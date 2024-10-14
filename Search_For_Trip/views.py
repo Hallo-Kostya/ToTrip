@@ -15,4 +15,6 @@ def city_form(request):
         return redirect('/Trip/cities_list')
 def city_delete(request):
     pass
+def main_trip_page(request):
+    return render(request, "Search_For_Trip/main_trip_page.html")
 # Create your views here.
