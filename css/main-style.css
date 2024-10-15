@@ -243,6 +243,30 @@ div.lead-wrapper div.search form {
 	left: 32px;
 }
 
+/*	Footer styles */
+footer {
+	width: 100%;
+	background: rgb(183, 183, 176);
+}
+
+div.footer-container {
+	display: flex;
+	max-width: 1920px;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 34px 112px;
+}
+
+ul.footer-menu {
+	list-style: none;
+	display: flex;
+}
+
+ul.footer-menu li:not(:last-child) {
+	margin-right: 24px;
+}
+
 @media(max-width: 1200px) {
 	.main-nav .search {
 		display: none;
