@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="{% static 'css/town-page-style.css' %}">
+	<title>Поездки по России - Москва</title>
+</head>
+
+<body>
+	<header class="showcase">
+		<div class="container">
+			<nav class="main-nav">
+				<div class="header-logo">
+					<img src="{% static 'img/main-logo.svg' %}" alt="Логотип ToTrip">
+				</div>
+				<div class="search">
+					<form action="/search" method="GET" class="search-form">
+						<button type="submit" class="search-button">
+							<img src="{% static 'img/search.svg' %}" alt="Поиск">
+						</button>
+						<input type="text" name="query" placeholder="Поиск">
+					</form>
+				</div>
+				<ul class="main-menu">
+					<li class="menu-item">Подборки</li>
+					<li class="menu-item">Поездки</li>
+					<li class="menu-item">Отзывы</li>
+				</ul>
+				<div class="profile">
+					<div class="profile-inf">
+						<p class="user-name">Константин Х.</p>
+						<button>Выход</button>
+					</div>
+					<div class="user-icon">
+						<img src="{% static 'img/user-icon.png' %}" alt="Профиль">
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="main-content">
+			<section class="lead">
+				<div class="lead-content">
+					<div class="town-name">
+						<h1>Москва</h1>
+					</div>
+					<div class="town-description">
+						<p>Познакомьтесь с яркой культурой, богатой историей и потрясающей архитектурой Москвы. 
+							Посетите все места этого динамичного города - от знаковых достопримечательностей, как 
+							Кремль и Красная площадь.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="town-places">
+				<div class="places-wrapper">
+					<ul class="places">
+						<li class="places-item">
+							<div class="current">
+								<img src="{% static 'img/hotels__icon.svg' %}" alt="Отели" width="32" height="32">
+								<span class="place-title">Отели</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/art__icon.svg' %}" alt="Искусство" width="32" height="32">
+								<span class="place-title">Искусство</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/night-life__icon.svg' %}" alt="Ночная жизнь" width="32" height="32">
+								<span class="place-title">Ночная жизнь</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/nature__icon.svg' %}" alt="На природе" width="32" height="32">
+								<span class="place-title">На природе</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/museums__icon.svg' %}" alt="Музеи" width="32" height="32">
+								<span class="place-title">Музеи</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/historical__icon.svg' %}" alt="Исторические места" width="32" height="32">
+								<span class="place-title">Исторические места</span>
+							</div>
+						</li>
+						<li class="places-item">
+							<div>
+								<img src="{% static 'img/eat__icon.svg' %}" alt="Еда" width="32" height="32">
+								<span class="place-title">Еда</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="places-cards-wrapper">
+					<ul class="places-cards">
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-1">
+									<p class="reviews reviews-1">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-2">
+									<p class="reviews reviews-2">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-3">
+									<p class="reviews reviews-3">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-4">
+									<p class="reviews reviews-4">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-5">
+									<p class="reviews reviews-5">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-6">
+									<p class="reviews reviews-6">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-7">
+									<p class="reviews reviews-7">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-8">
+									<p class="reviews reviews-8">1.2K</p>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-9">
+									<p class="reviews reviews-9">1.2K</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="copyright">
+				<p>&copy; ToTrip, 2024</p>
+			</div>
+			<ul class="footer-menu">
+				<li class="footer-menu-item">О нас</li>
+				<li class="footer-menu-item">Обратная связь</li>
+			</ul>
+			<img src="{% static 'img/footer-logo.svg' %}" alt="Логотип ToTrip">
+		</div>
+	</footer>
+</body>
+
+</html>
