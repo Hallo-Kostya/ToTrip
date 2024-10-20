@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список мест</title>
+</head>
+<body>
+    <h1>Список мест</h1>
+    <ul>
+        {% for place in places %}
+            <li>{{ place.name }} ({{ place.category }})</li>
+        {% empty %}
+            <li>Города не найдены.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_place' %}">Добавить новый город</a>
+</body>
+</html>

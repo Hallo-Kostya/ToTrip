@@ -55,14 +55,18 @@
 						<h1>Начните путешествовать вместе с ToTrip!</h1>
 					</div>
 					<div class="search">
-						<form action="/search" method="GET" class="lead-search-form">
-							<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
+						<form  method="POST" class="lead-search-form" action="">
+							{% csrf_token %}
+							<input type="text" name="query" placeholder="Куда вы хотите отправиться?" required>
 							<button type="submit" class="search-button">
-								<img src="img/search.svg" alt="Поиск">
+								<img src="{% static 'img/search.svg' %}" alt="Поиск">
 							</button>
 						</form>
 					</div>
 				</div>
+				{% if error %}
+    				<p>{{ error }}</p>
+				{% endif %}
 			</section>
 
 			<section class="suggestions">
