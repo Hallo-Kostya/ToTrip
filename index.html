@@ -47,40 +47,80 @@
 	</header>
 
 	<main>
-		<section class="lead">
-			<div class="lead-wrapper">
-				<div class="lead-content">
-					<h1>Начните путешествовать вместе с ToTrip!</h1>
+		<div class="main-content">
+			<section class="lead">
+				<div class="lead-wrapper">
+					<div class="lead-content">
+						<h1>Начните путешествовать вместе с ToTrip!</h1>
+					</div>
+					<div class="search">
+						<form action="/search" method="GET" class="lead-search-form">
+							<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
+							<button type="submit" class="search-button">
+								<img src="img/search.svg" alt="Поиск">
+							</button>
+						</form>
+					</div>
 				</div>
-				<div class="search">
-					<form action="/search" method="GET" class="lead-search-form">
-						<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
-						<button type="submit" class="search-button">
-							<img src="img/search.svg" alt="Поиск">
-						</button>
-					</form>
-				</div>
-			</div>
-		</section>
+			</section>
 
-		<section class="suggestions">
-			<div class="sugg-wrapper">
-				<h2>Подборки</h2>
-				<div class="suggestions-preview">
-					<ul class="grid-container">
-						<li class="suggestion-elem bg-1">
-							<span class="card-title">Самые вкусные блюда Востока</span>
+			<section class="suggestions">
+				<div class="sugg-wrapper">
+					<h2>Подборки</h2>
+					<div class="suggestions-preview">
+						<ul class="grid-container">
+							<li class="suggestion-elem bg-1">
+								<span class="card-title">Самые вкусные блюда Востока</span>
+							</li>
+							<li class="suggestion-elem bg-2">
+								<span class="card-title">Красивейшие места России</span>
+							</li>
+							<li class="suggestion-elem bg-3">
+								<span class="card-title">Красивейшие места России</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="recommendations">
+				<h2>Вам может понравиться</h2>
+				<div class="places-cards-wrapper">
+					<ul class="places-cards">
+						<li class="card">
+							<div>
+								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-1">
+									<p class="reviews reviews-1">1.2K</p>
+								</div>
+							</div>
 						</li>
-						<li class="suggestion-elem bg-2">
-							<span class="card-title">Красивейшие места России</span>
+						<li class="card">
+							<div>
+								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-2">
+									<p class="reviews reviews-2">1.2K</p>
+								</div>
+							</div>
 						</li>
-						<li class="suggestion-elem bg-3">
-							<span class="card-title">Красивейшие места России</span>
+						<li class="card">
+							<div>
+								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<div class="card-info">
+									<h3 class="card-title">Lotte Hotel</h3>
+									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-3">
+									<p class="reviews reviews-3">1.2K</p>
+								</div>
+							</div>
 						</li>
 					</ul>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 	</main>
 
 	<footer class="footer">
