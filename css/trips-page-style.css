@@ -2,6 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+
 }
 
 *:focus {
@@ -149,132 +150,135 @@ a {
 	align-items: center;
 }
 
-/* Main sections */
-section.lead {
-	width: 100%;
-	background: url('../img/town-page-photo.jpg') no-repeat center center/cover;
-	margin-top: -100px;
-}
-
-.lead-content {
-	padding: 304px 0;
-}
-
-.lead-content h1 {
-	max-width: 1000px;
-	margin: 0 auto;
-	text-align: center;
-	font-family: 'Roboto';
-	font-size: 96px;
-	font-weight: 700;
-	color: #FFF;
-}
-
-div.lead-content div.town-description {
-	max-width: 1000px;
-	color: #fff;
-	font-size: 32px;
-	font-weight: 500;
-	text-align: center;
-	margin: 0 auto;
-}
-
-/* Town places style */
-.places-wrapper {
+/* ПРОБЛЕМЫ С ОТЦЕНТРОВКОЙ MAIN */
+.main-content {
 	max-width: 1920px;
-	margin: 0 auto;
-	padding: 0 112px;
-	
-}
-
-.places {
 	display: flex;
-	list-style: none;
-	margin-top: 24px;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: 12px;
-}
-
-.places li:not(:last-child) {
-	margin-right: 12px;
-}
-
-.places-item div {
-	display: flex;
+	flex-direction: column;
 	align-items: center;
-	padding: 12px 20px;
-	border-radius: 16px;
-	box-shadow: 0px 4px 12.6px 0px rgba(0, 0, 0, 0.14);
-}
-
-.place-title {
-	font-family: 'Inter';
-	font-size: 28px;
-	margin-left: 12px;
-}
-
-.places-cards-wrapper {
-	max-width: 1920px;
 	margin: 0 auto;
-	margin-top: 72px;
+	margin-bottom: 100px;
+}
+
+/* TRIPS SECTIONS */
+.trips-wrapper {
+	width: 100%;
 	padding: 0 112px;
 }
 
-.places-cards-wrapper ul.places-cards {
-	display: grid;
-	list-style: none;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 32px;
+.trips {
+	margin-top: 101px;
+	margin-bottom: 100px;
 }
 
-.places-cards .card {
+.trips-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.trips-header h1 {
+	font-size: 60px;
+	font-weight: 800;
+}
+
+.trip-planner {
+	border: none;
+	font-size: 24px;
+	font-weight: 500;
+	border-radius: 24px;
+	background: rgba(112, 186, 255, 0.40);
+	padding: 24px 20px;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ КАРТОЧЕК, ЗАГЛУШКА */
+.past-trip,
+.future-trip,
+.current-trip {
+	background: url('../img/trips-photo.jpg') no-repeat center center/cover;
+	border-radius: 36px;
+	margin-top: 40px;
+	width: 100%;
+	height: 553px;
 	position: relative;
 }
 
-.places-cards .card img {
-	display: block;
-	width: 100%;
-	height: auto;
+.trips-wrapper div:not(:nth-child(-n + 2)) {
+	margin-top: 62px;
 }
 
-div.card-info {
-	max-width: 488px;
+.card-info-wrapper {
+	position: absolute;
+	bottom: 42px;
+	left: 42px;
+}
+
+.trip-header {
 	display: flex;
-	margin-top: 20px;
 	align-items: center;
+	justify-content: space-between;
 }
 
-.card-info > *:not(:last-child) {
-	margin-right: 20px; 
-}
-
-div.card-info img {
-	max-width: 184px;
-}
-
-div.card-info h3 {
-	font-size: 36px;
+.trip-header h2 {
+	font-size: 52px;
 	font-weight: 700;
 }
 
-.reviews {
-	color: #666;
-	font-size: 32px;
-	font-weight: 700;
+.unwrapper {
+	width: 60px;
+	height: 60px;
+	border: none;
+	background: #fff;
 }
 
-/* ЗАЛИВКА ИКОНОК */
-.places-item div.current img {
-	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg);
-}
-
-.places-item div.current {
-	background: var(--Accent, #4154FF);
+.trip-title,
+.date,
+.place {
 	color: #fff;
 }
 
-/*	Footer styles */
+.trip-title {
+	font-size: 52px;
+	font-weight: 700;
+}
+
+.date, .place {
+	font-size: 29px;
+	font-weight: 600;
+	margin-left: 12px;
+}
+
+.trip-info {
+	margin-top: 4px;
+	display: flex;
+}
+
+.trip-info > *:not(:last-child) {
+	margin-right: 18px;
+}
+
+.trip-date,
+.trip-place {
+	display: flex;
+}
+
+.users {
+	margin-top: 20px;
+	display: flex;
+	list-style: none;
+}
+
+.users li.user:not(:last-child) {
+	margin-right: 16px;
+}
+
+.trip-menu {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+/* FOOTER */
 .footer {
 	width: 100%;
 	background: rgb(183, 183, 176);
@@ -298,6 +302,10 @@ ul.footer-menu li:not(:last-child) {
 	margin-right: 24px;
 }
 
+/* ПЕРЕВОРАЧИВАЕМ СТРЕЛКУ СВОРАЧИВАНИЯ */
+.flipped-unwrap-button {
+	transform: rotate(180deg);
+}
 
 @media(max-width: 1200px) {
 	.main-nav .search {
@@ -309,35 +317,8 @@ ul.footer-menu li:not(:last-child) {
 		padding-right: 56px;
 	}
 
-	.lead-content h1 {
-		width: 700px;
-	}
-	
-	.sugg-wrapper {
+	div.footer-container {
 		padding-left: 56px;
 		padding-right: 56px;
-	}
-
-	.places-cards-wrapper ul.places-cards {
-		grid-template-columns: repeat(2, 1fr);
-   }
-
-	.recommendations {
-		padding-left: 56px;
-		padding-right: 56px;
-	}
-
-	div.card-info h3 {
-		font-size: 24px;
-	}
-
-	div.card-info img {
-		max-width: 120px;
-	}
-}
-
-@media (max-width: 800px) {
-	.places-cards-wrapper ul.places-cards {
-		grid-template-columns: 1fr;
 	}
 }
