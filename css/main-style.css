@@ -9,11 +9,21 @@
 	outline: none;
 }
 
+html, body {
+	height: 100%;
+}
+
 body {
 	color: #000;
 	font-family: 'Manrope', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
+	display: flex;
+   flex-direction: column;
+}
+
+.main-content {                
+	flex: 1;
 }
 
 a {
@@ -23,7 +33,20 @@ a {
 
 /* Main Navigation Styles */
 .showcase {
+	position: relative;
 	width: 100%;
+	z-index: 1;
+}
+
+.showcase::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.6);
+	z-index: -1;
 }
 
 .container {
@@ -109,7 +132,7 @@ a {
 
 .profile-inf button {
 	border: none;
-	background: #fff;
+	background: rgba(255, 255, 255, 0);
 	color: #565656;
 }
 
@@ -130,11 +153,11 @@ a {
 section.lead {
 	width: 100%;
 	background: url('../img/main-photo.jpg') no-repeat center center/cover;
+	margin-top: -100px;
 }
 
 .lead-wrapper {
-	padding-top: 204px;
-	padding-bottom: 304px;
+	padding: 304px 0;
 }
 
 .lead-content h1 {
@@ -179,12 +202,12 @@ div.lead-wrapper div.search form {
 
 /* Suggestions */
 .suggestions {
-	margin-top: 24px;
-	margin-bottom: 60px;
+	margin-top: 60px;
 }
 
-.suggestions h2 {
-	margin-bottom: 60px;
+.suggestions h2,
+.recommendations h2 {
+	margin-bottom: 40px;
 	font-size: 56px;
 	font-weight: 700;
 }
@@ -224,9 +247,9 @@ div.lead-wrapper div.search form {
 }
 
 .sugg-wrapper {
-	max-width: 1796px;
+	max-width: 1920px;
 	margin: 0 auto;
-	padding: 0 50px;
+	padding: 0 112px;
 }
 
 .grid-container li {
@@ -243,10 +266,67 @@ div.lead-wrapper div.search form {
 	left: 32px;
 }
 
+/* Recommendations styles */
+.recommendations {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 0 112px;
+	margin-top: 60px;
+}
+
+.places-cards-wrapper {
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.places-cards-wrapper ul.places-cards {
+	display: grid;
+	list-style: none;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+}
+
+.places-cards .card {
+	position: relative;
+}
+
+.places-cards .card img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+div.card-info {
+	max-width: 100%;
+	display: flex;
+	margin-top: 20px;
+	align-items: center;
+}
+
+.card-info > *:not(:last-child) {
+	margin-right: 20px;
+}
+
+div.card-info img {
+	max-width: 184px;
+}
+
+div.card-info h3 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+.reviews {
+	color: #666;
+	font-size: 32px;
+	font-weight: 700;
+}
+
 /*	Footer styles */
-footer {
+.footer {
 	width: 100%;
 	background: rgb(183, 183, 176);
+	margin-top: 100px;
 }
 
 div.footer-container {
@@ -270,5 +350,47 @@ ul.footer-menu li:not(:last-child) {
 @media(max-width: 1200px) {
 	.main-nav .search {
 		display: none;
+	}
+
+	.main-nav {
+		margin-left: 56px;
+		margin-right: 56px;
+	}
+
+	.lead-content h1 {
+		width: 700px;
+	}
+	
+	.sugg-wrapper {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: repeat(2, 1fr);
+   }
+
+	.recommendations {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	div.card-info h3 {
+		font-size: 24px;
+	}
+
+	div.card-info img {
+		max-width: 120px;
+	}
+
+	div.footer-container {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+}
+
+@media (max-width: 800px) {
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: 1fr;
 	}
 }
