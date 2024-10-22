@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from .forms import CityForm, PlaceForm
-from .models import City,Place
+from .models import City,Place, Review
 # Добавление нового города
 def add_city(request):
     if request.method == 'POST':
@@ -55,5 +55,27 @@ def town_page(request):
             #form.save()
         #return redirect('/Trip/cities_list')
     return render(request, "TripPlanner/town-page.html")
+
+
+def place_reviews(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    reviews = Review.objects.filter(place=place)
+
+    context = {
+        'place': place,
+        'reviews': reviews,
+    }
+    return render(request, 'place_reviews.html', context)
+
+def submit_review(request, place_id):
+    place = get_object_or_404(Place, id=place_id)  # место, к которому будет привязан отзыв
+    if request.method == 'POST':
+        rating = request.POST.get('rating')  # оценка пользователя
+        text = request.POST.get('text')      # текст отзыва
+        Review.objects.create(place=place, rating=rating, text=text)  # Создаем новый отзыв в базе данных
+        return redirect('place_detail', place_id=place_id)  # После отправки отзыва перенаправляем на страницу места
+    return render(request, 'TripPlanner/submit_review.html', {'place': place})
+
+
 
 # Create your views here.
