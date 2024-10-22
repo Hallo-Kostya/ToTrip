@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/main-style.css">
     <link rel="stylesheet" href="css/profile.css">
     <title>Welcome to ToTrip!</title>
 </head>
@@ -18,7 +17,7 @@
 		<div class="container">
 			<nav class="main-nav">
 				<div class="header-logo">
-					<img src="img/main-logo.svg" alt="Логотип ToTrip">
+					<a href="index.html"><img src="img/main-logo.svg" alt="Логотип ToTrip"></a>
 				</div>
 				<div class="search">
 					<form action="/search" method="GET" class="search-form">
@@ -48,37 +47,142 @@
     <main>
         <div class="main-content">
             <section class="lead"></section> 
-            <div class="profile-head">
-                <div>
-                    <img href="#" alt="Фото профиля">
+            <section class="profile">
+                <div class="profile-head">
+                    <img class='user-photo' src="/img/user-photo.png" alt="Фото профиля">
                     <div class="profile-info">
                         <p class="user-name">@jek1ti</p>
                         <div class="name">
                             <p class="name-element">Сафия Хажиева</p>
-                            <img href="#" alt="переименовать">
+                            <img src="img/profile/Vector.svg" alt="переименовать">
                         </div>
                         <p class="description">Lorem ipsum dolor sit amet consectetur. Euismod ut quis lorem viverra proin pellentesque gravida eu nisl.</p>
                     </div>
+                    <img src="/img/profile/Settings.svg" alt="Настройки профиля">
                 </div>
-                <img href="" alt="Настройки профиля">
-            </div>
-            <div class="social-info">
-                <div class="social">
-                    <p class="social-name">Публикации</p>
-                    <p class="counter">2</p>
-                </div class="social">
-                <div>
-                    <p class="social-name">Подписчики</p>
-                    <p class="counter">2</p>
+                <div class="social-info">
+                    <div class="social">
+                        <p class="social-name">Публикации</p>
+                        <p class="counter">2</p>
+                    </div class="social">
+                    <div>
+                        <p class="social-name">Подписчики</p>
+                        <p class="counter">2</p>
+                    </div>
+                    <div class="social">
+                        <p class="social-name">Подписки</p>
+                        <p class="counter">2</p>
+                    </div>
                 </div>
-                <div class="social">
-                    <p class="social-name">Подписки</p>
-                    <p class="counter">2</p>
+            </section>
+            <section class="headlines">
+                <ul class="user-actions-list">
+                    <li class="user-actions-list-item">
+                        <div class="current">
+                            <img src="img/profile/History.svg" class="list-action-photo">
+                            <p class="list-action-name">Действие</p>
+                        </div>
+                    </li>
+                    <li class="user-actions-list-item">
+                        <div>
+                            <img src='img/profile/Camera.svg' class="list-action-photo">
+                            <p class="list-action-name">Фото</p>
+                        </div>
+                    </li>
+                    <li class="user-actions-list-item">
+                        <div>
+                            <img src='img/profile/Star.svg' class="list-action-photo">
+                            <p class="list-action-name">Отзывы</p>
+                        </div>
+                    </li>
+                    <li class="user-actions-list-item">
+                        <div>
+                            <img src='img/profile/Eye.svg' class="list-action-photo">
+                            <p class="list-action-name">Обзоры</p>
+                        </div>
+                    </li>
+                    <li class="user-actions-list-item">
+                        <div>
+                            <img src='img/profile/Map Point.svg' class="list-action-photo">
+                            <p class="list-action-name">Места</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="main-info">
+                    <div class="sidebar">
+                        <div class="subscribers-section sidebar-element">
+                            <p class="subscribers-section-name sidebar-text">Подписчики</p>
+                            <ul class="subscribers-photos-list">
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                                <li class="subscribers-photo"><img src="img/user-photo.png"></li>
+                            </ul>
+                        </div>
+                        <div class="about-me-section sidebar-element">
+                            <p class="about-me-section-name sidebar-text">Обо мне</p>
+                            <div>
+                                <img src="img/profile/Map Point.svg">
+                                <p>Москва, Россия</p>
+                            </div>
+                            <div>
+                                <img src="img/profile/Calendar.svg">
+                                <p>С ToTrip с окт. 2024 года</p>
+                            </div>
+                            <p>Путешествия - мое все!</p>
+                        </div>
+                        <div class="share-section sidebar-element">
+                            <p class="share-section-name sidebar-text">Поделитесь с людьми!</p>
+                            <div>
+                                <img src="img/profile/Star.svg">
+                                <p>Создать отзыв</p>
+                            </div>
+                            <div>
+                                <img src="img/profile/Eye.svg">
+                                <p>Создать обзор</p>
+                            </div>
+                            <div>
+                                <img src="img/profile/Camera.svg">
+                                <p>Выложить фото</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mainbar">
+                        <div class="photo-element mainbar-element">
+                            <div class="user-info">
+                                <img src="img/user-photo.png" class="user-info-photo">
+                                <div>
+                                    <p class="name-action"><strong>Сафия Хажиева</strong> поделилась фотографией</p>
+                                    <p class="date-time">Вчера в 14:08</p>
+                                </div>
+                                <img src="img/profile/Trash Bin 2.svg" class="user-info-delete">
+                            </div>
+                            <img src="img/profile/user-publication-photo.png" class="user-publication-photo">
+                        </div>
+                        <div class="rate-element mainbar-element">
+                            <div class="user-info">
+                                <img src="img/user-photo.png" class="user-info-photo">
+                                <div>
+                                    <p class="name-action"><strong>Сафия Хажиева</strong> написала отзыв</p>
+                                    <p class="date-time">Вчера в 14:08</p>
+                                </div>
+                                <img src="img/profile/Trash Bin 2.svg" class="user-info-delete">
+                            </div>
+                            <div class="rate-comment-content ">
+                                <div>
+                                    <p class="rate-name">Название поездки</p>
+                                    <img class="rate">
+                                </div>
+                                <p class="commnet-text">Hipster ipsum tattooed brunch I'm baby. Chic chicken selvage enamel chartreuse godard selfies iPhone mood asymmetrical. Activated park before banh adaptogen. Taxidermy adaptogen everyday vice actually booth listicle. Kickstarter gastropub tousled selfies ascot schlitz waistcoat booth vinyl hell.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div>
-            
+            </section>
         </div>
     </main> 
     <footer class="footer">

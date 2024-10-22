@@ -1,4 +1,419 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+
+}
+
+*:focus {
+	outline: none;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	color: #000;
+	font-family: 'Manrope', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	display: flex;
+   flex-direction: column;
+}
+
+.main-content {                
+	flex: 1;
+}
+
+a {
+	color: #262626;
+	text-decoration: none;
+}
+
+/* Main Navigation Styles */
+.showcase {
+	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+.showcase::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.6);
+	z-index: -1;
+}
+
+.container {
+	max-width: 1920px;
+	max-height: 100px;
+	margin: 0 auto;
+	padding: 26px 112px;
+}
+
+.main-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-height: 48px;
+}
+
+.header-logo {
+	width: 130px;
+}
+
+.main-nav .search {
+	display: flex;
+	width: 342px;
+	align-items: center;
+	padding: 12px 0;
+	border-radius: 24px;
+	border: 1px solid rgba(112, 186, 255, 0.4);
+	background: #ECECEC;
+	margin-left: 72px;
+}
+
+.main-nav .search form {
+	max-width: 318px;
+	margin: 0 auto;
+}
+
+.main-nav .search form button,
+.main-nav .search form input {
+	border: none;
+	background: #ECECEC;
+}
+
+.main-nav .search form input {
+	width: 282px;
+	height: 22px;
+	font-size: 17px;
+	margin-left: 12px;
+}
+
+.main-nav .search-form {
+	display: flex;
+}
+
+.main-nav .search-form button {
+	display: flex;
+	align-items: center;
+}
+
+.main-menu {
+	display: flex;
+	list-style: none;
+	margin-left: auto;
+
+}
+
+.menu-item {
+	font-weight: 600;
+}
+
+.menu-item:not(:last-child) {
+	margin-right: 24px;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	margin-left: 72px;
+}
+
+.profile-inf {
+	text-align: right;
+}
+
+.profile-inf button {
+	border: none;
+	background: rgba(255, 255, 255, 0);
+	color: #565656;
+}
+
+.user-icon {
+	margin-left: 8px;
+	margin-top: 5px;
+}
+
+.header-logo,
+.search,
+.profile,
+.search-form {
+	display: flex;
+	align-items: center;
+}
+
+/* Main sections */
+.main-content {
+	background-color: #E4E4E4;
+}
+
 section.lead {
 	width: 100%;
-	background: url('../img/profile-lead.png') no-repeat center center/cover;
+	background: url('../img/profile/profile-lead.png') no-repeat center center/cover;
+	height: 609px;
+	margin-top: -100px;
+}
+
+section.profile {
+	display: flex;
+	padding: 36px 36px 12px 36px;
+	margin: 0 auto;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	border-radius: 38.4px;
+	background: #FFF;
+	box-shadow: 0px 3.2px 3.2px 0px rgba(0, 0, 0, 0.25);
+	margin-top: -100px;
+	width: fit-content;
+	margin-bottom: 16px;
+}
+
+div .profile-head {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+div .profile-head .user-photo {
+	width: 160px;
+	height: 160px;
+	border-radius: 160px;
+}
+
+div .name {
+	display: flex;
+	flex-direction: row;
+}
+
+div .social-info {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.user-actions-list {
+	display: flex;
+	width: 1126px;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	margin: 0 auto;
+}
+
+.user-actions-list-item {
+	list-style: none;
+	justify-content: center;
+	border-radius: 13.77px;
+	background: #FFF;
+	box-shadow: 0px 3.442px 10.843px 0px rgba(0, 0, 0, 0.14);
+	margin-bottom: 16px;
+}
+
+.user-actions-list-item div {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	padding: 10px 17px;
+}
+
+.list-action-photo {
+	width: 28px;
+	height: auto;
+}
+
+.list-action-name {
+	color: #000;
+	text-align: center;
+	font-family: Inter;
+	font-size: 23.097px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: 0.231px;
+}
+
+div .main-info {
+	display: flex;
+	justify-content: center;
+	gap: 13px;
+}
+
+div .sidebar {
+	display: flex;
+	flex-direction: column;
+	max-width: 283px;
+	gap: 16px;
+	margin-bottom: 100px;
+}
+
+.sidebar-text {
+	color: #000;
+	font-family: Manrope;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.28px;
+	margin-bottom: 16px;
+}
+
+.sidebar-element {
+	padding: 32px;
+	background: #FFFFFF;
+	border-radius: 32px;
+	background: #FFF;
+	box-shadow: 0px 3.2px 3.2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.subscribers-photos-list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: 8px;
+	row-gap: 16px;
+}
+
+.subscribers-photo {
+	list-style: none;
+}
+
+.subscribers-photo img {
+	width: 48px;
+	height: 48px;
+	border-radius: 48px;
+}
+
+
+div .mainbar {
+	width: 831px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 100px;
+}
+
+.mainbar-element {
+	border-radius: 32px;
+	background: #FFF;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.user-info {
+	display: flex;
+	flex-direction: row;
+	padding: 32px;
+	align-items: center;
+}
+
+.user-info-photo {
+	width: 80px;
+	height: 80px;
+	border-radius: 80px;
+	margin-right: 19.2px;
+}
+
+.user-publication-photo {
+	height: 500px;
+	width: 831px;
+	border-radius: 32px;
+}
+
+.user-info-delete {
+	margin-left: auto
+}
+
+.rate-comment-content {
+	margin: 32px;
+	margin-top: 0px;
+}
+
+.rate-name{
+	color: #000;
+	font-family: Manrope;
+	font-size: 25.6px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.256px;
+}
+
+
+/*	Footer styles */
+.footer {
+	width: 100%;
+	background: rgb(183, 183, 176);
+}
+
+div.footer-container {
+	display: flex;
+	max-width: 1920px;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 34px 112px;
+}
+
+ul.footer-menu {
+	list-style: none;
+	display: flex;
+}
+
+ul.footer-menu li:not(:last-child) {
+	margin-right: 24px;
+}
+
+@media(max-width: 1200px) {
+	.main-nav .search {
+		display: none;
+	}
+
+	.main-nav {
+		margin-left: 56px;
+		margin-right: 56px;
+	}
+
+	.lead-content h1 {
+		width: 700px;
+	}
+	
+	.sugg-wrapper {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: repeat(2, 1fr);
+   }
+
+	.recommendations {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	div.card-info h3 {
+		font-size: 24px;
+	}
+
+	div.card-info img {
+		max-width: 120px;
+	}
+
+	div.footer-container {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+}
+
+@media (max-width: 800px) {
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: 1fr;
+	}
 }
