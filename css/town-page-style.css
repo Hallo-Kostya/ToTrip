@@ -2,7 +2,6 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-
 }
 
 *:focus {
@@ -153,131 +152,73 @@ a {
 /* Main sections */
 section.lead {
 	width: 100%;
-	background: url('../img/main-photo.jpg') no-repeat center center/cover;
+	background: url('../img/town-page-photo.jpg') no-repeat center center/cover;
 	margin-top: -100px;
 }
 
-.lead-wrapper {
+.lead-content {
 	padding: 304px 0;
 }
 
 .lead-content h1 {
-	width: 744px;
+	max-width: 1000px;
 	margin: 0 auto;
 	text-align: center;
 	font-family: 'Roboto';
-	font-size: 45px;
+	font-size: 96px;
 	font-weight: 700;
 	color: #FFF;
-	margin-bottom: 64px;
 }
 
-div.lead-wrapper div.search {
-	width: 832px;
+div.lead-content div.town-description {
+	max-width: 1000px;
+	color: #fff;
+	font-size: 32px;
+	font-weight: 500;
+	text-align: center;
 	margin: 0 auto;
 }
 
-div.lead-wrapper div.search form {
+/* Town places style */
+.places-wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 0 112px;
+	
+}
+
+.places {
 	display: flex;
-	margin: 0 auto;
-}
-
-.lead-search-form input {
-	border-radius: 16px;
-	border: 1px solid rgba(112, 186, 255, 0.40);
-	background: #ECECEC;
-	width: 744px;
-	padding-left: 24px;
-}
-
-.lead-search-form button {
-	border-radius: 16px;
-	border: 1px solid rgba(112, 186, 255, 0.40);
-	background: #99A9EB;
-	margin-left: 16px;
-	padding: 10px;
-	padding-left: 12px;
-	padding-right: 12px;
-	padding-top: 14px;
-}
-
-/* Suggestions */
-.suggestions {
-	margin-top: 60px;
-}
-
-.suggestions h2,
-.recommendations h2 {
-	margin-bottom: 40px;
-	font-size: 56px;
-	font-weight: 700;
-}
-
-.suggestion-elem.bg-1 {
-	background: url('../img/sugg-photo-1.jpg') no-repeat center center/cover;
-	height: 740px;
-	border-radius: 24px;
-}
-
-.suggestion-elem.bg-2 {
-	background: url('../img/sugg-photo-2.jpg') no-repeat center center/cover;
-	height: 354px;
-	border-radius: 36px;
-}
-
-.suggestion-elem.bg-3 {
-	background: url('../img/sugg-photo-2.jpg') no-repeat center center/cover;
-	height: 354px;
-	border-radius: 36px;
-}
-
-.bg-1.big {
-	grid-column: 1;
-	grid-row: span 2;
-}
-
-.bg-2, .bg-3 {
-	grid-column: 2;
-}
-
-.grid-container {
 	list-style: none;
-	display: grid;
-	gap: 32px;
-	grid-template-columns: 1fr 1fr;
+	margin-top: 24px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
 }
 
-.sugg-wrapper {
-	max-width: 1920px;
-	margin: 0 auto;
-	padding: 0 112px;
+.places li:not(:last-child) {
+	margin-right: 12px;
 }
 
-.grid-container li {
-	position: relative;
+.places-item div {
+	display: flex;
+	align-items: center;
+	padding: 12px 20px;
+	border-radius: 16px;
+	box-shadow: 0px 4px 12.6px 0px rgba(0, 0, 0, 0.14);
 }
 
-.grid-container li span {
-	font-family: 'Roboto';
-	font-size: 44px;
-	font-weight: 800;
-	color: #FFF;
-	position: absolute;
-	bottom: 20px;
-	left: 32px;
-}
-
-/* Recommendations styles */
-.recommendations {
-	max-width: 1920px;
-	margin: 0 auto;
-	padding: 0 112px;
-	margin-top: 60px;
+.place-title {
+	font-family: 'Inter';
+	font-size: 28px;
+	margin-left: 12px;
 }
 
 .places-cards-wrapper {
-	max-width: 100%;
+	max-width: 1920px;
 	margin: 0 auto;
+	margin-top: 72px;
+	padding: 0 112px;
 }
 
 .places-cards-wrapper ul.places-cards {
@@ -298,14 +239,14 @@ div.lead-wrapper div.search form {
 }
 
 div.card-info {
-	max-width: 100%;
+	max-width: 488px;
 	display: flex;
 	margin-top: 20px;
 	align-items: center;
 }
 
 .card-info > *:not(:last-child) {
-	margin-right: 20px;
+	margin-right: 20px; 
 }
 
 div.card-info img {
@@ -321,6 +262,16 @@ div.card-info h3 {
 	color: #666;
 	font-size: 32px;
 	font-weight: 700;
+}
+
+/* ЗАЛИВКА ИКОНОК */
+.places-item div.current img {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg);
+}
+
+.places-item div.current {
+	background: var(--Accent, #4154FF);
+	color: #fff;
 }
 
 /*	Footer styles */
@@ -346,6 +297,7 @@ ul.footer-menu {
 ul.footer-menu li:not(:last-child) {
 	margin-right: 24px;
 }
+
 
 @media(max-width: 1200px) {
 	.main-nav .search {
@@ -381,11 +333,6 @@ ul.footer-menu li:not(:last-child) {
 
 	div.card-info img {
 		max-width: 120px;
-	}
-
-	div.footer-container {
-		padding-left: 56px;
-		padding-right: 56px;
 	}
 }
 
