@@ -142,6 +142,12 @@ a {
 	margin-top: 5px;
 }
 
+.user-icon img {
+	width: 52px;
+	height: 52px;
+	border-radius: 52px;
+}
+
 .header-logo,
 .search,
 .profile,
@@ -153,7 +159,7 @@ a {
 /* Main sections */
 section.lead {
 	width: 100%;
-	background: url('../img/main-photo.jpg') no-repeat center center/cover;
+	background: url('../img/index/main-photo.jpg') no-repeat center center/cover;
 	margin-top: -100px;
 }
 
@@ -213,20 +219,20 @@ div.lead-wrapper div.search form {
 	font-weight: 700;
 }
 
-.suggestion-elem.bg-1 {
-	background: url('../img/sugg-photo-1.jpg') no-repeat center center/cover;
+.suggestion-elem.bg-1.big {
+	background: url('../img/index/sugg__photo-1.jpg') no-repeat center center/cover;
 	height: 740px;
 	border-radius: 24px;
 }
 
 .suggestion-elem.bg-2 {
-	background: url('../img/sugg-photo-2.jpg') no-repeat center center/cover;
+	background: url('../img/index/sugg__photo-2.jpg') no-repeat center center/cover;
 	height: 354px;
 	border-radius: 36px;
 }
 
 .suggestion-elem.bg-3 {
-	background: url('../img/sugg-photo-2.jpg') no-repeat center center/cover;
+	background: url('../img/index/sugg__photo-2.jpg') no-repeat center center/cover;
 	height: 354px;
 	border-radius: 36px;
 }
@@ -297,19 +303,20 @@ div.lead-wrapper div.search form {
 	height: auto;
 }
 
-div.card-info {
+div.card-info a {
 	max-width: 100%;
 	display: flex;
 	margin-top: 20px;
 	align-items: center;
 }
 
-.card-info > *:not(:last-child) {
+.card-info a > *:not(:last-child) {
 	margin-right: 20px;
 }
 
-div.card-info img {
-	max-width: 184px;
+div.card-info .rating {
+	max-width: 32px;
+	max-height: 32px;
 }
 
 div.card-info h3 {

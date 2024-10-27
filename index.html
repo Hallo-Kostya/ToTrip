@@ -18,20 +18,22 @@
 		<div class="container">
 			<nav class="main-nav">
 				<div class="header-logo">
-					<img src="img/main-logo.svg" alt="Логотип ToTrip">
+					<a href="index.html">
+						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
+					</a>
 				</div>
 				<div class="search">
 					<form action="/search" method="GET" class="search-form">
 						<button type="submit" class="search-button">
-							<img src="img/search.svg" alt="Поиск">
+							<img src="img/common/search.svg" alt="Поиск">
 						</button>
 						<input type="text" name="query" placeholder="Поиск">
 					</form>
 				</div>
 				<ul class="main-menu">
-					<li class="menu-item">Подборки</li>
-					<li class="menu-item">Поездки</li>
-					<li class="menu-item">Отзывы</li>
+					<li class="menu-item"><a href="#">Подборки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
+					<li class="menu-item"><a href="#">Отзывы</a></li>
 				</ul>
 				<div class="profile">
 					<div class="profile-inf">
@@ -39,7 +41,9 @@
 						<button>Выход</button>
 					</div>
 					<div class="user-icon">
-						<img src="img/user-icon.png" alt="Профиль">
+						<a href="#">
+							<img src="img/user__icon.png" alt="Профиль">
+						</a>
 					</div>
 				</div>
 			</nav>
@@ -57,7 +61,7 @@
 						<form action="/search" method="GET" class="lead-search-form">
 							<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
 							<button type="submit" class="search-button">
-								<img src="img/search.svg" alt="Поиск">
+								<img src="img/common/search.svg" alt="Поиск">
 							</button>
 						</form>
 					</div>
@@ -70,13 +74,19 @@
 					<div class="suggestions-preview">
 						<ul class="grid-container">
 							<li class="suggestion-elem bg-1 big">
-								<span class="card-title">Самые вкусные блюда Востока</span>
+								<a href="#">
+									<span class="card-title">Самые вкусные блюда Востока</span>
+								</a>
 							</li>
 							<li class="suggestion-elem bg-2">
-								<span class="card-title">Красивейшие места России</span>
+								<a href="#">
+									<span class="card-title">Красивейшие места России</span>
+								</a>
 							</li>
 							<li class="suggestion-elem bg-3">
-								<span class="card-title">Красивейшие места России</span>
+								<a href="#">
+									<span class="card-title">Красивейшие места России</span>
+								</a>
 							</li>
 						</ul>
 					</div>
@@ -89,31 +99,37 @@
 					<ul class="places-cards">
 						<li class="card">
 							<div>
-								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<img src="img/index/like-it__place-photo.jpg" alt="" class="card-photo">
 								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-1">
-									<p class="reviews reviews-1">1.2K</p>
+									<a href="#">
+										<h3 class="card-title">Lotte Hotel</h3>
+										<img src="img/rating-star.svg" alt="Рейтинг" class="rating rating-1" width="32" height="32">
+										<p class="reviews reviews-1">1.2K</p>
+									</a>
 								</div>
 							</div>
 						</li>
 						<li class="card">
 							<div>
-								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<img src="img/index/like-it__place-photo.jpg" alt="" class="card-photo">
 								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-2">
-									<p class="reviews reviews-2">1.2K</p>
+									<a href="#">
+										<h3 class="card-title">Lotte Hotel</h3>
+										<img src="img/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<p class="reviews reviews-2">1.2K</p>
+									</a>
 								</div>
 							</div>
 						</li>
 						<li class="card">
 							<div>
-								<img src="img/places-photo__card.jpg" alt="" class="card-photo">
+								<img src="img/index/like-it__place-photo.jpg" alt="" class="card-photo">
 								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="img/rating.svg" alt="Рейтинг" class="rating rating-3">
-									<p class="reviews reviews-3">1.2K</p>
+									<a href="#">
+										<h3 class="card-title">Lotte Hotel</h3>
+										<img src="img/rating-star.svg" alt="Рейтинг" class="rating rating-3" width="32" height="32">
+										<p class="reviews reviews-3">1.2K</p>
+									</a>
 								</div>
 							</div>
 						</li>
@@ -126,13 +142,17 @@
 	<footer class="footer">
 		<div class="footer-container">
 			<div class="copyright">
-				<p>&copy; ToTrip, 2024</p>
+				<a href="#">
+					<p>&copy; ToTrip, 2024</p>
+				</a>
 			</div>
 			<ul class="footer-menu">
-				<li class="footer-menu-item">О нас</li>
-				<li class="footer-menu-item">Обратная связь</li>
+				<li class="footer-menu-item"><a href="#">О нас</a></li>
+				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<img src="img/footer-logo.svg" alt="Логотип ToTrip">
+			<a href="index.html">
+				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
+			</a>
 		</div>
 	</footer>
 </body>

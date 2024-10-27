@@ -142,6 +142,12 @@ a {
 	margin-top: 5px;
 }
 
+.user-icon img {
+	width: 52px;
+	height: 52px;
+	border-radius: 52px;
+}
+
 .header-logo,
 .search,
 .profile,
@@ -184,10 +190,14 @@ a {
 
 .trip-planner {
 	border: none;
+	border-radius: 24px;
+	padding: 24px 0;
+	background: rgba(112, 186, 255, 0.40);
+}
+
+.trip-planner a {
 	font-size: 24px;
 	font-weight: 500;
-	border-radius: 24px;
-	background: rgba(112, 186, 255, 0.40);
 	padding: 24px 20px;
 }
 
@@ -195,7 +205,7 @@ a {
 .past-trip,
 .future-trip,
 .current-trip {
-	background: url('../img/trips-photo.jpg') no-repeat center center/cover;
+	background: url('../img/trips-page/trips-photo.jpg') no-repeat center center/cover;
 	border-radius: 36px;
 	margin-top: 40px;
 	width: 100%;
@@ -231,7 +241,7 @@ a {
 	background: #fff;
 }
 
-.trip-title,
+.trip-title a,
 .date,
 .place {
 	color: #fff;
@@ -276,6 +286,10 @@ a {
 	position: absolute;
 	top: 20px;
 	right: 20px;
+}
+
+.some-user__icon {
+	border-radius: 52px;
 }
 
 /* FOOTER */
