@@ -1,36 +1,36 @@
 # users/serializers.py
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
-from django.contrib.auth.password_validation import validate_password
+from .models import User
+from django.contrib.auth import authenticate
 
 class RegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
-
-    password = serializers.CharField(
-        write_only=True, required=True, validators=[validate_password]
-    )
-    password2 = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password": "Пароли не совпадают."})
-        return attrs
+        fields = ('username', 'name', 'last_name', 'email', 'phone_number', 'bio', 'photo', 'password')
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
     def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data['username'],
+        user = User.objects.create_user(
             email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
+            username=validated_data['username'],
+            name=validated_data['name'],
+            last_name=validated_data['last_name'],
+            phone_number=validated_data.get('phone_number'),
+            bio=validated_data.get('bio'),
         )
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data['password'])  # Храните пароль в зашифрованном виде
         user.save()
         return user
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        user = authenticate(email=data['email'], password=data['password'])
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Некорректные данные для входа")
