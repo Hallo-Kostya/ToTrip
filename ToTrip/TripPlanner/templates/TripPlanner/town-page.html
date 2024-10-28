@@ -65,9 +65,7 @@
 			<section class="town-places">
 				<div class="places-wrapper">
 					<ul class="places">
-						{% for place in places %}
-							<li>{{ place.name }} — {{ place.avg_rating }} звёзд, Категория: {{place.category}}</li>
-    					{% endfor %}
+
 						<li class="places-item">
 							<div class="current">
 								<img src="{% static 'img/hotels__icon.svg' %}" alt="Отели" width="32" height="32">
@@ -114,96 +112,28 @@
 				</div>
 				<div class="places-cards-wrapper">
 					<ul class="places-cards">
+						{% for place in places %}
+<!--							<li>{{ place.name }} — {{ place.avg_rating }} звёзд, Категория: {{place.category}}</li>-->
+
 						<li class="card">
 							<div>
 								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
 								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-1">
+									<h3 class="card-title">{{ place.name }}</h3>
+									<p>Категория: {{place.category}}</p>
+									<p>Оценка:
+										{% if place.average_rating %}
+											{{ place.average_rating|floatformat:1 }}
+										{% else %}
+											нет оценок
+										{% endif %}
+									</p>
+<!--									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-1">-->
 									<p class="reviews reviews-1">1.2K</p>
 								</div>
 							</div>
 						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-2">
-									<p class="reviews reviews-2">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-3">
-									<p class="reviews reviews-3">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-4">
-									<p class="reviews reviews-4">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-5">
-									<p class="reviews reviews-5">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-6">
-									<p class="reviews reviews-6">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-7">
-									<p class="reviews reviews-7">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-8">
-									<p class="reviews reviews-8">1.2K</p>
-								</div>
-							</div>
-						</li>
-						<li class="card">
-							<div>
-								<img src="{% static 'img/places-photo__card.jpg' %}" alt="" class="card-photo">
-								<div class="card-info">
-									<h3 class="card-title">Lotte Hotel</h3>
-									<img src="{% static 'img/rating.svg' %}" alt="Рейтинг" class="rating rating-9">
-									<p class="reviews reviews-9">1.2K</p>
-								</div>
-							</div>
-						</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</section>

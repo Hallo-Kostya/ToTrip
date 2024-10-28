@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from .forms import CityForm, PlaceForm
 from .models import City,Place, Review
+from django.db.models import Avg
+
 # Добавление нового города
 def add_city(request):
     if request.method == 'POST':
@@ -16,7 +18,7 @@ def city_list(request):
     cities = City.objects.all()  # Получаем все города
     return render(request, 'TripPlanner/city_list.html', {'cities': cities})
 def place_list(request):
-    places = Place.objects.all()  # Получаем все города
+    places = Place.objects.all().annotate(average_rating=Avg('reviews__rating'))
     return render(request, 'TripPlanner/place_list.html', {'places': places})
 def city_detail(request, city_id):
     city = get_object_or_404(City, id=city_id)
@@ -54,7 +56,9 @@ def town_page(request):
         #if form.is_valid():
             #form.save()
         #return redirect('/Trip/cities_list')
-    return render(request, "TripPlanner/town-page.html")
+    places = Place.objects.all().annotate(average_rating=Avg('reviews__rating'))
+    return render(request, "TripPlanner/town-page.html", {'places': places})
+
 
 
 def place_reviews(request, place_id):
