@@ -32,8 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'users',
+    'Db_api',
     'TripPlanner',
+    'UserApp',
     'rest_framework',
     'rest_framework_simplejwt',
     'django.contrib.admin',
@@ -53,7 +54,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'Db_api.User'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -107,6 +108,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+LOGIN_URL = '/user/login/'
 
 
 # Password validation
