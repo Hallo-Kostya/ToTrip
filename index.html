@@ -11,10 +11,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="css/main-style.css">
 	<link rel="stylesheet" href="css/main-page.css">
+	<link rel="stylesheet" href="css/search_pop-up.css">
 	<title>Welcome to ToTrip!</title>
 </head>
 
 <body>
+	<div class="overlay"></div>
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
@@ -25,7 +27,7 @@
 				</div>
 				<div class="search">
 					<form action="/search" method="GET" class="search-form">
-						<button type="submit" class="search-button">
+						<button class="search-button">
 							<img src="img/common/search.svg" alt="Поиск">
 						</button>
 						<input type="text" name="query" placeholder="Поиск">
@@ -61,10 +63,84 @@
 					<div class="search">
 						<form action="/search" method="GET" class="lead-search-form">
 							<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
-							<button type="submit" class="search-button">
+							<button class="search-button__lead">
 								<img src="img/common/search.svg" alt="Поиск">
 							</button>
 						</form>
+					</div>
+				</div>
+				<div class="lead-search__pop-up">
+					<div class="search__pop-up">
+						<form action="/search" method="GET" class="search-form">
+							<button class="search-button">
+								<img src="img/common/search.svg" alt="Поиск">
+							</button>
+							<input type="text" name="query" placeholder="Куда хотите отправиться?">
+						</form>
+						<div class="recent-places">
+							<h4>Недавние места</h4>
+							<ul>
+								<li class="recent-places-item"><a href="#">
+									<div class="recent-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description recent-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+								<li class="recent-places-item"><a href="#">
+									<div class="recent-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description recent-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+								<li class="recent-places-item"><a href="#">
+									<div class="recent-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description recent-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+							</ul>
+						</div>
+						<div class="popular-places">
+							<h4>Популярные места</h4>
+							<ul>
+								<li class="popular-places-item"><a href="#">
+									<div class="popular-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description popular-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+								<li class="popular-places-item"><a href="#">
+									<div class="popular-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description popular-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+								<li class="popular-places-item"><a href="#">
+									<div class="popular-place__inner">
+										<img src="img/index/index_pop-up/exp_1.jpg" alt="">
+										<div class="place-description popular-place-description">
+											<h5>Дубай</h5>
+											<p>ОАЭ, Эмират Дубай</p>
+										</div>
+									</div>
+								</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -137,6 +213,7 @@
 					</ul>
 				</div>
 			</section>
+
 		</div>
 	</main>
 
@@ -156,6 +233,8 @@
 			</a>
 		</div>
 	</footer>
+
+	<script src="js/search_index.js"></script>
 </body>
 
 </html>

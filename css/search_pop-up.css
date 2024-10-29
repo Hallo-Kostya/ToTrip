@@ -1,0 +1,107 @@
+/* SEARCH POP-UP STYLES */
+.lead-search__pop-up {
+   position: relative;
+	top: -360px;
+	transform: translate(-50%, 0);
+	left: 50%;
+   z-index: 15;
+   background: #fff;
+   width: 832px;
+   padding: 28px 24px;
+   border-radius: 24px;
+   display: none;
+}
+
+div.search__pop-up form {
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.60);
+	padding: 12px 0;
+	margin-bottom: 32px;
+}
+
+div.search__pop-up form button {
+	border: none;
+	background: #fff;
+}
+
+.search__pop-up form input {
+	border: none;
+	margin-left: 12px;
+	width: 744px;
+}
+
+.search__pop-up form input::placeholder {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.recent-places,
+.popular-places {
+	padding: 0 20px;
+}
+
+.recent-places h4,
+.popular-places h4 {
+	font-size: 19px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.place-description h5 {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.place-description p {
+	font-size: 14px;
+	font-weight: 300;
+	color: #5B5B5B;
+}
+
+.recent-places ul,
+.popular-places ul {
+	list-style: none;
+	margin-bottom: 32px;
+}
+
+.popular-places ul {
+	margin-bottom: 0;
+}
+
+.recent-places ul li:not(:last-child),
+.popular-places ul li:not(:last-child) {
+	margin-bottom: 24px;
+}
+
+.recent-place__inner,
+.popular-place__inner {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.recent-place__inner img,
+.popular-place__inner img {
+	display: block;
+	border-radius: 8px;
+}
+
+
+/* ОТОБРАЖЕНИЕ POP-UP */
+.lead-search__pop-up.active {
+	display: block;
+}
+
+.overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.20);
+   z-index: 10;
+   display: none;
+}
+
+.overlay.active {
+   display: block;
+}

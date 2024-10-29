@@ -3,6 +3,7 @@ section.lead {
 	width: 100%;
 	background: url('../img/index/main-photo.jpg') no-repeat center center/cover;
 	margin-top: -100px;
+	max-height: 860px;
 }
 
 .lead-wrapper {
