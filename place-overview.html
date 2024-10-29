@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="css/main-style.css">
+	<link rel="stylesheet" href="css/place-overview.css">
+	<title>Обзор места</title>
+</head>
+
+<body>
+	<div class="overlay"></div>
+	<header class="showcase">
+		<div class="container">
+			<nav class="main-nav">
+				<div class="header-logo">
+					<a href="index.html">
+						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
+					</a>
+				</div>
+				<div class="search">
+					<form action="/search" method="GET" class="search-form">
+						<button class="search-button">
+							<img src="img/common/search.svg" alt="Поиск">
+						</button>
+						<input type="text" name="query" placeholder="Поиск">
+					</form>
+				</div>
+				<ul class="main-menu">
+					<li class="menu-item"><a href="#">Подборки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
+					<li class="menu-item"><a href="#">Отзывы</a></li>
+				</ul>
+				<div class="profile">
+					<div class="profile-inf">
+						<p class="user-name">Константин Х.</p>
+						<button>Выход</button>
+					</div>
+					<div class="user-icon">
+						<a href="#">
+							<img src="img/common/user__icon.png" alt="Профиль">
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="main-content">
+			<div class="content-wrapper">
+				<div class="place-header">
+					<h1 class="place-title">Mercure Москва Павелецкая</h1>
+					<p class="category-info">№1 / 532 в категории Отели, Москва </p>
+					<button class="like">
+						<img src="img/common/heart.svg" alt="">
+					</button>
+				</div>
+				<div class="place-main-info">
+					<img src="img/common/map-point.svg" alt="" class="map-point">
+					<p class="address">Ул. Бахрушина, 11, Москва</p>
+					<ul class="stars five-star">
+						<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+						<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+						<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+						<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+						<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					</ul>
+					<p class="comments-info">228 отзывов</p>
+				</div>
+				<div class="gallery-wrapper">
+					<ul class="gallery">
+						<li class="gallery-photo big">
+							<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
+						</li>
+						<div class="small-gallery-photos">
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
+							</li>
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
+							</li>
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
+							</li>
+						</div>
+					</ul>
+				</div>
+				<div class="place-description">
+					<div class="place-description__wrapper">
+						<h2>О нас</h2>
+						<div class="rating">
+							<ul class="rating-attributes">
+								<li class="attribute">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<p class="attribute-name">Расположение</p>
+									</ul>
+								</li>
+								<li class="attribute">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<p class="attribute-name">Чистота</p>
+									</ul>
+								</li>
+								<li class="attribute">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<p class="attribute-name">Обслуживание</p>
+									</ul>
+								</li>
+								<li class="attribute">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<p class="attribute-name">Цена/качество</p>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="description-p">
+							<p>Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+							<p>Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+							<p>Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+						</div>
+					</div>
+				</div>
+				<div class="comments-wrapper">
+					<div class="comments__wrapper-inner">
+						<div class="comments-header">
+							<h2 class="comments-title">Отзывы</h2>
+							<button class="write-comment">
+								<span class="com-btn-text">Написать отзыв</span>
+							</button>
+						</div>
+						<ul class="comments">
+							<li class="comment">
+								<div class="comment-header">
+									<a href="#" class="commentor-profile">
+										<img src="img/common/user__icon.png" alt="" class="commentor-icon">
+										<p class="commentor-name">Мария А.</p>
+									</a>
+									<p class="comment-date">написала отзыв 11 сентября 2024 года</p>
+								</div>
+								<ul class="estimation">
+									<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+								</ul>
+								<h5 class="main-phrase">Шикарный отель</h5>
+								<p class="more-description">Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+								<p class="stay-date"><span class="bold">Дата пребывания:</span> 5 сентября - 10 сентября 2024 года</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="copyright">
+				<a href="#">
+					<p>&copy; ToTrip, 2024</p>
+				</a>
+			</div>
+			<ul class="footer-menu">
+				<li class="footer-menu-item"><a href="#">О нас</a></li>
+				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
+			</ul>
+			<a href="index.html">
+				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
+			</a>
+		</div>
+	</footer>
+
+</body>
+</html>
