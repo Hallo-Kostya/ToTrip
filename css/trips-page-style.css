@@ -14,7 +14,7 @@
 	padding: 0 112px;
 }
 
-.trips {
+.trips-wrapper-header {
 	margin-top: 101px;
 	margin-bottom: 100px;
 }
@@ -132,4 +132,23 @@
 
 .some-user__icon {
 	border-radius: 52px;
+}
+
+/* Стили для отображения контента поездок */
+.toggle-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+.hidden {
+	display: none;
+}
+
+.rotated {
+	transform: rotate(180deg);
 }
