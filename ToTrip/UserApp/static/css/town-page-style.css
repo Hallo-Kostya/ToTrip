@@ -1,0 +1,160 @@
+/* Main sections */
+section.lead {
+	width: 100%;
+	background: url('../img/town-page/town-page-photo.jpg') no-repeat center center/cover;
+	margin-top: -100px;
+}
+
+.lead-content {
+	padding: 304px 0;
+}
+
+.lead-content h1 {
+	max-width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 96px;
+	font-weight: 700;
+	color: #FFF;
+}
+
+div.lead-content div.town-description {
+	max-width: 1000px;
+	color: #fff;
+	font-size: 32px;
+	font-weight: 500;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* Town places style */
+.places-wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 0 112px;
+	
+}
+
+.places {
+	display: flex;
+	list-style: none;
+	margin-top: 24px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.places li:not(:last-child) {
+	margin-right: 12px;
+}
+
+.places-item div a {
+	display: flex;
+	align-items: center;
+	padding: 12px 20px;
+	border-radius: 16px;
+	box-shadow: 0px 4px 12.6px 0px rgba(0, 0, 0, 0.14);
+}
+
+.place-title {
+	font-family: 'Inter';
+	font-size: 28px;
+	margin-left: 12px;
+}
+
+.places-cards-wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	margin-top: 72px;
+	padding: 0 112px;
+}
+
+.places-cards-wrapper ul.places-cards {
+	display: grid;
+	list-style: none;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+}
+
+.places-cards .card {
+	position: relative;
+}
+
+.places-cards .card img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+div.card-info a {
+	max-width: 488px;
+	display: flex;
+	margin-top: 20px;
+	align-items: center;
+}
+
+.card-info a > *:not(:last-child) {
+	margin-right: 20px; 
+}
+
+div.card-info .rating {
+	max-width: 32px;
+	max-height: 32px;
+}
+
+div.card-info h3 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+.reviews {
+	color: #666;
+	font-size: 32px;
+	font-weight: 700;
+}
+
+/* ЗАЛИВКА ИКОНОК */
+.places-item div.current img {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg);
+}
+
+.places-item div.current a {
+	background: var(--Accent, #4154FF);
+	color: #fff;
+}
+
+
+@media(max-width: 1200px) {
+	.lead-content h1 {
+		width: 700px;
+	}
+	
+	.sugg-wrapper {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: repeat(2, 1fr);
+   }
+
+	.recommendations {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	div.card-info h3 {
+		font-size: 24px;
+	}
+
+	div.card-info img {
+		max-width: 120px;
+	}
+}
+
+@media (max-width: 800px) {
+	.places-cards-wrapper ul.places-cards {
+		grid-template-columns: 1fr;
+	}
+}
