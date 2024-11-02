@@ -7,5 +7,7 @@ urlpatterns = [
     path('town_page/', views.town_page, name='town_page'),
     path('cities/', views.city_list, name='city_list'),
     path('places/', views.place_list, name='place_list'),
-    path('city/<int:city_id>/', views.city_detail, name='city_detail')
+    path('city/<int:city_id>/', views.city_detail, name='city_detail'),
+    path('place/<int:place_id>/reviews/', views.place_reviews, name='place_reviews'),
+    path('place/<int:place_id>/review/', views.submit_review, name='submit_review'),
 ]

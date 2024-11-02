@@ -18,3 +18,12 @@ class Place(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.category})"
+
+class Review(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.IntegerField(default=1)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review for {self.place.name} - {self.rating} stars"

@@ -7,7 +7,11 @@
     <h1>Список мест</h1>
     <ul>
         {% for place in places %}
-            <li>{{ place.name }} ({{ place.category }})</li>
+            <li>
+                {{ place.name }} ({{ place.category }})
+                <a href="{% url 'submit_review' place.id %}">Добавить отзыв</a>
+                <a href="{% url 'place_reviews' place.id %}">Отзывы</a>
+            </li>
         {% empty %}
             <li>Города не найдены.</li>
         {% endfor %}
