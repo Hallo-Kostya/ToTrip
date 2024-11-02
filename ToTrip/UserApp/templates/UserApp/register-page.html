@@ -14,10 +14,10 @@
 
     <form method="POST">
         {% csrf_token %}
-        <label for="username">Придумайте свой уникальный id:</label>
+        <label for="username">Придумайте своё имя пользователя:</label>
         <input type="text" id="username" name="username" required><br><br>
-        <label for="name">Отображаемое имя:</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <label for="first_name">Отображаемое имя:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
         <label for="last_name">Отображаемая фамилия:</label>
         <input type="text" id="last_name" name="last_name" required><br><br>
         <label for="email">Электронная почта:</label>

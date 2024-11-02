@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile-page.css' %}">
     <title>Welcome to ToTrip!</title>
 </head>
 <body>
@@ -19,28 +19,28 @@
 		<div class="container">
 			<nav class="main-nav">
 				<div class="header-logo">
-					<a href="index.html"><img src="img/main-logo.svg" alt="Логотип ToTrip"></a>
+					<a href="{% url 'home_page' %}"><img src="{% static 'img/main-logo.svg' %}" alt="Логотип ToTrip"></a>
 				</div>
 				<div class="search">
 					<form action="/search" method="GET" class="search-form">
 						<button type="submit" class="search-button">
-							<img src="img/search.svg" alt="Поиск">
+							<img src="{% static 'img/search.svg' %}" alt="Поиск">
 						</button>
 						<input type="text" name="query" placeholder="Поиск">
 					</form>
 				</div>
 				<ul class="main-menu">
-					<li class="menu-item"><a href='town-page.html'>Подборки</a></li>
+					<li class="menu-item"><a href="{% url 'home_page' %}">Подборки</a></li>
 					<li class="menu-item">Поездки</li>
 					<li class="menu-item">Отзывы</li>
 				</ul>
 				<div class="profile">
 					<div class="profile-inf">
-                         <p class="user-name">{{ user_data.Name }} {{ user_data.last_name }}</p>
+                         <p class="user-name">{{ user_data.first_name }} {{ user_data.last_name }}</p>
 						<a href="{% url 'logout_page' %}">Выйти</a>
 					</div>
 					<div class="user-icon">
-						<a href="profile.html"><img src="img/user-icon.png" alt="Профиль"></a>
+						<a href="{% url 'profile_page' %}"><img src="{% if user.photo %}{{ user.photo.url }}{% else %}{% static 'user_photos/default-avatar.png' %}{% endif %}" alt="Профиль"></a>
 					</div>
 				</div>
 			</nav>
@@ -51,16 +51,16 @@
             <section class="lead"></section> 
             <section class="profile">
                 <div class="profile-head">
-                    <img class='user-photo' src="/img/user-photo.png" alt="Фото профиля">
+                    <img class='user-photo' src="{% if user.photo %}{{ user.photo.url }}{% else %}{% static 'user_photos/default-avatar.png' %}{% endif %}" alt="Фото профиля">
                     <div class="profile-info">
-                        <p class="user-name">@jek1ti</p>
+                        <p class="user-name">@{{user_data.username}}</p>
                         <div class="name">
-                            <p class="name-element">Сафия Хажиева</p>
-                            <img src="img/profile/Vector.svg" alt="переименовать">
+                            <p class="name-element">{{user_data.first_name}} {{user_data.last_name}}</p>
+                            <img src="{% static 'img/profile/Vector.svg' %}" alt="переименовать">
                         </div>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur. Euismod ut quis lorem viverra proin pellentesque gravida eu nisl.</p>
+                        <p class="description">{{user_data.bio}}</p>
                     </div>
-                    <img src="/img/profile/Settings.svg" alt="Настройки профиля">
+                    <img src="{% static 'img/profile/Settings.svg' %}" alt="Настройки профиля">
                 </div>
                 <div class="social-info">
                     <div class="social">
@@ -81,13 +81,13 @@
                 <ul class="user-actions-list">
                     <li class="user-actions-list-item">
                         <div class="current">
-                            <img src="img/profile/History.svg" class="list-action-photo">
+                            <img src="{% static 'img/profile/History.svg' %}" class="list-action-photo">
                             <p class="list-action-name">Действие</p>
                         </div>
                     </li>
                     <li class="user-actions-list-item">
                         <div>
-                            <img src='img/profile/Camera.svg' class="list-action-photo">
+                            <img src="{% static 'img/profile/Camera.svg' %}" class="list-action-photo">
                             <p class="list-action-name">Фото</p>
                         </div>
                     </li>

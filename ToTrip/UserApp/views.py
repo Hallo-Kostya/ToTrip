@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login,authenticate
 import requests
-from django.contrib.auth.decorators import login_required
+
 
 def login_page(request):
     if request.method == 'POST':
@@ -17,6 +18,9 @@ def login_page(request):
             tokens = response.json()
             request.session['access'] = tokens['access']
             request.session['refresh'] = tokens['refresh']
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
             return redirect('profile_page')  # Перенаправление на главную страницу
 
         else:
@@ -31,14 +35,14 @@ def register_page(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         username = request.POST.get('username')
-        name=request.POST.get('name')
+        first_name=request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         password = request.POST.get('password')
 
         # Отправляем запрос к вашему API для регистрации
         response = requests.post('http://127.0.0.1:8000/api/users/register/', data={
             'email': email,
-            'name': name,
+            'first_name': first_name,
             'last_name': last_name,
             'username' : username,
             'password': password
@@ -59,12 +63,12 @@ def logout_page(request):
     request.session.pop('access', None)
     request.session.pop('refresh', None)
     return redirect('login_page')
+def main_page(request):
+    return render(request, "TripPlanner/MainPage.html")
 
-
-@login_required
 def profile_page(request):
     access_token = request.session.get('access')
-
+    print(f"Access token: {access_token}")  # Отладка для проверки токена
     response = requests.get(
         'http://127.0.0.1:8000/api/users/profile/',
         headers={'Authorization': f'Bearer {access_token}'}

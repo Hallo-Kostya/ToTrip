@@ -108,7 +108,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-LOGIN_URL = '/user/login/'
+LOGIN_URL = 'login/'
+
+LOGIN_REDIRECT_URL = ''
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Password validation
