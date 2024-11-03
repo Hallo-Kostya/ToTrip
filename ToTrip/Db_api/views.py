@@ -1,12 +1,17 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.decorators import api_view
+from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
-
+from .models import  City,Place, Category
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
+from .serializers import RegisterSerializer, LoginSerializer, UserSerializer, CitySerializer, PlaceSerializer
 from django.shortcuts import render, redirect
 import requests
+
+from ToTrip import settings
+
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -39,3 +44,5 @@ class UserProfileView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+

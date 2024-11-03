@@ -22,11 +22,12 @@
 					<a href="{% url 'home_page' %}"><img src="{% static 'img/main-logo.svg' %}" alt="Логотип ToTrip"></a>
 				</div>
 				<div class="search">
-					<form action="/search" method="GET" class="search-form">
+					<form action="{% url 'search_city' %}"  method="get" class="search-form">
+						{% csrf_token %}
+						<input type="text" name="city" placeholder="Поиск">
 						<button type="submit" class="search-button">
 							<img src="{% static 'img/search.svg' %}" alt="Поиск">
 						</button>
-						<input type="text" name="query" placeholder="Поиск">
 					</form>
 				</div>
 				<ul class="main-menu">
@@ -64,9 +65,9 @@
 						<h1>Начните путешествовать вместе с ToTrip!</h1>
 					</div>
 					<div class="search">
-						<form  method="POST" class="lead-search-form" action="">
-							{% csrf_token %}
-							<input type="text" name="query" placeholder="Куда вы хотите отправиться?" required>
+						<form action="{% url 'search_city' %}" class="lead-search-form" method="get" >
+						{% csrf_token %}
+							<input type="text" name="city" placeholder="Куда вы хотите отправиться?" required>
 							<button type="submit" class="search-button">
 								<img src="{% static 'img/search.svg' %}" alt="Поиск">
 							</button>

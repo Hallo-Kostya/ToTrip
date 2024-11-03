@@ -3,8 +3,9 @@
 from django.db import migrations
 
 
-class Migration(migrations.Migration):
 
+
+class Migration(migrations.Migration):
     dependencies = [
         ('Db_api', '0002_country_user_followers_alter_user_city_and_more'),
     ]

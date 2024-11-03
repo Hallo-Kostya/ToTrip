@@ -90,7 +90,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToTrip.wsgi.application'
 
-
+FOURSQUARE_API_KEY = 'fsq34Zy+vMIVStXkOn52f0vpDs+Om19xxkMKaXfrqRJF0mg='
+FOURSQUARE_API_BASE_URL = 'https://api.foursquare.com/v3/places/search'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -99,7 +100,7 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'ToTrip_BD',
         'USER':'postgres',
-        'PASSWORD':'0000',
+        'PASSWORD':'2396ToTripUlitki',
         'HOST':'localhost',
         'PORT':'5432',
     },
