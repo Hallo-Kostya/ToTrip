@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список маршрутов</title>
+</head>
+<body>
+    <h1>Маршруты</h1>
+    <ul>
+        {% for route in routes %}
+            <li><a href="{% url 'route_detail' route.id %}">{{ route.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_route' %}">Добавить новый маршрут</a>
+</body>
+</html>

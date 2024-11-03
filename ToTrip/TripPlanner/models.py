@@ -27,3 +27,24 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.place.name} - {self.rating} stars"
+
+class Route(models.Model):
+    name = models.CharField(max_length=255, unique=True, help_text="Name of the route")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+class RoutePoint(models.Model):
+    route = models.ForeignKey(Route, related_name='points', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, help_text="Name or description of the point")
+    latitude = models.FloatField(help_text="Latitude of the point")
+    longitude = models.FloatField(help_text="Longitude of the point")
+    order = models.PositiveIntegerField(help_text="Order of the point in the route")
+
+    class Meta:
+        unique_together = ('route', 'order')
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.name} (Order: {self.order})"
