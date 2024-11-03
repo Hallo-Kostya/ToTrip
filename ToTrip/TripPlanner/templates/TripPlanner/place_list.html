@@ -11,13 +11,6 @@
                 {{ place.name }} ({{ place.category }})
                 <a href="{% url 'submit_review' place.id %}">Добавить отзыв</a>
                 <a href="{% url 'place_reviews' place.id %}">Отзывы</a>
-                 <p>Средняя оценка:
-                    {% if place.average_rating %}
-                        {{ place.average_rating|floatformat:1 }}
-                    {% else %}
-                        Нет оценок
-                    {% endif %}
-                </p>
             </li>
         {% empty %}
             <li>Города не найдены.</li>
