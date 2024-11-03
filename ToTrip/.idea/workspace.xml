@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="91c9b9be-c58e-4ef7-a6f9-74b9bb9a8f0b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/ToTrip.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TripPlanner/templates/TripPlanner/submit_review.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/ToTrip_Proj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/ToTrip_Proj.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TripPlanner/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TripPlanner/templates/TripPlanner/add_route.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TripPlanner/templates/TripPlanner/add_route_point.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TripPlanner/templates/TripPlanner/route_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TripPlanner/templates/TripPlanner/route_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToTrip/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ToTrip/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TripPlanner/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/TripPlanner/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TripPlanner/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/TripPlanner/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TripPlanner/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/TripPlanner/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TripPlanner/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/TripPlanner/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../poetry.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pyproject.toml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2nncy9F4qyMJehEwHCOO09Jvdj7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Backend"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Backend-Aitur&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Айтур\testRepa\ToTrip\ToTrip\TripPlanner" />
+      <recent name="C:\Users\Айтур\testRepa\ToTrip\ToTrip\ToTrip" />
+      <recent name="C:\Users\Айтур\testRepa\ToTrip\ToTrip" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,5 +67,28 @@
       <updated>1729612531526</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Backend" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
