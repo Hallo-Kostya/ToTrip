@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 import requests
 
 
@@ -21,7 +21,7 @@ def login_page(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-            return redirect('profile_page')  # Перенаправление на главную страницу
+            return redirect('home_page')  # Перенаправление на главную страницу
 
         else:
             # Обработка ошибок входа
@@ -60,9 +60,10 @@ def register_page(request):
     return render(request, 'UserApp/register-page.html')
 
 def logout_page(request):
+    logout(request)
     request.session.pop('access', None)
     request.session.pop('refresh', None)
-    return redirect('login_page')
+    return redirect('home_page')
 def main_page(request):
     return render(request, "TripPlanner/MainPage.html")
 

@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="{% static 'css/town-page-style.css' %}">
-	<title>Поездки по {{city.country}} - {{city.name}}</title>
+	<title>{{city.name}}</title>
 </head>
 
 <body>
@@ -55,62 +55,21 @@
 						<h1>{{city.name}}</h1>
 					</div>
 					<div class="town-description">
-						<p>Познакомьтесь с яркой культурой, богатой историей и потрясающей архитектурой Москвы. 
-							Посетите все места этого динамичного города - от знаковых достопримечательностей, как 
-							Кремль и Красная площадь.</p>
+						<p>Здесь по сути описание</p>
 					</div>
 				</div>
 			</section>
 
 			<section class="town-places">
 				<div class="places-wrapper">
-					<ul class="places">
+					{% for category, places in places_by_category.items %}
+					<h2>{{ category }}</h2>
+					<ul>
 						{% for place in places %}
-							<li>{{ place.name }} — {{ place.avg_rating }} звёзд, Категория: {{place.category}}</li>
-    					{% endfor %}
-						<li class="places-item">
-							<div class="current">
-								<img src="{% static 'img/hotels__icon.svg' %}" alt="Отели" width="32" height="32">
-								<span class="place-title">Отели</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/art__icon.svg' %}" alt="Искусство" width="32" height="32">
-								<span class="place-title">Искусство</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/night-life__icon.svg' %}" alt="Ночная жизнь" width="32" height="32">
-								<span class="place-title">Ночная жизнь</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/nature__icon.svg' %}" alt="На природе" width="32" height="32">
-								<span class="place-title">На природе</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/museums__icon.svg' %}" alt="Музеи" width="32" height="32">
-								<span class="place-title">Музеи</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/historical__icon.svg' %}" alt="Исторические места" width="32" height="32">
-								<span class="place-title">Исторические места</span>
-							</div>
-						</li>
-						<li class="places-item">
-							<div>
-								<img src="{% static 'img/eat__icon.svg' %}" alt="Еда" width="32" height="32">
-								<span class="place-title">Еда</span>
-							</div>
-						</li>
+							<li>{{ place.name }} - {{ place.address }}</li>
+						{% endfor %}
 					</ul>
+					{% endfor %}
 				</div>
 				<div class="places-cards-wrapper">
 					<ul class="places-cards">

@@ -1,4 +1,7 @@
 # Db_api/models.py
+from enum import unique
+from logging import NullHandler
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -55,18 +58,28 @@ class City(models.Model):
     name = models.CharField(max_length=100)
     country = models.ForeignKey(Country, related_name='cities', on_delete=models.CASCADE)
     region = models.CharField(max_length=100)
-    coordinates=models.CharField(max_length=100, unique=True)
+    coordinates=models.CharField(max_length=100, null=True)
     photo=models.ImageField(upload_to='city_photos/', blank=True, null=True)
     def __str__(self):
         return f"{self.name}, {self.country}"
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    code = models.IntegerField(unique=True)
+    icon = models.ImageField(upload_to='category_icons/', null=True, blank=True)
+    def __str__(self):
+        return f"Категория {self.name}"
+
+
 class Place(models.Model):
+    fsq_id=models.CharField(max_length=50, unique=True, null=True)
     name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
-    category = models.CharField(max_length=50)
+    address = models.CharField(max_length=255, default="Не указан")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='places')
     description = models.TextField(null=True, blank=True)
     photos = models.ImageField(upload_to='place_photos/', blank=True, null=True)
     avg_rating = models.FloatField(default=0.0)
-    coordinates = models.CharField(max_length=100, unique=True)
+    coordinates = models.CharField(max_length=100, null=True)
     working_hours = models.CharField(max_length=100)
     city = models.ForeignKey(City, related_name='city_places', on_delete=models.CASCADE)
     country= models.ForeignKey(Country, related_name='places', on_delete=models.CASCADE)
@@ -119,3 +132,4 @@ class ReviewPhotos(models.Model):
 
     def __str__(self):
         return f"Photo for Review {self.review.id}"
+

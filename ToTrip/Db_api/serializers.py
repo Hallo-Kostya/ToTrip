@@ -1,6 +1,6 @@
 # Db_api/serializers.py
 from rest_framework import serializers
-from .models import User
+from .models import User, City, Place, Category
 from django.contrib.auth import authenticate
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -40,3 +40,20 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'first_name', 'last_name','bio','city','country']
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'code', 'icon', 'photo']
+
+class PlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Place
+        fields = ['name', 'fsq_id','category', 'avg_rating', 'address']
+
+class CitySerializer(serializers.ModelSerializer):
+    places = PlaceSerializer(many=True, read_only=True)
+    class Meta:
+        model = City
+        fields = ['name', 'country', 'places']
