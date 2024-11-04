@@ -1,4 +1,8 @@
 /* Main sections */
+body {
+	background: #E4E4E4;
+}
+
 section.lead {
 	width: 100%;
 	background: url('../img/town-page/town-page-photo.jpg') no-repeat center center/cover;
@@ -32,22 +36,18 @@ div.lead-content div.town-description {
 .places-wrapper {
 	max-width: 1920px;
 	margin: 0 auto;
-	padding: 0 112px;
-	
+	padding: 0 112px;	
 }
 
 .places {
+	max-width: 1413px;
 	display: flex;
-	list-style: none;
+	margin: 0 auto;
 	margin-top: 24px;
-	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 12px;
 }
 
-.places li:not(:last-child) {
-	margin-right: 12px;
-}
 
 .places-item div a {
 	display: flex;
@@ -55,18 +55,22 @@ div.lead-content div.town-description {
 	padding: 12px 20px;
 	border-radius: 16px;
 	box-shadow: 0px 4px 12.6px 0px rgba(0, 0, 0, 0.14);
+	background: #fff;
 }
 
 .place-title {
 	font-family: 'Inter';
-	font-size: 28px;
+	font-size: 20px;
 	margin-left: 12px;
 }
 
 .places-cards-wrapper {
 	max-width: 1920px;
+	display: flex;
+	gap: 32px;
+
 	margin: 0 auto;
-	margin-top: 72px;
+	margin-top: 49px;
 	padding: 0 112px;
 }
 
@@ -85,6 +89,8 @@ div.lead-content div.town-description {
 	display: block;
 	width: 100%;
 	height: auto;
+	border-radius: 24px;
+	margin-left: auto;
 }
 
 div.card-info a {
@@ -122,6 +128,51 @@ div.card-info h3 {
 .places-item div.current a {
 	background: var(--Accent, #4154FF);
 	color: #fff;
+}
+
+/* Filters styles */
+.filter {
+	width: 400px;
+	border-radius: 32px;
+	background: #fff;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 28px;
+}
+
+
+.filter-attributes {
+	padding: 10px;
+}
+
+.filter:not(:last-child) {
+	margin-bottom: 32px;
+}
+
+.filter h6 {
+	font-size: 24px;
+	margin-bottom: 14px;
+}
+
+.attribute {
+	display: flex;
+	align-items: center;
+}
+
+.attribute-p-img__wrapper {
+	display: flex;
+	margin-left: auto;
+}
+
+.attribute-p-img__wrapper img {
+	margin-left: 17px;
+}
+
+.stars {
+	display: flex;
+}
+
+.star:not(:first-child) {
+	margin-left: 6px;
 }
 
 

@@ -24,7 +24,7 @@
 				</div>
 				<div class="search">
 					<form action="/search" method="GET" class="search-form">
-						<button type="submit" class="search-button">
+						<button class="search-button">
 							<img src="img/common/search.svg" alt="Поиск">
 						</button>
 						<input type="text" name="query" placeholder="Поиск">
@@ -42,7 +42,7 @@
 					</div>
 					<div class="user-icon">
 						<a href="#">
-							<img src="img/user__icon.png" alt="Профиль">
+							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 	<main>
 		<div class="main-content">
 			<div class="trips-wrapper">
-				<div class="trips">
+				<div class="trips-wrapper-header">
 					<div class="trips-header-wrapper">
 						<div class="trips-header">
 							<h1>Мои поездки</h1>
@@ -66,150 +66,156 @@
 					</div>
 				</div>
 
-				<div class="past-trips">
+				<div class="trips">
 					<div class="past-trips-container">
 						<div class="trip-header past-trip-header">
 							<h2>Прошедшие</h2>
-							<button class="unwrapper">
-								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="unwrap-button">
+							<button class="unwrapper toggle-button">
+								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="arrow">
 							</button>
 						</div>
-						<div class="past-trip">
-							<a href="#">
-								<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
-							</a>
-							<div class="card-info-wrapper">
-								<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
-								<div class="trip-info">
-									<div class="trip-date">
-										<img src="img/trips-page/calendar__icon.svg" alt="Календарь иконка">
-										<p class="date">3 окт. - 15 окт.</p>
+						<div class="hide-content">
+							<div class="past-trip">
+								<a href="#">
+									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
+								</a>
+								<div class="card-info-wrapper">
+									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<div class="trip-info">
+										<div class="trip-date">
+											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
+											<p class="date">3 окт. - 15 окт.</p>
+										</div>
+										<div class="trip-place">
+											<img src="Img/common/map-pinned__icon.svg" alt="Картка иконка">
+											<p class="place">Москва</p>
+										</div>
 									</div>
-									<div class="trip-place">
-										<img src="Img/trips-page/map-pinned__icon.svg" alt="Картка иконка">
-										<p class="place">Москва</p>
-									</div>
+									<ul class="users">
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
+										</li>
+									</ul>
 								</div>
-								<ul class="users">
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
-									</li>
-								</ul>
 							</div>
-						</div>
-						<div class="past-trip">
-							<a href="#">
-								<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
-							</a>
-							<div class="card-info-wrapper">
-								<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
-								<div class="trip-info">
-									<div class="trip-date">
-										<img src="img/trips-page/calendar__icon.svg" alt="Календарь иконка">
-										<p class="date">3 окт. - 15 окт.</p>
+							<div class="past-trip">
+								<a href="#">
+									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
+								</a>
+								<div class="card-info-wrapper">
+									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<div class="trip-info">
+										<div class="trip-date">
+											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
+											<p class="date">3 окт. - 15 окт.</p>
+										</div>
+										<div class="trip-place">
+											<img src="Img/common/map-pinned__icon.svg" alt="Картка иконка">
+											<p class="place">Москва</p>
+										</div>
 									</div>
-									<div class="trip-place">
-										<img src="Img/trips-page/map-pinned__icon.svg" alt="Картка иконка">
-										<p class="place">Москва</p>
-									</div>
+									<ul class="users">
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
+										</li>
+									</ul>
 								</div>
-								<ul class="users">
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
-									</li>
-								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="future-trips">
+				<div class="trips">
 					<div class="future-trips-container">
 						<div class="trip-header future-trip-header">
 							<h2>Будущие</h2>
-							<button class="unwrapper">
-								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="unwrap-button">
+							<button class="unwrapper toggle-button">
+								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="arrow">
 							</button>
 						</div>
-						<div class="future-trip">
-							<a href="#">
-								<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
-							</a>
-							<div class="card-info-wrapper">
-								<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
-								<div class="trip-info">
-									<div class="trip-date">
-										<img src="img/trips-page/calendar__icon.svg" alt="Календарь иконка">
-										<p class="date">3 окт. - 15 окт.</p>
+						<div class="hide-content">
+							<div class="future-trip">
+								<a href="#">
+									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
+								</a>
+								<div class="card-info-wrapper">
+									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<div class="trip-info">
+										<div class="trip-date">
+											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
+											<p class="date">3 окт. - 15 окт.</p>
+										</div>
+										<div class="trip-place">
+											<img src="Img/common/map-pinned__icon.svg" alt="Картка иконка">
+											<p class="place">Москва</p>
+										</div>
 									</div>
-									<div class="trip-place">
-										<img src="Img/trips-page/map-pinned__icon.svg" alt="Картка иконка">
-										<p class="place">Москва</p>
-									</div>
+									<ul class="users">
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
+										</li>
+									</ul>
 								</div>
-								<ul class="users">
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
-									</li>
-								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="current-trips">
+				<div class="trips">
 					<div class="current-trips-container">
 						<div class="trip-header past-trip-header">
 							<h2>Текущая</h2>
-							<button class="unwrapper">
-								<img src="img/common/unwrap__button.svg" alt="Развернуть" class="unwrap-button flipped-unwrap-button">
+							<button class="unwrapper toggle-button">
+								<img src="img/common/unwrap__button.svg" alt="Развернуть" class="arrow">
 							</button>
 						</div>
-						<div class="current-trip">
-							<a href="#">
-								<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
-							</a>
-							<div class="card-info-wrapper">
-								<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
-								<div class="trip-info">
-									<div class="trip-date">
-										<img src="img/trips-page/calendar__icon.svg" alt="Календарь иконка">
-										<p class="date">3 окт. - 15 окт.</p>
+						<div class="hide-content">
+							<div class="current-trip">
+								<a href="#">
+									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
+								</a>
+								<div class="card-info-wrapper">
+									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<div class="trip-info">
+										<div class="trip-date">
+											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
+											<p class="date">3 окт. - 15 окт.</p>
+										</div>
+										<div class="trip-place">
+											<img src="Img/common/map-pinned__icon.svg" alt="Картка иконка">
+											<p class="place">Москва</p>
+										</div>
 									</div>
-									<div class="trip-place">
-										<img src="Img/trips-page/map-pinned__icon.svg" alt="Картка иконка">
-										<p class="place">Москва</p>
-									</div>
+									<ul class="users">
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
+										</li>
+										<li class="user">
+											<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
+										</li>
+									</ul>
 								</div>
-								<ul class="users">
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
-									</li>
-									<li class="user">
-										<img src="img/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
-									</li>
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -234,5 +240,7 @@
 			</a>
 		</div>
 	</footer>
+
+	<script src="js/hide-content.js"></script>
 </body>
 </html>
