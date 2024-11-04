@@ -33,19 +33,18 @@ def profile_page(request):
 # Create your views here.
 class CitySearchView(APIView):
     def fetch_and_store_places(self, city, category):
-        print('МЕТОД АКТИВИРОВАН НУЖНЫЙ')
         url = "https://api.foursquare.com/v3/places/search"
         headers = {
             "Authorization": f"{settings.FOURSQUARE_API_KEY}",
 
         }
-        print(city.name, category.name, category.code)
         params = {
-            "query": f"{city.name} {category.name}",
-            "categories":f"{category.code}",
-            "fields": "fsq_id,name,location,closed_bucket",
-            "near": city.name,
-            "limit": 10
+            "query": f'',
+            "categories":str(category.code),
+            "fields": "fsq_id,rating,name,location,closed_bucket",
+            "near": f"{city.name}, Россия",
+            "limit": 10,
+            "sort":"POPULARITY"
         }
         print("URL:", url)
         print("Headers:", headers)
@@ -57,17 +56,16 @@ class CitySearchView(APIView):
             if not places_data:
                 print(f"Нет мест для категории {category.name} в городе {city.name}")
             for place_data in places_data:
-                print(place_data)
+                avg_rating = place_data.get("rating")
                 Place.objects.update_or_create(
                     fsq_id=place_data["fsq_id"],
                     name=place_data["name"],
                     category=category,
+                    avg_rating=avg_rating,
                     city=city,
                     address=place_data["location"].get("formatted_address", ""),
                     country=country,
                 )
-        else:
-            print('всё херня давай по новой')
     def get(self, request):
 
         city_name = request.GET.get('city')  # Получаем название города из запроса

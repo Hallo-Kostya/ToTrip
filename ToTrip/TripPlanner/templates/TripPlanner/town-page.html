@@ -66,7 +66,7 @@
 					<h2>{{ category }}</h2>
 					<ul>
 						{% for place in places %}
-							<li>{{ place.name }} - {{ place.address }}</li>
+							<li>{{ place.name }} - {{ place.address }}    рейтинг: {{ place.avg_rating }}</li>
 						{% endfor %}
 					</ul>
 					{% endfor %}

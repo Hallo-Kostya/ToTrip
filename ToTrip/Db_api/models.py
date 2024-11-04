@@ -35,7 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = models.ImageField(upload_to='user_photos/', blank=True, null=True,default='user_photos/default_avatar.jpg')
     last_login = models.DateTimeField(default=timezone.now, null=False)
     is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     city=models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=50, null=True)
     followers=models.ManyToManyField('self',symmetrical=False, related_name='following', blank=True)
@@ -73,12 +73,12 @@ class Category(models.Model):
 
 class Place(models.Model):
     fsq_id=models.CharField(max_length=50, unique=True, null=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     address = models.CharField(max_length=255, default="Не указан")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='places')
     description = models.TextField(null=True, blank=True)
     photos = models.ImageField(upload_to='place_photos/', blank=True, null=True)
-    avg_rating = models.FloatField(default=0.0)
+    avg_rating = models.FloatField(default=0.0, null=True)
     coordinates = models.CharField(max_length=100, null=True)
     working_hours = models.CharField(max_length=100)
     city = models.ForeignKey(City, related_name='city_places', on_delete=models.CASCADE)
