@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="css/main-style.css">
+	<link rel="stylesheet" href="css/place-category-style.css">
+	<title>Поездки по городам - Категории</title>
+</head>
+
+<body>
+	<div class="overlay"></div>
+	<header class="showcase">
+		<div class="container">
+			<nav class="main-nav">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
+						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
+					</a>
+				</div>
+				<div class="search">
+					<form action="/search" method="GET" class="search-form">
+						<button class="search-button">
+							<img src="img/common/search.svg" alt="Поиск">
+						</button>
+						<input type="text" name="query" placeholder="Поиск">
+					</form>
+				</div>
+				<ul class="main-menu">
+					<li class="menu-item"><a href="#">Подборки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
+					<li class="menu-item"><a href="#">Отзывы</a></li>
+				</ul>
+				<div class="profile">
+					<div class="profile-inf">
+						<p class="user-name">Константин Х.</p>
+						<button>Выход</button>
+					</div>
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
+							<img src="img/common/user__icon.png" alt="Профиль">
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="#" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="#"><li class="city-nav-item">Отели</li></a>
+					<a href="#"><li class="city-nav-item">Развлечения</li></a>
+					<a href="#"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="main-content">
+			<section class="lead">
+				<div class="lead-wrapper">
+					<div class="lead-content">
+						<h1>Рестораны Москвы</h1>
+					</div>
+				</div>
+			</section>
+
+			<section class="place-category__container">
+				<div class="popular-categories__wrapper">
+					<h3 class="ppl-ctg__ttl">Популярные категории</h3>
+					<div class="categories__wrapper">
+						<ul class="categories">
+							<li class="category">
+								<a href="#">
+									<div class="category__inner">
+										<h6 class="category-title">Для посещения с детьми</h6>
+									</div>
+								</a>	
+							</li>
+							<li class="category">
+								<a href="#">
+									<div class="category__inner">
+										<h6 class="category-title">Самые комфортные</h6>
+									</div>
+								</a>	
+							</li>
+							<li class="category">
+								<a href="#">
+									<div class="category__inner">
+										<h6 class="category-title">5-ти звездочные отели</h6>
+									</div>
+								</a>		
+							</li>
+							<li class="category">
+								<a href="#">
+									<div class="category__inner">
+										<h6 class="category-title">Умеренная стоимость</h6>
+									</div>
+								</a>				
+							</li>
+							<li class="category">
+								<a href="#">
+									<div class="category__inner">
+										<h6 class="category-title">Бесплатный интернет</h6>
+									</div>
+								</a>					
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="place-category__inner">
+					<div class="sidebar">
+						<ul class="filters">
+							<li class="filter">
+								<h6>Оценка пользователей</h6>
+								<ul class="filter-attributes">
+									<li class="attribute">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/circle-check.svg" alt="" class="filter-circle check" width="24">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars four-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars three-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars two-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars one-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+								</ul>
+							</li>
+							<li class="filter">
+								<h6>Оценка пользователей</h6>
+								<ul class="filter-attributes">
+									<li class="attribute">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/circle-check.svg" alt="" class="filter-circle check" width="24">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars four-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars three-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars two-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+									<li class="attribute">
+										<ul class="stars one-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<div class="attribute-p-img__wrapper">
+											<p>и выше</p>
+											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="place-category-cards">
+						<div class="place-category-card">
+							<div class="pl-ct-img">
+								<img src="img/place-category/card-img.png" alt="" width="400" height="302">
+							</div>
+							<div class="pl-ct__inner">
+								<h3 class="place-name">Название места</h3>
+								<div class="reviews">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									</ul>
+									<p class="comments-cnt">1094 отзыва</p>
+								</div>
+								<div class="popular-comment">
+									<h4>Самый популярный комментарий:</h4>
+									<p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, eius.</p>
+									<div class="commentor">
+										<img src="img/common/user__icon.png" alt="" class="commentor-profile__icon" width="48" height="48">
+										<p class="commentor-name">Мария А.</p>
+										<p class="comment-date">19 сентября 2021 года</p>
+									</div>
+								</div>
+							</div>
+							<div class="place-info__sidebar">
+								<h3>Постояльцы отмечают:</h3>
+								<ul class="characteristics">
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Хороший интернет</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Приятный персонал</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-minus.svg" alt="" class="minus">
+											<p class="char-text">Тараканы в еде</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="place-category-card">
+							<div class="pl-ct-img">
+								<img src="img/place-category/card-img.png" alt="" width="400" height="302">
+							</div>
+							<div class="pl-ct__inner">
+								<h3 class="place-name">Название места</h3>
+								<div class="reviews">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									</ul>
+									<p class="comments-cnt">1094 отзыва</p>
+								</div>
+								<div class="popular-comment">
+									<h4>Самый популярный комментарий:</h4>
+									<p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, eius.</p>
+									<div class="commentor">
+										<img src="img/common/user__icon.png" alt="" class="commentor-profile__icon" width="48" height="48">
+										<p class="commentor-name">Мария А.</p>
+										<p class="comment-date">19 сентября 2021 года</p>
+									</div>
+								</div>
+							</div>
+							<div class="place-info__sidebar">
+								<h3>Постояльцы отмечают:</h3>
+								<ul class="characteristics">
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Хороший интернет</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Приятный персонал</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-minus.svg" alt="" class="minus">
+											<p class="char-text">Тараканы в еде</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="place-category-card">
+							<div class="pl-ct-img">
+								<img src="img/place-category/card-img.png" alt="" width="400" height="302">
+							</div>
+							<div class="pl-ct__inner">
+								<h3 class="place-name">Название места</h3>
+								<div class="reviews">
+									<ul class="stars five-star">
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+									</ul>
+									<p class="comments-cnt">1094 отзыва</p>
+								</div>
+								<div class="popular-comment">
+									<h4>Самый популярный комментарий:</h4>
+									<p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, eius.</p>
+									<div class="commentor">
+										<img src="img/common/user__icon.png" alt="" class="commentor-profile__icon" width="48" height="48">
+										<p class="commentor-name">Мария А.</p>
+										<p class="comment-date">19 сентября 2021 года</p>
+									</div>
+								</div>
+							</div>
+							<div class="place-info__sidebar">
+								<h3>Постояльцы отмечают:</h3>
+								<ul class="characteristics">
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Хороший интернет</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-plus.svg" alt="" class="plus">
+											<p class="char-text">Приятный персонал</p>
+										</div>
+									</li>
+									<li class="characteristic">
+										<div class="char__inner">
+											<img src="img/common/circle-minus.svg" alt="" class="minus">
+											<p class="char-text">Тараканы в еде</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="copyright">
+				<a href="#">
+					<p>&copy; ToTrip, 2024</p>
+				</a>
+			</div>
+			<ul class="footer-menu">
+				<li class="footer-menu-item"><a href="#">О нас</a></li>
+				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
+			</ul>
+			<a href="index.html" class="footer-logo">
+				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
+			</a>
+		</div>
+	</footer>
+
+	<script>
+
+	</script>
+</body>
+
+</html>
