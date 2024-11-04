@@ -1,12 +1,14 @@
 // Управление попапом
 
-document.getElementById('open-popup').onclick = function() {
+document.getElementById('open-popup').addEventListener('click',(event) => {
+    event.preventDefault();
     document.getElementById('popup').style.display = 'flex';
-};
+});
 
-document.getElementById('close-popup-button').onclick = function() {
+document.getElementById('close-popup-button').addEventListener('click', (event) => {
+    event.preventDefault();
     document.getElementById('popup').style.display = 'none';
-};
+});
 
 document.querySelector('.popup-content').addEventListener('submit', (event) => {
     event.preventDefault();
