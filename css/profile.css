@@ -1,9 +1,9 @@
-/* Main sections */
+/* --------------------------Main sections ------------------------------------*/
 .main-content {
 	background-color: #E4E4E4;
 }
 
-/* Lead-top */
+/* --------------------------Lead-top -------------------------------------*/
 section.lead {
 	width: 100%;
 	background: url('../img/profile/profile-lead.png') no-repeat center center/cover;
@@ -11,8 +11,10 @@ section.lead {
 	margin-top: -100px;
 }
 
-/* profile */
+/* -------------------------------------profile--------------------------------- */
 section.profile {
+	display: flex;
+	flex-direction: column;
 	max-width: 1120px;
 	background: #FFF;
 	border-radius: 38.4px;
@@ -20,15 +22,12 @@ section.profile {
 	margin: -100px auto 16px auto;
 	box-shadow: 0px 3.2px 3.2px 0px rgba(0, 0, 0, 0.25);
 	gap: 20px;
-	display: flex;
-	flex-direction: column;
 }
 
 div .profile-head {
 	display: flex;
 	gap: 20px;
 	margin: 0;
-	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
 	align-self: stretch;
@@ -41,33 +40,18 @@ div.profile-head-main-info {
 }
 
 div .profile-head .user-photo {
+	display: block;
 	width: 160px;
 	height: 160px;
 	border-radius: 160px;
 }
 
-div .name {
-	display: flex;
-	flex-direction: row;
-	gap: 38px;
+.profile-info h4 {
 	margin-bottom: 13px;
 }
 
-div.name > div {
-	display: flex;
-	width: 33px;
-	height: 33px;
-	flex-direction: column;
-	gap: 5px;
-}
-
-h6.user-name {
-	color: #595959;
-}
-
-h6.description {
+.profile-info h6 {
 	color: #636363;
-	width: 580px;
 	flex-wrap: wrap;
 }
 
@@ -78,35 +62,21 @@ div .social-info {
 }
 
 .social {
+	color: #6D6D6D;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	gap: 4px;
 }
 
-div > h5.social-name {
-	color: #6D6D6D;
-	text-align: center;
-}
-
-/* headlines */
+/* --------------------------headlines------------------------------------ */
 .user-actions-list {
 	display: flex;
-	width: 1126px;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	gap: 24px;
-	margin: 0 auto;
-}
-
-.user-actions-list-item {
 	list-style: none;
-	justify-content: center;
-	border-radius: 13.77px;
-	background: #FFF;
-	box-shadow: 0px 3.442px 10.843px 0px rgba(0, 0, 0, 0.14);
-	margin-bottom: 16px;
 }
 
 .user-actions-list-item div {
@@ -114,48 +84,46 @@ div > h5.social-name {
 	flex-direction: row;
 	gap: 10px;
 	padding: 10px 17px;
+	border-radius: 13.77px;
+	background: #FFF;
+	color: #000;
+	box-shadow: 0px 3.442px 10.843px 0px rgba(0, 0, 0, 0.14);
+	margin-bottom: 16px;
+	font-size: 23.097px;
+	font-weight: 400;
+	letter-spacing: 0.231px;
 }
 
-.list-action-photo {
+.user-actions-list-item div img.list-action-photo {
+	display: block;
 	width: 28px;
 	height: auto;
 }
 
-.list-action-name {
-	color: #000;
-	text-align: center;
-	font-family: Inter;
-	font-size: 23.097px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-	letter-spacing: 0.231px;
+.user-actions-list-item a.active div {
+	background: var(--Accent, #4154FF);
+	color: #fff;
 }
 
-div .main-info {
+.user-actions-list-item a.active div img.list-action-photo {
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg);
+}
+
+/*---------------------------maininfo----------------------------------*/
+
+div.main-info {
 	display: flex;
 	justify-content: center;
 	gap: 32px;
 }
 
-div .sidebar {
+div.sidebar {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 256px;
 	gap: 16px;
 	margin-bottom: 100px;
-}
-
-.sidebar-text {
-	color: #000;
-	font-family: Manrope;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: normal;
-	letter-spacing: 0.28px;
-	margin-bottom: 16px;
 }
 
 .sidebar-element {
@@ -167,13 +135,25 @@ div .sidebar {
 	box-shadow: 0px 3.2px 3.2px 0px rgba(0, 0, 0, 0.25);
 }
 
-.sidebar-element > div {
+.sidebar-element h5 {
+	color: #000;
+	font-family: Manrope;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	letter-spacing: 0.28px;
+	margin-bottom: 16px;
+}
+
+.sidebar-element div.row-element {
 	display: flex;
 	flex-direction: row;
 	gap: 8px;
 }
 
-.sidebar-element > div > img {
+.sidebar-element > div.row-element > img {
+	display: block;
 	width: 19px;
 	height: 19px;
 }
@@ -182,15 +162,13 @@ div .sidebar {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	list-style: none;
 	column-gap: 16px;
 	row-gap: 16px;
 }
 
-.subscribers-photo {
-	list-style: none;
-}
-
 .subscribers-photo img {
+	display: block;
 	width: 48px;
 	height: 48px;
 	border-radius: 48px;
@@ -223,6 +201,7 @@ div .mainbar {
 }
 
 .user-info-photo {
+	display: block;
 	width: 80px;
 	height: 80px;
 	border-radius: 80px;
@@ -256,8 +235,7 @@ div .mainbar {
 	margin-top: 0px;
 }
 
-
-/*popup-settings*/
+/*-----------------------popup-settings-----------------------------*/
 
 .popup {
     display: none;
@@ -277,10 +255,7 @@ div .mainbar {
 	background: #FFF;
     padding: 24px;	
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 522px;
-}
-
-div.popup-element {
+    width: fit-content;
 }
 
 .settings-input{
@@ -288,10 +263,14 @@ div.popup-element {
 	margin-bottom: 12px;
 	border-radius: 12px;
 	display: block;
-	width: 474px;
+	width: 100%;
 	padding: 12px;
 	border: 1px solid #8F8F8F;
 	display: flex;
 	align-items: center;
 	align-self: stretch;
+}
+
+.hidden {
+    display: none;
 }
