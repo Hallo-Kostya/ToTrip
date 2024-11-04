@@ -29,7 +29,7 @@ class Review(models.Model):
         return f"Review for {self.place.name} - {self.rating} stars"
 
 class Route(models.Model):
-    name = models.CharField(max_length=255, unique=True, help_text="Name of the route")
+    name = models.CharField(max_length=255, unique=True, help_text="Название маршрута")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

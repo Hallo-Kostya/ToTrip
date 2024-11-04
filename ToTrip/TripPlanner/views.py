@@ -35,9 +35,6 @@ def add_place(request):
     else:
         form = PlaceForm()
     return render(request, 'TripPlanner/add_place.html', {'form': form})
-from django.shortcuts import render,redirect
-import requests
-from UserApp import views
 def main_trip_page(request):
     return render(request,"TripPlanner/MainPage.html")
 def town_page(request):
@@ -62,7 +59,7 @@ def place_reviews(request, place_id):
         'place': place,
         'reviews': reviews,
     }
-    return render(request, 'place_reviews.html', context)
+    return render(request, 'TripPlanner/place_reviews.html', context)
 
 def submit_review(request, place_id):
     place = get_object_or_404(Place, id=place_id)  # место, к которому будет привязан отзыв
@@ -109,7 +106,7 @@ def add_route(request):
         form = RouteForm(request.POST)
         if form.is_valid():
             route = form.save()
-            return redirect('route_detail', route_id=route.id)
+            return redirect('TripPlanner/route_detail', route_id=route.id)
     else:
         form = RouteForm()
     return render(request, 'TripPlanner/add_route.html', {'form': form})
@@ -122,12 +119,12 @@ def add_route_point(request, route_id):
             point = form.save(commit=False)
             point.route = route
             point.save()
-            return redirect('route_detail', route_id=route.id)
+            return redirect('TripPlanner/route_detail', route_id=route.id)
     else:
         form = RoutePointForm()
     return render(request, 'TripPlanner/add_route_point.html', {'form': form, 'route': route})
 
-    return render(request, "TripPlanner/town-page.html")
+
 def login_page(request):
     return views.login_page(request)
 def register_page(request):

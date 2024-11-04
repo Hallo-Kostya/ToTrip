@@ -1,7 +1,8 @@
 # Db_api/serializers.py
 from rest_framework import serializers
-from .models import User
+from .models import User, Route, RoutePoint
 from django.contrib.auth import authenticate
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -40,3 +41,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'first_name', 'last_name','bio','city','country']
+
+class RoutePointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoutePoint
+        fields = ['id', 'name', 'latitude', 'longitude', 'order']
+
+class RouteSerializer(serializers.ModelSerializer):
+    points = RoutePointSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Route
+        fields = ['id', 'name', 'created_at', 'points']
