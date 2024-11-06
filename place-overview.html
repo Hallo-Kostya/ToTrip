@@ -52,15 +52,15 @@
 		<div class="current-city-nav__wrapper">
 			<div class="current-city-nav__inner">
 				<div class="current-city">
-					<a href="#" class="current-city__link">
+					<a href="town-page.html" class="current-city__link">
 						<img src="img/common/map-point.svg" alt="" width="36" height="36">
 						<p class="city-name">Москва</p>
 					</a>
 				</div>
 				<ul class="current-city-nav">
-					<a href="#"><li class="city-nav-item">Отели</li></a>
-					<a href="#"><li class="city-nav-item">Развлечения</li></a>
-					<a href="#"><li class="city-nav-item">Рестораны</li></a>
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
 				</ul>
 			</div>
 		</div>
@@ -72,9 +72,9 @@
 				<div class="place-header">
 					<h1 class="place-title">Mercure Москва Павелецкая</h1>
 					<p class="category-info">№1 / 532 в категории Отели, Москва </p>
-					<button class="like">
+					<div class="like">
 						<img src="img/common/heart.svg" alt="">
-					</button>
+					</div>
 				</div>
 				<div class="place-main-info">
 					<img src="img/common/map-point.svg" alt="" class="map-point">
@@ -214,5 +214,12 @@
 		</div>
 	</footer>
 
+	<script>
+		var likeButton = document.querySelector('.like');
+		likeButton.addEventListener('click', () => {
+			var heart = likeButton.querySelector('img');
+			heart.classList.toggle('clicked');
+		});
+	</script>
 </body>
 </html>

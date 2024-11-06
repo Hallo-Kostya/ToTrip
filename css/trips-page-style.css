@@ -79,8 +79,7 @@
 .unwrapper {
 	width: 60px;
 	height: 60px;
-	border: none;
-	background: #fff;
+	background: #E4E4E4;
 }
 
 .trip-title a,
@@ -132,23 +131,4 @@
 
 .some-user__icon {
 	border-radius: 52px;
-}
-
-/* Стили для отображения контента поездок */
-.toggle-button {
-	background: none;
-	border: none;
-	cursor: pointer;
-}
-
-.arrow {
-	transition: transform 0.3s ease;
-}
-
-.hidden {
-	display: none;
-}
-
-.rotated {
-	transform: rotate(180deg);
 }

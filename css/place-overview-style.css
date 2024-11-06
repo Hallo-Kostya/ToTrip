@@ -37,20 +37,16 @@ h2 {
 	margin-left: 24px;
 }
 
-button.like {
-	border: none;
-	background: #fff;
+div.like {
+	cursor: pointer;
 	border-radius: 50%;
-	align-items: center;
-	padding: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
+	background: white;
 	margin-left: auto;
 }
 
-button.like img {
-	margin-top: 6px;
-	width: 40px;
+.like img {
+	width: 71px;
+	padding: 15px;
 }
 
 .place-main-info {

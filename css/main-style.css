@@ -249,6 +249,43 @@ ul.footer-menu li:not(:last-child) {
 	margin-right: 24px;
 }
 
+/* ACTIVE BUTTONS STYLES */
+.filter-circle {
+	cursor: pointer;
+	transition: fill 0.3s;
+}
+
+.filter-circle.check {
+	background: black;
+	border-radius: 50%;
+	filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(45deg);
+}
+
+/* Лайк - сердце */
+.clicked {
+	border-radius: 50%;
+	filter: invert(32%) sepia(100%) saturate(1000%) hue-rotate(305deg);
+}
+
+/* Стили для отображения контента поездок */
+.toggle-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+.hidden {
+	display: none;
+}
+
+.rotated {
+	transform: rotate(180deg);
+}
+
 @media(max-width: 1200px) {
 	.main-nav .search {
 		display: none;

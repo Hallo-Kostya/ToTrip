@@ -51,15 +51,15 @@
 		<div class="current-city-nav__wrapper">
 			<div class="current-city-nav__inner">
 				<div class="current-city">
-					<a href="#" class="current-city__link">
+					<a href="town-page.html" class="current-city__link">
 						<img src="img/common/map-point.svg" alt="" width="36" height="36">
 						<p class="city-name">Москва</p>
 					</a>
 				</div>
 				<ul class="current-city-nav">
-					<a href="#"><li class="city-nav-item">Отели</li></a>
-					<a href="#"><li class="city-nav-item">Развлечения</li></a>
-					<a href="#"><li class="city-nav-item">Рестораны</li></a>
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
 				</ul>
 			</div>
 		</div>
@@ -266,6 +266,29 @@
 		</div>
 	</footer>
 
-	<script src="js/hide-content.js"></script>
+	<script>
+		const navItems = document.querySelectorAll('.trip-nav-item a');
+
+		navItems.forEach(item => {
+			item.addEventListener('click', function(event) {
+				event.preventDefault();
+
+				navItems.forEach(link => link.classList.remove('selected'));
+
+				this.classList.add('selected');
+			});
+		});
+	</script>
+	<script>
+		const toggleButton = document.querySelector('.toggle-button');
+		const eventsWrapper = document.querySelector('.events__wrapper');
+		const arrow = toggleButton.querySelector('.arrow');
+
+		toggleButton.addEventListener('click', () => {
+			eventsWrapper.classList.toggle('hidden');
+
+			arrow.classList.toggle('rotated');
+		});
+	</script>
 </body>
 </html>

@@ -120,20 +120,24 @@ div.lead-wrapper div.search form {
 }
 
 .places-cards-wrapper ul.places-cards {
-	display: grid;
-	list-style: none;
-	grid-template-columns: repeat(3, 1fr);
+	display: flex;
+	flex-wrap: wrap;
 	gap: 32px;
+}
+
+.card {
+	max-width: 400px;
 }
 
 .places-cards .card {
 	position: relative;
 }
 
-.places-cards .card img {
+.card-photo {
 	display: block;
 	width: 100%;
 	height: auto;
+	border-radius: 16px;
 }
 
 div.card-info a {
@@ -147,19 +151,29 @@ div.card-info a {
 	margin-right: 20px;
 }
 
-div.card-info .rating {
-	max-width: 32px;
-	max-height: 32px;
+.stars {
+	display: flex;
+	margin-left: auto;
 }
 
-div.card-info h3 {
-	font-size: 36px;
+.stars li:not(:last-child) {
+	margin-right: 6px;
+}
+
+.star img {
+	display: block;
+	width: 24px;
+	height: 24px;
+}
+
+.card-title {
+	font-size: 24px;
 	font-weight: 700;
 }
 
 .reviews {
 	color: #666;
-	font-size: 32px;
+	font-size: 19.515px;
 	font-weight: 700;
 }
 
