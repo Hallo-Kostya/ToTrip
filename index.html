@@ -286,6 +286,15 @@
 	</footer>
 
 	<script>
+		const userName = document.querySelector('.user-name').textContent;
+		const userIconSrc = document.querySelector('.user-icon img').src;
+
+		// Сохраняем данные в localStorage
+		localStorage.setItem('userName', userName);
+		localStorage.setItem('userIcon', userIconSrc);
+	</script>
+
+	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 		const searchButton = document.querySelector('.search-button__lead');
 		const popup = document.querySelector('.lead-search__pop-up');

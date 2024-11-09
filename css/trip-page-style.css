@@ -109,13 +109,14 @@ button img {
 
 .control-dates__wrapper {
 	width: 100%;
-	overflow: hidden;
+	overflow-x: auto;
+	padding: 30px 0px;
+	border-bottom: #0000004D 3px solid;
 }
 
 .control-dates {
 	display: flex;
-	padding: 30px 0px;
-	border-bottom: #0000004D 3px solid;
+	
 }
 
 .control-dates li {
@@ -147,6 +148,10 @@ a.selected {
 /* Date events info */
 .date-events {
 	margin-top: 77px;
+}
+
+.date-events > *:not(:last-child) {
+	margin-bottom: 40px;
 }
 
 .date-events-header {
@@ -244,12 +249,18 @@ a.selected {
 	display: flex;
 }
 
+.events__wrapper {
+	padding-bottom: 36px;
+	border-bottom: 2px solid black;
+}
+
 .event-icons li:not(:last-child) {
 	margin-right: 12px;
 }
 
-.event__icon button {
-   border: 0.5px solid #000;
+.event__icon button,
+.open-icons-list__btn {
+	border: 0.5px solid #000;
 	background: #fff;
 	padding: 7px;
 	border-radius: 50%;

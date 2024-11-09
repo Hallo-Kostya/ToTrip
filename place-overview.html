@@ -195,6 +195,27 @@
 				</div>
 			</div>
 		</div>
+		<template id="new-comment__template">
+			<li class="comment">
+				<div class="comment-header">
+					<a href="#" class="commentor-profile">
+						<img src="img/common/user__icon.png" alt="" class="commentor-icon">
+						<p class="commentor-name">Мария А.</p>
+					</a>
+					<p class="comment-date">написала отзыв 11 сентября 2024 года</p>
+				</div>
+				<ul class="estimation">
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+				</ul>
+				<h5 class="main-phrase">Шикарный отель</h5>
+				<p class="more-description">Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+				<p class="stay-date"><span class="bold">Дата пребывания:</span> 5 сентября - 10 сентября 2024 года</p>
+			</li>
+		</template>
 	</main>
 
 	<footer class="footer">
@@ -213,6 +234,28 @@
 			</a>
 		</div>
 	</footer>
+
+	<script>
+		const reviewButton = document.querySelector('.write-comment');
+		const newCommentTemplate = document.querySelector('#new-comment__template').content.querySelector('.comment');
+		const commentsList = document.querySelector('.comments');
+
+		reviewButton.addEventListener('click', function () {
+			const userName = localStorage.getItem('userName');
+			const userIcon = localStorage.getItem('userIcon');
+
+			// НЕ РАБОТАЕТ??? почему
+			if (userName && userIcon) {
+				// Здесь можно заполнить форму отзыва
+				newCommentTemplate.querySelector('.commentor-name').textContent = userName;
+				newCommentTemplate.querySelector('.commentor-icon').src = userIcon;
+			} else {
+				console.error('Данные пользователя не найдены.');
+			}
+
+			commentsList.append(newCommentTemplate);
+		});
+	</script>
 
 	<script>
 		var likeButton = document.querySelector('.like');

@@ -14,6 +14,14 @@
 	padding: 0 112px;
 }
 
+.trips-wrapper .trips {
+	margin-top: 67px;
+}
+
+.trip {
+	margin-top: 40px;
+}
+
 .trips-wrapper-header {
 	margin-top: 101px;
 	margin-bottom: 100px;
@@ -49,15 +57,12 @@
 .current-trip {
 	background: url('../img/trips-page/trips-photo.jpg') no-repeat center center/cover;
 	border-radius: 36px;
-	margin-top: 40px;
 	width: 100%;
 	height: 553px;
 	position: relative;
 }
 
-.trips-wrapper div:not(:nth-child(-n + 2)) {
-	margin-top: 62px;
-}
+
 
 .card-info-wrapper {
 	position: absolute;
