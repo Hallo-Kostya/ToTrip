@@ -119,7 +119,7 @@ def add_route_point(request, route_id):
             point = form.save(commit=False)
             point.route = route
             point.save()
-            return redirect('TripPlanner/route_detail', route_id=route.id)
+            return redirect('TripPlanne r/route_detail', route_id=route.id)
     else:
         form = RoutePointForm()
     return render(request, 'TripPlanner/add_route_point.html', {'form': form, 'route': route})
