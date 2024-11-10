@@ -241,19 +241,9 @@
 		const commentsList = document.querySelector('.comments');
 
 		reviewButton.addEventListener('click', function () {
-			const userName = localStorage.getItem('userName');
-			const userIcon = localStorage.getItem('userIcon');
+			const newComment = newCommentTemplate.cloneNode(true);
 
-			// НЕ РАБОТАЕТ??? почему
-			if (userName && userIcon) {
-				// Здесь можно заполнить форму отзыва
-				newCommentTemplate.querySelector('.commentor-name').textContent = userName;
-				newCommentTemplate.querySelector('.commentor-icon').src = userIcon;
-			} else {
-				console.error('Данные пользователя не найдены.');
-			}
-
-			commentsList.append(newCommentTemplate);
+			commentsList.appendChild(newComment);
 		});
 	</script>
 

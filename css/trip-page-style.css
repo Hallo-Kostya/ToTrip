@@ -209,7 +209,7 @@ a.selected {
 }
 
 .event:last-child {
-	border-left: 2px dotted #000;
+	border-left: 2px dashed #000;
 	padding-bottom: 80px;
 }
 

@@ -179,9 +179,7 @@ p.comments-info {
 }
 
 .comment:not(:last-child) {
-	margin-bottom: 20px;
-	padding-bottom: 10px;
-	border-bottom: 0.5px solid rgba(74, 66, 66, 0.5);
+	margin-bottom: 30px;
 }
 
 .commentor-icon {
