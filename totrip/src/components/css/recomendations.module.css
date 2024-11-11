@@ -1,0 +1,13 @@
+.recommendations {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 0 112px;
+	margin-top: 70px;
+	margin-bottom: 100px;
+}
+
+.recommendations h2 {
+	margin-bottom: 40px;
+	font-size: 56px;
+	font-weight: 700;
+}

@@ -1,0 +1,42 @@
+.footer {
+	width: 100%;
+	background: rgb(183, 183, 176);
+}
+
+div.footerContainer {
+	display: flex;
+	max-width: 1920px;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 34px 112px;
+}
+
+ul.footerMenu {
+	list-style: none;
+	display: flex;
+}
+
+ul.footerMenu li:not(:last-child) {
+	margin-right: 24px;
+}
+
+@media(max-width: 1200px) {
+	.mainNav .search {
+		display: none;
+	}
+
+	.container {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+
+	.leadContent h1 {
+		width: 700px;
+	}
+
+	div.footerContainer {
+		padding-left: 56px;
+		padding-right: 56px;
+	}
+}

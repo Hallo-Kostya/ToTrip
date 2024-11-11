@@ -1,0 +1,36 @@
+.places-cards .card {
+	position: relative;
+}
+
+.places-cards .card img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+div.card-info a {
+	max-width: 100%;
+	display: flex;
+	margin-top: 20px;
+	align-items: center;
+}
+
+.card-info a > *:not(:last-child) {
+	margin-right: 20px;
+}
+
+div.card-info .rating {
+	max-width: 32px;
+	max-height: 32px;
+}
+
+div.card-info h3 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+.reviews {	
+	color: #666;
+	font-size: 32px;
+	font-weight: 700;
+}

@@ -1,0 +1,154 @@
+/* ПРОБЛЕМЫ С ОТЦЕНТРОВКОЙ MAIN */
+.main-content {
+	max-width: 1920px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	margin-bottom: 100px;
+}
+
+/* TRIPS SECTIONS */
+.trips-wrapper {
+	width: 100%;
+	padding: 0 112px;
+}
+
+.trips-wrapper-header {
+	margin-top: 101px;
+	margin-bottom: 100px;
+}
+
+.trips-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.trips-header h1 {
+	font-size: 60px;
+	font-weight: 800;
+}
+
+.trip-planner {
+	border: none;
+	border-radius: 24px;
+	padding: 24px 0;
+	background: rgba(112, 186, 255, 0.40);
+}
+
+.trip-planner a {
+	font-size: 24px;
+	font-weight: 500;
+	padding: 24px 20px;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ КАРТОЧЕК, ЗАГЛУШКА */
+.past-trip,
+.future-trip,
+.current-trip {
+	background: url('../img/trips-page/trips-photo.jpg') no-repeat center center/cover;
+	border-radius: 36px;
+	margin-top: 40px;
+	width: 100%;
+	height: 553px;
+	position: relative;
+}
+
+.trips-wrapper div:not(:nth-child(-n + 2)) {
+	margin-top: 62px;
+}
+
+.card-info-wrapper {
+	position: absolute;
+	bottom: 42px;
+	left: 42px;
+}
+
+.trip-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.trip-header h2 {
+	font-size: 52px;
+	font-weight: 700;
+}
+
+.unwrapper {
+	width: 60px;
+	height: 60px;
+	border: none;
+	background: #fff;
+}
+
+.trip-title a,
+.date,
+.place {
+	color: #fff;
+}
+
+.trip-title {
+	font-size: 52px;
+	font-weight: 700;
+}
+
+.date, .place {
+	font-size: 29px;
+	font-weight: 600;
+	margin-left: 12px;
+}
+
+.trip-info {
+	margin-top: 4px;
+	display: flex;
+}
+
+.trip-info > *:not(:last-child) {
+	margin-right: 18px;
+}
+
+.trip-date,
+.trip-place {
+	display: flex;
+}
+
+.users {
+	margin-top: 20px;
+	display: flex;
+	list-style: none;
+}
+
+.users li.user:not(:last-child) {
+	margin-right: 16px;
+}
+
+.trip-menu {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.some-user__icon {
+	border-radius: 52px;
+}
+
+/* Стили для отображения контента поездок */
+.toggle-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+.hidden {
+	display: none;
+}
+
+.rotated {
+	transform: rotate(180deg);
+}

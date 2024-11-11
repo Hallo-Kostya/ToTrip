@@ -1,0 +1,63 @@
+.suggestions {
+	margin-top: 60px;
+	margin-bottom: 70px;
+}
+
+.suggestions h2 {
+	margin-bottom: 40px;
+	font-size: 56px;
+	font-weight: 700;
+}
+
+.suggestion-elem.bg-1.big {
+	background: url('/img/index/sugg__photo-1.jpg') no-repeat center center/cover;
+	height: 740px;
+	border-radius: 24px;
+}
+
+.suggestion-elem.bg-2 {
+	background: url('/img/index/sugg__photo-2.jpg') no-repeat center center/cover;
+	height: 354px;
+	border-radius: 36px;
+}
+
+.suggestion-elem.bg-3 {
+	background: url('/img/index/sugg__photo-2.jpg') no-repeat center center/cover;
+	height: 354px;
+	border-radius: 36px;
+}
+
+.bg-1.big {
+	grid-column: 1;
+	grid-row: span 2;
+}
+
+.bg-2, .bg-3 {
+	grid-column: 2;
+}
+
+.grid-container {
+	list-style: none;
+	display: grid;
+	gap: 32px;
+	grid-template-columns: 1fr 1fr;
+}
+
+.sugg-wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 0 112px;
+}
+
+.grid-container li {
+	position: relative;
+}
+
+.grid-container li span {
+	font-size: 44px;
+	font-weight: 800;
+	color: #FFF;
+	position: absolute;
+	bottom: 20px;
+	left: 32px;
+}
