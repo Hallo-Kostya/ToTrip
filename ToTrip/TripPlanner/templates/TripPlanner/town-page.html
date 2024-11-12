@@ -62,14 +62,15 @@
 
 			<section class="town-places">
 				<div class="places-wrapper">
-					{% for category, places in places_by_category.items %}
 					<h2>{{ category }}</h2>
 					<ul>
 						{% for place in places %}
 							<li>{{ place.name }} - {{ place.address }}    рейтинг: {{ place.avg_rating }}</li>
+							{% for image in place.placeimage_set.all %}
+								<img src="{{ image.image.url }}" width="255 px" height="255 px" alt="Place Image">
+							{% endfor %}
 						{% endfor %}
-					</ul>
-					{% endfor %}
+					</ul>	
 				</div>
 				<div class="places-cards-wrapper">
 					<ul class="places-cards">

@@ -1,6 +1,6 @@
 # Db_api/serializers.py
 from rest_framework import serializers
-from .models import User, City, Place, Category
+from .models import User, City, Place, Category, PlaceImage, Country, District, Region
 from django.contrib.auth import authenticate
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -36,10 +36,31 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Некорректные данные для входа")
-class UserSerializer(serializers.ModelSerializer):
+    
+
+   
+
+class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name','bio','city','country']
+        fields = ['id', 'username', 'first_name', 'last_name', 'photo']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    followers_count = serializers.IntegerField(source='followers.count', read_only=True)
+    following_count = serializers.IntegerField(source='following.count', read_only=True)
+    followers=FollowSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            'id', 'email', 'first_name', 
+            'last_name', 'bio', 'city', 
+            'country', 'photo', 'username', 
+            'phone_number', 'created_at', 'followers_count', 
+            'following_count', 'followers'
+            ]
+     
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -47,13 +68,43 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name', 'code', 'icon', 'photo']
 
+
+class PlaceImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlaceImage
+        fields = ['image']
+
+
 class PlaceSerializer(serializers.ModelSerializer):
+    placeimage_set = PlaceImageSerializer(many=True, read_only=True)  
+
     class Meta:
         model = Place
-        fields = ['name', 'fsq_id','category', 'avg_rating', 'address']
+        fields = ['id', 'name', 'address', 'category', 'description', 'avg_rating', 'coordinates', 'working_hours', 'city', 'country', 'placeimage_set']
+
 
 class CitySerializer(serializers.ModelSerializer):
     places = PlaceSerializer(many=True, read_only=True)
     class Meta:
         model = City
         fields = ['name', 'country', 'places']
+
+class RegionSerializer(serializers.ModelSerializer):
+    cities=CitySerializer(many=True, read_only=True)
+    class Meta:
+        model = Region
+        fields = ['id', 'name', 'image', 'district']
+
+class DistrictSerializer(serializers.ModelSerializer):
+    regions=RegionSerializer(many=True, read_only=True)
+    class Meta:
+        model = District
+        fields = ['id', 'name', 'image', 'country']
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    districts=DistrictSerializer(many=True, read_only=True)
+    class Meta:
+        model = Country
+        fields = ['id', 'name', 'code', 'image', 'flag']
+        

@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_active', True)
         return self.create_user(email, username, password, **extra_fields)
 
@@ -32,13 +32,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     bio = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to='user_photos/', blank=True, null=True,default='user_photos/default_avatar.jpg')
+    photo = models.ImageField(upload_to='user_photos/', blank=True, default='user_photos/default_avatar.jpg')
     last_login = models.DateTimeField(default=timezone.now, null=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     city=models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=50, null=True)
-    followers=models.ManyToManyField('self',symmetrical=False, related_name='following', blank=True)
+    followers=models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -53,15 +53,32 @@ class Country(models.Model):
     flag=models.ImageField(upload_to='country_photos/flags/', blank=True, null=True)
     def __str__(self):
         return self.name
+    
+
+class District(models.Model):
+    name=models.CharField(max_length=100,unique=True)
+    image=models.ImageField(upload_to='district_photos/', blank=True, null=True)
+    country=models.ForeignKey(Country, related_name='districts', on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.name} в стране {self.country.name}'
+
+
+class Region(models.Model):
+    name=models.CharField(max_length=100,unique=True)
+    image=models.ImageField(upload_to='region_photos/', blank=True, null=True)
+    district=models.ForeignKey(District, related_name='regions', on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.name} в {self.district.name}'
+    
 
 class City(models.Model):
     name = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, related_name='cities', on_delete=models.CASCADE)
-    region = models.CharField(max_length=100)
+    region = models.ForeignKey(Region, related_name='region_cities', on_delete=models.CASCADE)
     coordinates=models.CharField(max_length=100, null=True)
     photo=models.ImageField(upload_to='city_photos/', blank=True, null=True)
     def __str__(self):
-        return f"{self.name}, {self.country}"
+        return f"{self.name}, {self.region.name}, {self.region.district.name}, {self.region.district.country.name}"
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -77,7 +94,6 @@ class Place(models.Model):
     address = models.CharField(max_length=255, default="Не указан")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='places')
     description = models.TextField(null=True, blank=True)
-    photos = models.ImageField(upload_to='place_photos/', blank=True, null=True)
     avg_rating = models.FloatField(default=0.0, null=True)
     coordinates = models.CharField(max_length=100, null=True)
     working_hours = models.CharField(max_length=100)
@@ -118,6 +134,7 @@ class PostPhoto(models.Model):
 
 class Review(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
+    author = models.ForeignKey(User, related_name='user_reviews', on_delete=models.CASCADE)
     rating = models.IntegerField()
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -127,9 +144,28 @@ class Review(models.Model):
         return f"Review for {self.place.name} - {self.rating} stars"
 
 class ReviewPhotos(models.Model):
-    review=models.ForeignKey(Review, on_delete=models.CASCADE, related_name='photos')
+    review=models.ForeignKey(Review, on_delete=models.CASCADE, related_name='review_photos')
     image=models.ImageField(upload_to='review_photos/')
 
     def __str__(self):
         return f"Photo for Review {self.review.id}"
+    
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey(Place,related_name="placeimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='place_images/')
+    
+    def __str__(self):
+        return f"Photos for Place {self.place.name}"
+
+
+class FavoritePlace(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='favorite_places', on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'place')  # Отключает дублирование избранного места для пользователя
+    def __str__(self):
+        return f"Favorite place for {self.user} in {self.place.city}."
 
