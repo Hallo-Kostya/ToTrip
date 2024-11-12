@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="css/main-style.css">
-	<link rel="stylesheet" href="css/main-page.css">
+	<link rel="stylesheet" href="css/index-page-style.css">
 	<link rel="stylesheet" href="css/search_pop-up.css">
 	<title>Welcome to ToTrip!</title>
 </head>
@@ -20,8 +20,8 @@
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
-				<div class="header-logo">
-					<a href="index.html">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
 						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
 					</a>
 				</div>
@@ -43,13 +43,28 @@
 						<p class="user-name">Константин Х.</p>
 						<button>Выход</button>
 					</div>
-					<div class="user-icon">
-						<a href="profile.html">
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
 							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
 			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="town-page.html" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -62,8 +77,7 @@
 					</div>
 					<div class="search">
 						<form action="/search" method="GET" class="lead-search-form">
-							<input type="text" id="search" name="query" placeholder="Куда вы хотите отправиться?">
-							<div id="places-dropdown" class="dropdown-content"></div>
+							<input type="text" name="query" placeholder="Куда вы хотите отправиться?">
 							<button class="search-button__lead">
 								<img src="img/common/search.svg" alt="Поиск">
 							</button>
@@ -181,7 +195,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-1" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-1">1.2K</p>
 									</a>
 								</div>
@@ -193,7 +213,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -205,7 +231,31 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-3" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
+										<p class="reviews reviews-3">1.2K</p>
+									</a>
+								</div>
+							</div>
+						</li>
+						<li class="card">
+							<div>
+								<img src="img/index/like-it__place-photo.jpg" alt="" class="card-photo">
+								<div class="card-info">
+									<a href="#">
+										<h3 class="card-title">Lotte Hotel</h3>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-3">1.2K</p>
 									</a>
 								</div>
@@ -229,13 +279,42 @@
 				<li class="footer-menu-item"><a href="#">О нас</a></li>
 				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<a href="index.html">
+			<a href="index.html" class="footer-logo">
 				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
 			</a>
 		</div>
 	</footer>
 
-	<script src="js/search_index.js"></script>
+	<script>
+		const userName = document.querySelector('.user-name').textContent;
+		const userIconSrc = document.querySelector('.user-icon img').src;
+
+		// Сохраняем данные в localStorage
+		localStorage.setItem('userName', userName);
+		localStorage.setItem('userIcon', userIconSrc);
+	</script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		const searchButton = document.querySelector('.search-button__lead');
+		const popup = document.querySelector('.lead-search__pop-up');
+		const overlay = document.querySelector('.overlay');
+
+		searchButton.addEventListener('click', function (e) {
+			e.preventDefault();
+			popup.classList.add('active');
+			overlay.classList.add('active');
+		});
+
+		// Закрытие окна по клику вне его
+		document.addEventListener('click', function (e) {
+			if (!popup.contains(e.target) && !searchButton.contains(e.target)) {
+				popup.classList.remove('active');
+				overlay.classList.remove('active');
+			}
+		});
+	});
+	</script>
 </body>
 
 </html>

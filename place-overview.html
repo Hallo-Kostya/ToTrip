@@ -10,17 +10,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="css/main-style.css">
-	<link rel="stylesheet" href="css/place-overview.css">
+	<link rel="stylesheet" href="css/place-overview-style.css">
 	<title>Обзор места</title>
 </head>
 
 <body>
-	<div class="overlay"></div>
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
-				<div class="header-logo">
-					<a href="index.html">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
 						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
 					</a>
 				</div>
@@ -42,13 +41,28 @@
 						<p class="user-name">Константин Х.</p>
 						<button>Выход</button>
 					</div>
-					<div class="user-icon">
-						<a href="#">
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
 							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
 			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="town-page.html" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -58,9 +72,9 @@
 				<div class="place-header">
 					<h1 class="place-title">Mercure Москва Павелецкая</h1>
 					<p class="category-info">№1 / 532 в категории Отели, Москва </p>
-					<button class="like">
+					<div class="like">
 						<img src="img/common/heart.svg" alt="">
-					</button>
+					</div>
 				</div>
 				<div class="place-main-info">
 					<img src="img/common/map-point.svg" alt="" class="map-point">
@@ -75,22 +89,24 @@
 					<p class="comments-info">228 отзывов</p>
 				</div>
 				<div class="gallery-wrapper">
-					<ul class="gallery">
-						<li class="gallery-photo big">
-							<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
-						</li>
-						<div class="small-gallery-photos">
-							<li class="gallery-photo">
-								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
-							</li>
-							<li class="gallery-photo">
-								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
-							</li>
-							<li class="gallery-photo">
-								<a href="#"><img src="img/place-overview/place-photo.jpg" alt=""></a>
+					<div class="gallery">
+						<div class="big-gallery-photo__wrapper">
+							<li class="gallery-photo big">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt="" width="1408" height="524"></a>
 							</li>
 						</div>
-					</ul>
+						<div class="small-gallery-photos">
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt="" width="253"></a>
+							</li>
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt="" width="253"></a>
+							</li>
+							<li class="gallery-photo">
+								<a href="#"><img src="img/place-overview/place-photo.jpg" alt="" width="253"></a>
+							</li>
+						</div>
+					</div>
 				</div>
 				<div class="place-description">
 					<div class="place-description__wrapper">
@@ -179,6 +195,27 @@
 				</div>
 			</div>
 		</div>
+		<template id="new-comment__template">
+			<li class="comment">
+				<div class="comment-header">
+					<a href="#" class="commentor-profile">
+						<img src="img/common/user__icon.png" alt="" class="commentor-icon">
+						<p class="commentor-name">Мария А.</p>
+					</a>
+					<p class="comment-date">написала отзыв 11 сентября 2024 года</p>
+				</div>
+				<ul class="estimation">
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+					<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+				</ul>
+				<h5 class="main-phrase">Шикарный отель</h5>
+				<p class="more-description">Hipster ipsum tattooed brunch I'm baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
+				<p class="stay-date"><span class="bold">Дата пребывания:</span> 5 сентября - 10 сентября 2024 года</p>
+			</li>
+		</template>
 	</main>
 
 	<footer class="footer">
@@ -192,11 +229,30 @@
 				<li class="footer-menu-item"><a href="#">О нас</a></li>
 				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<a href="index.html">
+			<a href="index.html" class="footer-logo">
 				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
 			</a>
 		</div>
 	</footer>
 
+	<script>
+		const reviewButton = document.querySelector('.write-comment');
+		const newCommentTemplate = document.querySelector('#new-comment__template').content.querySelector('.comment');
+		const commentsList = document.querySelector('.comments');
+
+		reviewButton.addEventListener('click', function () {
+			const newComment = newCommentTemplate.cloneNode(true);
+
+			commentsList.appendChild(newComment);
+		});
+	</script>
+
+	<script>
+		var likeButton = document.querySelector('.like');
+		likeButton.addEventListener('click', () => {
+			var heart = likeButton.querySelector('img');
+			heart.classList.toggle('clicked');
+		});
+	</script>
 </body>
 </html>

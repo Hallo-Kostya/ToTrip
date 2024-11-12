@@ -17,8 +17,8 @@
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
-				<div class="header-logo">
-					<a href="index.html">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
 						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
 					</a>
 				</div>
@@ -32,7 +32,7 @@
 				</div>
 				<ul class="main-menu">
 					<li class="menu-item"><a href="#">Подборки</a></li>
-					<li class="menu-item"><a href="#">Поездки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
 					<li class="menu-item"><a href="#">Отзывы</a></li>
 				</ul>
 				<div class="profile">
@@ -40,13 +40,28 @@
 						<p class="user-name">Константин Х.</p>
 						<button>Выход</button>
 					</div>
-					<div class="user-icon">
-						<a href="#">
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
 							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
 			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="town-page.html" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -75,12 +90,12 @@
 							</button>
 						</div>
 						<div class="hide-content">
-							<div class="past-trip">
+							<div class="trip past-trip">
 								<a href="#">
 									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
 								</a>
 								<div class="card-info-wrapper">
-									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<h3 class="trip-title"><a href="trip-page.html">Поездка к родным</a></h3>
 									<div class="trip-info">
 										<div class="trip-date">
 											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
@@ -104,12 +119,12 @@
 									</ul>
 								</div>
 							</div>
-							<div class="past-trip">
+							<div class="trip past-trip">
 								<a href="#">
 									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
 								</a>
 								<div class="card-info-wrapper">
-									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<h3 class="trip-title"><a href="trip-page.html">Поездка к родным</a></h3>
 									<div class="trip-info">
 										<div class="trip-date">
 											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
@@ -146,12 +161,12 @@
 							</button>
 						</div>
 						<div class="hide-content">
-							<div class="future-trip">
+							<div class="trip future-trip">
 								<a href="#">
 									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
 								</a>
 								<div class="card-info-wrapper">
-									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<h3 class="trip-title"><a href="trip-page.html">Поездка к родным</a></h3>
 									<div class="trip-info">
 										<div class="trip-date">
 											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
@@ -188,12 +203,12 @@
 							</button>
 						</div>
 						<div class="hide-content">
-							<div class="current-trip">
+							<div class="trip current-trip">
 								<a href="#">
 									<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
 								</a>
 								<div class="card-info-wrapper">
-									<h3 class="trip-title"><a href="#">Поездка к родным</a></h3>
+									<h3 class="trip-title"><a href="trip-page.html">Поездка к родным</a></h3>
 									<div class="trip-info">
 										<div class="trip-date">
 											<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
@@ -222,6 +237,37 @@
 				</div>
 			</div>
 		</div>
+		<template id="new-trip__template">
+			<div class="trip future-trip">
+				<a href="#">
+					<img src="img/common/burger-menu.svg" alt="Меню поездки" class="trip-menu">
+				</a>
+				<div class="card-info-wrapper">
+					<h3 class="trip-title"><a href="trip-page.html">Поездка к родным</a></h3>
+					<div class="trip-info">
+						<div class="trip-date">
+							<img src="img/common/calendar__icon.svg" alt="Календарь иконка">
+							<p class="date">3 окт. - 15 окт.</p>
+						</div>
+						<div class="trip-place">
+							<img src="Img/common/map-pinned__icon.svg" alt="Картка иконка">
+							<p class="place">Москва</p>
+						</div>
+					</div>
+					<ul class="users">
+						<li class="user">
+							<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-1" width="52" height="52">
+						</li>
+						<li class="user">
+							<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-2" width="52" height="52">
+						</li>
+						<li class="user">
+							<img src="img/common/user__icon.png" alt="" class="some-user__icon ic-3" width="52" height="52">
+						</li>
+					</ul>
+				</div>
+			</div>
+		</template>
 	</main>
 
 	<footer class="footer">
@@ -235,12 +281,43 @@
 				<li class="footer-menu-item"><a href="#">О нас</a></li>
 				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<a href="index.html">
+			<a href="index.html" class="footer-logo">
 				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
 			</a>
 		</div>
 	</footer>
 
-	<script src="js/hide-content.js"></script>
+	<script>
+		const newTripTamplate = document.querySelector('#new-trip__template').content.querySelector('.future-trip');
+		const tripList = document.querySelector('.future-trips-container').querySelector('.hide-content');
+		const tripCreator = document.querySelector('.trip-planner');
+
+		tripCreator.addEventListener('click', () => {
+			const newTrip = newTripTamplate.cloneNode(true);
+
+			tripList.append(newTrip);
+		});
+	</script>
+
+	<script>
+		let trips = document.querySelectorAll('.trips');
+
+		for (let i = 0; i < trips.length; i++) {
+			let trip = trips[i];
+			let toggleButton = trip.querySelector('.toggle-button');
+			let content = trip.querySelector('.hide-content');
+			let arrow = toggleButton.querySelector('.arrow');
+
+				toggleButton.onclick = function() {
+				if (content.classList.contains('hidden')) {
+					content.classList.remove('hidden');
+					arrow.classList.remove('rotated');
+				} else {
+					content.classList.add('hidden');
+					arrow.classList.add('rotated');
+				}
+			};
+		}
+	</script>
 </body>
 </html>

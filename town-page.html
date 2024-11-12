@@ -19,8 +19,8 @@
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
-				<div class="header-logo">
-					<a href="index.html">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
 						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
 					</a>
 				</div>
@@ -34,7 +34,7 @@
 				</div>
 				<ul class="main-menu">
 					<li class="menu-item"><a href="#">Подборки</a></li>
-					<li class="menu-item"><a href="#">Поездки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
 					<li class="menu-item"><a href="#">Отзывы</a></li>
 				</ul>
 				<div class="profile">
@@ -42,13 +42,28 @@
 						<p class="user-name">Константин Х.</p>
 						<button>Выход</button>
 					</div>
-					<div class="user-icon">
-						<a href="#">
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
 							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
 			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="town-page.html" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -144,7 +159,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/circle-check.svg" alt="" class="filter-circle check" width="24">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle check" width="24">
 										</div>
 									</li>
 									<li class="attribute">
@@ -156,7 +171,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -167,7 +182,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -177,7 +192,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -186,7 +201,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 								</ul>
@@ -204,7 +219,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/circle-check.svg" alt="" class="filter-circle check" width="24">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle check" width="24">
 										</div>
 									</li>
 									<li class="attribute">
@@ -216,7 +231,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -227,7 +242,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -237,7 +252,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 									<li class="attribute">
@@ -246,7 +261,7 @@
 										</ul>
 										<div class="attribute-p-img__wrapper">
 											<p>и выше</p>
-											<img src="img/town-page/filter-circle.svg" alt="" class="filter-circle">
+											<img src="img/common/filter-circle.svg" alt="" class="filter-circle">
 										</div>
 									</li>
 								</ul>
@@ -260,7 +275,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -272,7 +293,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -284,7 +311,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -296,7 +329,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -308,7 +347,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -320,7 +365,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -332,7 +383,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -344,7 +401,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -356,7 +419,13 @@
 								<div class="card-info">
 									<a href="#">
 										<h3 class="card-title">Lotte Hotel</h3>
-										<img src="img/common/rating-star.svg" alt="Рейтинг" class="rating rating-2" width="32" height="32">
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt=""></li>
+										</ul>
 										<p class="reviews reviews-2">1.2K</p>
 									</a>
 								</div>
@@ -379,11 +448,26 @@
 				<li class="footer-menu-item"><a href="#">О нас</a></li>
 				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<a href="index.html">
+			<a href="index.html" class="footer-logo">
 				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
 			</a>
 		</div>
 	</footer>
+
+	<script>
+		const places = document.querySelectorAll('.places');
+
+		places.forEach(item => {
+			const itemsWrappers = item.querySelectorAll('div');
+			itemsWrappers.forEach(wrapper => {
+				wrapper.addEventListener('click', function() {
+					itemsWrappers.forEach(w => w.classList.remove('current'));
+					this.classList.add('current');
+				});
+			});
+		});
+	</script>
+	<script src="js/rating-filter.js"></script>
 </body>
 
 </html>

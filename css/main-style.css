@@ -68,6 +68,10 @@ p.small {
 	font-size: 16px;
 }
 
+img {
+	vertical-align: middle;
+}
+
 /* Main Navigation Styles */
 .showcase {
 	position: relative;
@@ -100,7 +104,7 @@ p.small {
 	max-height: 48px;
 }
 
-.header-logo {
+.header-logo__wrapper {
 	width: 130px;
 }
 
@@ -173,9 +177,8 @@ p.small {
 	color: #565656;
 }
 
-.user-icon {
+.user-icon__wrapper {
 	margin-left: 8px;
-	margin-top: 5px;
 }
 
 .user-icon img {
@@ -190,6 +193,51 @@ p.small {
 .search-form {
 	display: flex;
 	align-items: center;
+}
+
+.current-city-nav__wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 28px 112px;
+}
+
+.current-city-nav__inner {
+	display: flex;
+}
+
+.current-city a {
+	display: flex;
+	align-items: center;
+}
+
+.current-city a > *:not(:last-child) {
+	margin-right: 12px;
+}
+
+.current-city-nav {
+	display: flex;
+	align-items: center;
+	margin-left: 48px;
+}
+
+.current-city-nav a:not(:last-child) {
+	margin-right: 48px;
+}
+
+.city-name,
+.city-nav-item {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+section.lead {
+	width: 100%;
+	margin-top: -200px;
+	max-height: 860px;
+}
+
+.lead-content {
+	padding: 354px 0;
 }
 
 /*	Footer styles */
@@ -214,6 +262,43 @@ ul.footer-menu {
 
 ul.footer-menu li:not(:last-child) {
 	margin-right: 24px;
+}
+
+/* ACTIVE BUTTONS STYLES */
+.filter-circle {
+	cursor: pointer;
+	transition: fill 0.3s;
+}
+
+.filter-circle.check {
+	background: black;
+	border-radius: 50%;
+	filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(45deg);
+}
+
+/* Лайк - сердце */
+.clicked {
+	border-radius: 50%;
+	filter: invert(32%) sepia(100%) saturate(1000%) hue-rotate(305deg);
+}
+
+/* Стили для отображения контента поездок */
+.toggle-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+.hidden {
+	display: none;
+}
+
+.rotated {
+	transform: rotate(180deg);
 }
 
 @media(max-width: 1200px) {

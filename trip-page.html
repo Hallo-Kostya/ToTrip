@@ -9,17 +9,16 @@
 		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="css/trip-page.css">
 		<link rel="stylesheet" href="css/main-style.css">
-
+		<link rel="stylesheet" href="css/trip-page-style.css">
 		<title>Страница поездки</title>
 	</head>
 <body>
 	<header class="showcase">
 		<div class="container">
 			<nav class="main-nav">
-				<div class="header-logo">
-					<a href="index.html">
+				<div class="header-logo__wrapper">
+					<a href="index.html" class="header-logo">
 						<img src="img/common/main-logo.svg" alt="Логотип ToTrip">
 					</a>
 				</div>
@@ -33,7 +32,7 @@
 				</div>
 				<ul class="main-menu">
 					<li class="menu-item"><a href="#">Подборки</a></li>
-					<li class="menu-item"><a href="#">Поездки</a></li>
+					<li class="menu-item"><a href="trips-page.html">Поездки</a></li>
 					<li class="menu-item"><a href="#">Отзывы</a></li>
 				</ul>
 				<div class="profile">
@@ -41,13 +40,28 @@
 						<p class="user-name">Константин Х.</p>
 						<button>Выход</button>
 					</div>
-					<div class="user-icon">
-						<a href="#">
+					<div class="user-icon__wrapper">
+						<a href="#" class="user-icon">
 							<img src="img/common/user__icon.png" alt="Профиль">
 						</a>
 					</div>
 				</div>
 			</nav>
+		</div>
+		<div class="current-city-nav__wrapper">
+			<div class="current-city-nav__inner">
+				<div class="current-city">
+					<a href="town-page.html" class="current-city__link">
+						<img src="img/common/map-point.svg" alt="" width="36" height="36">
+						<p class="city-name">Москва</p>
+					</a>
+				</div>
+				<ul class="current-city-nav">
+					<a href="place-category__hotels.html"><li class="city-nav-item">Отели</li></a>
+					<a href="place-category__entertainments.html"><li class="city-nav-item">Развлечения</li></a>
+					<a href="place-category__restaurants.html"><li class="city-nav-item">Рестораны</li></a>
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -114,124 +128,280 @@
 			</div>
 
 			<div class="date-events">
-				<div class="date-events-header__wrapper">
-					<div class="date-events-header">
-						<p class="date">четверг, 19 сент.</p>
-						<button class="add-place__btn">
-							<span>Добавить место</span>
-						</button>
-						<button class="unwrapper toggle-button">
-							<img src="img/common/unwrap__button.svg" alt="Свернуть" class="arrow" width="40" height="40">
-						</button>
+				<div class="date-event">
+					<div class="date-events-header__wrapper">
+						<div class="date-events-header">
+							<p class="date">четверг, 19 сент.</p>
+							<button class="add-place__btn">
+								<span>Добавить место</span>
+							</button>
+							<button class="unwrapper toggle-button rotated">
+								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="arrow" width="40" height="40">
+							</button>
+						</div>
+					</div>
+	
+					<div class="events__wrapper hidden">
+						<ul class="events">
+							<li class="event">
+								<!-- Переместить изображения вкладышей из town-page в common -->
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
+								</div>
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+								</div>
+							</li>
+							<li class="event">
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
+								</div>
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+								</div>
+							</li>
+							<li class="event">
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
+								</div>
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+								</div>
+							</li>
+						</ul>
+						<div class="xdrop-event-icons hidden">
+							<button class="open-icons-list__btn">
+								<img src="img/common/plus.svg" alt="" class="plus__img" width="26" height="26">
+							</button>
+						</div>
+						<div class="event-icons__container">
+							<ul class="event-icons unwrapped">
+								<!-- Переместить изображения вкладышей из town-page в common -->
+								<li class="event__icon art">
+									<button class="change-event__icon art__icon">
+										<img src="img/town-page/art__icon.svg" alt="Развлечения" class="art__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon hotels">
+									<button class="change-event__icon hotels__icon">
+										<img src="img/town-page/hotels__icon.svg" alt="Отели" class="hotels__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon night-life">
+									<button class="change-event__icon night-life__icon">
+										<img src="img/town-page/night-life__icon.svg" alt="Ночная жизнь" class="night-life__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon nature">
+									<button class="change-event__icon nature__icon">
+										<img src="img/town-page/nature__icon.svg" alt="На природе" class="nature__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon museums">
+									<button class="change-event__icon museums__icon">
+										<img src="img/town-page/museums__icon.svg" alt="Музеи" class="museums__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon historical">
+									<button class="change-event__icon historical__icon">
+										<img src="img/town-page/historical__icon.svg" alt="Исторические места" class="hisctorical__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon eat">
+									<button class="change-event__icon eat__icon">
+										<img src="img/town-page/eat__icon.svg" alt="ЕДа" class="eat__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon cross">
+									<button class="close-icons-list cross__icon">
+										<img src="img/common/cross__icon.svg" alt="Закрыть" class="cross__img" width="32" height="32">
+									</button>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
-
-				<div class="events__wrapper">
-					<ul class="events">
-						<li class="event">
-							<!-- Переместить изображения вкладышей из town-page в common -->
-							<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
-							<div class="event-card">
-								<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
-							</div>
-							<div class="event-info">
-								<div class="event-info-header">
-									<h4 class="event-info-title">Hotel</h4>
-									<ul class="stars five-star">
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-									</ul>
+				<div class="date-event">
+					<div class="date-events-header__wrapper">
+						<div class="date-events-header">
+							<p class="date">четверг, 19 сент.</p>
+							<button class="add-place__btn">
+								<span>Добавить место</span>
+							</button>
+							<button class="unwrapper toggle-button rotated">
+								<img src="img/common/unwrap__button.svg" alt="Свернуть" class="arrow" width="40" height="40">
+							</button>
+						</div>
+					</div>
+	
+					<div class="events__wrapper hidden">
+						<ul class="events">
+							<li class="event">
+								<!-- Переместить изображения вкладышей из town-page в common -->
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
 								</div>
-								<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
-							</div>
-						</li>
-						<li class="event">
-							<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
-							<div class="event-card">
-								<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
-							</div>
-							<div class="event-info">
-								<div class="event-info-header">
-									<h4 class="event-info-title">Hotel</h4>
-									<ul class="stars five-star">
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-									</ul>
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
 								</div>
-								<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
-							</div>
-						</li>
-						<li class="event">
-							<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
-							<div class="event-card">
-								<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
-							</div>
-							<div class="event-info">
-								<div class="event-info-header">
-									<h4 class="event-info-title">Hotel</h4>
-									<ul class="stars five-star">
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-										<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
-									</ul>
+							</li>
+							<li class="event">
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
 								</div>
-								<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
-							</div>
-						</li>
-					</ul>
-					<ul class="event-icons unwrapped">
-						<!-- Переместить изображения вкладышей из town-page в common -->
-						<li class="event__icon art">
-							<button class="change-event__icon art__icon">
-								<img src="img/town-page/art__icon.svg" alt="Развлечения" class="art__img" " width="26" height="26">
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+								</div>
+							</li>
+							<li class="event">
+								<img src="img/town-page/art__icon.svg" alt="" class="event__icon">
+								<div class="event-card">
+									<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
+								</div>
+								<div class="event-info">
+									<div class="event-info-header">
+										<h4 class="event-info-title">Hotel</h4>
+										<ul class="stars five-star">
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+											<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+										</ul>
+									</div>
+									<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+								</div>
+							</li>
+						</ul>
+						<div class="xdrop-event-icons">
+							<button class="open-icons-list__btn">
+								<img src="img/common/plus.svg" alt="" class="plus__img" width="26" height="26">
 							</button>
-						</li>
-						<li class="event__icon hotels">
-							<button class="change-event__icon hotels__icon">
-								<img src="img/town-page/hotels__icon.svg" alt="Отели" class="hotels__img" width="26" height="26">
-							</button>
-						</li>
-						<li class="event__icon night-life">
-							<button class="change-event__icon night-life__icon">
-								<img src="img/town-page/night-life__icon.svg" alt="Ночная жизнь" class="night-life__img" width="26" height="26">
-							</button>
-						</li>
-						<li class="event__icon nature">
-							<button class="change-event__icon nature__icon">
-								<img src="img/town-page/nature__icon.svg" alt="На природе" class="nature__img" width="26" height="26">
-							</button>
-						</li>
-						<li class="event__icon museums">
-							<button class="change-event__icon museums__icon">
-								<img src="img/town-page/museums__icon.svg" alt="Музеи" class="museums__img" width="26" height="26">
-							</button>
-						</li>
-						<li class="event__icon historical">
-							<button class="change-event__icon historical__icon">
-								<img src="img/town-page/historical__icon.svg" alt="Исторические места" class="hisctorical__img" width="26" height="26">
-							</button>
-						</li>
-						<li class="event__icon eat">
-							<button class="change-event__icon eat__icon">
-								<img src="img/town-page/eat__icon.svg" alt="ЕДа" class="eat__img" width="26" height="26"">
-							</button>
-						</li>
-						<li class="event__icon cross">
-							<button class="close-icons-list cross__icon">
-								<img src="img/common/cross__icon.svg" alt="Закрыть" class="cross__img" width="26" height="26">
-							</button>
-						</li>
-					</ul>
+						</div>
+						<div class="event-icons__container hidden">
+							<ul class="event-icons unwrapped">
+								<!-- Переместить изображения вкладышей из town-page в common -->
+								<li class="event__icon art">
+									<button class="change-event__icon art__icon">
+										<img src="img/town-page/art__icon.svg" alt="Развлечения" class="art__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon hotels">
+									<button class="change-event__icon hotels__icon">
+										<img src="img/town-page/hotels__icon.svg" alt="Отели" class="hotels__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon night-life">
+									<button class="change-event__icon night-life__icon">
+										<img src="img/town-page/night-life__icon.svg" alt="Ночная жизнь" class="night-life__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon nature">
+									<button class="change-event__icon nature__icon">
+										<img src="img/town-page/nature__icon.svg" alt="На природе" class="nature__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon museums">
+									<button class="change-event__icon museums__icon">
+										<img src="img/town-page/museums__icon.svg" alt="Музеи" class="museums__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon historical">
+									<button class="change-event__icon historical__icon">
+										<img src="img/town-page/historical__icon.svg" alt="Исторические места" class="hisctorical__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon eat">
+									<button class="change-event__icon eat__icon">
+										<img src="img/town-page/eat__icon.svg" alt="ЕДа" class="eat__img" width="26" height="26">
+									</button>
+								</li>
+								<li class="event__icon cross">
+									<button class="close-icons-list cross__icon">
+										<img src="img/common/cross__icon.svg" alt="Закрыть" class="cross__img" width="32" height="32">
+									</button>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
+			<template id="date-event__card">
+				<li class="event">
+					<img src="" alt="" class="event__icon">
+					<div class="event-card">
+						<img src="img/trip-page/trip-place-photo.jpg" alt="" class="event__img">
+					</div>
+					<div class="event-info">
+						<div class="event-info-header">
+							<h4 class="event-info-title">Hotel</h4>
+							<ul class="stars five-star">
+								<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+								<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+								<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+								<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+								<li class="star"><img src="img/common/rating-star.svg" alt="" width="26" height="26"></li>
+							</ul>
+						</div>
+						<p class="event-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolor rem pariatur cum nulla laboriosam.</p>
+					</div>
+				</li>
+			</template>
 		</div>
 	</main>
 
@@ -246,12 +416,130 @@
 				<li class="footer-menu-item"><a href="#">О нас</a></li>
 				<li class="footer-menu-item"><a href="#">Обратная связь</a></li>
 			</ul>
-			<a href="index.html">
+			<a href="index.html" class="footer-logo">
 				<img src="img/common/footer-logo.svg" alt="Логотип ToTrip">
 			</a>
 		</div>
 	</footer>
 
-	<script src="js/hide-content.js"></script>
+	<script>
+		var dateEvents = document.querySelectorAll('.date-event');
+
+		dateEvents.forEach(event => {
+			var eventIconsCont = event.querySelector('.event-icons__container');
+			var dropIconsListCont = event.querySelector('.xdrop-event-icons');
+			var dropListBtn = event.querySelector('.open-icons-list__btn');
+			var closeIconsListBtn = event.querySelector('.close-icons-list');
+
+			dropListBtn.addEventListener('click', () => {
+				eventIconsCont.classList.remove('hidden');
+				dropIconsListCont.classList.add('hidden');
+			});
+
+			closeIconsListBtn.addEventListener('click', () => {
+				eventIconsCont.classList.add('hidden');
+				dropIconsListCont.classList.remove('hidden');
+			});
+		});
+	</script>
+
+	<script>
+		const navItems = document.querySelectorAll('.trip-nav-item a');
+
+		navItems.forEach(item => {
+			item.addEventListener('click', function(evt) {
+				evt.preventDefault();
+
+				navItems.forEach(link => link.classList.remove('selected'));
+
+				this.classList.add('selected');
+			});
+		});
+	</script>
+
+	<script>
+		var dateEventsList = document.querySelector('.date-events');
+		var dateEvents = dateEventsList.querySelectorAll('.date-event');
+
+		// Функция для добавления обработчиков событий
+		var initEventHandlers = (event) => {
+			var eventContentWrapper = event.querySelector('.events__wrapper');
+			var toggleButton = event.querySelector('.toggle-button');
+			var arrow = toggleButton.querySelector('.arrow');
+
+			// Обработчик для кнопки сворачивания/разворачивания
+			toggleButton.addEventListener('click', function () {
+				eventContentWrapper.classList.toggle('hidden');
+				arrow.classList.toggle('rotated');
+			});
+		};
+
+		dateEvents.forEach(initEventHandlers);
+	</script>
+	
+	<script>
+		// Функция для обработки нажатия на кнопку "Добавить место"
+		function handleAddPlaceButtonClick(event) {
+			// Находим ближайший родительский элемент .date-event
+			const dateEvent = event.target.closest('.date-event');
+			if (dateEvent) {
+				const eventContentWrapper = dateEvent.querySelector('.events__wrapper');
+				const eventIcons = dateEvent.querySelector('.event-icons');
+				const toggleButton = dateEvent.querySelector('.toggle-button');
+				const arrow = toggleButton.querySelector('.arrow');
+
+				// Проверяем видимость содержимого
+				const isHidden = eventContentWrapper.classList.contains('hidden');
+
+				// Если содержимое скрыто, показываем его
+				if (isHidden) {
+					eventContentWrapper.classList.remove('hidden');
+					arrow.classList.add('rotated'); // Поворачиваем стрелку при раскрытии
+				}
+
+				// Прокручиваем к элементу .event-icons
+				if (eventIcons) {
+					const elementPosition = eventIcons.getBoundingClientRect().top + window.scrollY;
+					const offsetPosition = elementPosition - (window.innerHeight / 2) + (eventIcons.offsetHeight / 2);
+
+					// Выполняем прокрутку
+					window.scrollTo({
+						top: offsetPosition,
+						behavior: 'smooth'
+					});
+				}
+			}
+		}
+
+		// Добавляем обработчик событий к каждой кнопке "Добавить место"
+		const addButtons = document.querySelectorAll('.add-place__btn');
+		addButtons.forEach(button => {
+			button.addEventListener('click', handleAddPlaceButtonClick);
+		});
+	</script>	
+
+	<script>
+		// Template for event in events
+		var dateEvents = document.querySelectorAll('.date-event');
+		var eventCardTemplate = document.querySelector('#date-event__card').content.querySelector('.event');
+		
+		dateEvents.forEach(dateEvent => {
+			var list = dateEvent.querySelector('.events');
+			var eventIcons = dateEvent.querySelectorAll('.event-icons .change-event__icon');
+
+			eventIcons.forEach(iconButton => {
+				var iconSrc = iconButton.querySelector('img').src;
+
+				iconButton.addEventListener('click', () => {
+					var newEventCard = eventCardTemplate.cloneNode(true);
+					var currentCardIcon = newEventCard.querySelector('.event__icon');
+					currentCardIcon.src = iconSrc;
+
+					list.append(newEventCard);
+				});
+			});
+		});
+	</script>
+
 </body>
 </html>
