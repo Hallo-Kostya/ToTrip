@@ -1,4 +1,6 @@
 from django.urls import path,include
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 from rest_framework.routers import DefaultRouter
 
@@ -26,3 +28,6 @@ urlpatterns = [
     path('login/', views.login_page, name='login_page'),
     path('search/', views.CitySearchView.as_view(), name='search_city')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
