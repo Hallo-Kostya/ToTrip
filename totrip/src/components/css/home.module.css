@@ -14,37 +14,8 @@ section.lead {
 	margin: 0 auto;
 	text-align: center;
 	font-family: 'Roboto';
-	font-size: 45px;
+	font-size: 56px;
 	font-weight: 700;
 	color: #FFF;
 	margin-bottom: 64px;
-}
-
-div.lead-wrapper div.search {
-	width: 832px;
-	margin: 0 auto;
-}
-
-div.lead-wrapper div.search form {
-	display: flex;
-	margin: 0 auto;
-}
-
-.lead-search-form input {
-	border-radius: 16px;
-	border: 1px solid rgba(112, 186, 255, 0.40);
-	background: #ECECEC;
-	width: 744px;
-	padding-left: 24px;
-}
-
-.lead-search-form button {
-	border-radius: 16px;
-	border: 1px solid rgba(112, 186, 255, 0.40);
-	background: #99A9EB;
-	margin-left: 16px;
-	padding: 10px;
-	padding-left: 12px;
-	padding-right: 12px;
-	padding-top: 14px;
 }

@@ -31,7 +31,7 @@ const Header = () => {
                   height={20}
                 />
               </button>
-              <input type="text" name="query" placeholder="Поиск" />
+              <input type="text" name="query" placeholder="Поиск" autoComplete='off'/>
             </form>
           </div>
 
