@@ -4,9 +4,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
-from .models import  City, Place, Category, FavoritePlace, User
+from ..models import  City, Place, Category, FavoritePlace, User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegisterSerializer, LoginSerializer, UserSerializer, CitySerializer, PlaceSerializer
+from ..serializers import RegisterSerializer, LoginSerializer, UserSerializer, CitySerializer, PlaceSerializer
 from django.shortcuts import render, redirect
 import requests
 
@@ -19,6 +19,7 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
+
 
 class RegisterView(APIView):
     def post(self, request):
@@ -35,6 +36,7 @@ class LogoutView(APIView):
         request.session.pop('refresh', None)
         return Response({"message": "вы вышли из аккаунта."}, status=status.HTTP_200_OK)
 
+
 class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
@@ -44,6 +46,7 @@ class LoginView(APIView):
             return Response(token, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -51,6 +54,7 @@ class UserProfileView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class AddToFavoritesView(APIView):
     def post(self, request, place_id):
@@ -64,16 +68,6 @@ class AddToFavoritesView(APIView):
         except Place.DoesNotExist:
             return Response({"error": "Место не найдено."}, status=status.HTTP_404_NOT_FOUND)
 
-
-class PlaceDetailAPIView(APIView):
-    def get(self, request, pk):
-        try:
-            place = Place.objects.get(pk=pk)
-            serializer = PlaceSerializer(place)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Place.DoesNotExist:
-            return Response({"error": "Данное место не найдено"}, status=status.HTTP_404_NOT_FOUND)
-        
 
 class FollowUserView(APIView):
     permission_classes = [IsAuthenticated]
