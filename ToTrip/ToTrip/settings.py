@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-
+from . import constants
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Db_api',
     'TripPlanner',
     'UserApp',
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'django.contrib.admin',
@@ -53,6 +54,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 AUTH_USER_MODEL = 'Db_api.User'
@@ -62,12 +66,17 @@ SIMPLE_JWT = {
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Next.js
 ]
 
 ROOT_URLCONF = 'ToTrip.urls'
@@ -90,19 +99,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToTrip.wsgi.application'
 
-FOURSQUARE_API_KEY = 'fsq34Zy+vMIVStXkOn52f0vpDs+Om19xxkMKaXfrqRJF0mg='
+FOURSQUARE_API_KEY = constants.FOURSQUARE_API_KEY
 FOURSQUARE_API_BASE_URL = 'https://api.foursquare.com/v3/places/search'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default':{
-        'ENGINE':'django.db.backends.postgresql',
-        'NAME':'ToTrip_BD',
-        'USER':'postgres',
-        'PASSWORD':'2396ToTripUlitki',
-        'HOST':'localhost',
-        'PORT':'5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': constants.DATABASE_NAME,
+        'USER': constants.DATABASE_USERNAME,
+        'PASSWORD': constants.DATABASE_PASSWORD,
+        'HOST': constants.DATABASE_HOST,
+        'PORT': constants.DATABASE_PORT,
     },
 
     'sqlite3': {
