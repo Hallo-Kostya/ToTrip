@@ -22,6 +22,7 @@ class SearchPlacesAPIView(APIView):
             Q(lower_name__icontains=query) | 
             Q(lower_name__in=query_parts)
         )
+
         regions = Region.objects.annotate(lower_name=Lower('name')).filter(
             Q(lower_name__icontains=query) | 
             Q(lower_name__in=query_parts)
@@ -38,6 +39,11 @@ class SearchPlacesAPIView(APIView):
         # Сериализация данных
         cities_data = CitySerializer(cities, many=True).data
         places_data = PlaceSerializer(places, many=True).data
+        if cities_data and len(places_data) < 10:
+            city_ids = cities.values_list('id', flat=True)
+            places_cities = Place.objects.filter(city_id__in = city_ids)
+            places_cities_data = PlaceSerializer(places_cities, many=True).data
+            places_data.extend(places_cities_data)
         districts_data = DistrictSerializer(districts, many=True).data
         regions_data = RegionSerializer(regions, many=True).data
         countries_data = CountrySerializer(countries, many=True).data

@@ -2,6 +2,8 @@ from django.urls import path,include
 from .views.UserViews import RegisterView, LoginView, UserProfileView, FollowUserView, LogoutView
 from .views.PlaceViews import PlaceDetailAPIView
 from .views.SearchView import SearchPlacesAPIView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('users/register/', RegisterView.as_view(), name='register_api'),
@@ -12,4 +14,4 @@ urlpatterns = [
     path('users/<int:user_id>/unfollow/', FollowUserView.as_view(), name = 'unfollow_user'),
     path('place/<int:pk>/', PlaceDetailAPIView.as_view(), name='place-detail'),
     path('search/', SearchPlacesAPIView.as_view(), name='search_api')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
