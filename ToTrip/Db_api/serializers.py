@@ -105,13 +105,6 @@ class PlaceImageSerializer(serializers.ModelSerializer):
         if obj.image:
             width = self.context.get('width', 80)  
             height = self.context.get('height', 80)
-            img = Image.open(obj.image)
-            img.thumbnail((width, height))
-            # Сохраняем в буфер
-            buffer = BytesIO()
-            img.save(buffer, format="JPEG")  
-            buffer.seek(0)
-
             original_filename = obj.image.name
             name, ext = os.path.splitext(original_filename)
             resized_filename = f"{name}-{width}x{height}{ext}"
@@ -119,6 +112,19 @@ class PlaceImageSerializer(serializers.ModelSerializer):
             # Путь для сохранения изображения
             media_root = settings.MEDIA_ROOT  
             resized_path = os.path.join(media_root, 'resized', resized_filename)
+
+            if os.path.exists(resized_path):
+                # Если файл уже существует, возвращаем URL к существующему изображению
+                return f"/media/resized/{resized_filename}"
+            
+            img = Image.open(obj.image)
+            img.thumbnail((width, height))
+            # Сохраняем в буфер
+            buffer = BytesIO()
+            img.save(buffer, format="JPEG")  
+            buffer.seek(0)
+
+            
             # Создаем папку, если она не существует
             os.makedirs(os.path.dirname(resized_path), exist_ok=True)
             # Сохраняем файл на диск
