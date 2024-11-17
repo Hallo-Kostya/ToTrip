@@ -87,24 +87,24 @@ class CitySerializer(serializers.ModelSerializer):
     places = PlaceSerializer(many=True, read_only=True)
     class Meta:
         model = City
-        fields = ['name', 'country', 'places']
+        fields = ['name', 'region', 'places']
 
 class RegionSerializer(serializers.ModelSerializer):
     cities=CitySerializer(many=True, read_only=True)
     class Meta:
         model = Region
-        fields = ['id', 'name', 'image', 'district']
+        fields = ['id', 'name', 'image', 'district', 'cities']
 
 class DistrictSerializer(serializers.ModelSerializer):
     regions=RegionSerializer(many=True, read_only=True)
     class Meta:
         model = District
-        fields = ['id', 'name', 'image', 'country']
+        fields = ['id', 'name', 'image', 'country', 'regions']
 
 
 class CountrySerializer(serializers.ModelSerializer):
     districts=DistrictSerializer(many=True, read_only=True)
     class Meta:
         model = Country
-        fields = ['id', 'name', 'code', 'image', 'flag']
+        fields = ['id', 'name', 'code', 'image', 'flag', 'districts']
         
