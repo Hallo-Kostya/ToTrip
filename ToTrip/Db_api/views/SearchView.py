@@ -1,22 +1,39 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
 from Db_api.models import Place, City, District, Country, Region
 from Db_api.serializers import PlaceSerializer, CitySerializer, CountrySerializer, DistrictSerializer, RegionSerializer
-from rest_framework.permissions import AllowAny
-
+from django.db.models import Q
+from django.db.models.functions import Lower
 
 class SearchPlacesAPIView(APIView):
     def get(self, request):
         query = request.GET.get("query", "")
         if not query:
             return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Синхронный доступ к БД
-        cities = City.objects.filter(name__icontains=query)
-        places = Place.objects.filter(name__icontains=query)
-        districts = District.objects.filter(name__icontains=query)
-        regions = Region.objects.filter(name__icontains=query)
-        countries = Country.objects.filter(name__icontains=query)
+        query=query.lower()
+        query_parts = query.split()
+        
+        cities = City.objects.annotate(lower_name=Lower('name')).filter(
+            Q(lower_name__icontains=query) | 
+            Q(lower_name__in=query_parts)
+        )
+        places = Place.objects.annotate(lower_name=Lower('name')).filter(
+            Q(lower_name__icontains=query) | 
+            Q(lower_name__in=query_parts)
+        )
+        regions = Region.objects.annotate(lower_name=Lower('name')).filter(
+            Q(lower_name__icontains=query) | 
+            Q(lower_name__in=query_parts)
+        )
+        districts = District.objects.annotate(lower_name=Lower('name')).filter(
+            Q(lower_name__icontains=query) | 
+            Q(lower_name__in=query_parts)
+        )
+        countries = Country.objects.annotate(lower_name=Lower('name')).filter(
+            Q(lower_name__icontains=query) | 
+            Q(lower_name__in=query_parts)
+        )
 
         # Сериализация данных
         cities_data = CitySerializer(cities, many=True).data
