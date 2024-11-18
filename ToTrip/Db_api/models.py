@@ -1,7 +1,6 @@
 # Db_api/models.py
 from enum import unique
 from logging import NullHandler
-
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -48,6 +47,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+
 class Country(models.Model):
     name=models.CharField(max_length=100,unique=True)
     code=models.CharField(max_length=3, unique=True)
@@ -57,30 +58,53 @@ class Country(models.Model):
         return self.name
     
 
+class CountryImage(models.Model):
+    country = models.ForeignKey(Country,related_name="countryimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='country_images/')
+    
+    def __str__(self):
+        return f"Photos for Country {self.country.name}"
+
 class District(models.Model):
     name=models.CharField(max_length=100,unique=True)
-    image=models.ImageField(upload_to='district_photos/', blank=True, null=True)
     country=models.ForeignKey(Country, related_name='districts', on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.name} в стране {self.country.name}'
 
+class DistrictImage(models.Model):
+    district = models.ForeignKey(District,related_name="districtimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='district_images/')
+    
+    def __str__(self):
+        return f"Photos for District {self.district.name}"
 
 class Region(models.Model):
     name=models.CharField(max_length=100,unique=True)
-    image=models.ImageField(upload_to='region_photos/', blank=True, null=True)
     district=models.ForeignKey(District, related_name='regions', on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.name} в {self.district.name}'
+
+class RegionImage(models.Model):
+    region = models.ForeignKey(Region,related_name="regionimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='region_images/')
     
+    def __str__(self):
+        return f"Photos for Region {self.region.name}"
 
 class City(models.Model):
     name = models.CharField(max_length=100)
     region = models.ForeignKey(Region, related_name='region_cities', on_delete=models.CASCADE)
     coordinates=models.CharField(max_length=100, null=True)
-    photo=models.ImageField(upload_to='city_photos/', blank=True, null=True)
     def __str__(self):
         return f"{self.name}, {self.region.name}, {self.region.district.name}, {self.region.district.country.name}"
+    
 
+class CityImage(models.Model):
+    city = models.ForeignKey(City,related_name="cityimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='city_images/')
+    
+    def __str__(self):
+        return f"Photos for City {self.city.name}"
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -108,7 +132,6 @@ class Trip(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='trips')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    photos = models.ImageField(upload_to='trip_photos/', blank=True, null=True)
     start_Date=models.DateField()
     end_Date=models.DateField()
     places=models.ManyToManyField(Place, related_name='places_in_country')
@@ -119,6 +142,13 @@ class Trip(models.Model):
     def __str__(self):
         return f"Поездка: {self.title} ({self.start_date} - {self.end_date})"
 
+class TripImage(models.Model):
+    trip = models.ForeignKey(Trip,related_name="tripimage_set", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='trip_images/')
+    
+    def __str__(self):
+        return f"Photos for Trip {self.trip.user}"
+
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     content = models.TextField()
@@ -127,8 +157,8 @@ class Post(models.Model):
     def __str__(self):
         return f"Post by {self.user} at {self.created_at}"
 
-class PostPhoto(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='photos')
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='postimage_set')
     image = models.ImageField(upload_to='post_photos/')
 
     def __str__(self):
@@ -145,8 +175,8 @@ class Review(models.Model):
     def __str__(self):
         return f"Review for {self.place.name} - {self.rating} stars"
 
-class ReviewPhotos(models.Model):
-    review=models.ForeignKey(Review, on_delete=models.CASCADE, related_name='review_photos')
+class ReviewImage(models.Model):
+    review=models.ForeignKey(Review, on_delete=models.CASCADE, related_name='reviewimage_set')
     image=models.ImageField(upload_to='review_photos/')
 
     def __str__(self):
