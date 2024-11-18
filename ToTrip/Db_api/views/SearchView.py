@@ -2,9 +2,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from Db_api.models import Place, City, District, Country, Region, Category 
-from Db_api.serializers import PlaceSerializer, CitySerializer, CountrySerializer, DistrictSerializer, RegionSerializer
+from Db_api.serializers import PlaceSerializer, SearchCitySerializer, SearchCountrySerializer, SearchDistrictSerializer, SearchPlaceSerializer, SearchRegionSerializer
 from django.db.models import Q
 from django.db.models.functions import Lower
+
+class AllPlacesIds(APIView):
+    def get(self, request):
+        places_ids= list(Place.objects.values_list("id", flat=True).distinct())
+        if places_ids:
+            return Response({"places_ids": places_ids}, status=status.HTTP_200_OK)
+        else: 
+            return Response({"error": "не найдено мест в базе"}, status=status.HTTP_204_NO_CONTENT)
+        
 
 class SearchPlacesAPIView(APIView):
     def get(self, request):
@@ -13,15 +22,13 @@ class SearchPlacesAPIView(APIView):
             return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
         query=query.lower()
         query_parts = query.split()
-        width = request.GET.get("width", 80)
-        height = request.GET.get("height", 80)
 
         cities = City.objects.annotate(lower_name=Lower('name')).filter(
             Q(lower_name__icontains=query) | 
             Q(lower_name__in=query_parts)
         )
 
-        places = set(Place.objects.prefetch_related("place_images").annotate(lower_name=Lower('name')).filter(
+        places = set(Place.objects.prefetch_related("placeimage_set").annotate(lower_name=Lower('name')).filter(
             Q(lower_name__icontains=query) | 
             Q(lower_name__in=query_parts)
         ))
@@ -42,7 +49,7 @@ class SearchPlacesAPIView(APIView):
         )
 
         # Сериализация данных
-        cities_data = CitySerializer(cities, many=True).data
+        cities_data = SearchCitySerializer(cities, many=True).data
         if len(places) < 10:
             category = Category.objects.annotate(lower_name=Lower('name')).filter(
                 Q(lower_name__icontains=query) | 
@@ -68,13 +75,10 @@ class SearchPlacesAPIView(APIView):
                     Q(city_id__in = city_ids)
                 ))
                 places=places.union(city_places)
-        places_data = PlaceSerializer(places, many=True, context={
-            'width': int(width),
-            'height': int(height)
-            }).data
-        districts_data = DistrictSerializer(districts, many=True).data
-        regions_data = RegionSerializer(regions, many=True).data
-        countries_data = CountrySerializer(countries, many=True).data
+        places_data = SearchPlaceSerializer(places, many=True).data
+        districts_data = SearchDistrictSerializer(districts, many=True).data
+        regions_data = SearchRegionSerializer(regions, many=True).data
+        countries_data = SearchCountrySerializer(countries, many=True).data
 
         return Response({
             "cities": cities_data,
