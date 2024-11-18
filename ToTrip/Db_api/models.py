@@ -124,7 +124,7 @@ class Place(models.Model):
     coordinates = models.CharField(max_length=100, null=True)
     working_hours = models.CharField(max_length=100)
     city = models.ForeignKey(City, related_name='city_places', on_delete=models.CASCADE)
-    country= models.ForeignKey(Country, related_name='places', on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
 
@@ -150,7 +150,7 @@ class TripImage(models.Model):
         return f"Photos for Trip {self.trip.user}"
 
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_posts')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

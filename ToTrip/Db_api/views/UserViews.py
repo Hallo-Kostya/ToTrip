@@ -3,12 +3,13 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from ..models import  City, Place, Category, FavoritePlace, User
 from rest_framework_simplejwt.tokens import RefreshToken
 from ..serializers import RegisterSerializer, LoginSerializer, UserSerializer, CitySerializer, PlaceSerializer
 from django.shortcuts import render, redirect
 import requests
+from rest_framework.exceptions import NotFound
 
 from ToTrip import settings
 
@@ -48,12 +49,27 @@ class LoginView(APIView):
 
 
 class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
+    def get(self, request, user_id=None):
+        # Если user_id не передан, используем профиль текущего пользователя
+        if user_id is None:
+            # Требуется авторизация
+            self.check_permissions(request)
+            user = request.user
+        else:
+            # Разрешаем доступ без авторизации
+            try:
+                user = User.objects.get(pk=user_id)
+            except User.DoesNotExist:
+                raise NotFound("Пользователь с таким ID не найден")
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def get_permissions(self):
+        # Если user_id не указан, разрешаем доступ только авторизованным пользователям
+        if self.kwargs.get('user_id') is None:
+            return [IsAuthenticated()]
+        # Если user_id указан, доступ открыт всем
+        return [AllowAny()]
 
 
 class AddToFavoritesView(APIView):

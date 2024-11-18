@@ -1,6 +1,6 @@
 # Db_api/serializers.py
 from rest_framework import serializers
-from .models import User, City, CityImage, Place, PlaceImage, Category,  Country, CountryImage, District, DistrictImage, Region, RegionImage 
+from .models import User, City, CityImage, Place, PlaceImage, Category,  Country, CountryImage, District, DistrictImage, Region, RegionImage, Review, Post, ReviewImage, PostImage 
 from django.contrib.auth import authenticate
 from PIL import Image
 import os
@@ -91,29 +91,16 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "first_name", "last_name", "photo"]
 
 
-class UserSerializer(serializers.ModelSerializer):
-    followers_count = serializers.IntegerField(source="followers.count", read_only=True)
-    following_count = serializers.IntegerField(source="following.count", read_only=True)
-    followers = FollowSerializer(many=True, read_only=True)
-
+class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = [
-            "id",
-            "email",
-            "first_name",
-            "last_name",
-            "bio",
-            "city",
-            "country",
-            "photo",
-            "username",
-            "phone_number",
-            "created_at",
-            "followers_count",
-            "following_count",
-            "followers",
-        ]
+        model = PostImage
+        fields = ["image"]
+
+class PostSerializer(serializers.ModelSerializer):
+    postimage_set = PostImageSerializer(many = True, read_only = True)
+    class Meta:
+        model = Post
+        fields = ["id", "user", "content", "created_at", "postimage_set"]
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -152,33 +139,90 @@ class PlaceImageSerializer(serializers.ModelSerializer):
         fields = ["image"]
 
 
+class ReviewImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewImage
+        fields = ["image"]
+
+class ReviewSerializer(serializers.ModelSerializer):
+    reviewimage_set = ReviewImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Review
+        fields = ["place", "author", "rating", "text", "created_at", "reviewimage_set"]
+
+class UserSerializer(serializers.ModelSerializer):
+    followers_count = serializers.IntegerField(source="followers.count", read_only=True)
+    following_count = serializers.IntegerField(source="following.count", read_only=True)
+    followers = FollowSerializer(many=True, read_only=True)
+    user_reviews = ReviewSerializer(many=True, read_only = True)
+    user_posts = PostSerializer(many=True, read_only = True)
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "bio",
+            "city",
+            "country",
+            "photo",
+            "username",
+            "phone_number",
+            "created_at",
+            "followers_count",
+            "following_count",
+            "followers",
+            "user_reviews",
+            "user_posts"
+        ]
+
 class PlaceSerializer(serializers.ModelSerializer):
     placeimage_set = PlaceImageSerializer(many=True, read_only=True)
-
+    reviews = ReviewSerializer(many=True, read_only = True)
+    city_name = serializers.CharField(source="city.name", read_only=True)
+    city_id = serializers.IntegerField(source = "city.id", read_only=True)
+    region_name = serializers.CharField(source="city.region.name", read_only=True)
+    region_id = serializers.IntegerField(source = "city.region.id", read_only=True)
+    district_name = serializers.CharField(source="city.region.district.name", read_only=True)
+    district_id = serializers.IntegerField(source = "city.region.district.id", read_only=True)
+    country_name = serializers.CharField(source="city.region.district.country.name", read_only=True)
+    country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
     class Meta:
         model = Place
         fields = [
             "id",
             "name",
             "address",
+            "city_id",
+            "city_name",
+            "region_id",
+            "region_name",
+            "district_id",
+            "district_name",
+            "country_id",
+            "country_name",
             "category",
             "description",
             "avg_rating",
             "coordinates",
             "working_hours",
-            "city",
-            "country",
             "placeimage_set",
+            "reviews"
         ]
 
-    
 
 class CitySerializer(serializers.ModelSerializer):
     places = PlaceSerializer(many=True, read_only=True)
-
+    region_name = serializers.CharField(source="region.name", read_only=True)
+    region_id = serializers.IntegerField(source = "region.id", read_only=True)
+    district_name = serializers.CharField(source="district.name", read_only=True)
+    disctrict_id = serializers.IntegerField(source = "region.district.id", read_only=True)
+    country_name = serializers.CharField(source="region.district.country.name", read_only=True)
+    country_id = serializers.IntegerField(source = "region.district.country.id", read_only=True)
     class Meta:
         model = City
-        fields = ["name", "region", "places"]
+        fields = ["name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
 
 
 class RegionSerializer(serializers.ModelSerializer):
