@@ -1,29 +1,82 @@
-export interface iProfile {
+import axios from "axios";
+
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+const BASE_URL = "http://127.0.0.1:8000";
+
+interface iPlaceImage {
+  image: string;
+  resized_image: string;
+}
+interface iPlace {
+  id: number;
   name: string;
-  email: string;
+  address: string;
+  category: number;
+  description: string;
+  avg_rating: number;
+  coordinates: string;
+  working_hours: string;
+  placeimage_set: iPlaceImage[]; // Массив изображений
+} 
+export interface iSearchPlaceCard {
+  id: number
+  name: string;
+  location: string;
   photo: string;
-  username: string;
-  role: "Frontend Developer" | "Backend Developer" | "Fullstack Developer";
 }
 
-export const data: iProfile[] = [];
-
-const RandomNames = [
-  "Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Henry", "Ivy", "Jack",
-  "Kate", "Liam", "Mia", "Noah", "Olivia", "Peter", "Quinn", "Rose", "Sam", "Tina",
-  "Uma", "Victor", "Wendy", "Xander", "Yara", "Zane", "Abigail", "Benjamin", "Chloe",
-  "Daniel", "Emily", "Fiona", "George", "Hannah", "Isaac", "Julia", "Kevin", "Lily",
-  "Mason", "Nora", "Oscar", "Penelope", "Quentin", "Rachel", "Simon", "Tiffany", "Ulysses",
-  "Violet", "William", "Xavier", "Yasmine", "Zoey", "Stephen", "Gerrard", "Adewale",
-];
-
-for (let i = 0; i < RandomNames.length; i++) {
-  const profile: iProfile = {
-      name: RandomNames[i],
-      role: i % 3 === 0 ? "Backend Developer" : i % 2 === 0 ? "Frontend Developer" : "Fullstack Developer",
-      email: `${RandomNames[i].toLowerCase()}@example.com`,
-      username: `user${RandomNames[i].toLowerCase()}_username`,
-      photo: "/img/user-photo.png",
-  };
-  data.push(profile);
+interface ApiResponse {
+  places: iPlace[];
+  // cities: Cities[];
+  // countries: Countries[];
+  // regions: Regions[];
+  // districts: Districts[];
 }
+
+export const fetchSearchPlaceCards = async (query: string): Promise<iSearchPlaceCard[]> => {
+  try {
+    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/search/?query=${query}&width=80&heigth=80`);
+
+    if (response.data && Array.isArray(response.data.places)) {
+      return response.data.places.map((place) => ({
+        id: place.id,
+        name: place.name,
+        location: place.address,
+        photo: `${BASE_URL}${place.placeimage_set?.[0]?.resized_image}` || '/img/common/noimage.jpg',
+      }));
+    } else {
+      console.log("Нет результатов для запроса");
+      return [];
+    }
+  } catch (error) {
+    console.error("Ошибка при запросе данных: ", error);
+    return [];
+  }
+};
+
+export const fetchPlaces = async (query: string): Promise<iPlace[]> => {
+  try {
+    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/search/?query=${query}`);
+
+    if (response.data && Array.isArray(response.data.places)) {
+      return response.data.places.map((place) => ({
+        id: place.id,
+        name: place.name,
+        address: place.address,
+        category: place.category,
+        description: place.description,
+        avg_rating: place.avg_rating,
+        coordinates: place.coordinates,
+        working_hours: place.working_hours,
+        placeimage_set: place.placeimage_set
+      }));
+    } else {
+      console.log("Нет результатов для запроса");
+      return [];
+    }
+  } catch (error) {
+    console.error("Ошибка при запросе данных: ", error);
+    return [];
+  }
+};
+
