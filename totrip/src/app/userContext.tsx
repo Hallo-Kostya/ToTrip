@@ -1,31 +1,62 @@
-"use client"
+'use client'
 
 import React, { createContext, useContext, useState } from 'react';
 
-interface UserContextType {
-  userImg: string;
+// Интерфейс для пользователя
+interface UserContextProps {
+  nickname: string;
   userName: string;
+  userImg: string;
+  location: string;
+  motto: string;
+  profileDesc: string;
+  setUserContext: (data: Partial<UserContextState>) => void;
 }
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+interface UserContextState {
+  nickname: string;
+  userName: string;
+  userImg: string;
+  location: string;
+  motto: string;
+  profileDesc: string;
+}
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userData] = useState<UserContextType>({
-    userImg: "/img/user-photo.png", // здесь вы можете обновлять данные пользователя
-    userName: "Имя пользователя"
+// Создаем контекст
+const UserContext = createContext<UserContextProps | undefined>(undefined);
+
+// Провайдер, который будем использовать в приложении
+const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [state, setState] = useState<UserContextState>({
+    nickname: '',
+    userName: 'Сафия Х',
+    userImg: '/img/no-user-icon.png',
+    location: '',
+    motto: '',
+    profileDesc: ''
   });
 
+  const setUserContext = (data: Partial<UserContextState>) => {
+    setState(prevState => ({
+      ...prevState,
+      ...data
+    }));
+  };
+
   return (
-    <UserContext.Provider value={userData}>
+    <UserContext.Provider value={{ ...state, setUserContext }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-export const useUserContext = () => {
+// Хук для использования контекста
+const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUserContext must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 };
+
+export { UserProvider, useUser };
