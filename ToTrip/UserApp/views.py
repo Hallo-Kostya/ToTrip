@@ -42,10 +42,11 @@ def register_page(request):
         # Отправляем запрос к вашему API для регистрации
         response = requests.post('http://127.0.0.1:8000/api/users/register/', data={
             'email': email,
+            'password': password,
             'first_name': first_name,
             'last_name': last_name,
-            'username' : username,
-            'password': password
+            'username': username,
+            
         })
 
 
