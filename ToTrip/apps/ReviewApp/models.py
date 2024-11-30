@@ -3,6 +3,7 @@ from apps.PlaceApp.models import Place
 from apps.UsersApp.models import User
 # Create your models here.
 class Review(models.Model):
+    """модель отзыва, включающая связь с местом, юзером(автором), рейтинг и сам текст отзыва с временем написания"""
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     author = models.ForeignKey(User, related_name='user_reviews', on_delete=models.CASCADE)
     rating = models.IntegerField()

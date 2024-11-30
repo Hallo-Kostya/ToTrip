@@ -6,6 +6,7 @@ from apps.ReviewApp.serializers import ReviewSerializer
 from apps.PostApp.serializers import PostSerializer
 
 class RegisterSerializer(serializers.ModelSerializer):
+    """сериализатор, переводящий из json формата данные в новый объект User"""
     password = serializers.CharField(max_length=128, min_length=8, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
     class Meta:
@@ -30,6 +31,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
+    """сериализатор, проверяющий имеется ли данный юзер в бд"""
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
@@ -41,11 +43,14 @@ class LoginSerializer(serializers.Serializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
+    """сериализатор для модели подписчика"""
     class Meta:
         model = User
         fields = ["id", "username", "first_name", "last_name", "photo"]
 
 class UserSerializer(serializers.ModelSerializer):
+    """сериализатор пользователя, содержащий дополнительно счетчик подписок, подписчиков,
+    отзывы, посты"""
     followers_count = serializers.IntegerField(source="followers.count", read_only=True)
     following_count = serializers.IntegerField(source="following.count", read_only=True)
     followers = FollowSerializer(many=True, read_only=True)

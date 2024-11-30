@@ -3,6 +3,8 @@ from ToTrip import settings
 from apps.PlaceApp.models import Place, City, Country
 # Create your models here.
 class Trip(models.Model):
+    """модель поездки, содержащая связь с пользователем и местами\городами\странами, заголовок, описание, даты начала и конца
+    поездки, а также дату создания поездки"""
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='trips')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)

@@ -5,6 +5,7 @@ from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
+    """класс создания объекта пользователь"""
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
             raise ValueError('Email обязателен')
@@ -23,6 +24,8 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """модель пользователя, содержащая обязательные поля: имя пользователя,
+    email, пароль, имя, фамилия."""
     username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)

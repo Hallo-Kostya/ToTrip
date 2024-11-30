@@ -13,6 +13,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 def get_tokens_for_user(user):
+    """функция для получения access(15 мин.) и refresh(365 дней) токенов для пользователя"""
     refresh = RefreshToken.for_user(user)
     refresh.payload.update({
 
@@ -28,6 +29,8 @@ def get_tokens_for_user(user):
 
 
 class RegisterView(APIView):
+    """класс для регистрации пользователя, возвращает access(15 мин.) и refresh(365 дней, но оба обновляются при запросе с фронтенда) 
+    токены после регистрации"""
     renderer_classes = (UserJSONRenderer,)
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -49,6 +52,8 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
+    """класс для выхода из системы, с фронтенда должен быть отправлен refresh token для его дальнейшего добавления в 
+    черный список, чтобы в случае его кражи, взломщик не смог получить новые токены по старому refresh токену."""
     def post(self, request):
         refresh_token = request.data.get('refresh_token') # С клиента нужно отправить refresh token
         if not refresh_token:
@@ -64,6 +69,7 @@ class LogoutView(APIView):
 
 
 class LoginView(APIView):
+    """класс для авторизации пользователя, после подтверждения сериализатора отправляет токены"""
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -74,6 +80,7 @@ class LoginView(APIView):
 
 
 class UserProfileView(APIView):
+    """класс, отправляющий свой либо чужой профиль на фронтенд"""
     def get(self, request, user_id=None):
         # Если user_id не передан, используем профиль текущего пользователя
         if user_id is None:
@@ -90,6 +97,7 @@ class UserProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def get_permissions(self):
+        """метод для проверки авторизации и установления дальнейшего уровня доступа в зависимости от него"""
         # Если user_id не указан, разрешаем доступ только авторизованным пользователям
         if self.kwargs.get('user_id') is None:
             return [IsAuthenticated()]
@@ -98,6 +106,7 @@ class UserProfileView(APIView):
 
 
 class AddToFavoritesView(APIView):
+    """класс для добавления места в "избранные места" пользователя"""
     def post(self, request, place_id):
         user = request.user
         try:
@@ -111,9 +120,11 @@ class AddToFavoritesView(APIView):
 
 
 class FollowUserView(APIView):
+    """класс для подписки на другого пользователя"""
     permission_classes = [IsAuthenticated]
 
     def post(self, request, user_id):
+        """подписаться от пользователя"""
         try:
             user_to_follow = User.objects.get(id=user_id)
             request.user.following.add(user_to_follow)
@@ -122,6 +133,7 @@ class FollowUserView(APIView):
             return Response({'error': 'Данный пользователь не найден'}, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, user_id):
+        """отписаться от пользователя"""
         try:
             user_to_unfollow = User.objects.get(id=user_id)
             request.user.following.remove(user_to_unfollow)

@@ -6,6 +6,7 @@ import os
 from ToTrip import settings
 
 def crop_image(obj):
+    """функция для обрезки фотографии под квадратный формат перед отправкой на фронт"""
     # Обрабатываем только первую фотографию
     img = Image.open(obj.image)
     img_width, img_height = img.size
@@ -36,6 +37,8 @@ def crop_image(obj):
 
 
 class SearchCitySerializer(serializers.ModelSerializer):
+    """сериализатор города для поиска, который преобразует первую фотографию для поиска,
+    а также выводит только необходимую для поиска информацию"""
     search_image = serializers.SerializerMethodField()  
     region_name = serializers.CharField(source="region.name", read_only=True)
     district_name = serializers.CharField(source="district.name", read_only=True)
@@ -44,6 +47,7 @@ class SearchCitySerializer(serializers.ModelSerializer):
         model = City
         fields = ["name", "region_name", "district_name", "country_name", "search_image"]
     def get_search_image(self, obj):
+        """метод для вызова обрезающей функции для первой фотографии"""
         search_image = obj.cityimage_set.first()
         if search_image:
             return crop_image(search_image)
@@ -51,6 +55,8 @@ class SearchCitySerializer(serializers.ModelSerializer):
 
 
 class SearchRegionSerializer(serializers.ModelSerializer):
+    """сериализатор региона для поиска, который преобразует первую фотографию для поиска,
+    а также выводит только необходимую для поиска информацию"""
     search_image = serializers.SerializerMethodField() 
     district_name = serializers.CharField(source="district.name", read_only=True)
     country_name = serializers.CharField(source="district.country.name", read_only=True)
@@ -58,6 +64,7 @@ class SearchRegionSerializer(serializers.ModelSerializer):
         model = Region
         fields = ["id", "name", "search_image", "district_name", "country_name"]
     def get_search_image(self, obj):
+        """метод для вызова обрезающей функции для первой фотографии"""
         search_image = obj.regionimage_set.first()
         if search_image:
             return crop_image(search_image)
@@ -65,6 +72,8 @@ class SearchRegionSerializer(serializers.ModelSerializer):
 
 
 class SearchDistrictSerializer(serializers.ModelSerializer):
+    """сериализатор округа для поиска, который преобразует первую фотографию для поиска,
+    а также выводит только необходимую для поиска информацию"""
     search_image = serializers.SerializerMethodField()
     country_name = serializers.CharField(source="country.name", read_only=True)
     class Meta:
@@ -72,6 +81,7 @@ class SearchDistrictSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "search_image", "country_name"]
 
     def get_search_image(self, obj):
+        """метод для вызова обрезающей функции для первой фотографии"""
         search_image = obj.districtimage_set.first()
         if search_image:
             return crop_image(search_image)
@@ -79,18 +89,23 @@ class SearchDistrictSerializer(serializers.ModelSerializer):
 
 
 class SearchCountrySerializer(serializers.ModelSerializer):
+    """сериализатор страны для поиска, который преобразует первую фотографию для поиска,
+    а также выводит только необходимую для поиска информацию"""
     search_image = serializers.SerializerMethodField()
     class Meta:
         model = Country
         fields = ["id", "name", "search_image"]
 
     def get_search_image(self, obj):
+        """метод для вызова обрезающей функции для первой фотографии"""
         search_image = obj.countryimage_set.first()
         if search_image:
             return crop_image(search_image)
         return None
 
 class SearchPlaceSerializer(serializers.ModelSerializer):
+    """сериализатор места для поиска, который преобразует первую фотографию для поиска,
+    а также выводит только необходимую для поиска информацию"""
     search_image = serializers.SerializerMethodField()
     city_name = serializers.CharField(source="city.name", read_only=True)
     region_name = serializers.CharField(source="city.region.name", read_only=True)
@@ -109,6 +124,7 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
         ]
 
     def get_search_image(self, obj):
+        """метод для вызова обрезающей функции для первой фотографии"""
         search_image = obj.placeimage_set.first()
         if search_image:
             return crop_image(search_image)

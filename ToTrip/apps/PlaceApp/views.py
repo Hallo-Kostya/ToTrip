@@ -6,6 +6,7 @@ from .models import Place
 
 
 class AllPlacesIds(APIView):
+    """Возвращает id всех мест в бд"""
     def get(self, request):
         places_ids= list(Place.objects.values_list("id", flat=True).distinct())
         if places_ids:
@@ -14,6 +15,7 @@ class AllPlacesIds(APIView):
             return Response({"error": "не найдено мест в базе"}, status=status.HTTP_204_NO_CONTENT)
         
 class PlaceDetailAPIView(APIView):
+    """Класс для получения детальной информации о конкретном объекте"""
     def get(self, request, pk):
         try:
             place = Place.objects.get(pk=pk)
