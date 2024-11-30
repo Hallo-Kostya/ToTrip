@@ -3,11 +3,13 @@ from .models import  Place, City, District, Country, Region, Category
 from apps.ImageApp.serializers import PlaceImageSerializer
 from apps.ReviewApp.serializers import ReviewSerializer
 class CategorySerializer(serializers.ModelSerializer):
+    """класс для преобразования категории мест в json формат и наоборот"""
     class Meta:
         model = Category
         fields = ["id", "name", "code", "icon", "photo"]
 
 class PlaceSerializer(serializers.ModelSerializer):
+    """класс для преобразования места в json формат и наоборот"""
     placeimage_set = PlaceImageSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only = True)
     city_name = serializers.CharField(source="city.name", read_only=True)
@@ -43,6 +45,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 
 
 class CitySerializer(serializers.ModelSerializer):
+    """класс для преобразования города в json формат и наоборот"""
     places = PlaceSerializer(many=True, read_only=True)
     region_name = serializers.CharField(source="region.name", read_only=True)
     region_id = serializers.IntegerField(source = "region.id", read_only=True)
@@ -56,6 +59,7 @@ class CitySerializer(serializers.ModelSerializer):
 
 
 class RegionSerializer(serializers.ModelSerializer):
+    """класс для преобразования региона в json формат и наоборот"""
     cities = CitySerializer(many=True, read_only=True)
 
     class Meta:
@@ -64,6 +68,7 @@ class RegionSerializer(serializers.ModelSerializer):
 
 
 class DistrictSerializer(serializers.ModelSerializer):
+    """класс для преобразования округа в json формат и наоборот"""
     regions = RegionSerializer(many=True, read_only=True)
 
     class Meta:
@@ -72,6 +77,7 @@ class DistrictSerializer(serializers.ModelSerializer):
 
 
 class CountrySerializer(serializers.ModelSerializer):
+    """класс для преобразования страны в json формат и наоборот"""
     districts = DistrictSerializer(many=True, read_only=True)
 
     class Meta:

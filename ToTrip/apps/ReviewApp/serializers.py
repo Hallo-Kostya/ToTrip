@@ -3,6 +3,7 @@ from apps.ReviewApp.models import Review
 from rest_framework import serializers
 
 class ReviewSerializer(serializers.ModelSerializer):
+    """сериализатор отзыва"""
     reviewimage_set = ReviewImageSerializer(many=True, read_only=True)
     class Meta:
         model = Review
