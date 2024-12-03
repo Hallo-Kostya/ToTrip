@@ -5,20 +5,16 @@ import Header from '@/components/ui/header';
 import Footer from "@/components/ui/footer";
 import { UserProvider } from "./userContext";
 
-const isRegistered = true;
-const userName = "";
-const userImg = "";
-
 export const metadata: Metadata = {
   title: "Welcome to ToTrip!",
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body className={`${manrope.className} antialiased bg-customGray`}>
         <UserProvider>
-          <Header isRegistered={isRegistered} userName={userName} userImg={userImg} />
+          <Header />
             {children}
           <Footer />
         </UserProvider>

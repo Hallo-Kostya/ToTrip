@@ -22,18 +22,17 @@ interface UserContextState {
   profileDesc: string;
 }
 
-// Создаем контекст
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-// Провайдер, который будем использовать в приложении
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<UserContextState>({
-    nickname: '',
-    userName: 'Сафия Х',
+    // Через эти переменные данные передаются по всем элементам, для которых они были импортированы
+    nickname: '@индивидуальный_идентификатор',
+    userName: '',
     userImg: '/img/no-user-icon.png',
-    location: '',
-    motto: '',
-    profileDesc: ''
+    location: 'Ваше местоположение!',
+    motto: 'Ваш девиз!',
+    profileDesc: 'Описание профиля!'
   });
 
   const setUserContext = (data: Partial<UserContextState>) => {

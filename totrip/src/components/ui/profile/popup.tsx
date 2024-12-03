@@ -34,54 +34,73 @@ const Popup: React.FC<PopupControlsProps> = ({
         location: initialData?.location || '',
         about: initialData?.about || '',
         motto: initialData?.motto || ''
-      });
-
-const [tempAvatar, setTempAvatar] = useState<string>('');
-
-useEffect(() => {
-    if (isOpen && initialData) {
-      setProfileData(initialData);
-      setTempAvatar(initialData.avatar || '');
-    }
-  }, [isOpen, initialData]);
-
-const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    setProfileData(prevState => ({
-        ...prevState,
-        [name]: value
-    }));
-};
-
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onAvatarChange(tempAvatar);
-    onSubmit({
-        ...profileData, avatar: tempAvatar,
-        newImg: ''
     });
-    onClose();
-  };
 
-// const validateName = (value: string) => {
-// const regex = /^[A-Za-zА-Яа-яёЁ\s]+$/;
-// return regex.test(value);
-// };
+    const [errors, setErrors] = useState<Partial<UserProfile>>({});
+    const [tempAvatar, setTempAvatar] = useState<string>('');
 
-// const validateUsername = (value: string) => {
-// const regex = /^(?!.*[:&!?]).*$/;
-// return regex.test(value);
-// };
+    useEffect(() => {
+        if (isOpen && initialData) {
+            setProfileData(initialData);
+            setTempAvatar(initialData.avatar || '');
+        }
+    }, [isOpen, initialData]);
 
-const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setProfileData(prevState => ({
-        ...prevState,
-        location: event.target.value
+    const validateFields = () => {
+        const newErrors: Partial<UserProfile> = {};
+        if (!profileData.name.trim()) {
+            newErrors.name = "Имя обязательно";
+        }
+        if (!profileData.username.startsWith('@')) {
+            newErrors.username = "Имя пользователя должно начинаться с @";
+        }
+        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.name)) {
+            newErrors.name = "Разрешены только буквы и пробелы";
+        }
+        if (!/^(?!.*[:&!?]).*$/.test(profileData.username)) {
+            newErrors.username = "Недопустимые символы: : & ! ?";
+        }
+        if (!profileData.location) {
+            newErrors.location = "Пожалуйста, выберите город";
+        }
+        if (!profileData.about) {
+            newErrors.about = "Описание обязательно";
+        }
+        if (!profileData.motto) {
+            newErrors.motto = "Девиз обязателен";
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setProfileData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (validateFields()) {
+            onAvatarChange(tempAvatar);
+            onSubmit({
+                ...profileData, avatar: tempAvatar, newImg: ''
+            });
+            onClose();
+        }
+    };
+
+    const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setProfileData(prevState => ({
+            ...prevState,
+            location: event.target.value
         }));
     };
 
     const handleAvatarChange = (newAvatar: string) => {
-        setTempAvatar(newAvatar); // Обновляем временный аватар
+        setTempAvatar(newAvatar);
     };
 
     return (
@@ -104,6 +123,7 @@ const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
                                     pattern="[A-Za-zА-Яа-яёЁ\s]*"
                                     title="Разрешены буквы и пробелы"
                                 />
+                                {errors.name && <p className="text-red-500">{errors.name}</p>}
                             </div>
                             <div className="mb-[12px]">
                                 <h5 className="text-[24px] font-bold mb-[4px]">Имя пользователя</h5>
@@ -118,6 +138,7 @@ const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
                                     pattern="^(?!.*[:&!?]).*$"
                                     title="Недопустимые символы: : & ! ?"
                                 />
+                                {errors.username && <p className="text-red-500">{errors.username}</p>}
                             </div>
                         </div>
                     </div>
@@ -139,6 +160,7 @@ const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
                                 <option value="Екатеринбург">Екатеринбург</option>
                                 <option value="Казань">Казань</option>
                             </select>
+                            {errors.location && <p className="text-red-500">{errors.location}</p>}
                         </div>
                     </div>
                     <div className="mb-[8px]">
@@ -152,6 +174,7 @@ const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
                             maxLength={500}
                             required
                         />
+                        {errors.about && <p className="text-red-500">{errors.about}</p>}
                     </div>
                     <div className="mb-[32px]">
                         <h5 className="text-[24px] font-bold mb-[4px]">Девиз</h5>
@@ -164,6 +187,7 @@ const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
                             maxLength={200}
                             required
                         />
+                        {errors.motto && <p className="text-red-500">{errors.motto}</p>}
                     </div>
                 </div>
                 <div className="flex justify-between w-full">

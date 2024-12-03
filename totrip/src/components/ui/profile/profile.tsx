@@ -35,7 +35,7 @@ const handleSubmit = (data: UserData) => {
     };
 
     return (
-    <section className="profile size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] shadow-md mb-4 -mt-[100px]">
+    <section className="size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] shadow-md mb-4 -mt-[100px]">
         <div className="flex justify-between items-start gap-5">
             <div className="flex gap-6">
                 <Image className="w-[160px] h-[160px] object-cover rounded-full" src={userImg} width={160} height={160} alt="Фото профиля" />
@@ -55,12 +55,12 @@ const handleSubmit = (data: UserData) => {
             onSubmit={handleSubmit}
             onAvatarChange={handleAvatarChange}
             initialData={{
-            avatar: userImg,
-            name: userName,
-            username: 'никнейм_если_есть',
-            location: location,
-            about: profileDesc,
-            motto: motto
+                avatar: userImg,
+                name: userName,
+                username: nickname,
+                location: location,
+                about: profileDesc,
+                motto: motto
             }}
         />
     </section>

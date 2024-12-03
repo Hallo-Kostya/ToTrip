@@ -18,7 +18,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatar
       reader.onloadend = () => {
         const imageUrl = reader.result as string;
         setSelectedImage(imageUrl);
-        onAvatarChange(imageUrl); // Передаем новые данные родителю
+        onAvatarChange(imageUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -43,9 +43,9 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatar
         id="file-input"
       />
       <label htmlFor="file-input" className={`
-      absolute inset-0 cursor-pointer flex items-center justify-center
-      bg-black bg-opacity-50 rounded-full text-white transition-opacity
-      duration-300 ${selectedImage ? 'opacity-0' : 'opacity-100'}
+        absolute inset-0 cursor-pointer flex items-center justify-center
+        bg-black bg-opacity-50 rounded-full text-white transition-opacity
+        duration-300 ${selectedImage ? 'opacity-0' : 'opacity-100'}
       `}>
         <span>Загрузить</span>
       </label>

@@ -15,7 +15,7 @@ const PhotoPost: React.FC<PhotoPostProps> = ({ postTime, tripName, postImage, co
     const starImg = '/img/profile/star.svg';
 
     return (
-      <div className="w-[831px] photo-element bg-white rounded-lg shadow-md p-[36px] mb-4">
+      <div className="w-[831px] photo-element bg-white rounded-2xl shadow-md p-[36px] mb-4">
         <div className="flex justify-between">
           <div className="flex items-center mb-4">
             <Image src={userImg} className="w-[80px] h-[80px] object-cover user-info-photo rounded-full mr-4" alt="User Photo" width={60} height={60} />
@@ -46,7 +46,7 @@ const PhotoPost: React.FC<PhotoPostProps> = ({ postTime, tripName, postImage, co
             alt="PhotoPost" 
             width={759} 
             height={573.5} 
-        />
+          />
         </div>
       </div>    
     );

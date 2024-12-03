@@ -1,13 +1,20 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/components/css/header.module.css';
 import { useUser } from '@/app/userContext';
+import RegistrationPopup from './common_modules/registration';
 
 const Header: React.FC = () => {
-    const { userName, userImg } = useUser();
+    const { userName, userImg, setUserContext } = useUser();
+    const isRegistered = Boolean(userName);
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+    const handleLogout = () => {
+        setUserContext({ userName: '' });
+    };
 
     return (
         <header className={styles.showcase}>
@@ -33,20 +40,35 @@ const Header: React.FC = () => {
                         <li className={styles['menu-item']}><Link href="/">Отзывы</Link></li>
                     </ul>
                     <div className={styles.profile}>
-                        <div className={`${styles['profile-inf']} flex`}>
-                            <div>
-                                <p className="mt-2 user-name">{userName}</p>
-                                <button>Выход</button>
+                        {isRegistered ? (
+                            <div className={`${styles['profile-inf']} flex`}>
+                                <div>
+                                    <p className="mt-2 user-name">{userName}</p>
+                                    <button onClick={handleLogout}>Выход</button>
+                                </div>
+                                <div className={styles['user-icon']}>
+                                    <Link href="/profile">
+                                        <Image src={userImg} alt="Профиль" width={52} height={52} />
+                                    </Link>
+                                </div>
                             </div>
-                            <div className={styles['user-icon']}>
-                                <Link href="/profile">
+                        ) : (
+                            <div className='flex gap-2'>
+                                <button 
+                                    className=''
+                                    onClick={() => setIsPopupVisible(true)}
+                                >
+                                    Зарегистрироваться
+                                </button>
+                                <div className={styles['user-icon']}>
                                     <Image src={userImg} alt="Профиль" width={52} height={52} />
-                                </Link>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </nav>
             </div>
+            {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} />}
         </header>
     );
 };

@@ -61,8 +61,10 @@ function Headlines() {
 
         if (filteredPosts.length === 0) {
           return (
-            <div className='w-[831px] h-auto bg-white rounded-2xl shadow-md p-8 mb-6'>
-                Нет публикаций
+            <div className='max-w-[831px] h-auto bg-white rounded-2xl shadow-md p-8 mb-6 mx-auto'>
+                <div className='w-[831px]'>
+                    Нет публикаций
+                </div>
             </div>
           );
         }
@@ -111,7 +113,7 @@ function Headlines() {
     };
 
     return (
-        <section className="">
+        <section className="size-full max-w-[1120px]">
             <ul className="flex flex-wrap gap-[24px] mb-4 justify-center items-center">
                 {links.map((link, index) => (
                     <li key={index} className="list-none">
@@ -127,7 +129,7 @@ function Headlines() {
                     </li>
                 ))}
             </ul>
-            <div className='flex gap-[32px]'>
+            <div className='flex gap-[32px] max-w-[1120px]'>
                 <Sidebar onAddPost={handleAddPost} />
 
                 <div className="content">

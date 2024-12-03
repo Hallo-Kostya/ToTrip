@@ -22,7 +22,7 @@ export default function Sidebar({ onAddPost }: SidebarProps) {
   const { location, motto } = useUser();
   const [isFormOpen, setFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState<'comment' | 'photo' | 'overview' | 'place' | null>(null);
-  const subscribers = new Array(6).fill({ imgSrc: '/img/user-photo.png' });
+  const subscribers = new Array(6).fill({ imgSrc: '/img/no-user-icon.png' });
 
   const handleOpenForm = (type: 'comment' | 'photo' | 'overview') => {
     setCurrentFormType(type);
@@ -62,7 +62,7 @@ export default function Sidebar({ onAddPost }: SidebarProps) {
   ];
 
   return (
-    <div className="flex flex-col relative left-0 top-0 gap-4 w-[256px]">
+    <div className="flex flex-col relative left-0 top-0 gap-4 max-w-[256px]">
       <div className="bg-white rounded-2xl shadow-md p-[32px]">
         <h5 className="text-black font-bold text-2xl mb-4">Подписчики</h5>
         <ul className="flex flex-wrap gap-[16px] list-none">
