@@ -1,0 +1,10 @@
+section.lead {
+	width: 100%;
+	background: url('/img/profile/profile-lead.png') no-repeat center center/cover;
+	height: 609px;
+	margin-top: -100px;
+}
+
+.profile {
+    margin-top: -100px;
+}
