@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='login_api'),
     path('logout/', LogoutView.as_view(), name='login_api'),
     path('profile/', UserProfileView.as_view(), name='self_profile_api'),
+    path('profile/edit/', EditUserView.as_view(), name = 'edituser_api'),
     path('profile/<int:user_id>/', UserProfileView.as_view(), name='profile_api'),
     path('<int:user_id>/follow/', FollowUserView.as_view(), name = 'follow_user'),
     path('<int:user_id>/unfollow/', FollowUserView.as_view(), name = 'unfollow_user'),
