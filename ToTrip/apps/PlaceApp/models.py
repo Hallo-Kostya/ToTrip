@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 from ToTrip import settings
 
@@ -6,7 +7,7 @@ class Category(models.Model):
     """модель категории с именем, кодом(для фильтрации будущей) и иконкой"""
     name = models.CharField(max_length=50, unique=True)
     code = models.IntegerField(unique=True)
-    icon = models.ImageField(upload_to='category_icons/', null=True, blank=True)
+    icon = models.FileField(upload_to='category_icons/', validators=[FileExtensionValidator(['jpg', 'png', 'svg'])], null=True, blank=True)
     def __str__(self):
         return f"Категория {self.name}"
     
