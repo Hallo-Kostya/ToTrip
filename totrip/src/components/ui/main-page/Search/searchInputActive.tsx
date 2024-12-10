@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams, usePathname, useRouter  } from "next/navigation";
+import { useSearchParams, useRouter  } from "next/navigation";
 import { useState, ChangeEvent, useEffect, useRef} from "react";
 import Image from "next/image";
 import { PlaceCard } from "./searchPlaceCard";
@@ -15,7 +15,6 @@ interface SearchInputActiveProps {
 
 export const SearchInputActive = ({ defaultValue, onChange }: SearchInputActiveProps) => {
     const searchParams = useSearchParams()
-    const pathname = usePathname();
     const router = useRouter();
     const [PlaceData, setPlaceData] = useState<iSearchPlaceCard[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -52,11 +51,12 @@ export const SearchInputActive = ({ defaultValue, onChange }: SearchInputActiveP
         } else {
             params.delete('query')
         }
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+        router.push(`?${params.toString()}`, { scroll: false })
     }, 300);
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
+            router.push(`/search`)
         }
     };
 

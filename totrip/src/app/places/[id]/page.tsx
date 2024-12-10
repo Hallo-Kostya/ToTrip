@@ -1,28 +1,12 @@
+'use client'
 import styles from '@/components/css/styles.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import Popup from 'reactjs-popup';
+import Stars from '@/components/ui/Common/Stars';
+const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
-export async function getStaticProps({
-    params,
-}: {
-    params: { id: string };
-}) {
-    const { id } = params;
-
-    const response = await fetch(`http://127.0.0.1:8000/api/places/${id}`);
-    if (!response.ok) {
-        return {
-            notFound: true,
-        };
-    }
-
-    const placeData = await response.json();
-
-    return {
-        props: { placeData },
-    };
-}
-
-export default function page () {
+export default function Page () {
     return (
 		<div className={styles.mainContent}>
             <div className={styles.contentWrapper}>
@@ -37,62 +21,86 @@ export default function page () {
                     <Image src="/img/common/map-point.svg" width={36} height={36} alt="" className={styles.mapPoint} />
                     <p className='text-[24px] font-bold ml-[12px]'>Ул. Бахрушина, 11, Москва</p>
                     <ul className='flex ml-[48px] gap-[6px]'>
-                        <li className=''><Image src="/img/common/rating-star.svg" width={35} height={35} alt="Звезда рейтинга" /></li>
-                        <li className=''><Image src="/img/common/rating-star.svg" width={35} height={35} alt="Звезда рейтинга" /></li>
-                        <li className=''><Image src="/img/common/rating-star.svg" width={35} height={35} alt="Звезда рейтинга" /></li>
-                        <li className=''><Image src="/img/common/rating-star.svg" width={35} height={35} alt="Звезда рейтинга" /></li>
-                        <li className=''><Image src="/img/common/rating-star.svg" width={35} height={35} alt="Звезда рейтинга" /></li>
+                        <Stars rating={4.5} width={35} height={35}/>
                     </ul>
                     <p className='text-[20px] font-bold ml-[32px]'>0 отзывов</p>
                 </div>
                 <div className='max-w-[1696px] mt-42px'>
-                    <div className='mt-[42px] mb-[62px]'>
-                        <Image src="/img/place-overview/place-photo.jpg" alt="фото места" width={1693} height={524} className='rounded-[36px]'/>    
+                    <div className='relative mt-[42px] mb-[62px] w-[1693px] h-[524px] rounded-[36px]'>
+                        <Image src="/img/place-overview/place-photo.jpg" alt="фото места" fill quality={100} className='rounded-[36px] object-cover'/>
+                        <Popup trigger={
+                        <button className="absolute text-white text-[20px] font-bold p-2 bg-black rounded-[10px] right-[27px] bottom-[27px]">Посмотреть все фото</button>
+                        
+                        } modal overlayStyle={overlayStyle}>
+                        <div className='flex bg-white w-[1696px] gap-[60px] p-[40px] flex-col rounded-[36px] mt-[30 px]'>
+                            <div className='flex flex-col'>
+                                <div className='flex flex-row'>
+                                    <h1 className='text-[56px] font-bold mr-[24px]'>Mercure Москва Павелецкая</h1>
+                                    <h6 className='text[20px] font-bold text-[#323232] mt-[40px]'>№1 / 532 в категории Отели, Москва </h6>
+                                    <Image src="/img/common/heart.svg" alt="Избранное" width={72} height={72} className='p-[15px] ml-[auto]'/>
+                                </div>
+                                <div className='flex flex-row'>
+                                    <Image src="/img/common/map-point.svg" width={36} height={36} alt="" className={styles.mapPoint} />
+                                    <p className='text-[24px] font-bold ml-[12px]'>Ул. Бахрушина, 11, Москва</p>
+                                    <ul className='flex ml-[48px] gap-[6px]'>
+                                        <Stars rating={4.5} width={35} height={35}/>
+                                    </ul>
+                                    <p className='text-[20px] font-bold ml-[32px]'>0 отзывов</p>
+                                </div>
+                            </div>
+                            <div className='gap-[40px] flex flex-row'>
+                                <div className='w-[456px] h-[545px] overflow-x-hidden overflow-y-scroll scrollbar-hide'>
+                                    <h5 className='text-[24px] font-bold mb-[20px]'>Фотографии</h5>
+                                    <div className='flex flex-wrap gap-[16px]'>
+                                        <div className='relative w-[220px] h-[170px] '>
+                                            <Image src="/img/place-overview/place-photo.jpg" alt="фото места" fill quality={100} className='rounded-[20px] object-cover'/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="relative w-[1120px] h-[545px] rounded-[32px]">
+                                    <Image src="/img/place-overview/place-photo.jpg" alt="фото места" fill quality={100} className='rounded-[32px] object-cover'/>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent via-[40%] to-transparent rounded-[32px]"></div>
+                                    <Link href='#' className='absolute right-[16px] top-[231px]'><Image src='/img/common/arrow-right.svg' width={60} height={60} alt='стрелочка'/></Link>
+                                    <Link href='#' className='absolute left-[16px] top-[231px] rotate-180'><Image src='/img/common/arrow-right.svg' width={60} height={60} alt='стрелочка'/></Link>
+                                    <div className='flex flex-row w-[1040px] justify-between absolute left-[40px] bottom-[18px] text-white text-[22px] font-bold items-center'>
+                                        <p>Название локации</p>
+                                        <p>1 / 1</p>
+                                        <div className='flex flex-row text-[18px] font-bold'>
+                                            <p className='mr-[15px]'>Источник:</p>
+                                            <Image src='/img/user-photo.png' alt='Фото пользователя' width={32} height={32} className='rounded-[32] mr-[10px]'></Image>
+                                            <p className='font-normal'>Мария А.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </Popup>
+                        <Link href='#' className='absolute right-[16px] top-[231px]'><Image src='/img/common/arrow-right.svg' width={60} height={60} alt='стрелочка'/></Link>
+                        <Link href='#' className='absolute left-[16px] top-[231px] rotate-180'><Image src='/img/common/arrow-right.svg' width={60} height={60} alt='стрелочка'/></Link>
                     </div>
                 </div>
-                <div className='max-w-[1120px] flex p-[40px] flex-col gap-[64px] bg-white rounded-[24px] mb-[200px]'>
-                        <h2>О нас</h2>
-                        <div className=''>
-                        <ul className={styles.ratingAttributes}>
-                            <li className={styles.attribute}>
+                <div className='max-w-[1120px] flex p-[40px] flex-col bg-white rounded-[24px] mb-[200px]'>
+                        <h2 className='text-[48px] font-bold mb-[20px]'>О нас</h2>
+                        <ul className='mb-[64px] flex flex-col gap-[20px]'>
                             <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <p className={styles.attributeName}>Расположение</p>
+                                <Stars rating={4.5} width={35} height={35}/>
+                                <p className='text-[20px] font-bold'>Расположение</p>
                             </ul>
                             <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
+                                <Stars rating={4.5} width={35} height={35}/>
                                 <p className={styles.attributeName}>Чистота</p>
                             </ul>
                             <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
+                                <Stars rating={4.5} width={35} height={35}/>
                                 <p className={styles.attributeName}>Обслуживание</p>
                             </ul>
                             <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
-                                <li className={styles.star}><img src="/img/common/rating-star.svg" alt="" /></li>
+                                <Stars rating={4.5} width={35} height={35}/>
                                 <p className={styles.attributeName}>Цена/качество</p>
                             </ul>
-                            </li>
-                            {/* Другие элементы списка */}
-                        </ul>
-                        </div>
+                        </ul> 
                         <div>
-                        <p className='text-[25px] font-medium'>Hipster ipsum tattooed brunch Im baby...</p>
+                        <p className='text-[25px] font-medium'>Hipster ipsum tattooed brunch Im baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.<br /><br />Hipster ipsum tattooed brunch Im baby. Tbh juice green wolf iPhone tumblr dollar pok heirloom flannel. Keytar gentrify street on hella bespoke viral franzen. Keffiyeh next belly seitan jean vexillologist thundercats migas swag kogi. Raw small rights keffiyeh next diy vexillologist roof crucifix. 3-moon letterpress pop-up meggings mixtape tumblr tonx man. Tacos kinfolk tumeric asymmetrical v on charcoal vinegar. Letterpress ascot try-hard keytar sartorial.</p>
                         </div>
                 </div>
                 {/* <div className={styles.commentsWrapper}>
