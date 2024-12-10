@@ -1,64 +1,70 @@
-"use client"
+'use client';
 
-import styles from '@/components/css/profile/profileLead.module.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Popup from '@/components/ui/profile/popup';
+import Image from 'next/image';
+import { UserData } from '@/components/ui/types';
+import { useUser } from '@/app/userContext';
 
-interface ProfileData {
-    username: string;
-    bio?: string;  // Optional
-    // Add other relevant fields as needed
-}
+const Profile: React.FC = () => {
+const { nickname, userName, userImg, location, motto, profileDesc, setUserContext } = useUser();
+const [isPopupOpen, setPopupOpen] = useState(false);
 
-interface ProfileProps {
-    userImg: string;
-    nickname: string;
-    userName: string;
-    profileDesc: string;
-}
+const handleOpenPopup = () => {
+    setPopupOpen(true);
+};
 
-const Profile: React.FC<ProfileProps> = ({ userImg, nickname, userName, profileDesc }) => {
-    const [isPopupOpen, setPopupOpen] = useState(false);
+const handleClosePopup = () => {
+    setPopupOpen(false);
+};
 
-    const handleOpenPopup = () => {
-        setPopupOpen(true);
-    };
-
-    const handleClosePopup = () => {
+const handleSubmit = (data: UserData) => {
+    setUserContext({
+            nickname: data.username,
+            userName: data.name,
+            userImg: data.avatar,
+            location: data.location,
+            motto: data.motto,
+            profileDesc: data.about
+        });
         setPopupOpen(false);
     };
 
-    const handleSubmit = (data: ProfileData) => {
-        console.log('Данные профиля:', data);
-        // Here you could add logic for sending data to a server or saving it
+    const handleAvatarChange = (newImg: string) => {
+    setUserContext({ userImg: newImg });
     };
 
     return (
-        <section className={`${styles["profile"]} profile size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] mb-4 shadow-md`}>
-            <div className="flex justify-between items-start gap-5">
-                <div className="flex gap-6">
-                    <img className='w-[160px] h-[160px] rounded-full' src={userImg} alt="Фото профиля" />
-                    <div className="flex flex-col mt-2">
-                        <h6 className="text-gray-600 font-bold text-[20px]">{nickname}</h6>
-                        <h4 className="font-bold text-[32px]">{userName}</h4>
-                        <h6 className="mt-13 text-gray-600 font-bold text-[20px]">{profileDesc}</h6>
-                    </div>
+    <section className="size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] shadow-md mb-4 -mt-[100px]">
+        <div className="flex justify-between items-start gap-5">
+            <div className="flex gap-6">
+                <Image className="w-[160px] h-[160px] object-cover rounded-full" src={userImg} width={160} height={160} alt="Фото профиля" />
+                <div className="flex flex-col mt-2">
+                    <h6 className="text-gray-600 font-bold text-[20px]">{nickname}</h6>
+                    <h4 className="font-bold text-[32px]">{userName}</h4>
+                    <h6 className="mt-13 text-gray-600 font-bold text-[20px]">{profileDesc}</h6>
                 </div>
+            </div>
                 <a href="#" onClick={handleOpenPopup}>
-                    <img src="/img/profile/Settings.svg" alt="Настройки профиля" className="hover:cursor-pointer" />
+                    <Image src="/img/profile/Settings.svg" alt="Настройки профиля" width={32} height={32} className="hover:cursor-pointer" />
                 </a>
-            </div>
-            <div className="flex gap-8 mt-4 -mb-4 justify-center">
-                {['Публикации', 'Подписчики', 'Подписки'].map((item, index) => (
-                    <div key={index} className="text-gray-600 flex flex-col items-center">
-                        <h5 className="text-[24px]">{item}</h5>
-                        <h5 className="font-bold text-[24px]">0</h5>
-                    </div>
-                ))}
-            </div>
-            <Popup isOpen={isPopupOpen} onClose={handleClosePopup} onSubmit={handleSubmit} />
-        </section>
+        </div>
+        <Popup
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+            onSubmit={handleSubmit}
+            onAvatarChange={handleAvatarChange}
+            initialData={{
+                avatar: userImg,
+                name: userName,
+                username: nickname,
+                location: location,
+                about: profileDesc,
+                motto: motto
+            }}
+        />
+    </section>
     );
-}
+};
 
 export default Profile;
