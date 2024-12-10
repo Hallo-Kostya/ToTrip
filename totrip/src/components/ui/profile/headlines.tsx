@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import ConfirmDeletePostPopup from '../common_modules/confirmDeletePost';
 import CommentPost from '@/components/ui/profile/commentPost';
 import PhotoPost from '@/components/ui/profile/photoPost';
 import OverviewPost from '@/components/ui/profile/overviewPost';
 import Sidebar from '@/components/ui/profile/sidebar';
-import Image from 'next/image';
 
 interface Post {
   id: number;
@@ -32,6 +33,8 @@ function Headlines() {
 
     const [activeLink, setActiveLink] = useState(links[0].title);
     const [posts, setPosts] = useState<Post[]>([]);
+    const [isConfirmDeletePostVisible, setIsConfirmDeletePostVisible] = useState(false);
+    const [postToDeleteId, setPostToDeleteId] = useState<number | null>(null);
 
     const handleAddPost = (newPost: Post) => {
         setPosts((prevPosts) => [newPost, ...prevPosts]);
@@ -54,6 +57,24 @@ function Headlines() {
 
     const handleDeletePost = (id: number) => {
         setPosts(posts.filter(post => post.id !== id));
+    };
+
+    const handleRequestDeletePost = (id: number) => {
+        setPostToDeleteId(id);
+        setIsConfirmDeletePostVisible(true);
+    };
+
+    const handleConfirmDelete = () => {
+        if (postToDeleteId !== null) {
+            handleDeletePost(postToDeleteId);
+            setPostToDeleteId(null);
+            setIsConfirmDeletePostVisible(false);
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setPostToDeleteId(null);
+        setIsConfirmDeletePostVisible(false);
     };
 
     const renderContent = () => {
@@ -80,7 +101,7 @@ function Headlines() {
                             postImage={post.postImage || ''}
                             commentText={post.commentText}
                             rating={post.rating}
-                            onDelete={() => handleDeletePost(post.id)}
+                            onDelete={() => handleRequestDeletePost(post.id)}
                         />
                     );
                 case 'comment':
@@ -91,7 +112,7 @@ function Headlines() {
                             tripName={post.tripName}
                             commentText={post.commentText}
                             rating={post.rating}
-                            onDelete={() => handleDeletePost(post.id)}
+                            onDelete={() => handleRequestDeletePost(post.id)}
                         />
                     );
                 case 'overview':
@@ -103,7 +124,7 @@ function Headlines() {
                             commentText={post.commentText}
                             rating={post.rating}
                             images={post.images || []}
-                            onDelete={() => handleDeletePost(post.id)}
+                            onDelete={() => handleRequestDeletePost(post.id)}
                         />
                     );
                 default:
@@ -130,14 +151,20 @@ function Headlines() {
                 ))}
             </ul>
             <div className='flex gap-[32px] max-w-[1120px]'>
-                <Sidebar onAddPost={handleAddPost} />
+                <Sidebar subscribers={5} onAddPost={handleAddPost} />
 
                 <div className="content">
                     {renderContent()}
                 </div>
             </div>
+            {isConfirmDeletePostVisible && (
+                <ConfirmDeletePostPopup
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                />
+            )}
         </section>
     );
-};
+}
 
 export default Headlines;

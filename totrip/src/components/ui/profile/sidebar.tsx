@@ -15,14 +15,14 @@ interface Post {
 }
 
 interface SidebarProps {
+  subscribers: number;
   onAddPost: (post: Post) => void;
 }
 
-export default function Sidebar({ onAddPost }: SidebarProps) {
+const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
   const { location, motto } = useUser();
   const [isFormOpen, setFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState<'comment' | 'photo' | 'overview' | 'place' | null>(null);
-  const subscribers = new Array(6).fill({ imgSrc: '/img/no-user-icon.png' });
 
   const handleOpenForm = (type: 'comment' | 'photo' | 'overview') => {
     setCurrentFormType(type);
@@ -65,13 +65,11 @@ export default function Sidebar({ onAddPost }: SidebarProps) {
     <div className="flex flex-col relative left-0 top-0 gap-4 max-w-[256px]">
       <div className="bg-white rounded-2xl shadow-md p-[32px]">
         <h5 className="text-black font-bold text-2xl mb-4">Подписчики</h5>
-        <ul className="flex flex-wrap gap-[16px] list-none">
-          {subscribers.map((subscriber, index) => (
-            <li key={index} className="flex items-center">
-              <Image src={subscriber.imgSrc} className="rounded-full" width={48} height={48} alt="subscriber" />
-            </li>
+        <div className="flex flex-wrap gap-[16px] list-none">
+          {Array.from({ length: subscribers }).map((_, index) => (
+              <Image key={index} src="/img/user-photo.png" width={52} height={52} alt={`Пользователь ${index + 1}`} className="rounded-full" />
           ))}
-        </ul>
+        </div>
       </div>
 
       <div className="bg-white rounded-2xl shadow-md p-8">
@@ -107,3 +105,5 @@ export default function Sidebar({ onAddPost }: SidebarProps) {
     </div>
   );
 }
+
+export default Sidebar;

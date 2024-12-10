@@ -15,21 +15,21 @@ const PhotoPost: React.FC<PhotoPostProps> = ({ postTime, tripName, postImage, co
     const starImg = '/img/profile/star.svg';
 
     return (
-      <div className="w-[831px] photo-element bg-white rounded-2xl shadow-md p-[36px] mb-4">
-        <div className="flex justify-between">
-          <div className="flex items-center mb-4">
-            <Image src={userImg} className="w-[80px] h-[80px] object-cover user-info-photo rounded-full mr-4" alt="User Photo" width={60} height={60} />
-            <div>
-              <p className="font-bold text-[24px]">{userName} <span className="font-medium ml-2 text-[18px]">выложил(а) фото</span></p>
-              <p className="text-gray-600 font-bold text-[20px] mt-[8px]">{postTime}</p>
-            </div>
+      <div className="w-full lg:w-[831px] h-auto bg-white rounded-2xl shadow-md p-[36px] mb-6">
+          <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                  <Image src={userImg} className="w-20 h-20 object-cover rounded-full mr-4" width={80} height={80} alt="user" />
+              <div>
+                  <p className="font-bold text-[24px]">{userName} <span className="font-medium ml-2 text-[18px]">выложил(а) фото</span></p>
+                  <p className="text-gray-600 text-[20px] font-bold mt-2">{postTime}</p>
+              </div>
           </div>
           <button onClick={onDelete} className="text-gray-600">
-            <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="block mb-8 ml-auto relative" width={32} height={32} />
+              <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="mb-12 ml-auto relative" width={32} height={32}/>
           </button>
         </div>
         <div>
-          <div className='flex gap-2'>
+          <div className='flex gap-2 mt-6'>
             <h4 className="font-bold text-[32px] mr-[20px]">{tripName}</h4>
             <ul className='flex'>
               {Array.from({ length: rating }, (_, idx) => (
@@ -37,7 +37,7 @@ const PhotoPost: React.FC<PhotoPostProps> = ({ postTime, tripName, postImage, co
                       <Image src={starImg} width={26} height={26} alt={`star ${idx + 1}`} />
                   </li>
               ))}
-          </ul>
+            </ul>
           </div>
           <p className="text-[20px] font-medium mt-[20px]">{commentText}</p>
           <Image 

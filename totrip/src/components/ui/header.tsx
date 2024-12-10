@@ -6,14 +6,21 @@ import Image from 'next/image';
 import styles from '@/components/css/header.module.css';
 import { useUser } from '@/app/userContext';
 import RegistrationPopup from './common_modules/registration';
+import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
 const Header: React.FC = () => {
     const { userName, userImg, setUserContext } = useUser();
     const isRegistered = Boolean(userName);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
 
     const handleLogout = () => {
-        setUserContext({ userName: '' });
+        setIsConfirmLogoutVisible(true);
+    };
+
+    const confirmLogout = () => {
+        setUserContext({ userName: '', userImg: '/img/no-user-icon.png' });
+        setIsConfirmLogoutVisible(false);
     };
 
     return (
@@ -61,7 +68,7 @@ const Header: React.FC = () => {
                                     Зарегистрироваться
                                 </button>
                                 <div className={styles['user-icon']}>
-                                    <Image src={userImg} alt="Профиль" width={52} height={52} />
+                                    <Image src='/img/no-user-icon.png' alt="Профиль" width={52} height={52} />
                                 </div>
                             </div>
                         )}
@@ -69,6 +76,12 @@ const Header: React.FC = () => {
                 </nav>
             </div>
             {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} />}
+            {isConfirmLogoutVisible && (
+                <ConfirmLogoutPopup 
+                    onConfirm={confirmLogout} 
+                    onCancel={() => setIsConfirmLogoutVisible(false)} 
+                />
+            )}
         </header>
     );
 };

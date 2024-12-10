@@ -28,7 +28,7 @@ interface CommentPostProps {
           </button>
         </div>
         <div>
-          <div className='flex gap-2'>
+          <div className='flex gap-2 mt-6'>
             <h4 className="font-bold text-[32px] mr-[20px]">{tripName}</h4>
             <ul className='flex'>
               {Array.from({ length: rating }, (_, idx) => (

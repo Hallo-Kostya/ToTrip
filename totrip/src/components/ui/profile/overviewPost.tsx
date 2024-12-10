@@ -16,7 +16,7 @@ const OverviewPost: React.FC<OverviewPostProps> = ({ postTime, tripName, images,
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
     return (
-        <div className="w-full lg:w-[831px] h-auto bg-white rounded-2xl shadow-md p-6 mb-6">
+        <div className="w-full lg:w-[831px] h-auto bg-white rounded-2xl shadow-md p-[36px] mb-6">
             <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center">
                     <Image src={userImg} className="w-20 h-20 object-cover rounded-full mr-4" width={80} height={80} alt="user" />
@@ -30,8 +30,8 @@ const OverviewPost: React.FC<OverviewPostProps> = ({ postTime, tripName, images,
                 </button>
             </div>
             <div>
-                <div className='flex gap-2'>
-                    <h4 className="font-bold text-[32px]">{tripName}</h4>
+                <div className='flex gap-2 mt-6'>
+                    <h4 className="font-bold text-[32px] mr-[20px] ">{tripName}</h4>
                     <ul className='flex'>
                         {Array.from({ length: rating }, (_, idx) => (
                             <li key={idx} className='block mr-[4.8px] my-auto'>
@@ -62,6 +62,7 @@ const OverviewPost: React.FC<OverviewPostProps> = ({ postTime, tripName, images,
                           width={100}
                           height={100}
                           onClick={() => setSelectedImage(imageSrc)}
+                       
                         />
                     ))}
                 </div>
