@@ -5,13 +5,14 @@ import Image from 'next/image';
 
 interface TripCardProps {
     tripImage: string;
-    tripTitle: string;
-    tripDate: string;
+    tripName: string;
     tripPlace: string;
+    tripStart: string;
+    tripEnd: string;
     users?: number;
 }
 
-const TripCard: React.FC<TripCardProps> = ({ tripImage, tripTitle, tripDate, tripPlace, users }) => {
+const TripCard: React.FC<TripCardProps> = ({ tripImage, tripName, tripPlace, tripStart, tripEnd, users }) => {
     const backgroundStyle = {
         backgroundImage: `url(${tripImage})`,
       };
@@ -21,11 +22,11 @@ const TripCard: React.FC<TripCardProps> = ({ tripImage, tripTitle, tripDate, tri
             {/* Основной контент карточки */}
             <div className="trip-info flex flex-col absolute bottom-[54px] left-[42px]">
                 <div>
-                    <h2 className="trip-title font-bold text-[40px] text-white">{tripTitle}</h2>
+                    <h2 className="trip-title font-bold text-[40px] text-white">{tripName}</h2>
                     <div className="flex mt-[12px] gap-[18px]">
                         <div className="date flex items-center gap-[12px]">
                             <Image src="./img/calendar.svg" alt="Календарь" width={36} height={36} className="" />
-                            <p className="trip-date font-bold text-[24px] text-white">{tripDate}</p>
+                            <p className="trip-date font-bold text-[24px] text-white">{tripStart} - {tripEnd}</p>
                         </div>
                         <div className="date flex items-center gap-[12px]">
                             <Image src="./img/map-pinned.svg" alt="Местоположение" width={36} height={36} className="" />

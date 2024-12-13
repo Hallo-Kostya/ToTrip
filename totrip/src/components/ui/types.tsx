@@ -6,4 +6,12 @@ export interface UserData {
     location: string;
     motto: string;
     avatar?: string;
-  }
+}
+
+export interface TripData {
+    tripName: string;
+    tripPlace: string;
+    tripStart: string;
+    tripEnd: string;
+}
+  
