@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TripData } from '@/components/ui/types';
-import DatePicker from 'react-datepicker'; // Импортируем компонент DatePicker из react-datepicker
-import 'react-datepicker/dist/react-datepicker.css'; // Импортируем стили для DatePicker
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
@@ -100,7 +100,7 @@ const TripForm: React.FC<TripFormProps> = ({
 
     return !isOpen ? null : (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-75">
-            <div className="max-w-[800px] bg-white p-[48px] rounded-[50px] max-w-md w-full">
+            <div className="max-w-[800px] bg-white p-[48px] rounded-[50px] w-full">
                 <form onSubmit={handleSubmit}>
                     <h2 className="text-[36px] font-bold">Название поездки</h2>
                     <input

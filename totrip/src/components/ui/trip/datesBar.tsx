@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 
 
@@ -22,9 +20,9 @@ const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd }) => {
   const dates = getDatesBetween(tripStart, tripEnd);
 
   return (
-    <div>
+    <div className="flex py-[30px] border-y-[3px] border-black border-opacity-30 gap-[12px]">
       {dates.map(date => (
-        <div key={date.toDateString()}>{date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}</div>
+        <div className="px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600]" key={date.toDateString()}>{date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}</div>
       ))}
     </div>
   );

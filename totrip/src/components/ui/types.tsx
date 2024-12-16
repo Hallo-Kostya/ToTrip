@@ -11,7 +11,7 @@ export interface UserData {
 export interface TripData {
     tripName: string;
     tripPlace: string;
-    tripStart: string;
-    tripEnd: string;
+    tripStart: Date;
+    tripEnd: Date;
 }
   

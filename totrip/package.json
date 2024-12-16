@@ -14,7 +14,8 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-datepicker": "^7.5.0",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "tailwindcss-filters": "^3.0.0"
+    "tailwindcss-filters": "^3.0.0",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/node": "20.17.6",
