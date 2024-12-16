@@ -1,72 +1,89 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/components/css/header.module.css';
+import { useUser } from '@/app/userContext';
+import RegistrationPopup from './common_modules/registration';
+import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
+const Header: React.FC = () => {
+    const { userName, userImg, setUserContext } = useUser();
+    const isRegistered = Boolean(userName);
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
 
-const Header = () => {
-  return (
-    <header className={styles.showcase}>
-      <div className="overlay"></div>
-      <div className={styles.container}>
-        <nav className={styles['main-nav']}>
-          <div className={styles['header-logo']}>
-            <Link href="/">
-              <Image
-                src="/img/common/main-logo.svg"
-                alt="Логотип ToTrip"
-                width={100}
-                height={50}
-              />
-            </Link>
-          </div>
+    const handleLogout = () => {
+        setIsConfirmLogoutVisible(true);
+    };
 
-          <div className={styles.search}>
-            <form action="/search" method="GET" className={styles['search-form']}>
-              <button className={styles['search-button']}>
-                <Image
-                  src="/img/common/search.svg"
-                  alt="Поиск"
-                  width={20}
-                  height={20}
-                />
-              </button>
-              <input type="text" name="query" placeholder="Поиск" autoComplete='off'/>
-            </form>
-          </div>
+    const confirmLogout = () => {
+        setUserContext({ userName: '', userImg: '/img/no-user-icon.png' });
+        setIsConfirmLogoutVisible(false);
+    };
 
-          <ul className={styles['main-menu']}>
-            <li className={styles['menu-item']}>
-              <Link href="/">Подборки</Link>
-            </li>
-            <li className={styles['menu-item']}>
-              <Link href="/trips">Поездки</Link>
-            </li>
-            <li className={styles['menu-item']}>
-              <Link href="/">Отзывы</Link>
-            </li>
-          </ul>
-
-          <div className={styles.profile}>
-            <div className={styles['profile-inf']}>
-              <p className="user-name">Константин Х.</p>
-              <button>Выход</button>
+    return (
+        <header className={styles.showcase}>
+            <div className="overlay"></div>
+            <div className={styles.container}>
+                <nav className={styles['main-nav']}>
+                    <div className={styles['header-logo']}>
+                        <Link href="/">
+                            <Image src="/img/common/main-logo.svg" alt="Логотип ToTrip" width={100} height={50} />
+                        </Link>
+                    </div>
+                    <div className={styles.search}>
+                        <form action="/search" method="GET" className={styles['search-form']}>
+                            <button className={styles['search-button']}>
+                                <Image src="/img/common/search.svg" alt="Поиск" width={20} height={20} />
+                            </button>
+                            <input type="text" name="query" placeholder="Поиск" autoComplete="off" />
+                        </form>
+                    </div>
+                    <ul className={styles['main-menu']}>
+                        <li className={styles['menu-item']}><Link href="/">Подборки</Link></li>
+                        <li className={styles['menu-item']}><Link href="/trips">Поездки</Link></li>
+                        <li className={styles['menu-item']}><Link href="/">Отзывы</Link></li>
+                    </ul>
+                    <div className={styles.profile}>
+                        {isRegistered ? (
+                            <div className={`${styles['profile-inf']} flex`}>
+                                <div>
+                                    <p className="mt-2 user-name">{userName}</p>
+                                    <button onClick={handleLogout}>Выход</button>
+                                </div>
+                                <div className={styles['user-icon']}>
+                                    <Link href="/profile">
+                                        <Image src={userImg} alt="Профиль" width={52} height={52} />
+                                    </Link>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className='flex gap-2'>
+                                <button 
+                                    className=''
+                                    onClick={() => setIsPopupVisible(true)}
+                                >
+                                    Зарегистрироваться
+                                </button>
+                                <div className={styles['user-icon']}>
+                                    <Image src='/img/no-user-icon.png' alt="Профиль" width={52} height={52} />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </nav>
             </div>
-            <div className={styles['user-icon']}>
-              <Link href="/profile">
-                <Image
-                  src="/img/common/user__icon.png"
-                  alt="Профиль"
-                  width={52}
-                  height={52}
+            {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} />}
+            {isConfirmLogoutVisible && (
+                <ConfirmLogoutPopup 
+                    onConfirm={confirmLogout} 
+                    onCancel={() => setIsConfirmLogoutVisible(false)} 
                 />
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-  );
+            )}
+        </header>
+    );
 };
 
 export default Header;

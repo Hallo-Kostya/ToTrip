@@ -5,7 +5,7 @@ import styles from '@/components/css/footer.module.css';
 
 const Footer = () => {
     return (
-      <footer className={styles.footer}>
+      <footer className={styles.footer} >
         <div className={styles.footerContainer}>
           <div>
             <Link href="#">

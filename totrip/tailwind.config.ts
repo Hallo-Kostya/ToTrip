@@ -8,11 +8,21 @@ export default {
   ],
   theme: {
     extend: {
+      filter: {
+        invert: 'invert(1)',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        customGray: '#E4E4E4',
+        btn: 'rgba(112, 186, 255, 0.40)',
       },
     },
+    variants: {
+      filter: ['responsive', 'hover', 'focus'],
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-filters'), 
+  ],
 } satisfies Config;
