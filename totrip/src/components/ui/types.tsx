@@ -1,5 +1,6 @@
 export interface UserData {
     name: string;
+    surname: string;
     username: string;
     newImg: string;
     about: string;
@@ -9,9 +10,12 @@ export interface UserData {
 }
 
 export interface TripData {
+    tripImage: string;
     tripName: string;
     tripPlace: string;
     tripStart: Date;
     tripEnd: Date;
+    users: number;
+    tripId: string;
 }
   

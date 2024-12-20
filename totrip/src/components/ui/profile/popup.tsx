@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AvatarUploader from './avatarUploader';
 import Image from 'next/image';
 import { UserData } from '@/components/ui/types';
@@ -8,6 +8,7 @@ import { UserData } from '@/components/ui/types';
 interface UserProfile {
     avatar: string;
     name: string;
+    surname: string;
     username: string;
     location: string;
     about: string;
@@ -22,6 +23,14 @@ interface PopupControlsProps {
     initialData?: UserData;
 }
 
+const popularCities = [
+    "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
+    "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск",
+    "Ростов-на-Дону", "Уфа", "Красноярск", "Воронеж", "Пермь",
+    "Волгоград", "Краснодар", "Тюмень", "Саратов", "Тольятти",
+    "Ижевск"
+];
+
 const Popup: React.FC<PopupControlsProps> = ({
     isOpen,
     onClose,
@@ -32,6 +41,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     const [profileData, setProfileData] = useState<UserProfile>({
         avatar: initialData?.avatar || '',
         name: initialData?.name || '',
+        surname: initialData?.surname || '',
         username: initialData?.username || '',
         location: initialData?.location || '',
         about: initialData?.about || '',
@@ -53,23 +63,17 @@ const Popup: React.FC<PopupControlsProps> = ({
         if (!profileData.name.trim()) {
             newErrors.name = "Имя обязательно";
         }
-        if (!profileData.username.startsWith('@')) {
-            newErrors.username = "Имя пользователя должно начинаться с @";
-        }
         if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.name)) {
             newErrors.name = "Разрешены только буквы и пробелы";
         }
+        if (!profileData.surname.trim()) {
+            newErrors.surname = "Фамилия обязательна";
+        }
+        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.surname)) {
+            newErrors.surname = "Разрешены только буквы и пробелы";
+        }
         if (!/^(?!.*[:&!?]).*$/.test(profileData.username)) {
             newErrors.username = "Недопустимые символы: : & ! ?";
-        }
-        if (!profileData.location) {
-            newErrors.location = "Пожалуйста, выберите город";
-        }
-        if (!profileData.about) {
-            newErrors.about = "Описание обязательно";
-        }
-        if (!profileData.motto) {
-            newErrors.motto = "Девиз обязателен";
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -128,21 +132,36 @@ const Popup: React.FC<PopupControlsProps> = ({
                                 {errors.name && <p className="text-red-500">{errors.name}</p>}
                             </div>
                             <div className="mb-[12px]">
-                                <h5 className="text-[24px] font-bold mb-[4px]">Имя пользователя</h5>
+                                <h5 className="text-[24px] font-bold mb-[4px]">Фамилия</h5>
                                 <input
                                     type="text"
-                                    name="username"
-                                    value={profileData.username}
-                                    placeholder="Введите имя пользователя"
+                                    name="surname"
+                                    value={profileData.surname}
+                                    placeholder="Введите фамилию"
                                     className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
                                     onChange={handleChange}
                                     required
-                                    pattern="^(?!.*[:&!?]).*$"
-                                    title="Недопустимые символы: : & ! ?"
+                                    pattern="[A-Za-zА-Яа-яёЁ\s]*"
+                                    title="Разрешены буквы и пробелы"
                                 />
-                                {errors.username && <p className="text-red-500">{errors.username}</p>}
+                                {errors.surname && <p className="text-red-500">{errors.surname}</p>}
                             </div>
                         </div>
+                    </div>
+                    <div className="mb-[12px]">
+                        <h5 className="text-[24px] font-bold mb-[4px]">Имя пользователя</h5>
+                        <input
+                            type="text"
+                            name="username"
+                            value={profileData.username}
+                            placeholder="Введите имя пользователя"
+                            className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
+                            onChange={handleChange}
+                            required
+                            pattern="^(?!.*[:&!?]).*$"
+                            title="Недопустимые символы: : & ! ?"
+                        />
+                        {errors.username && <p className="text-red-500">{errors.username}</p>}
                     </div>
                     <div className="mb-[12px]">
                         <h5 className="text-[24px] font-bold mb-[4px]">Город проживания</h5>
@@ -156,11 +175,9 @@ const Popup: React.FC<PopupControlsProps> = ({
                                 required
                             >
                                 <option value="" disabled>Выберите город</option>
-                                <option value="Москва">Москва</option>
-                                <option value="Санкт-Петербург">Санкт-Петербург</option>
-                                <option value="Новосибирск">Новосибирск</option>
-                                <option value="Екатеринбург">Екатеринбург</option>
-                                <option value="Казань">Казань</option>
+                                {popularCities.map(city => (
+                                    <option key={city} value={city}>{city}</option>
+                                ))}
                             </select>
                             {errors.location && <p className="text-red-500">{errors.location}</p>}
                         </div>

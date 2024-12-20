@@ -1,41 +1,44 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface TripContextProps {
-    tripName: string;
-    tripPlace: string;
-    tripStart: Date;
-    tripEnd: Date;
+    trip: TripContextState;
     setTripContext: (data: Partial<TripContextState>) => void;
 }
 
 interface TripContextState {
+    tripImage: string;
     tripName: string;
     tripPlace: string;
     tripStart: Date;
     tripEnd: Date;
+    users: number;
+    id: string;
 }
 
 const TripContext = createContext<TripContextProps | undefined>(undefined);
 
-const TripProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [state, setState] = useState<TripContextState>({
+const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [trip, setTrip] = useState<TripContextState>({
+        tripImage: '',
         tripName: '',
         tripPlace: '',
-        tripStart: new Date,
-        tripEnd: new Date,
+        tripStart: new Date(),
+        tripEnd: new Date(),
+        users: 1,
+        id: '',
     });
 
     const setTripContext = (data: Partial<TripContextState>) => {
-        setState(prevState => ({
+        setTrip(prevState => ({
             ...prevState,
-            ...data
+            ...data,
         }));
     };
 
     return (
-        <TripContext.Provider value={{ ...state, setTripContext }}>
+        <TripContext.Provider value={{ trip, setTripContext }}>
             {children}
         </TripContext.Provider>
     );
@@ -43,9 +46,23 @@ const TripProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
 const useTrip = () => {
     const context = useContext(TripContext);
+
     if (!context) {
-        throw new Error("useTrip must be used within a TripProvider");
+        // возвращаем безопасные значения по умолчанию
+        return {
+            trip: {
+                tripImage: './img/trips-page/exp_photo.png',
+                tripName: 'Поездка в Москву',
+                tripPlace: 'Москва',
+                tripStart: new Date('2024-12-22'),
+                tripEnd: new Date('2024-12-29'),
+                users: 1,
+                id: '',
+            },
+            setTripContext: () => {}
+        };
     }
+
     return context;
 };
 

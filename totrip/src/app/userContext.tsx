@@ -6,6 +6,7 @@ import React, { createContext, useContext, useState } from 'react';
 interface UserContextProps {
   nickname: string;
   userName: string;
+  userSurname: string;
   userImg: string;
   location: string;
   motto: string;
@@ -16,6 +17,7 @@ interface UserContextProps {
 interface UserContextState {
   nickname: string;
   userName: string;
+  userSurname: string;
   userImg: string;
   location: string;
   motto: string;
@@ -27,8 +29,9 @@ const UserContext = createContext<UserContextProps | undefined>(undefined);
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<UserContextState>({
     // Через эти переменные данные передаются по всем элементам, для которых они были импортированы
-    nickname: '@индивидуальный_идентификатор',
+    nickname: 'индивидуальный_идентификатор',
     userName: '',
+    userSurname: '',
     userImg: '/img/no-user-icon.png',
     location: 'Ваше местоположение!',
     motto: 'Ваш девиз!',

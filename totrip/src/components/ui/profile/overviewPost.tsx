@@ -12,7 +12,7 @@ interface OverviewPostProps {
 }
 
 const OverviewPost: React.FC<OverviewPostProps> = ({ postTime, tripName, images, commentText, onDelete, rating }) => {
-    const { userImg, userName } = useUser();
+    const { userImg, userName, userSurname } = useUser();
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
     return (
@@ -21,12 +21,12 @@ const OverviewPost: React.FC<OverviewPostProps> = ({ postTime, tripName, images,
                 <div className="flex items-center">
                     <Image src={userImg} className="w-20 h-20 object-cover rounded-full mr-4" width={80} height={80} alt="user" />
                     <div>
-                        <p className="font-bold text-[24px]">{userName} <span className="font-medium ml-2 text-[18px]">выложил(а) обзор</span></p>
+                        <p className="font-bold text-[24px]">{userName} {userSurname} <span className="font-medium ml-2 text-[18px]">выложил(а) обзор</span></p>
                         <p className="text-gray-600 text-[20px] font-bold mt-2">{postTime}</p>
                     </div>
                 </div>
                 <button onClick={onDelete} className="text-gray-600">
-                    <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="mb-8 ml-auto relative" width={32} height={32}/>
+                    <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="mb-12 ml-auto relative" width={32} height={32}/>
                 </button>
             </div>
             <div>

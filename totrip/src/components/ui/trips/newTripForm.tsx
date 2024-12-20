@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { TripData } from '@/components/ui/types';
 import DatePicker from 'react-datepicker';
@@ -16,6 +16,14 @@ interface TripFormProps {
     days: number;
 }
 
+const popularCities = [
+    "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
+    "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск",
+    "Ростов-на-Дону", "Уфа", "Красноярск", "Воронеж", "Пермь",
+    "Волгоград", "Краснодар", "Тюмень", "Саратов", "Тольятти",
+    "Ижевск"
+];
+
 const TripForm: React.FC<TripFormProps> = ({
     isOpen,
     onClose,
@@ -23,11 +31,15 @@ const TripForm: React.FC<TripFormProps> = ({
     initialData,
     days: initialDays
 }) => {
+    // Updated validations and states
+    const [tripImage, setTripImage] = useState(initialData?.tripImage || '');
     const [tripName, setTripName] = useState(initialData?.tripName || '');
     const [tripPlace, setTripPlace] = useState(initialData?.tripPlace || '');
     const [tripStart, setTripStart] = useState<Date | null>(initialData?.tripStart ? new Date(initialData.tripStart) : null);
     const [tripEnd, setTripEnd] = useState<Date | null>(initialData?.tripEnd ? new Date(initialData.tripEnd) : null);
+    const [users, setUsers] = useState(initialData?.users || 0);
     const [days, setDays] = useState(initialDays);
+    const [errors, setErrors] = useState<{ tripName?: string }>({});
 
     useEffect(() => {
         if (isOpen) {
@@ -41,33 +53,49 @@ const TripForm: React.FC<TripFormProps> = ({
         }
     }, [isOpen]);
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
+        setTripImage('');
         setTripName('');
         setTripPlace('');
         setTripStart(null);
         setTripEnd(null);
+        setUsers(0);
         setDays(initialDays);
         onClose();
+    }, [initialDays, onClose]);
+
+    const validateFields = () => {
+        const newErrors: any = {};
+        if (!tripName.trim()) {
+            newErrors.tripName = "Название поездки обязательно";
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        
+        if (!validateFields()) return;
+
         if (tripStart && tripEnd && tripEnd < tripStart) {
             alert('Дата окончания поездки не может быть раньше даты начала.');
             return;
         }
 
         const tripData = {
+            tripImage,
             tripName,
             tripPlace,
             tripStart: tripStart ? format(tripStart, 'dd MMM', { locale: ru }) : '',
             tripEnd: tripEnd ? format(tripEnd, 'dd MMM', { locale: ru }) : '',
+            users,
         };
 
         onSubmit(tripData);
         handleClose();
     };
-    
+
     const updateTripEnd = (startDate: Date | null, daysCount: number) => {
         if (startDate) {
             const newEndDate = new Date(startDate);
@@ -110,18 +138,24 @@ const TripForm: React.FC<TripFormProps> = ({
                         name="tripname"
                         placeholder="К примеру, командировка в Москве"
                         required
-                        className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"
+                        className={`w-full mt-[20px] p-[13px] border ${errors.tripName ? 'border-red-500' : 'border-gray-300'} rounded-[16px]`}
                     />
+                    {errors.tripName && <p className="text-red-500">{errors.tripName}</p>}
+                    
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
-                    <input
-                        type="text"
+                    <select
                         value={tripPlace}
                         onChange={(e) => setTripPlace(e.target.value)}
                         name="tripplace"
-                        placeholder="Куда вы хотите отправиться?"
                         required
                         className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"
-                    />
+                    >
+                        <option value="" disabled>Куда вы хотите отправиться?</option>
+                        {popularCities.map((city) => (
+                            <option key={city} value={city}>{city}</option>
+                        ))}
+                    </select>
+
                     <div className="mt-[20px] flex justify-between">
                         <h2 className="text-[36px] font-bold">Длительность поездки</h2>
                         <div className="flex items-center">

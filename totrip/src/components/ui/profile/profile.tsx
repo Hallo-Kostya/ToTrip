@@ -7,7 +7,7 @@ import { UserData } from '@/components/ui/types';
 import { useUser } from '@/app/userContext';
 
 const Profile: React.FC = () => {
-    const { nickname, userName, userImg, location, motto, profileDesc, setUserContext } = useUser();
+    const { nickname, userName, userSurname, userImg, location, motto, profileDesc, setUserContext } = useUser();
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handleOpenPopup = () => {
@@ -22,6 +22,7 @@ const Profile: React.FC = () => {
         setUserContext({
             nickname: data.username,
             userName: data.name,
+            userSurname: data.surname,
             userImg: data.avatar,
             location: data.location,
             motto: data.motto,
@@ -40,8 +41,8 @@ const Profile: React.FC = () => {
                 <div className="flex gap-6">
                     <Image className="w-[160px] h-[160px] object-cover rounded-full" src={userImg} width={160} height={160} alt="Фото профиля" />
                     <div className="flex flex-col mt-2">
-                        <h6 className="text-gray-600 font-bold text-[20px]">{nickname}</h6>
-                        <h4 className="font-bold text-[32px]">{userName}</h4>
+                        <h6 className="text-gray-600 font-bold text-[20px]">@{nickname}</h6>
+                        <h4 className="font-bold text-[32px]">{userName} {userSurname}</h4>
                         <h6 className="mt-13 text-gray-600 font-bold text-[20px]">{profileDesc}</h6>
                     </div>
                 </div>
@@ -57,6 +58,7 @@ const Profile: React.FC = () => {
                 initialData={{
                     avatar: userImg,
                     name: userName,
+                    surname: userSurname,
                     username: nickname,
                     location: location,
                     about: profileDesc,

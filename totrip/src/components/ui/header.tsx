@@ -9,8 +9,8 @@ import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
 const Header: React.FC = () => {
-    const { userName, userImg, setUserContext } = useUser();
-    const isRegistered = Boolean(userName);
+    const { userName, userSurname, userImg, setUserContext } = useUser();
+    const isRegistered = Boolean(userName && userSurname);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
 
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     };
 
     const confirmLogout = () => {
-        setUserContext({ userName: '', userImg: '/img/no-user-icon.png' });
+        setUserContext({ userName: '', userSurname: '', userImg: '/img/no-user-icon.png' });
         setIsConfirmLogoutVisible(false);
     };
 
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
                         {isRegistered ? (
                             <div className={`${styles['profile-inf']} flex`}>
                                 <div>
-                                    <p className="mt-2 user-name">{userName}</p>
+                                    <p className="mt-2 user-name">{userName} {userSurname}</p>
                                     <button onClick={handleLogout}>Выход</button>
                                 </div>
                                 <div className={styles['user-icon']}>

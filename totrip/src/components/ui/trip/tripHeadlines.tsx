@@ -3,17 +3,19 @@
 import React, { useState } from 'react';
 import DatesBar from '@/components/ui/trip/datesBar';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface TripHeadlinesProps {
     tripStart: Date;
     tripEnd: Date;
+    tripId: string;
 }
 
-const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd }) => {
+const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripId }) => {
     const links = [
-        { title: 'Маршрут', url: '/trip?tab=route' },
-        { title: 'Закладки', url: '/trip?tab=marks' },
-        { title: 'Для Вас', url: '/trip?tab=for-you' },
+        { title: 'Маршрут', url: `/trip/${tripId}?tab=route` },
+        { title: 'Закладки', url: `/trip/${tripId}?tab=marks` },
+        { title: 'Для Вас', url: `/trip/${tripId}?tab=for-you` },
     ];
 
     const [activeLink, setActiveLink] = useState(links[0].title);
@@ -53,9 +55,12 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd }) => 
             </div>
             <div className="flex flex-col mt-[40px]">
                 {dateList.map((date, index) => (
-                    <div key={index} className="flex items-center pb-[12px] border-b-[1px] border-black mb-[36px]">
+                    <div key={index} className="flex items-center pb-[12px] border-b-[1px] border-black mt-[80px] mb-[36px]">
                         <span className="text-[24px] font-[600]">{`${dayNames[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('ru-RU', { month: 'short' })}`}</span>
                         <button className="text-[20px] ml-[20px] border-b-[1px] border-black pb-0">Добавить место</button>
+                        <button className="ml-auto">
+                            <Image src="/img/common/unwrap__button.svg" alt="toggle content" width={40} height={40} />
+                        </button>
                     </div>
                 ))}
             </div>

@@ -8,6 +8,7 @@ interface Post {
   type: 'photo' | 'comment' | 'overview' | 'place';
   userImg: string;
   userName: string;
+  userSurname: string;
   time: string;
   tripName: string;
   postImage?: string;
@@ -42,7 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         id: Date.now(),
         type: currentFormType as 'photo' | 'comment' | 'overview',
         userImg: '',
-        userName: "",
+        userName: '',
+        userSurname: '',
         time: new Date().toLocaleString(),
         tripName: formData.title,
         postImage: postImage,
@@ -80,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         </div>
         <div className="flex gap-2 mb-2">
           <Image src="/img/profile/Calendar.svg" className="mb-auto" width={19} height={19} alt="date" />
-          <p className='text-sm'>С ToTrip с `месяц` `год` года</p>
+          <p className='text-sm'>С ToTrip вместе с {new Date().toLocaleDateString('ru-RU')}!</p>
         </div>
         <p className='text-sm'>{motto}</p>
       </div>

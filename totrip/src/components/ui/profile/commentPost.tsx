@@ -10,7 +10,7 @@ interface CommentPostProps {
   }
   
   const CommentPost: React.FC<CommentPostProps> = ({ postTime, tripName, commentText, onDelete, rating }) => {
-    const { userImg, userName } = useUser();
+    const { userImg, userName, userSurname } = useUser();
     const starImg = '/img/profile/star.svg';
 
     return (
@@ -19,12 +19,12 @@ interface CommentPostProps {
           <div className="flex items-center">
             <Image src={userImg} className="w-[80px] h-[80px] object-cover rounded-full mr-4" width={60} height={60} alt="user" />
             <div>
-              <p className="font-bold text-[24px]">{userName} <span className="font-medium ml-2 text-[18px]">написал(а) отзыв</span></p>
+              <p className="font-bold text-[24px]">{userName} {userSurname} <span className="font-medium ml-2 text-[18px]">написал(а) отзыв</span></p>
               <p className="text-gray-600 text-[20px] font-bold mt-[8px]">{postTime}</p>
             </div>
           </div>
           <button onClick={onDelete} className="text-gray-600">
-            <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="mb-8 ml-auto relative" width={32} height={32}/>
+            <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="mb-12 ml-auto relative" width={32} height={32}/>
           </button>
         </div>
         <div>

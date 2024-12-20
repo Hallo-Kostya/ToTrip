@@ -7,8 +7,22 @@ const RegistrationPopup = ({ onClose }: { onClose: () => void }) => {
     const { setUserContext } = useUser();
     const [isRegistration, setIsRegistration] = useState(true);
     const [isVisible, setIsVisible] = useState(true);
-    const [formData, setFormData] = useState({ userName: '', login: '', password: '', confirmPassword: '' });
-    const [errors, setErrors] = useState<{ login?: string, password?: string, confirmPassword?: string }>({});
+    const [formData, setFormData] = useState({
+        userName: '',
+        userSurname: '',
+        email: '',
+        login: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const [errors, setErrors] = useState<{
+        userName?: string,
+        userSurname?: string,
+        email?: string,
+        login?: string,
+        password?: string,
+        confirmPassword?: string
+    }>({});
 
     useEffect(() => {
         const handleKeydown = (event: KeyboardEvent) => {
@@ -33,10 +47,33 @@ const RegistrationPopup = ({ onClose }: { onClose: () => void }) => {
     };
 
     const validateForm = () => {
-        const newErrors: { login?: string, password?: string, confirmPassword?: string } = {};
+        const newErrors: {
+            userName?: string,
+            userSurname?: string,
+            email?: string,
+            login?: string,
+            password?: string,
+            confirmPassword?: string
+        } = {};
+
+        if (!formData.userName.trim()) {
+            newErrors.userName = 'Имя обязательно';
+        }
+
+        if (!formData.userSurname.trim()) {
+            newErrors.userSurname = 'Фамилия обязательна';
+        }
+
+        if (isRegistration && !formData.email.trim()) {
+            newErrors.email = 'Электронная почта обязательна';
+        }
 
         if (isRegistration && formData.password !== formData.confirmPassword) {
             newErrors.confirmPassword = 'Пароли не совпадают';
+        }
+
+        if (formData.password.length < 8) {
+            newErrors.password = 'Пароль должен быть не менее 8 символов';
         }
 
         setErrors(newErrors);
@@ -46,7 +83,8 @@ const RegistrationPopup = ({ onClose }: { onClose: () => void }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (validateForm()) {
-            setUserContext({ userName: formData.userName, userImg: '/img/no-user-icon.png' });
+            // Добавьте сюда POST-запрос для отправки данных на сервер
+            setUserContext({ userName: formData.userName, userSurname: formData.userSurname, userImg: '/img/no-user-icon.png' });
             setIsVisible(false);
             onClose();
         }
@@ -66,26 +104,55 @@ const RegistrationPopup = ({ onClose }: { onClose: () => void }) => {
                 <div className='reg_log_popup_inputs w-[406px]'>
                     <form onSubmit={handleSubmit} className='flex flex-col'>
                         {isRegistration && (
-                            <input
-                                type="text"
-                                name="userName"
-                                className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
-                                placeholder="Введите своё имя и фамилию"
-                                required
-                                onChange={handleInputChange}
-                                value={formData.userName}
-                            />
+                            <>
+                                <input
+                                    type="text"
+                                    name="userName"
+                                    className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
+                                    placeholder="Введите своё имя"
+                                    required
+                                    onChange={handleInputChange}
+                                    value={formData.userName}
+                                />
+                                {errors.userName && <p className="text-red-500">{errors.userName}</p>}
+                                
+                                <input
+                                    type="text"
+                                    name="userSurname"
+                                    className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
+                                    placeholder="Введите свою фамилию"
+                                    required
+                                    onChange={handleInputChange}
+                                    value={formData.userSurname}
+                                />
+                                {errors.userSurname && <p className="text-red-500">{errors.userSurname}</p>}
+                                
+                                <input
+                                    type="email"
+                                    name="email"
+                                    className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
+                                    placeholder="Ваш email"
+                                    required
+                                    onChange={handleInputChange}
+                                    value={formData.email}
+                                />
+                                {errors.email && <p className="text-red-500">{errors.email}</p>}
+                            </>
                         )}
-                        <input
-                            type="text"
-                            name="login"
-                            className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
-                            placeholder="Ваш логин"
-                            required
-                            onChange={handleInputChange}
-                            value={formData.login}
-                        />
-                        {errors.login && <p className="text-red-500">{errors.login}</p>}
+                        {!isRegistration && (
+                            <>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    className="border rounded-[16px] mt-[24px] px-[12px] py-[16px]"
+                                    placeholder="Ваш email"
+                                    required
+                                    onChange={handleInputChange}
+                                    value={formData.email}
+                                />
+                                {errors.email && <p className="text-red-500">{errors.email}</p>}
+                            </>
+                        )}
                         <input
                             type="password"
                             name="password"

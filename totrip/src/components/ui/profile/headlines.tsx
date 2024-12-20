@@ -14,6 +14,7 @@ interface Post {
   type: 'photo' | 'comment' | 'overview' | 'place';
   userImg: string;
   userName: string;
+  userSurname: string;
   time: string;
   tripName: string;
   postImage: string;
@@ -151,7 +152,7 @@ function Headlines() {
                 ))}
             </ul>
             <div className='flex gap-[32px] max-w-[1120px]'>
-                <Sidebar subscribers={5} onAddPost={handleAddPost} />
+                <Sidebar subscribers={0} onAddPost={handleAddPost} />
 
                 <div className="content">
                     {renderContent()}
