@@ -23,6 +23,7 @@ class Review(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     rating = models.IntegerField(default=1)
     text = models.TextField()
+    image = models.ImageField(upload_to='review_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

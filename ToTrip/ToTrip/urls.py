@@ -23,6 +23,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('TripPlanner.urls'),name='home_page'),
-    path('api/', include('Db_api.urls')),
-    path('', include('UserApp.urls'))
+    path('api/users/', include('apps.UsersApp.urls')),
+    path('', include('apps.SearchApp.urls')),
+    # path('', include('apps.ReviewApp.urls')),
+    # path('', include('apps.PostApp.urls')),
+    # path('', include('apps.TripApp.urls')),
+    # path('', include('apps.ImageApp.urls')),
+    path('api/', include('UserApp.urls')),
+    path('api/', include('apps.PlaceApp.urls')),
+    path('api/', include('apps.ReviewApp.urls')),
 ]

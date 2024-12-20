@@ -13,6 +13,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from . import constants
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-u1@3z4)b&ev8wbdf2-_)l_)#fl(ca70(y+hy=!2_$!$5$09(#4'
+SECRET_KEY = constants.SECRET_KEY_DJANGO
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,12 +33,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Db_api',
+    'apps.UsersApp',
+    'apps.ImageApp',
+    'apps.PostApp',
+    'apps.ReviewApp',
+    'apps.PlaceApp',
+    'apps.SearchApp',
+    'apps.TripApp',
     'TripPlanner',
     'UserApp',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,20 +55,22 @@ INSTALLED_APPS = [
 ]
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'TripPlanner', 'static'),
+   os.path.join(BASE_DIR, "static"),
 ]
-
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 }
 
-AUTH_USER_MODEL = 'Db_api.User'
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-}
+
+AUTH_USER_MODEL = 'UsersApp.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -120,9 +130,9 @@ LOGIN_URL = 'login/'
 
 LOGIN_REDIRECT_URL = ''
 
-MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'TripPlanner', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 # Password validation
@@ -165,3 +175,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'TOKEN_BLACKLIST_ENABLED': True
+
+}
