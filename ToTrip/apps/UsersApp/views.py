@@ -97,19 +97,8 @@ class UserProfileView(APIView):
         return [AllowAny()]
 
 
-class AddToFavoritesView(APIView):
-    """класс для добавления места в "избранные места" пользователя"""
-    permission_classes = [IsAuthenticated]
-    def post(self, request, place_id):
-        user = request.user
-        try:
-            place = Place.objects.get(id=place_id)
-            favorite, created = FavoritePlace.objects.get_or_create(user=user, place=place)
-            if created:
-                return Response({"message": "Место добавлено в избранное."}, status=status.HTTP_201_CREATED)
-            return Response({"message": "Место уже в избранном."}, status=status.HTTP_200_OK)
-        except Place.DoesNotExist:
-            return Response({"error": "Место не найдено."}, status=status.HTTP_404_NOT_FOUND)
+
+
 
 
 class FollowUserView(APIView):

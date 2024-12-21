@@ -30,5 +30,5 @@ urlpatterns = [
     # path('', include('apps.TripApp.urls')),
     # path('', include('apps.ImageApp.urls')),
     path('api/', include('UserApp.urls')),
-    path('api/', include('apps.PlaceApp.urls'))
+    path('api/places/', include('apps.PlaceApp.urls'))
 ]

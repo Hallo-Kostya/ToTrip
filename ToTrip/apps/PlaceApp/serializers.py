@@ -37,7 +37,8 @@ class PlaceSerializer(serializers.ModelSerializer):
             "category",
             "description",
             "avg_rating",
-            "coordinates",
+            "longitude",
+            "latitude",
             "working_hours",
             "placeimage_set",
             "reviews"

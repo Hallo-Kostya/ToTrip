@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('place/<int:pk>/', PlaceDetailAPIView.as_view(), name='place_detail'),
-    path('places/', AllPlacesIds.as_view(), name='places_ids')
+    path('<int:pk>/', PlaceDetailAPIView.as_view(), name='place_detail'),
+    path('list/', AllPlacesIds.as_view(), name='places_ids'),
+    path('favorite/', FavoritesView.as_view(), name = 'favorite_places'),
+    path('favorite/<int:place_id>/', FavoritesView.as_view(), name = 'favorite_places')
 ]
