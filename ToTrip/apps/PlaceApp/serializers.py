@@ -56,8 +56,12 @@ class CitySerializer(serializers.ModelSerializer):
     country_id = serializers.IntegerField(source = "region.district.country.id", read_only=True)
     class Meta:
         model = City
-        fields = ["name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
+        fields = ["id", "name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
 
+class CityShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ["id", "name"]
 
 class RegionSerializer(serializers.ModelSerializer):
     """класс для преобразования региона в json формат и наоборот"""

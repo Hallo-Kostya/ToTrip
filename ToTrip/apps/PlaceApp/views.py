@@ -56,6 +56,8 @@ class AllPlacesIds(APIView):
             return Response({"places_ids": places_ids}, status=status.HTTP_200_OK)
         else: 
             return Response({"error": "не найдено мест в базе"}, status=status.HTTP_204_NO_CONTENT)
+        
+        
 class PlaceDetailAPIView(APIView):
     """Класс для получения детальной информации о конкретном объекте"""
     def get(self, request, pk):

@@ -29,15 +29,13 @@ def get_tokens_for_user(user):
 
 
 class RegisterView(APIView):
-    """класс для регистрации пользователя, возвращает access(15 мин.) и refresh(365 дней, но оба обновляются при запросе с фронтенда) 
-    токены после регистрации"""
+    """класс для регистрации пользователя, принимающий username, password, last_name, email, first_name как обязательные параметры"""
     renderer_classes = [UserJSONRenderer]
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):   
             user = serializer.save()
-            response_data = RegisterSerializer(user).data
-            return Response(response_data,
+            return Response({"message":"Вы успешно зарегистрированы!"},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -47,7 +45,7 @@ class LogoutView(APIView):
     черный список, чтобы в случае его кражи, взломщик не смог получить новые токены по старому refresh токену."""
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        refresh_token = request.data.get('refresh_token') # С клиента нужно отправить refresh token
+        refresh_token = request.data.get('refresh') # С клиента нужно отправить refresh token
         if not refresh_token:
             return Response({'error': 'Необходим Refresh token'},
                             status=status.HTTP_400_BAD_REQUEST)
@@ -95,10 +93,6 @@ class UserProfileView(APIView):
             return [IsAuthenticated()]
         # Если user_id указан, доступ открыт всем
         return [AllowAny()]
-
-
-
-
 
 
 class FollowUserView(APIView):

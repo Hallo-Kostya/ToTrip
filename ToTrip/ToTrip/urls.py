@@ -21,13 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('TripPlanner.urls'),name='home_page'),
+    path('api/admin/', admin.site.urls),
     path('api/users/', include('apps.UsersApp.urls')),
-    path('', include('apps.SearchApp.urls')),
+    path('api/search/', include('apps.SearchApp.urls')),
     # path('', include('apps.ReviewApp.urls')),
     # path('', include('apps.PostApp.urls')),
-    # path('', include('apps.TripApp.urls')),
+    path('api/trips/', include('apps.TripApp.urls')),
     # path('', include('apps.ImageApp.urls')),
     path('api/', include('UserApp.urls')),
     path('api/places/', include('apps.PlaceApp.urls'))

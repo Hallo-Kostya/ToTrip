@@ -13,6 +13,5 @@ urlpatterns = [
     path('profile/edit/', EditUserView.as_view(), name = 'edituser_api'),
     path('profile/<int:user_id>/', UserProfileView.as_view(), name='profile_api'),
     path('<int:user_id>/follow/', FollowUserView.as_view(), name = 'follow_user'),
-    path('<int:user_id>/unfollow/', FollowUserView.as_view(), name = 'unfollow_user'),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

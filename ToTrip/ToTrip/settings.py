@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'apps.PlaceApp',
     'apps.SearchApp',
     'apps.TripApp',
-    'TripPlanner',
     'UserApp',
     'corsheaders',
     'rest_framework',
@@ -179,7 +178,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
     'AUTH_HEADER_TYPES': ('Bearer',),
     'TOKEN_BLACKLIST_ENABLED': True
 

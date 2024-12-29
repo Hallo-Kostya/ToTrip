@@ -62,19 +62,19 @@ class SearchPlacesAPIView(APIView):
                 )
                 if category:
                     category=category.values_list('id', flat=True)
-                    if cities_data:
+                    if cities:
                         city_ids = cities.values_list('id', flat=True)
                         category_places = (Place.objects.filter(
                             Q(category_id__in = category) &
                             Q(city_id__in = city_ids)
                         ))
                         places=places.union(category_places)
-                    elif not cities_data:
+                    elif not cities:
                         category_places = (Place.objects.filter(
                             Q(category_id__in = category) 
                         ))
                         places=places.union(category_places)
-                elif cities_data and not category:
+                elif cities and not category:
                     city_ids = cities.values_list('id', flat=True)
                     city_places= (Place.objects.filter(
                         Q(city_id__in = city_ids)
@@ -88,9 +88,11 @@ class SearchPlacesAPIView(APIView):
                 places = (Place.objects.filter(
                         Q(category_id__in = category_ids)
                     ))
+        if not full_search:
+            places = list(places)[:8]
         paginator = self.CustomPagination()
         paginated_cities = paginator.paginate_queryset(cities, request, view=self)
-        paginated_places = paginator.paginate_queryset(places, request, view=self)
+        paginated_places = paginator.paginate_queryset(list(places), request, view=self)
         paginated_regions = paginator.paginate_queryset(regions, request, view=self)
         paginated_districts = paginator.paginate_queryset(districts, request, view=self)
         paginated_countries = paginator.paginate_queryset(countries, request, view=self)

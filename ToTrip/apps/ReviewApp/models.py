@@ -7,7 +7,7 @@ class Review(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     author = models.ForeignKey(User, related_name='user_reviews', on_delete=models.CASCADE)
     rating = models.IntegerField()
-    text = models.TextField()
+    text = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
