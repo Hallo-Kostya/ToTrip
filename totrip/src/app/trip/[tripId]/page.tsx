@@ -10,13 +10,14 @@ const TripPage: React.FC = () => {
  
     const {
         tripImage = './img/trips-page/exp_photo.png',
-        tripName = 'Без названия',
-        tripPlace = 'Неизвестное место',
+        tripName = '',
+        tripPlace = '',
         tripStart = new Date(),
         tripEnd = new Date(),
         users = 0,
         id = '',
-    } = setTripContext(trip);
+    } = trip;
+    setTripContext(trip);
 
     const formattedTripStart = (tripStart instanceof Date ? tripStart.toLocaleDateString() : tripStart);
     const formattedTripEnd = (tripEnd instanceof Date ? tripEnd.toLocaleDateString() : tripEnd);
