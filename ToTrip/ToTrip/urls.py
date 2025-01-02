@@ -30,4 +30,4 @@ urlpatterns = [
     # path('', include('apps.ImageApp.urls')),
     path('api/', include('UserApp.urls')),
     path('api/places/', include('apps.PlaceApp.urls'))
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

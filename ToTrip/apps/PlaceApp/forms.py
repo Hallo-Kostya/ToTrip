@@ -18,7 +18,7 @@ class MultipleFileField(forms.FileField):
 
 
 class PlaceForm(forms.ModelForm):
-    images = MultipleFileField(label='Select files', required=True)
+    images = MultipleFileField(label='Select files', required=False)
     class Meta:
         model = Place
         fields = ['name', 'address', 'categories', 'description', 'city', 'longitude', 'latitude', 'working_hours']

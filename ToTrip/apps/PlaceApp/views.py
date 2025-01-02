@@ -85,11 +85,10 @@ def create_place(request):
         form = PlaceForm(request.POST, request.FILES)
         if form.is_valid():
             place = form.save()
-            # Обработка загруженных изображений
-            files = request.FILES.getlist('images')
-            for file in files:
-                PlaceImage.objects.create(place=place, image=file)
-            return redirect('place_list')  # Перенаправление на список мест
+            uploaded_images = request.FILES.getlist('images')
+            for image in uploaded_images:
+                PlaceImage.objects.create(place=place, image=image)
+            return Response({"message": "allright!"}, status=200)  # Перенаправление на список мест
     else:
         form = PlaceForm()
     return render(request, 'add_place_form.html', {'form': form})

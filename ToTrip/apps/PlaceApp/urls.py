@@ -9,4 +9,4 @@ urlpatterns = [
     path('favorite/', FavoritesView.as_view(), name = 'favorite_places'),
     path('favorite/<int:place_id>/', FavoritesView.as_view(), name = 'favorite_places'),
     path('addcity/', create_place, name='addplace_api')
-]
+] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
