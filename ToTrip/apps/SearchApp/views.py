@@ -22,7 +22,7 @@ class SearchPlacesAPIView(APIView):
         query = request.GET.get("query", "")
         full_search = request.GET.get("full_search", "false").lower() == "true"
         query_cat = request.GET.get("query_cat", "").lower()
-        if not query:
+        if query=="":
             return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
         query=query.lower()
         query_parts = query.split()
