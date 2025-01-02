@@ -74,27 +74,31 @@ class DeleteSubtripApiView(APIView):
         except SubTrip.DoesNotExist:
             return Response({"error": "день поездки не найден"}, status=status.HTTP_404_NOT_FOUND)
         
-class ManagePlacesInSubtripApiView(APIView):
+class AddPlaceToSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]
     
     def patch(self, request, subtrip_id):
         try:
             subtrip = SubTrip.objects.get(id=subtrip_id)
             place_id = request.data.get('place_id')
+            place = Place.objects.get(id=place_id)
             if not place_id:
                 return Response({'error': 'не передан Id места'}, status=status.HTTP_400_BAD_REQUEST)
-            if not Place.objects.filter(id=place_id).exists():
+            if not place:
                 return Response({'error': 'указан некорректный Id места'}, status=status.HTTP_400_BAD_REQUEST)
-            if SubtripReviewPlace.objects.filter(subtrip=subtrip, place_id=place_id).exists():
+            if SubtripReviewPlace.objects.filter(subtrip=subtrip, place=place).exists():
                 return Response({"error": "Место уже добавлено"}, status=status.HTTP_400_BAD_REQUEST)
-            SubtripReviewPlace.objects.create(subtrip=subtrip, place=place_id)
+            SubtripReviewPlace.objects.create(subtrip=subtrip, place=place)
             return Response({'status': 'место успешно добавлено'}, status=status.HTTP_200_OK)
         except SubTrip.DoesNotExist:
             return Response({"error": "день поездки не найден"}, status=status.HTTP_404_NOT_FOUND)
     
-    def delete(self, request, place_id):
+class DeleteSubtripPlaceApiView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, subtripplace_id):
         try:
-            place = SubtripReviewPlace.objects.get(id = place_id)
+            place = SubtripReviewPlace.objects.get(id = subtripplace_id)
             if not place:
                 return Response({"error": "Место не добавлено в данный день поездки"}, status=status.HTTP_400_BAD_REQUEST)
             if place.delete():
