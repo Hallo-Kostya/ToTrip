@@ -4,6 +4,14 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Place, FavoritePlace
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import redirect, render
+from django.http import JsonResponse
+from .models import Place
+from apps.ImageApp.models import PlaceImage
+from .forms import PlaceForm
+from django.views import View
+from django.db import transaction
+from apps.PlaceApp.models import City, Category
 
 class FavoritesView(APIView):
     """
@@ -70,3 +78,18 @@ class PlaceDetailAPIView(APIView):
                 {"error": "Данное место не найдено"}, 
                 status=status.HTTP_404_NOT_FOUND
                 )
+        
+
+def create_place(request):
+    if request.method == 'POST':
+        form = PlaceForm(request.POST, request.FILES)
+        if form.is_valid():
+            place = form.save()
+            # Обработка загруженных изображений
+            files = request.FILES.getlist('images')
+            for file in files:
+                PlaceImage.objects.create(place=place, image=file)
+            return redirect('place_list')  # Перенаправление на список мест
+    else:
+        form = PlaceForm()
+    return render(request, 'add_place_form.html', {'form': form})

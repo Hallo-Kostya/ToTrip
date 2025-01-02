@@ -20,6 +20,7 @@ class PlaceSerializer(serializers.ModelSerializer):
     district_id = serializers.IntegerField(source = "city.region.district.id", read_only=True)
     country_name = serializers.CharField(source="city.region.district.country.name", read_only=True)
     country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     class Meta:
         model = Place
         fields = [
@@ -34,7 +35,7 @@ class PlaceSerializer(serializers.ModelSerializer):
             "district_name",
             "country_id",
             "country_name",
-            "category",
+            "categories",
             "description",
             "avg_rating",
             "longitude",
@@ -43,6 +44,11 @@ class PlaceSerializer(serializers.ModelSerializer):
             "placeimage_set",
             "reviews"
         ]
+    def create(self, validated_data):
+        categories_data = validated_data.pop('categories')
+        place = Place.objects.create(**validated_data)
+        place.categories.set(categories_data)
+        return place
 
 class CitySerializer(serializers.ModelSerializer):
     """класс для преобразования города в json формат и наоборот"""
