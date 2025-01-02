@@ -18,7 +18,7 @@ class Trip(models.Model):
         return f"Поездка: {self.title} ({self.start_date} - {self.end_date})"
 
 
-class SubTrip(models.Model):
+class  SubTrip(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name = 'subtrips')
     date = models.DateField()
     class Meta:

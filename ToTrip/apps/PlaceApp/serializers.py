@@ -44,7 +44,6 @@ class PlaceSerializer(serializers.ModelSerializer):
             "reviews"
         ]
 
-
 class CitySerializer(serializers.ModelSerializer):
     """класс для преобразования города в json формат и наоборот"""
     places = PlaceSerializer(many=True, read_only=True)

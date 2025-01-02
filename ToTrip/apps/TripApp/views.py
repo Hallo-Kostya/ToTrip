@@ -3,7 +3,8 @@ from rest_framework.views import APIView
 from .serializers import TripSerializer, SubTripSerializer, SubtripReviewPlaceSerializer, CreateTripSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from apps.TripApp.models import Trip 
+from apps.TripApp.models import Trip, SubTrip, SubtripReviewPlace
+from apps.PlaceApp.models import Place
 from apps.UsersApp.models import User
 from rest_framework.permissions import IsAuthenticated
 
@@ -48,3 +49,55 @@ class DeleteTripApiView(APIView):
                 return Response({'status': 'Поездка удалена'}, status=status.HTTP_200_OK)
         except Trip.DoesNotExist:
             return Response({"error": "Данная поездка не найдена"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CreateSubtripApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        subtripSerializer = SubTripSerializer(data = request.data)
+        if subtripSerializer.is_valid():
+            subtripSerializer.save()
+            return Response({"subtrip": subtripSerializer.data},
+                status=status.HTTP_201_CREATED)
+        else:
+            return Response(subtripSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class DeleteSubtripApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def delete(self, request, subtrip_id):
+        try:
+            subtrip_to_delete = SubTrip.objects.get(id=subtrip_id)
+            if subtrip_to_delete.delete():
+                return Response({'status': 'день поездки удален'}, status=status.HTTP_200_OK)
+        except SubTrip.DoesNotExist:
+            return Response({"error": "день поездки не найден"}, status=status.HTTP_404_NOT_FOUND)
+        
+class ManagePlacesInSubtripApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def patch(self, request, subtrip_id):
+        try:
+            subtrip = SubTrip.objects.get(id=subtrip_id)
+            place_id = request.data.get('place_id')
+            if not place_id:
+                return Response({'error': 'не передан Id места'}, status=status.HTTP_400_BAD_REQUEST)
+            if not Place.objects.filter(id=place_id).exists():
+                return Response({'error': 'указан некорректный Id места'}, status=status.HTTP_400_BAD_REQUEST)
+            if SubtripReviewPlace.objects.filter(subtrip=subtrip, place_id=place_id).exists():
+                return Response({"error": "Место уже добавлено"}, status=status.HTTP_400_BAD_REQUEST)
+            SubtripReviewPlace.objects.create(subtrip=subtrip, place=place_id)
+            return Response({'status': 'место успешно добавлено'}, status=status.HTTP_200_OK)
+        except SubTrip.DoesNotExist:
+            return Response({"error": "день поездки не найден"}, status=status.HTTP_404_NOT_FOUND)
+    
+    def delete(self, request, place_id):
+        try:
+            place = SubtripReviewPlace.objects.get(id = place_id)
+            if not place:
+                return Response({"error": "Место не добавлено в данный день поездки"}, status=status.HTTP_400_BAD_REQUEST)
+            if place.delete():
+                return Response({'status': 'место успешно удалено из дня поездки'}, status=status.HTTP_200_OK)
+        except SubtripReviewPlace.DoesNotExist:
+            return Response({"error": "Данного места в этот день не найдено"}, status=status.HTTP_404_NOT_FOUND)
