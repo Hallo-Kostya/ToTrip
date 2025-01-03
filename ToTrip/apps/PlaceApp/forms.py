@@ -19,10 +19,31 @@ class MultipleFileField(forms.FileField):
 
 class PlaceForm(forms.ModelForm):
     images = MultipleFileField(label='Загрузить фотографии', required=True)
-
+    services = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'service-input',
+            'placeholder': 'Здесь отображаются услуги'
+        }),
+        required=False
+    )
     class Meta:
         model = Place
-        fields = ['name', 'address', 'categories', 'description', 'city', 'longitude', 'latitude', 'working_hours', ]
+        fields = ['name', 'address', 'categories', 'description', 'city', 'longitude', 'latitude', 'working_hours',  ]
         widgets = {
-            'categories': forms.CheckboxSelectMultiple()
+            'categories': forms.CheckboxSelectMultiple(),
         }
+
+    def clean_services(self):
+        services = self.data.getlist('services')  # Получаем все теги из POST-запроса
+        return [service.strip() for service in services if service.strip()]
+    
+    def save(self, commit=True):
+        # Сначала сохраняем сам объект места
+        place = super().save(commit=False)
+        services = self.cleaned_data.get('services', [])
+
+        # Сохраняем услуги в объекте Place
+        place.services = services
+        if commit:
+            place.save()
+        return place

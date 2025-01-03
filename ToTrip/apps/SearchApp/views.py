@@ -65,13 +65,13 @@ class SearchPlacesAPIView(APIView):
                     if cities:
                         city_ids = cities.values_list('id', flat=True)
                         category_places = (Place.objects.filter(
-                            Q(category_id__in = category) &
+                            Q(categories__in = category) &
                             Q(city_id__in = city_ids)
                         ))
                         places=places.union(category_places)
                     elif not cities:
                         category_places = (Place.objects.filter(
-                            Q(category_id__in = category) 
+                            Q(categories__in = category) 
                         ))
                         places=places.union(category_places)
                 elif cities and not category:
@@ -86,7 +86,7 @@ class SearchPlacesAPIView(APIView):
                 ).values_list('id', flat=True)
             if category_ids.exists():
                 places = (Place.objects.filter(
-                        Q(category_id__in = category_ids)
+                        Q(categories__in = category_ids)
                     ))
         if not full_search:
             places = list(places)[:8]

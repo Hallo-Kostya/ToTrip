@@ -27,6 +27,7 @@ class PlaceSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "address",
+            "services",
             "city_id",
             "city_name",
             "region_id",

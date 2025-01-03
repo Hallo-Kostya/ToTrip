@@ -88,7 +88,7 @@ def create_place(request):
             uploaded_images = request.FILES.getlist('images')
             for image in uploaded_images:
                 PlaceImage.objects.create(place=place, image=image)
-            return redirect('place_detail', place.id)  # Перенаправление на список мест
+            return redirect('place_detail', place.id)  
     else:
         form = PlaceForm()
     return render(request, 'add_place_form.html', {'form': form})
