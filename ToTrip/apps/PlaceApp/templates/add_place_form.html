@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Добавить место</h1>
-    <form method="post" action="addplace_api">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Сохранить</button>

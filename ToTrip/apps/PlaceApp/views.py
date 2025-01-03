@@ -82,13 +82,13 @@ class PlaceDetailAPIView(APIView):
 
 def create_place(request):
     if request.method == 'POST':
-        form = PlaceForm(request.POST, request.FILES)
+        form = PlaceForm(request.POST)
         if form.is_valid():
             place = form.save()
             uploaded_images = request.FILES.getlist('images')
             for image in uploaded_images:
                 PlaceImage.objects.create(place=place, image=image)
-            return Response({"message": "allright!"}, status=200)  # Перенаправление на список мест
+            return redirect('place_detail', place.id)  # Перенаправление на список мест
     else:
         form = PlaceForm()
     return render(request, 'add_place_form.html', {'form': form})
