@@ -1,8 +1,8 @@
 export interface UserData {
-    name: string;
-    surname: string;
-    username: string;
-    newImg: string;
+    first_name: string;
+    last_name: string;
+    login: string;
+    newImg?: string;
     about: string;
     location: string;
     motto: string;

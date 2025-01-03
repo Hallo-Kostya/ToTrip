@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/components/css/header.module.css';
@@ -9,21 +9,43 @@ import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
 const Header: React.FC = () => {
-  const { userName, userSurname, userImg, setUserContext } = useUser();
-  const isRegistered = Boolean(userName && userSurname);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
+    const { first_name, last_name, userImg, setUserContext } = useUser();
+    const isRegistered = Boolean(first_name && last_name);
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
 
   const handleLogout = async () => {
     setIsConfirmLogoutVisible(true);
   };
 
+//   const confirmLogout = async () => {
+//     try {
+//       const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ refresh: localStorage.getItem('refresh') }), // обновил на 'refresh'
+//       });
+
+//       if (!response.ok) {
+//         console.error('Ошибка при выходе');
+//         return;
+//       }
+
+//       localStorage.removeItem('refresh');
+//       setUserContext(null); // Очистить состояние пользователя
+//       setIsConfirmLogoutVisible(false);
+//     } catch (error) {
+//       console.error('Ошибка сети:', error);
+//     }
+//   };
+
   const confirmLogout = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/users/register/', {
+      const refreshToken = localStorage.getItem('refresh');
+      const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ refresh: localStorage.getItem('refreshToken') }),
+        body: JSON.stringify({ refresh: refreshToken }),
       });
 
       if (!response.ok) {
@@ -31,13 +53,38 @@ const Header: React.FC = () => {
         return;
       }
 
-    //   setUserContext({ userName: '', userSurname: '', userImg: '/img/no-user-icon.png' });
-      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('refresh');
+      setUserContext({ first_name: '', last_name: '', userImg: '/img/no-user-icon.png' });
       setIsConfirmLogoutVisible(false);
     } catch (error) {
       console.error('Ошибка сети:', error);
     }
   };
+
+  const handleRegister = (userData: { first_name: string; last_name: string; }) => {
+    setUserContext(userData);
+  };
+
+  useEffect(() => {
+    // Проверка аутентификации пользователя из localStorage
+    const refreshToken = localStorage.getItem('refresh');
+    if (refreshToken) {
+      // Запрос для обновления профиля или аутентификации
+      (async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
+          headers: { Authorization: `Bearer ${refreshToken}` }
+        });
+        if (response.ok) {
+          const userData = await response.json();
+          setUserContext({
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+          });
+        }
+      })();
+    }
+  }, [setUserContext]);
+
 
   return (
     <header className={styles.showcase}>
@@ -63,15 +110,15 @@ const Header: React.FC = () => {
             <li className={styles['menu-item']}><Link href="/">Отзывы</Link></li>
           </ul>
           <div className={styles.profile}>
-            {isRegistered ? (
+            {isRegistered? (
               <div className={`${styles['profile-inf']} flex`}>
                 <div>
-                  <p className="mt-2 user-name">{userName} {userSurname}</p>
+                  <p className="mt-2 user-name">{first_name} {last_name}</p>
                   <button onClick={handleLogout}>Выход</button>
                 </div>
                 <div className={styles['user-icon']}>
                   <Link href="/profile">
-                    <Image src={userImg} alt="Профиль" width={52} height={52} />
+                    <Image src="/img/common/main-logo.svg" alt="Профиль" width={52} height={52} />
                   </Link>
                 </div>
               </div>
@@ -91,7 +138,7 @@ const Header: React.FC = () => {
           </div>
         </nav>
       </div>
-      {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} />}
+      {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} onRegister={handleRegister} />}
       {isConfirmLogoutVisible && (
         <ConfirmLogoutPopup
           onConfirm={confirmLogout}

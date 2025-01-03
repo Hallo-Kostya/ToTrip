@@ -1,12 +1,11 @@
-'use client'
+'use client';
 
 import React, { createContext, useContext, useState } from 'react';
 
-// Интерфейс для пользователя
 interface UserContextProps {
-  nickname: string;
-  userName: string;
-  userSurname: string;
+  username: string;
+  first_name: string;
+  last_name: string;
   userImg: string;
   location: string;
   motto: string;
@@ -15,9 +14,9 @@ interface UserContextProps {
 }
 
 interface UserContextState {
-  nickname: string;
-  userName: string;
-  userSurname: string;
+  username: string;
+  first_name: string;
+  last_name: string;
   userImg: string;
   location: string;
   motto: string;
@@ -28,14 +27,13 @@ const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<UserContextState>({
-    // Через эти переменные данные передаются по всем элементам, для которых они были импортированы
-    nickname: 'индивидуальный_идентификатор',
-    userName: '',
-    userSurname: '',
+    username: '',
+    first_name: '',
+    last_name: '',
     userImg: '/img/no-user-icon.png',
-    location: 'Ваше местоположение!',
+    location: 'Ваше местоположение',
     motto: 'Ваш девиз!',
-    profileDesc: 'Описание профиля!'
+    profileDesc: 'Описание профиля'
   });
 
   const setUserContext = (data: Partial<UserContextState>) => {
@@ -52,7 +50,6 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   );
 };
 
-// Хук для использования контекста
 const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {

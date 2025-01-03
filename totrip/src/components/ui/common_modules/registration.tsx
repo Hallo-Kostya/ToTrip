@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-// import { useUser } from '@/app/userContext';
+import React, { useState } from 'react';
+import { useUser } from '@/app/userContext';
 
 interface RegistrationPopupProps {
   onClose: () => void;
 }
 
 const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
-//   const { setUserContext } = useUser();
+  const { setUserContext } = useUser();
   const [isVisible, setIsVisible] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
@@ -20,22 +20,6 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
-  useEffect(() => {
-    const handleKeydown = (evt: KeyboardEvent) => {
-      if (evt.key === 'Escape') {
-        setIsVisible(false);
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeydown);
-    return () => {
-      window.removeEventListener('keydown', handleKeydown);
-    };
-  }, [onClose]);
-
-  if (!isVisible) return null;
 
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
@@ -50,7 +34,7 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
     if (!formData.email.trim()) newErrors.email = 'Электронная почта обязательна';
     if (formData.password.length < 8) newErrors.password = 'Пароль должен быть не менее 8 символов';
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Пароли не совпадают';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -61,7 +45,7 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
       try {
         const response = await fetch('http://127.0.0.1:8000/api/users/register/', {
           method: 'POST',
-
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         });
 
@@ -72,14 +56,13 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
         }
 
         const data = await response.json();
-        localStorage.setItem('refreshToken', data.refresh);
+        localStorage.setItem('refresh', data.refresh);
 
-        // setUserContext({
-        //   username: formData.username,
-        //   first_name: formData.first_name,
-        //   last_name: formData.last_name,
-        //   userImg: '/img/no-user-icon.png',
-        // });
+        // Обновление контекста пользователя
+        setUserContext({
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+        });
 
         setIsVisible(false);
         onClose();
@@ -88,6 +71,8 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
       }
     }
   };
+
+  if (!isVisible) return null;
 
   return (
     <div className='popup-backdrop flex items-center justify-center fixed inset-0 bg-black bg-opacity-50' onClick={() => { setIsVisible(false); onClose(); }}>
