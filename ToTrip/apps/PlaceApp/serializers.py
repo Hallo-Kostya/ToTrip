@@ -1,17 +1,19 @@
 from rest_framework import serializers
 from .models import  Place, City, District, Country, Region, Category
+from apps.ReviewApp.models import Review
 from apps.ImageApp.serializers import PlaceImageSerializer
 from apps.ReviewApp.serializers import ReviewSerializer
 class CategorySerializer(serializers.ModelSerializer):
     """класс для преобразования категории мест в json формат и наоборот"""
     class Meta:
         model = Category
-        fields = ["id", "name", "code", "icon", "photo"]
+        fields = ["id", "name", "code", "icon"]
 
 class PlaceSerializer(serializers.ModelSerializer):
     """класс для преобразования места в json формат и наоборот"""
     placeimage_set = PlaceImageSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only = True)
+    review_ids = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all(), many=True, write_only=True)  
     city_name = serializers.CharField(source="city.name", read_only=True)
     city_id = serializers.IntegerField(source = "city.id", read_only=True)
     region_name = serializers.CharField(source="city.region.name", read_only=True)
@@ -20,7 +22,8 @@ class PlaceSerializer(serializers.ModelSerializer):
     district_id = serializers.IntegerField(source = "city.region.district.id", read_only=True)
     country_name = serializers.CharField(source="city.region.district.country.name", read_only=True)
     country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
-    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    categories = CategorySerializer(many=True, read_only=True)
+    category_ids = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True, write_only=True)  
     class Meta:
         model = Place
         fields = [
@@ -36,6 +39,7 @@ class PlaceSerializer(serializers.ModelSerializer):
             "district_name",
             "country_id",
             "country_name",
+            "category_ids",
             "categories",
             "description",
             "avg_rating",
@@ -43,13 +47,15 @@ class PlaceSerializer(serializers.ModelSerializer):
             "latitude",
             "working_hours",
             "placeimage_set",
-            "reviews"
+            "reviews",
+            "review_ids"
         ]
     def create(self, validated_data):
-        categories_data = validated_data.pop('categories')
+        categories_data = validated_data.pop('category_ids')
         place = Place.objects.create(**validated_data)
         place.categories.set(categories_data)
         return place
+
 
 class CitySerializer(serializers.ModelSerializer):
     """класс для преобразования города в json формат и наоборот"""

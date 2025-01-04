@@ -28,7 +28,7 @@ class PlaceForm(forms.ModelForm):
     )
     class Meta:
         model = Place
-        fields = ['name', 'address', 'categories', 'description', 'city', 'longitude', 'latitude', 'working_hours',  ]
+        fields = ['name', 'address', 'categories', 'description', 'city',   ]
         widgets = {
             'categories': forms.CheckboxSelectMultiple(),
         }
@@ -41,9 +41,11 @@ class PlaceForm(forms.ModelForm):
         # Сначала сохраняем сам объект места
         place = super().save(commit=False)
         services = self.cleaned_data.get('services', [])
+        categories = self.cleaned_data.get('categories', [])
 
         # Сохраняем услуги в объекте Place
         place.services = services
         if commit:
             place.save()
+            self.save_m2m()
         return place

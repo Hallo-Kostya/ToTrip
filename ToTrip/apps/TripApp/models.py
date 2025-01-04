@@ -25,9 +25,8 @@ class  SubTrip(models.Model):
         unique_together = ('trip', 'date')
 
 
-class SubtripReviewPlace(models.Model):
+class SubtripPlace(models.Model):
     subtrip = models.ForeignKey(SubTrip, on_delete=models.CASCADE, related_name = 'subtrip_places')
     place = models.ForeignKey(Place, on_delete = models.DO_NOTHING, related_name = 'subtrip_review_places')
-    review = models.ForeignKey(Review, on_delete = models.DO_NOTHING, blank= True, null = True)
     class Meta:
-        unique_together = ('subtrip', 'place', 'review')
+        unique_together = ('subtrip', 'place')
