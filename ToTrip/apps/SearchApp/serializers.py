@@ -120,6 +120,7 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
             "region_name",
             "district_name",
             "country_name",
+            "address",
             "search_image"
         ]
 

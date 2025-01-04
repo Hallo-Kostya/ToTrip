@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 from ToTrip import settings
 
@@ -48,10 +49,14 @@ class City(models.Model):
 
 class Place(models.Model):
     """модель места с координатами, именем, адресом, категорией, рейтингом, рабочими часами"""
-    fsq_id=models.CharField(max_length=50, unique=True, null=True)
+    services = ArrayField(
+        models.CharField(max_length=100),  # Каждый элемент - строка длиной до 100 символов
+        blank=True,
+        default=list  # По умолчанию пустой список
+    )
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255, default="Не указан")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='places')
+    categories = models.ManyToManyField(Category, related_name='places')
     description = models.TextField(null=True, blank=True)
     avg_rating = models.FloatField(default=0.0, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null = True)

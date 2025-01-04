@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить место</title>
+    <style>
+        .service-input {
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добавить место</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="services-container">
+            <label for="services">Услуги:</label>
+            <input type="text" name="services" class="service-input">
+        </div>
+        <button type="button" onclick="addServiceField()">Добавить услугу</button>
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <script>
+        function addServiceField() {
+            const container = document.getElementById('services-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'services';
+            input.className = 'service-input';
+            input.placeholder = 'Введите еще одну услугу';
+            container.appendChild(input);
+        }
+    </script>
+</body>
+</html>

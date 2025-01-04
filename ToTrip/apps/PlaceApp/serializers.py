@@ -20,12 +20,14 @@ class PlaceSerializer(serializers.ModelSerializer):
     district_id = serializers.IntegerField(source = "city.region.district.id", read_only=True)
     country_name = serializers.CharField(source="city.region.district.country.name", read_only=True)
     country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     class Meta:
         model = Place
         fields = [
             "id",
             "name",
             "address",
+            "services",
             "city_id",
             "city_name",
             "region_id",
@@ -34,15 +36,20 @@ class PlaceSerializer(serializers.ModelSerializer):
             "district_name",
             "country_id",
             "country_name",
-            "category",
+            "categories",
             "description",
             "avg_rating",
-            "coordinates",
+            "longitude",
+            "latitude",
             "working_hours",
             "placeimage_set",
             "reviews"
         ]
-
+    def create(self, validated_data):
+        categories_data = validated_data.pop('categories')
+        place = Place.objects.create(**validated_data)
+        place.categories.set(categories_data)
+        return place
 
 class CitySerializer(serializers.ModelSerializer):
     """класс для преобразования города в json формат и наоборот"""
@@ -55,8 +62,12 @@ class CitySerializer(serializers.ModelSerializer):
     country_id = serializers.IntegerField(source = "region.district.country.id", read_only=True)
     class Meta:
         model = City
-        fields = ["name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
+        fields = ["id", "name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
 
+class CityShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ["id", "name"]
 
 class RegionSerializer(serializers.ModelSerializer):
     """класс для преобразования региона в json формат и наоборот"""
