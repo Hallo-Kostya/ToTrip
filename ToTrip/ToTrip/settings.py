@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'apps.PlaceApp',
     'apps.SearchApp',
     'apps.TripApp',
-    'UserApp',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
