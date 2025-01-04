@@ -20,6 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             "email",
             "phone_number",
             "bio",
+            "slogan",
             "photo",
             "city",
             "country"
@@ -67,6 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
             "slogan",
             "is_superuser",
             "is_active",
+            "is_staff",
             "city",
             "country",
             "photo",

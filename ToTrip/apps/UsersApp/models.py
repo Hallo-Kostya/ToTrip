@@ -37,6 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = models.ImageField(upload_to='user_photos/', blank=True, default='user_photos/default_avatar.png')
     last_login = models.DateTimeField(default=timezone.now, null=False)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
     city=models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=50, null=True)
     followers=models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
