@@ -21,7 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
-  const { location, motto } = useUser();
+  const { city, motto, registrationDate } = useUser();
   const [isFormOpen, setFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState<'comment' | 'photo' | 'overview' | 'place' | null>(null);
 
@@ -36,26 +36,24 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
     comment: string; 
     image?: Blob | MediaSource; 
     images?: File[];
-}) => {
-  const postImage = formData.image ? URL.createObjectURL(formData.image) : undefined;
+  }) => {
+    const postImage = formData.image ? URL.createObjectURL(formData.image) : undefined;
 
     const newPost: Post = {
-        id: Date.now(),
-        type: currentFormType as 'photo' | 'comment' | 'overview',
-        userImg: '',
-        userName: '',
-        userSurname: '',
-        time: new Date().toLocaleString(),
-        tripName: formData.title,
-        postImage: postImage,
-        commentText: formData.comment,
-        images: formData.images,
-        rating: formData.rating
+      id: Date.now(),
+      type: currentFormType as 'photo' | 'comment' | 'overview',
+      userImg: '',
+      userName: '',
+      userSurname: '',
+      time: new Date().toLocaleString(),
+      tripName: formData.title,
+      postImage: postImage,
+      commentText: formData.comment
     };
 
     onAddPost(newPost);
     setFormOpen(false);
-};
+  };
 
   const shareActions = [
     { imgSrc: '/img/profile/Star.svg', text: 'Создать отзыв', type: 'comment' },
@@ -69,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         <h5 className="text-black font-bold text-2xl mb-4">Подписчики</h5>
         <div className="flex flex-wrap gap-[16px] list-none">
           {Array.from({ length: subscribers }).map((_, index) => (
-              <Image key={index} src="/img/user-photo.png" width={52} height={52} alt={`Пользователь ${index + 1}`} className="rounded-full" />
+            <Image key={index} src="/img/user-photo.png" width={52} height={52} alt={`Пользователь ${index + 1}`} className="rounded-full" />
           ))}
         </div>
       </div>
@@ -78,11 +76,11 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         <h5 className="text-black font-bold text-2xl mb-4">Обо мне</h5>
         <div className="flex items-center gap-2 mb-2">
           <Image src="/img/profile/Map Point.svg" width={19} height={19} alt="location" />
-          <p className='text-sm'>{location}</p>
+          <p className='text-sm'>{city}</p>
         </div>
         <div className="flex gap-2 mb-2">
           <Image src="/img/profile/Calendar.svg" className="mb-auto" width={19} height={19} alt="date" />
-          <p className='text-sm'>С ToTrip вместе с {new Date().toLocaleDateString('ru-RU')}!</p>
+          <p className='text-sm'>С ToTrip вместе с {registrationDate}!</p>
         </div>
         <p className='text-sm'>{motto}</p>
       </div>
@@ -106,6 +104,6 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
       )}
     </div>
   );
-}
+};
 
 export default Sidebar;

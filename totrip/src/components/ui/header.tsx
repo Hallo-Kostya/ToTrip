@@ -9,42 +9,31 @@ import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
 const Header: React.FC = () => {
-    const { first_name, last_name, userImg, setUserContext } = useUser();
-    const isRegistered = Boolean(first_name && last_name);
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
-    const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
+  const { first_name, last_name, userImg, setUserContext } = useUser();
+  const isRegistered = Boolean(first_name && last_name);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     setIsConfirmLogoutVisible(true);
   };
 
-//   const confirmLogout = async () => {
-//     try {
-//       const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ refresh: localStorage.getItem('refresh') }), // обновил на 'refresh'
-//       });
-
-//       if (!response.ok) {
-//         console.error('Ошибка при выходе');
-//         return;
-//       }
-
-//       localStorage.removeItem('refresh');
-//       setUserContext(null); // Очистить состояние пользователя
-//       setIsConfirmLogoutVisible(false);
-//     } catch (error) {
-//       console.error('Ошибка сети:', error);
-//     }
-//   };
-
   const confirmLogout = async () => {
     try {
+      const accessToken = localStorage.getItem('access');
       const refreshToken = localStorage.getItem('refresh');
+
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+
+      if (accessToken) {
+        headers['Authorization'] = `Bearer ${accessToken}`;
+      }
+
       const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify({ refresh: refreshToken }),
       });
 
@@ -54,37 +43,42 @@ const Header: React.FC = () => {
       }
 
       localStorage.removeItem('refresh');
+      localStorage.removeItem('access');
       setUserContext({ first_name: '', last_name: '', userImg: '/img/no-user-icon.png' });
       setIsConfirmLogoutVisible(false);
+      window.location.reload(); // автоматическое обновление страницы
     } catch (error) {
       console.error('Ошибка сети:', error);
     }
   };
 
-  const handleRegister = (userData: { first_name: string; last_name: string; }) => {
-    setUserContext(userData);
-  };
-
   useEffect(() => {
-    // Проверка аутентификации пользователя из localStorage
-    const refreshToken = localStorage.getItem('refresh');
-    if (refreshToken) {
-      // Запрос для обновления профиля или аутентификации
-      (async () => {
-        const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
-          headers: { Authorization: `Bearer ${refreshToken}` }
-        });
-        if (response.ok) {
-          const userData = await response.json();
-          setUserContext({
-            first_name: userData.first_name,
-            last_name: userData.last_name,
+    const accessToken = localStorage.getItem('access');
+    if (accessToken && !isRegistered) {  // предотвращение повторных запросов
+      const fetchUserProfile = async () => {
+        try {
+          const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
+            headers: { Authorization: `Bearer ${accessToken}` }
           });
-        }
-      })();
-    }
-  }, [setUserContext]);
 
+          if (response.ok) {
+            const userData = await response.json();
+            setUserContext({
+              first_name: userData.first_name,
+              last_name: userData.last_name,
+              userImg: userData.photo || '/img/no-user-icon.png',
+            });
+          } else {
+            console.error('Ошибка получения профиля');
+          }
+        } catch (error) {
+          console.error('Ошибка сети:', error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, [isRegistered, setUserContext]);
 
   return (
     <header className={styles.showcase}>
@@ -110,7 +104,7 @@ const Header: React.FC = () => {
             <li className={styles['menu-item']}><Link href="/">Отзывы</Link></li>
           </ul>
           <div className={styles.profile}>
-            {isRegistered? (
+            {isRegistered ? (
               <div className={`${styles['profile-inf']} flex`}>
                 <div>
                   <p className="mt-2 user-name">{first_name} {last_name}</p>
@@ -118,7 +112,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className={styles['user-icon']}>
                   <Link href="/profile">
-                    <Image src="/img/common/main-logo.svg" alt="Профиль" width={52} height={52} />
+                    <Image src={userImg} alt="Профиль" width={52} height={52} />
                   </Link>
                 </div>
               </div>
@@ -138,7 +132,7 @@ const Header: React.FC = () => {
           </div>
         </nav>
       </div>
-      {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} onRegister={handleRegister} />}
+      {isPopupVisible && <RegistrationPopup onClose={() => setIsPopupVisible(false)} />}
       {isConfirmLogoutVisible && (
         <ConfirmLogoutPopup
           onConfirm={confirmLogout}

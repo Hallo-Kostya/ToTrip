@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useEffect, useState } from 'react';
 import AvatarUploader from './avatarUploader';
 import Image from 'next/image';
@@ -7,12 +5,14 @@ import { UserData } from '@/components/ui/types';
 
 interface UserProfile {
     avatar: string;
-    name: string;
-    surname: string;
+    first_name: string;
+    last_name: string;
     username: string;
-    location: string;
-    about: string;
+    city: string;
+    country: string;
+    bio: string;
     motto: string;
+    phone_number: string;
 }
 
 interface PopupControlsProps {
@@ -20,14 +20,13 @@ interface PopupControlsProps {
     onClose: () => void;
     onSubmit: (data: UserData) => void;
     onAvatarChange: (newImg: string) => void;
-    initialData?: UserData;
+    initialData: UserData;
 }
 
 const popularCities = [
     "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
     "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск",
     "Ростов-на-Дону", "Уфа", "Красноярск", "Воронеж", "Краснодар",
-
 ];
 
 const Popup: React.FC<PopupControlsProps> = ({
@@ -39,12 +38,14 @@ const Popup: React.FC<PopupControlsProps> = ({
 }) => {
     const [profileData, setProfileData] = useState<UserProfile>({
         avatar: initialData?.avatar || '',
-        name: initialData?.name || '',
-        surname: initialData?.surname || '',
+        first_name: initialData?.first_name || '',
+        last_name: initialData?.last_name || '',
         username: initialData?.username || '',
-        location: initialData?.location || '',
-        about: initialData?.about || '',
-        motto: initialData?.motto || ''
+        city: initialData?.city || '',
+        country: initialData?.country || '',
+        bio: initialData?.bio || '',
+        motto: initialData?.motto || '',
+        phone_number: initialData?.phone_number || '',
     });
 
     const [errors, setErrors] = useState<Partial<UserProfile>>({});
@@ -59,17 +60,17 @@ const Popup: React.FC<PopupControlsProps> = ({
 
     const validateFields = () => {
         const newErrors: Partial<UserProfile> = {};
-        if (!profileData.name.trim()) {
-            newErrors.name = "Имя обязательно";
+        if (!profileData.first_name.trim()) {
+            newErrors.first_name = "Имя обязательно";
         }
-        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.name)) {
-            newErrors.name = "Разрешены только буквы и пробелы";
+        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.first_name)) {
+            newErrors.first_name = "Разрешены только буквы и пробелы";
         }
-        if (!profileData.surname.trim()) {
-            newErrors.surname = "Фамилия обязательна";
+        if (!profileData.last_name.trim()) {
+            newErrors.last_name = "Фамилия обязательна";
         }
-        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.surname)) {
-            newErrors.surname = "Разрешены только буквы и пробелы";
+        if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.last_name)) {
+            newErrors.last_name = "Разрешены только буквы и пробелы";
         }
         if (!/^(?!.*[:&!?]).*$/.test(profileData.username)) {
             newErrors.username = "Недопустимые символы: : & ! ?";
@@ -91,7 +92,7 @@ const Popup: React.FC<PopupControlsProps> = ({
         if (validateFields()) {
             onAvatarChange(tempAvatar);
             onSubmit({
-                ...profileData, avatar: tempAvatar, newImg: ''
+                ...profileData, avatar: tempAvatar
             });
             onClose();
         }
@@ -100,7 +101,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setProfileData(prevState => ({
             ...prevState,
-            location: event.target.value
+            city: event.target.value
         }));
     };
 
@@ -119,31 +120,27 @@ const Popup: React.FC<PopupControlsProps> = ({
                                 <h5 className="text-[24px] font-bold mb-[4px]">Имя</h5>
                                 <input
                                     type="text"
-                                    name="name"
-                                    value={profileData.name}
+                                    name="first_name"
+                                    value={profileData.first_name}
                                     placeholder="Введите имя"
                                     className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
                                     onChange={handleChange}
                                     required
-                                    pattern="[A-Za-zА-Яа-яёЁ\s]*"
-                                    title="Разрешены буквы и пробелы"
                                 />
-                                {errors.name && <p className="text-red-500">{errors.name}</p>}
+                                {errors.first_name && <p className="text-red-500">{errors.first_name}</p>}
                             </div>
                             <div className="mb-[12px]">
                                 <h5 className="text-[24px] font-bold mb-[4px]">Фамилия</h5>
                                 <input
                                     type="text"
-                                    name="surname"
-                                    value={profileData.surname}
+                                    name="last_name"
+                                    value={profileData.last_name}
                                     placeholder="Введите фамилию"
                                     className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
                                     onChange={handleChange}
                                     required
-                                    pattern="[A-Za-zА-Яа-яёЁ\s]*"
-                                    title="Разрешены буквы и пробелы"
                                 />
-                                {errors.surname && <p className="text-red-500">{errors.surname}</p>}
+                                {errors.last_name && <p className="text-red-500">{errors.last_name}</p>}
                             </div>
                         </div>
                     </div>
@@ -157,8 +154,6 @@ const Popup: React.FC<PopupControlsProps> = ({
                             className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
                             onChange={handleChange}
                             required
-                            pattern="^(?!.*[:&!?]).*$"
-                            title="Недопустимые символы: : & ! ?"
                         />
                         {errors.username && <p className="text-red-500">{errors.username}</p>}
                     </div>
@@ -167,8 +162,8 @@ const Popup: React.FC<PopupControlsProps> = ({
                         <div className="relative">
                             <Image src="/img/profile/Map Point.svg" alt="" className="absolute left-3 top-1/2 transform -translate-y-1/2" width={20} height={20} />
                             <select
-                                name="location"
-                                value={profileData.location}
+                                name="city"
+                                value={profileData.city}
                                 onChange={handleLocationChange}
                                 className="p-[12px] pl-[36px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
                                 required
@@ -178,21 +173,41 @@ const Popup: React.FC<PopupControlsProps> = ({
                                     <option key={city} value={city}>{city}</option>
                                 ))}
                             </select>
-                            {errors.location && <p className="text-red-500">{errors.location}</p>}
                         </div>
+                    </div>
+                    <div className="mb-[12px]">
+                        <h5 className="text-[24px] font-bold mb-[4px]">Страна</h5>
+                        <input
+                            type="text"
+                            name="country"
+                            value={profileData.country}
+                            placeholder="Введите страну"
+                            className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className="mb-[8px]">
                         <h5 className="text-[24px] font-bold mb-[4px]">О себе</h5>
                         <textarea
-                            name="about"
-                            value={profileData.about}
+                            name="bio"
+                            value={profileData.bio}
                             placeholder="Расскажите о себе"
                             className="p-[12px] border rounded-[12px] border-[#8F8F8F] w-full"
                             onChange={handleChange}
                             maxLength={500}
                             required
                         />
-                        {errors.about && <p className="text-red-500">{errors.about}</p>}
+                    </div>
+                    <div className="mb-[12px]">
+                        <h5 className="text-[24px] font-bold mb-[4px]">Телефон</h5>
+                        <input
+                            type="tel"
+                            name="phone_number"
+                            value={profileData.phone_number}
+                            placeholder="Введите номер телефона"
+                            className="p-[12px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className="mb-[32px]">
                         <h5 className="text-[24px] font-bold mb-[4px]">Девиз</h5>
@@ -203,9 +218,7 @@ const Popup: React.FC<PopupControlsProps> = ({
                             className="p-[12px] border rounded-[12px] border-[#8F8F8F] w-full"
                             onChange={handleChange}
                             maxLength={200}
-                            required
                         />
-                        {errors.motto && <p className="text-red-500">{errors.motto}</p>}
                     </div>
                 </div>
                 <div className="flex justify-between w-full">

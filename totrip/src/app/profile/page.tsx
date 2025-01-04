@@ -4,14 +4,7 @@ import React from 'react';
 import Profile from '@/components/ui/profile/profile';
 import Headlines from '@/components/ui/profile/headlines';
 
-// Интерфейс для свойств страницы
-interface PageProps {
-  onUserDataUpdate?: (newImg: string, newName: string) => void;
-}
-
-// Главный компонент страницы профиля
-const Page: React.FC<PageProps> = () => {
-  // Состояние активной вкладки для фильтрации контента
+const Page = () => {
   
   return (
     <main className="w-full mb-[100px]">

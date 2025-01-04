@@ -1,13 +1,10 @@
-'use client';
-
 import React, { useState } from 'react';
 import Popup from '@/components/ui/profile/popup';
 import Image from 'next/image';
-import { UserData } from '@/components/ui/types';
 import { useUser } from '@/app/userContext';
 
 const Profile: React.FC = () => {
-    const { nickname, userName, userSurname, userImg, location, motto, profileDesc, setUserContext } = useUser();
+    const { username, first_name, last_name, userImg, city, country, motto, bio, phone_number, setUserContext } = useUser();
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handleOpenPopup = () => {
@@ -18,21 +15,37 @@ const Profile: React.FC = () => {
         setPopupOpen(false);
     };
 
-    const handleSubmit = (data: UserData) => {
-        setUserContext({
-            nickname: data.username,
-            userName: data.name,
-            userSurname: data.surname,
-            userImg: data.avatar,
-            location: data.location,
-            motto: data.motto,
-            profileDesc: data.about
-        });
-        setPopupOpen(false);
-    };
-
-    const handleAvatarChange = (newImg: string) => {
-        setUserContext({ userImg: newImg });
+    const handleSubmit = (data: unknown) => {
+        const accessToken = localStorage.getItem('access');
+        if (accessToken) {
+            fetch('http://127.0.0.1:8000/api/users/profile/edit/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.ok ? response.json() : Promise.reject(response))
+            .then(updatedData => {
+                setUserContext({
+                    username: updatedData.username,
+                    first_name: updatedData.first_name,
+                    last_name: updatedData.last_name,
+                    userImg: updatedData.photo || '',
+                    city: updatedData.city || '',
+                    country: updatedData.country || '',
+                    motto: updatedData.motto || '',
+                    bio: updatedData.bio || '',
+                    phone_number: updatedData.phone_number || '',
+                });
+                setPopupOpen(false);
+            })
+            .catch(error => {
+                console.error('Ошибка обновления профиля:', error);
+                alert('Не удалось обновить профиль. Попробуйте снова.');
+            });
+        }
     };
 
     return (
@@ -41,28 +54,30 @@ const Profile: React.FC = () => {
                 <div className="flex gap-6">
                     <Image className="w-[160px] h-[160px] object-cover rounded-full" src={userImg} width={160} height={160} alt="Фото профиля" />
                     <div className="flex flex-col mt-2">
-                        <h6 className="text-gray-600 font-bold text-[20px]">@{nickname}</h6>
-                        <h4 className="font-bold text-[32px]">{userName} {userSurname}</h4>
-                        <h6 className="mt-13 text-gray-600 font-bold text-[20px]">{profileDesc}</h6>
+                        <h6 className="text-gray-600 font-bold text-[20px]">@{username}</h6>
+                        <h4 className="font-bold text-[32px]">{first_name} {last_name}</h4>
+                        <h6 className="mt-13 text-gray-600 font-bold text-[20px]">{bio}</h6>
                     </div>
                 </div>
-                    <a href="#" onClick={handleOpenPopup}>
-                        <Image src="/img/profile/Settings.svg" alt="Настройки профиля" width={32} height={32} className="hover:cursor-pointer" />
-                    </a>
+                <a href="#" onClick={handleOpenPopup}>
+                    <Image src="/img/profile/Settings.svg" alt="Настройки профиля" width={32} height={32} className="hover:cursor-pointer" />
+                </a>
             </div>
             <Popup
                 isOpen={isPopupOpen}
                 onClose={handleClosePopup}
                 onSubmit={handleSubmit}
-                onAvatarChange={handleAvatarChange}
+                onAvatarChange={(newImg: string) => setUserContext({ userImg: newImg })}
                 initialData={{
                     avatar: userImg,
-                    name: userName,
-                    surname: userSurname,
-                    username: nickname,
-                    location: location,
-                    about: profileDesc,
-                    motto: motto
+                    first_name: first_name,
+                    last_name: last_name,
+                    username: username,
+                    city: city,
+                    country: country,
+                    bio: bio,
+                    motto: motto,
+                    phone_number: phone_number
                 }}
             />
         </section>

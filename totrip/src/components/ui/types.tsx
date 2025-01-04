@@ -1,12 +1,14 @@
 export interface UserData {
     first_name: string;
     last_name: string;
-    login: string;
+    username: string;
     newImg?: string;
-    about: string;
-    location: string;
+    bio: string;
+    city: string;
     motto: string;
+    country: string;
     avatar?: string;
+    phone_number: string;
 }
 
 export interface TripData {
