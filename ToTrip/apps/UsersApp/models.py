@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
         return self.create_user(email, username, password, **extra_fields)
 
@@ -33,10 +33,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     bio = models.TextField(blank=True, null=True)
+    slogan = models.CharField(max_length=100, null=True)
     photo = models.ImageField(upload_to='user_photos/', blank=True, default='user_photos/default_avatar.png')
     last_login = models.DateTimeField(default=timezone.now, null=False)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
     city=models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=50, null=True)
     followers=models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)

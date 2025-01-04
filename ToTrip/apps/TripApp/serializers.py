@@ -1,19 +1,18 @@
 from rest_framework import serializers
-from .models import Trip, SubTrip, SubtripReviewPlace
+from .models import Trip, SubTrip, SubtripPlace
 from apps.UsersApp.serializers import FollowSerializer
 from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer
-from apps.PlaceApp.models import City,Place
+from apps.PlaceApp.models import City, Place
 from apps.ReviewApp.models import Review
 from apps.UsersApp.models import User 
 from apps.ReviewApp.serializers import ReviewSerializer
 
-class SubtripReviewPlaceSerializer(serializers.ModelSerializer):
+class SubtripPlaceSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all(), source='place', write_only=True)
-    review = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all(), required=False, allow_null=True)
     place = PlaceSerializer(read_only=True)
     class Meta:
-        model = SubtripReviewPlace
-        fields = ["id", "place_id", "review", "place"]
+        model = SubtripPlace
+        fields = ["id", "place_id", "place"]
 
     def to_representation(self, instance):
         """Добавляем полную информацию о месте при запросе"""
@@ -22,7 +21,7 @@ class SubtripReviewPlaceSerializer(serializers.ModelSerializer):
         return representation
 
 class SubTripSerializer(serializers.ModelSerializer):
-    subtrip_places = SubtripReviewPlaceSerializer(many = True)
+    subtrip_places = SubtripPlaceSerializer(many = True)
     trip_id = serializers.PrimaryKeyRelatedField(queryset=Trip.objects.all(), write_only=True)
     class Meta:
         model = SubTrip
@@ -38,7 +37,7 @@ class SubTripSerializer(serializers.ModelSerializer):
         # Создаем связанные места для SubTrip
         for place_data in places_data:
             place = place_data.pop('place')
-            SubtripReviewPlace.objects.create(subtrip=subtrip, place=place, **place_data)
+            SubtripPlace.objects.create(subtrip=subtrip, place=place, **place_data)
         
         return subtrip
 
