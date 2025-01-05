@@ -9,7 +9,7 @@ import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
 const Header: React.FC = () => {
-  const { first_name, last_name, userImg, setUserContext } = useUser();
+  const { first_name, last_name, photo, setUserContext } = useUser();
   const isRegistered = Boolean(first_name && last_name);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isConfirmLogoutVisible, setIsConfirmLogoutVisible] = useState(false);
@@ -44,9 +44,9 @@ const Header: React.FC = () => {
 
       localStorage.removeItem('refresh');
       localStorage.removeItem('access');
-      setUserContext({ first_name: '', last_name: '', userImg: '/img/no-user-icon.png' });
+      setUserContext({ first_name: '', last_name: '', photo: '' });
       setIsConfirmLogoutVisible(false);
-      window.location.reload(); // автоматическое обновление страницы
+      window.location.reload();
     } catch (error) {
       console.error('Ошибка сети:', error);
     }
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access');
-    if (accessToken && !isRegistered) {  // предотвращение повторных запросов
+    if (accessToken && !isRegistered) {
       const fetchUserProfile = async () => {
         try {
           const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
@@ -66,7 +66,7 @@ const Header: React.FC = () => {
             setUserContext({
               first_name: userData.first_name,
               last_name: userData.last_name,
-              userImg: userData.photo || '/img/no-user-icon.png',
+              photo: userData.photo || '', 
             });
           } else {
             console.error('Ошибка получения профиля');
@@ -112,7 +112,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className={styles['user-icon']}>
                   <Link href="/profile">
-                    <Image src={userImg} alt="Профиль" width={52} height={52} />
+                    <Image src={photo} alt="Профиль" width={52} height={52} />
                   </Link>
                 </div>
               </div>

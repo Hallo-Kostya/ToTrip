@@ -5,10 +5,11 @@ export interface UserData {
     newImg?: string;
     bio: string;
     city: string;
-    motto: string;
+    slogan: string;
     country: string;
-    avatar?: string;
+    photo: string;
     phone_number: string;
+    created_at: string;
 }
 
 export interface TripData {

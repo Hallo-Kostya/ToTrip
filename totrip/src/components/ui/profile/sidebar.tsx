@@ -21,7 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
-  const { city, motto, registrationDate } = useUser();
+  const { city, country, slogan, created_at, setUserContext } = useUser();
   const [isFormOpen, setFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState<'comment' | 'photo' | 'overview' | 'place' | null>(null);
 
@@ -61,6 +61,17 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
     { imgSrc: '/img/profile/Camera.svg', text: 'Выложить фото', type: 'photo' }
   ];
 
+  function formatDate(createdAt: string): string {
+    const date = new Date(createdAt);
+
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // Январь — 0, поэтому добавляем 1
+    const year = date.getUTCFullYear();
+
+    return `${day}.${month}.${year}`;
+}
+
+
   return (
     <div className="flex flex-col relative left-0 top-0 gap-4 max-w-[256px]">
       <div className="bg-white rounded-2xl shadow-md p-[32px]">
@@ -76,13 +87,13 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         <h5 className="text-black font-bold text-2xl mb-4">Обо мне</h5>
         <div className="flex items-center gap-2 mb-2">
           <Image src="/img/profile/Map Point.svg" width={19} height={19} alt="location" />
-          <p className='text-sm'>{city}</p>
+          <p className='text-sm'>{city || 'Город не указан'}, {country}</p>
         </div>
         <div className="flex gap-2 mb-2">
           <Image src="/img/profile/Calendar.svg" className="mb-auto" width={19} height={19} alt="date" />
-          <p className='text-sm'>С ToTrip вместе с {registrationDate}!</p>
+          <p className='text-sm'>С ToTrip с {formatDate(created_at) || 'Дата не указана'}!</p>
         </div>
-        <p className='text-sm'>{motto}</p>
+        <p className='text-sm'>{slogan || 'Девиз отсутствует'}</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-md p-8">

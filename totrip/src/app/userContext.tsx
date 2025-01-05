@@ -6,13 +6,13 @@ interface UserContextState {
   username: string;
   first_name: string;
   last_name: string;
-  userImg: string;
+  photo: string;
   city: string;
   country: string;
-  motto: string;
+  slogan: string;
   bio: string;
   phone_number: string;
-  registrationDate: string;
+  created_at: string;
   setUserContext: (data: Partial<UserContextState>) => void;
 }
 
@@ -23,13 +23,13 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     username: '',
     first_name: '',
     last_name: '',
-    userImg: '',
+    photo: '',
     city: '',
     country: '',
-    motto: '',
+    slogan: '',
     bio: '',
     phone_number: '',
-    registrationDate: ''
+    created_at: ''
   });
 
   const setUserContext = (data: Partial<UserContextState>) => {
@@ -56,13 +56,13 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
               username: userData.username,
               first_name: userData.first_name,
               last_name: userData.last_name,
-              userImg: userData.photo || '',
+              photo: userData.photo || '',
               city: userData.city || '',
               country: userData.country || '',
-              motto: userData.motto || '',
+              slogan: userData.slogan || '',
               bio: userData.bio || '',
               phone_number: userData.phone_number || '',
-              registrationDate: userData.registration_date || ''
+              created_at: userData.created_at || ''
             });
           } else {
             console.error('Ошибка получения профиля:', response.statusText);
