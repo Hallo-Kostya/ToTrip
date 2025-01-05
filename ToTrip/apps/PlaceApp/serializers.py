@@ -50,6 +50,7 @@ class PlaceSerializer(serializers.ModelSerializer):
             "is_favorite",
             "placeimage_set",
             "reviews",
+            "reviews_count",
             "review_ids"
         ]
     def get_is_favorite(self,obj):
@@ -60,14 +61,6 @@ class PlaceSerializer(serializers.ModelSerializer):
         except AttributeError:
             return False
             
-    def get_avg_rating(self, obj):
-        try:
-            reviews = Review.objects.filter(place_id = obj.id).values_list('rating', flat = True)
-            print(reviews)
-            rating = sum(reviews)/len(reviews)
-            return rating
-        except Review.DoesNotExist:
-            return 0.0
 
     def create(self, validated_data):
         categories_data = validated_data.pop('category_ids')

@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from apps.PlaceApp.models import  City, Place,  Country, District,  Region
+from apps.ReviewApp.models import Review
+from apps.PlaceApp.serializers import CategorySerializer
 from django.contrib.auth import authenticate
 from PIL import Image
 import os
@@ -111,6 +113,7 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
     region_name = serializers.CharField(source="city.region.name", read_only=True)
     district_name = serializers.CharField(source="city.region.district.name", read_only=True)
     country_name = serializers.CharField(source="country.name", read_only=True)
+    categories = CategorySerializer(many=True, read_only=True)
     class Meta:
         model = Place
         fields = [
@@ -121,7 +124,10 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
             "district_name",
             "country_name",
             "address",
-            "search_image"
+            "search_image",
+            "categories",
+            "avg_rating",
+            "reviews_count"
         ]
 
     def get_search_image(self, obj):
