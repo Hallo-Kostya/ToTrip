@@ -21,7 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
-  const { city, country, slogan, created_at, setUserContext } = useUser();
+  const { city, country, slogan, created_at } = useUser();
   const [isFormOpen, setFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState<'comment' | 'photo' | 'overview' | 'place' | null>(null);
 

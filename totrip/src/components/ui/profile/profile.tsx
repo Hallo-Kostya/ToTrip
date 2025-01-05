@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useUser } from '@/app/userContext';
 
 const Profile: React.FC = () => {
-  const { username, first_name, last_name, photo, city, country, slogan, bio, phone_number, created_at, setUserContext } = useUser();
+  const { username, first_name, last_name, photo, city, country, slogan, bio, phone_number, setUserContext } = useUser();
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
@@ -15,19 +15,25 @@ const Profile: React.FC = () => {
     setPopupOpen(false);
   };
 
-  const handleSubmit = (formData: unknown) => {
+  const handleSubmit = (formData: { [s: string]: unknown; } | ArrayLike<unknown>) => {
     const accessToken = localStorage.getItem('access');
     if (accessToken) {
+      const formDataObject = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          formDataObject.append(key, value instanceof File ? value : value.toString());
+        }
+      });
+
       fetch('http://127.0.0.1:8000/api/users/profile/edit/', {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(formData),
+        body: formDataObject,
       })
-        .then(response => response.ok ? response.json() : Promise.reject(response))
-        .then(updatedData => {
+        .then((response) => response.ok ? response.json() : Promise.reject(response))
+        .then((updatedData) => {
           setUserContext({
             username: updatedData.username,
             first_name: updatedData.first_name,
@@ -41,8 +47,9 @@ const Profile: React.FC = () => {
             created_at: updatedData.created_at || '',
           });
           setPopupOpen(false);
+          window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Ошибка обновления профиля:', error);
           alert('Не удалось обновить профиль. Попробуйте снова.');
         });
@@ -68,7 +75,7 @@ const Profile: React.FC = () => {
         isOpen={isPopupOpen}
         onClose={handleClosePopup}
         onSubmit={handleSubmit}
-        onAvatarChange={(newImg: string) => setUserContext({ photo: newImg })}
+        onAvatarChange={(newImg: File | null) => setUserContext({ photo: newImg })}
         initialData={{
           photo: photo,
           first_name: first_name,

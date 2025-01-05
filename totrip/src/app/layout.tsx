@@ -11,15 +11,15 @@ export const metadata: Metadata = {
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <html lang="ru">
-      <body className={`${manrope.className} antialiased bg-customGray`}>
-        <UserProvider>
+    <UserProvider>
+      <html lang="ru">
+        <body className={`${manrope.className} antialiased bg-customGray`}>
           <Header />
             {children}
           <Footer />
-        </UserProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </UserProvider>
   );
 }
 

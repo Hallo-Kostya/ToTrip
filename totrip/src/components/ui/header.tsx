@@ -8,6 +8,8 @@ import { useUser } from '@/app/userContext';
 import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
+const BASE_URL = 'http://127.0.0.1:8000';
+
 const Header: React.FC = () => {
   const { first_name, last_name, photo, setUserContext } = useUser();
   const isRegistered = Boolean(first_name && last_name);
@@ -31,7 +33,7 @@ const Header: React.FC = () => {
         headers['Authorization'] = `Bearer ${accessToken}`;
       }
 
-      const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
+      const response = await fetch(`${BASE_URL}/api/users/logout/`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({ refresh: refreshToken }),
@@ -57,16 +59,17 @@ const Header: React.FC = () => {
     if (accessToken && !isRegistered) {
       const fetchUserProfile = async () => {
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
+          const response = await fetch(`${BASE_URL}/api/users/profile/`, {
             headers: { Authorization: `Bearer ${accessToken}` }
           });
 
           if (response.ok) {
             const userData = await response.json();
+            const photoUrl = userData.photo ? `${BASE_URL}${userData.photo}` : '';
             setUserContext({
               first_name: userData.first_name,
               last_name: userData.last_name,
-              photo: userData.photo || '', 
+              photo: photoUrl,
             });
           } else {
             console.error('Ошибка получения профиля');

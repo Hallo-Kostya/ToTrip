@@ -3,7 +3,7 @@ import AvatarUploader from './avatarUploader';
 import Image from 'next/image';
 
 interface UserProfile {
-  photo: string;
+  photo: File | null;
   first_name: string;
   last_name: string;
   username: string;
@@ -18,7 +18,7 @@ interface PopupControlsProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: UserProfile) => void;
-  onAvatarChange: (newImg: string) => void;
+  onAvatarChange: (newImg: File | null) => void;
   initialData: UserProfile;
 }
 
@@ -48,12 +48,15 @@ const Popup: React.FC<PopupControlsProps> = ({
   });
 
   const [errors, setErrors] = useState<Partial<UserProfile>>({});
-  const [tempAvatar, setTempAvatar] = useState<string>('');
+  const [tempAvatar, setTempAvatar] = useState<File | null>(null);
 
   useEffect(() => {
     if (isOpen && initialData) {
-      setProfileData(initialData);
-      setTempAvatar(initialData.photo || '');
+      setProfileData({
+        ...initialData,
+        photo: null
+      });
+      setTempAvatar(null);
     }
   }, [isOpen, initialData]);
 
@@ -86,14 +89,14 @@ const Popup: React.FC<PopupControlsProps> = ({
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     if (validateFields()) {
-      onAvatarChange(tempAvatar);
-      onSubmit({
-        ...profileData, photo: tempAvatar
-      });
-      onClose();
+      const formDataToSubmit: UserProfile = {
+        ...profileData,
+        photo: tempAvatar,
+      };
+      onSubmit(formDataToSubmit);
     }
   };
 
@@ -104,7 +107,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     }));
   };
 
-  const handleAvatarChange = (newAvatar: string) => {
+  const handleAvatarChange = (newAvatar: File | null) => {
     setTempAvatar(newAvatar);
   };
 
@@ -113,7 +116,7 @@ const Popup: React.FC<PopupControlsProps> = ({
       <form className="w-[522px] bg-white rounded-[16px] p-6 space-y-4 shadow-lg items-start mx-auto" onSubmit={handleSubmit}>
         <div>
           <div className="flex">
-            <AvatarUploader currentAvatar={tempAvatar} onAvatarChange={handleAvatarChange} />
+            <AvatarUploader currentAvatar={profileData.photo} onAvatarChange={handleAvatarChange} />
             <div className="w-[246px] ml-4">
               <div className="mb-[12px]">
                 <h5 className="text-[24px] font-bold mb-[4px]">Имя</h5>

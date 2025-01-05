@@ -2,7 +2,7 @@ export interface UserData {
     first_name: string;
     last_name: string;
     username: string;
-    newImg?: string;
+    newImg: string;
     bio: string;
     city: string;
     slogan: string;

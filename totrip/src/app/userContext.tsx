@@ -16,6 +16,8 @@ interface UserContextState {
   setUserContext: (data: Partial<UserContextState>) => void;
 }
 
+const BASE_URL = 'http://127.0.0.1:8000';
+
 const UserContext = createContext<UserContextState | undefined>(undefined);
 
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -52,11 +54,12 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
           if (response.ok) {
             const userData = await response.json();
+            const photoUrl = userData.photo ? `${BASE_URL}${userData.photo}` : '';
             setUserContext({
               username: userData.username,
               first_name: userData.first_name,
               last_name: userData.last_name,
-              photo: userData.photo || '',
+              photo: photoUrl || '',
               city: userData.city || '',
               country: userData.country || '',
               slogan: userData.slogan || '',
@@ -86,6 +89,7 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
+    console.error("useUser должен использоваться внутри UserProvider");
     throw new Error("useUser должен использоваться внутри UserProvider");
   }
   return context;
