@@ -71,7 +71,7 @@ class PlaceDetailAPIView(APIView):
     def get(self, request, pk):
         try:
             place = Place.objects.get(pk=pk)
-            serializer = PlaceSerializer(place)
+            serializer = PlaceSerializer(place, context = {"request": request})
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Place.DoesNotExist:
             return Response(

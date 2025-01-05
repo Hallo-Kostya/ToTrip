@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from .models import User
 from django.contrib.auth import authenticate
-from apps.ReviewApp.serializers import ReviewSerializer
+
 from apps.PostApp.serializers import PostSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework.exceptions import ValidationError
@@ -55,8 +55,10 @@ class UserSerializer(serializers.ModelSerializer):
     followers_count = serializers.IntegerField(source="followers.count", read_only=True)
     following_count = serializers.IntegerField(source="following.count", read_only=True)
     followers = FollowSerializer(many=True, read_only=True)
-    user_reviews = ReviewSerializer(many=True, read_only = True)
+    # user_reviews = ReviewSerializer(many=True, read_only = True)
     user_posts = PostSerializer(many=True, read_only = True)
+    # is_following = serializers.SerializerMethodField()
+    # is_followed = serializers.SerializerMethodField()
     class Meta:
         model = User
         fields = [
@@ -81,6 +83,13 @@ class UserSerializer(serializers.ModelSerializer):
             "user_reviews",
             "user_posts"
         ]
+    
+    # def get_is_following(self, obj):
+    #     try:
+    #         curr_user = self.context.get('request').user
+    #         if obj in self.validated_data.get('followers'):
+    #             return True
+    #         return False
 
 
 class UserEditSerializer(serializers.ModelSerializer):

@@ -6,7 +6,7 @@ class Review(models.Model):
     """модель отзыва, включающая связь с местом, юзером(автором), рейтинг и сам текст отзыва с временем написания"""
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     author = models.ForeignKey(User, related_name='user_reviews', on_delete=models.CASCADE)
-    rating = models.IntegerField()
+    rating = models.FloatField()
     text = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

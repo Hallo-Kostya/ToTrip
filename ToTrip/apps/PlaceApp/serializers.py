@@ -1,8 +1,10 @@
 from rest_framework import serializers
-from .models import  Place, City, District, Country, Region, Category
+from .models import  Place, City, District, Country, Region, Category, FavoritePlace
+from apps.UsersApp.models import User
 from apps.ReviewApp.models import Review
 from apps.ImageApp.serializers import PlaceImageSerializer
 from apps.ReviewApp.serializers import ReviewSerializer
+
 class CategorySerializer(serializers.ModelSerializer):
     """класс для преобразования категории мест в json формат и наоборот"""
     class Meta:
@@ -11,6 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class PlaceSerializer(serializers.ModelSerializer):
     """класс для преобразования места в json формат и наоборот"""
+    is_favorite = serializers.SerializerMethodField()
     placeimage_set = PlaceImageSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only = True)
     review_ids = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all(), many=True, write_only=True)  
@@ -24,6 +27,7 @@ class PlaceSerializer(serializers.ModelSerializer):
     country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
     category_ids = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True, write_only=True)  
+    avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Place
         fields = [
@@ -43,13 +47,28 @@ class PlaceSerializer(serializers.ModelSerializer):
             "categories",
             "description",
             "avg_rating",
-            "longitude",
-            "latitude",
-            "working_hours",
+            "is_favorite",
             "placeimage_set",
             "reviews",
             "review_ids"
         ]
+    def get_is_favorite(self,obj):
+        try:
+            user = self.context.get('request').user
+            favorite = FavoritePlace.objects.filter(user_id = user.id, place_id = obj.id).exists()
+            return favorite
+        except AttributeError:
+            return False
+            
+    def get_avg_rating(self, obj):
+        try:
+            reviews = Review.objects.filter(place_id = obj.id).values_list('rating', flat = True)
+            print(reviews)
+            rating = sum(reviews)/len(reviews)
+            return rating
+        except Review.DoesNotExist:
+            return 0.0
+
     def create(self, validated_data):
         categories_data = validated_data.pop('category_ids')
         place = Place.objects.create(**validated_data)

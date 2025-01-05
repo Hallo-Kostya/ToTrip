@@ -32,10 +32,13 @@ class RegisterView(APIView):
     """класс для регистрации пользователя, принимающий username, password, last_name, email, first_name как обязательные параметры"""
     renderer_classes = [UserJSONRenderer]
     def post(self, request):
+        if request.user:
+            return Response({"error":"Вы уже авторизованы"},
+                status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):   
             user = serializer.save()
-            return Response({"message":"Вы успешно зарегистрированы!"},
+            return Response({"user": user.data},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -61,6 +64,9 @@ class LogoutView(APIView):
 class LoginView(APIView):
     """класс для авторизации пользователя, после подтверждения сериализатора отправляет токены"""
     def post(self, request):
+        if request.user:
+            return Response({"error":"Вы уже авторизованы"},
+                status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
@@ -83,7 +89,7 @@ class UserProfileView(APIView):
                 user = User.objects.get(pk=user_id)
             except User.DoesNotExist:
                 raise NotFound("Пользователь с таким ID не найден")
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(user, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def get_permissions(self):

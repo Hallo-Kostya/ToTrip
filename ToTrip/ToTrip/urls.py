@@ -24,10 +24,10 @@ urlpatterns = [
     path('api/admin/', admin.site.urls),
     path('api/users/', include('apps.UsersApp.urls')),
     path('api/search/', include('apps.SearchApp.urls')),
-    # path('', include('apps.ReviewApp.urls')),
-    # path('', include('apps.PostApp.urls')),
+    path('api/reviews/', include('apps.ReviewApp.urls')),
+    # path('api/posts/', include('apps.PostApp.urls')),
     path('api/trips/', include('apps.TripApp.urls')),
-    # path('', include('apps.ImageApp.urls')),
+    # path('api/images/', include('apps.ImageApp.urls')),
     path('api/places/', include('apps.PlaceApp.urls'))
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
