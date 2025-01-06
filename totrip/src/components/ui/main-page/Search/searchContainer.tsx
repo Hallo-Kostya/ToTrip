@@ -3,17 +3,32 @@
 import { useState, useRef, useEffect } from "react";
 import { SearchInput } from "./searchInput";
 import { SearchInputActive } from "./searchInputActive";
+import { useSearchParams, redirect} from "next/navigation";
 import Image from "next/image";
 
 export const SearchContainer = () => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState(""); // Общее состояние для текста
     const containerRef = useRef<HTMLDivElement>(null);
+    const searchParams = useSearchParams()
 
     // Открытие активного поиска
     const toggleSearchInput = () => {
         setIsActive(true);
     };
+
+    const clickHandler = () => {
+        const trimmedQuery = inputValue.trim();
+        const params = new URLSearchParams(searchParams);
+
+        if (trimmedQuery) {
+          params.set('query', trimmedQuery);
+        } else {
+          params.delete('query');
+        }
+      
+        redirect(`/search?${params.toString()}`);
+      };
 
     // Закрытие активного поиска при клике вне контейнера
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,7 +63,8 @@ export const SearchContainer = () => {
                         onChange={setInputValue} 
                         onClick={toggleSearchInput} 
                     />
-                    <button className="rounded-[24px] bg-[#99A9EB] ml-[16px] p-[24px] border-[1px] border-solid border-[#70baff66]">
+                    <button className="rounded-[24px] bg-[#99A9EB] ml-[16px] p-[24px] border-[1px] border-solid border-[#70baff66]"
+                    onClick={clickHandler}>
                         <Image
                             src="/img/common/search.svg"
                             alt="Поиск"
@@ -60,7 +76,8 @@ export const SearchContainer = () => {
             ) : (
                 <SearchInputActive 
                     defaultValue={inputValue} 
-                    onChange={setInputValue} 
+                    onChange={setInputValue}
+                    onKeyDown={setIsActive}
                 />
             )}
         </div>

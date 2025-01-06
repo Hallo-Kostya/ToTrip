@@ -1,12 +1,10 @@
-import axios from "axios";
-
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 const BASE_URL = "http://127.0.0.1:8000";
 
-interface iPlaceImage {
+export interface iPlaceImage {
   image: string;
-  resized_image: string;
 }
+
 interface iPlace {
   id: number;
   name: string;
@@ -17,32 +15,46 @@ interface iPlace {
   coordinates: string;
   working_hours: string;
   placeimage_set: iPlaceImage[]; // Массив изображений
-} 
+  search_image: string;
+}
+
 export interface iSearchPlaceCard {
-  id: number
+  id: number;
   name: string;
   location: string;
   photo: string;
 }
 
-interface ApiResponse {
+export interface iObjectCard {
+  placeimage_set: iPlaceImage[];
+  name: string;
+  address: string;
+  rating: number;
+  description: string;
+  longitude: number;
+  latitude: number;
+}
+
+interface SearchApiResponse {
   places: iPlace[];
-  // cities: Cities[];
-  // countries: Countries[];
-  // regions: Regions[];
-  // districts: Districts[];
 }
 
 export const fetchSearchPlaceCards = async (query: string): Promise<iSearchPlaceCard[]> => {
   try {
-    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/search/?query=${query}&width=80&heigth=80`);
+    const response = await fetch(`${API_BASE_URL}/search/?query=${query}`);
+    if (!response.ok) {
+      console.error(`Ошибка HTTP: ${response.status}`);
+      return [];
+    }
 
-    if (response.data && Array.isArray(response.data.places)) {
-      return response.data.places.map((place) => ({
+    const data: SearchApiResponse = await response.json();
+
+    if (data && Array.isArray(data.places)) {
+      return data.places.map((place) => ({
         id: place.id,
         name: place.name,
         location: place.address,
-        photo: `${BASE_URL}${place.placeimage_set?.[0]?.resized_image}` || '/img/common/noimage.jpg',
+        photo: place.search_image ? `${BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
       }));
     } else {
       console.log("Нет результатов для запроса");
@@ -54,29 +66,18 @@ export const fetchSearchPlaceCards = async (query: string): Promise<iSearchPlace
   }
 };
 
-export const fetchPlaces = async (query: string): Promise<iPlace[]> => {
+export const fetchObjectCard = async (id: number): Promise<iObjectCard | null> => {
   try {
-    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/search/?query=${query}`);
-
-    if (response.data && Array.isArray(response.data.places)) {
-      return response.data.places.map((place) => ({
-        id: place.id,
-        name: place.name,
-        address: place.address,
-        category: place.category,
-        description: place.description,
-        avg_rating: place.avg_rating,
-        coordinates: place.coordinates,
-        working_hours: place.working_hours,
-        placeimage_set: place.placeimage_set
-      }));
-    } else {
-      console.log("Нет результатов для запроса");
-      return [];
+    const response = await fetch(`${API_BASE_URL}/places/${id}`);
+    if (!response.ok) {
+      console.error(`Ошибка HTTP: ${response.status}`);
+      return null;
     }
+
+    const data: iObjectCard = await response.json();
+    return data;
   } catch (error) {
     console.error("Ошибка при запросе данных: ", error);
-    return [];
+    return null;
   }
 };
-

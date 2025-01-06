@@ -2,6 +2,38 @@ import SuggestionsSection from '@/components/ui/main-page/suggestions';
 import RecommendationsSection from '@/components/ui/main-page/Recomendations/recomendations';
 import { SearchContainer } from '@/components/ui/main-page/Search/searchContainer';
 
+const placeData = [
+  {
+    id: 1758,
+    title: "Lotte Hotel",
+    reviewsCount: "1.2K",
+    placeImg: "/img/index/like-it__place-photo.jpg",
+    rating: 2,
+  },
+  {
+    id: 1758,
+    title: "Lotte Hotel",
+    reviewsCount: "1.2K",
+    placeImg: "/img/index/like-it__place-photo.jpg",
+    rating: 3,
+  },
+  {
+    id: 1758,
+    title: "Lotte Hotel",
+    reviewsCount: "1.2K",
+    placeImg: "/img/index/like-it__place-photo.jpg",
+    rating: 4,
+  },
+  {
+    id: 1758,
+    title: "Lotte Hotel",
+    reviewsCount: "1.2K",
+    placeImg: "/img/index/like-it__place-photo.jpg",
+    rating: 5,
+  },
+  
+];
+
 export default function Home() {
   return (  
     <main>
@@ -12,7 +44,7 @@ export default function Home() {
           </div>
         </section>
         <SuggestionsSection />
-        <RecommendationsSection />
+        <div className='mb-[100px]'><RecommendationsSection places={placeData}/></div>
     </main>
   );
 }

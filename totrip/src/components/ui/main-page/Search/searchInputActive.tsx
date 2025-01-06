@@ -11,9 +11,10 @@ import { useDebouncedCallback } from "use-debounce";
 interface SearchInputActiveProps {
     defaultValue: string;
     onChange: (value: string) => void;
+    onKeyDown: (value: boolean) => void;
 }
 
-export const SearchInputActive = ({ defaultValue, onChange }: SearchInputActiveProps) => {
+export const SearchInputActive = ({ defaultValue, onChange, onKeyDown}: SearchInputActiveProps) => {
     const searchParams = useSearchParams()
     const router = useRouter();
     const [PlaceData, setPlaceData] = useState<iSearchPlaceCard[]>([]);
@@ -56,9 +57,19 @@ export const SearchInputActive = ({ defaultValue, onChange }: SearchInputActiveP
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            router.push(`/search`)
+          const trimmedQuery = defaultValue.trim();
+          const params = new URLSearchParams(searchParams);
+          if (trimmedQuery) {
+            params.set('query', trimmedQuery);
+          } else {
+            params.delete('query');
+          }
+          
+          router.push(`/search?${params.toString()}`, { scroll: false });
+          onKeyDown(false);
         }
-    };
+      };
+    
 
     return (
         <div className="flex flex-col bg-white gap-[32px] z-[100] relative pt-[11px] pb-[28px] px-[24px] rounded-[24px] border-[2px] border-solid">
