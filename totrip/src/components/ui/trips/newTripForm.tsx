@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import { useUser } from '@/app/userContext';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
@@ -22,13 +23,7 @@ const popularCities = [
     "Москва", "Санкт-Петербург", "Новосибирск", // и т.д.
 ];
 
-const TripForm: React.FC<TripFormProps> = ({
-    isOpen,
-    onClose,
-    onSubmit,
-    initialData = {},
-    days: initialDays
-}) => {
+const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialData = {}, days: initialDays }) => {
     const [tripImage, setTripImage] = useState(initialData.tripImage || '');
     const [title, setTitle] = useState(initialData.title || '');
     const [description, setDescription] = useState(initialData.description || '');
@@ -39,17 +34,7 @@ const TripForm: React.FC<TripFormProps> = ({
     const [days, setDays] = useState(initialDays);
     const [errors, setErrors] = useState<{ title?: string }>({});
 
-    useEffect(() => {
-        if (isOpen) {
-            const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === "Escape") {
-                    handleClose();
-                }
-            };
-            window.addEventListener('keydown', handleKeyDown);
-            return () => window.removeEventListener('keydown', handleKeyDown);
-        }
-    }, [isOpen]);
+    const { user_id } = useUser();
 
     const handleClose = useCallback(() => {
         setTripImage('');
@@ -62,6 +47,18 @@ const TripForm: React.FC<TripFormProps> = ({
         setDays(initialDays);
         onClose();
     }, [initialDays, onClose]);
+
+    useEffect(() => {
+        if (isOpen) {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === "Escape") {
+                    handleClose();
+                }
+            };
+            window.addEventListener('keydown', handleKeyDown);
+            return () => window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [handleClose, isOpen]);
 
     const validateFields = () => {
         const newErrors: any = {};
@@ -85,7 +82,8 @@ const TripForm: React.FC<TripFormProps> = ({
             description,
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
-            trippers: [1],
+            tripPlace,
+            trippers: [user_id],
             cities: []
         };
 

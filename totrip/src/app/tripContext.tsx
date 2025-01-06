@@ -9,12 +9,12 @@ interface TripContextProps {
 
 interface TripContextState {
     tripImage: string;
-    tripName: string;
+    title: string;
     tripPlace: string;
-    tripStart: Date;
-    tripEnd: Date;
-    users: number;
-    id: string;
+    startDate : Date;
+    endDate: Date;
+    trippers: number;
+    id: number;
 }
 
 const TripContext = createContext<TripContextProps | undefined>(undefined);
@@ -22,12 +22,12 @@ const TripContext = createContext<TripContextProps | undefined>(undefined);
 const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [trip, setTrip] = useState<TripContextState>({
         tripImage: '',
-        tripName: '',
+        title: '',
         tripPlace: '',
-        tripStart: new Date(),
-        tripEnd: new Date(),
-        users: 1,
-        id: '',
+        startDate: new Date(),
+        endDate: new Date(),
+        trippers: 0,
+        id: 0,
     });
 
     const setTripContext = (data: Partial<TripContextState>) => {
@@ -51,13 +51,13 @@ const useTrip = () => {
         // возвращаем безопасные значения по умолчанию
         return {
             trip: {
-                tripImage: './img/trips-page/exp_photo.png',
-                tripName: 'Поездка в Москву',
-                tripPlace: 'Москва',
-                tripStart: new Date('2024-12-22'),
-                tripEnd: new Date('2024-12-29'),
-                users: 1,
-                id: '',
+                tripImage: '',
+                title: '',
+                tripPlace: '',
+                startDate: new Date(),
+                endDate: new Date(),
+                trippers: 0,
+                id: 0,
             },
             setTripContext: () => {}
         };

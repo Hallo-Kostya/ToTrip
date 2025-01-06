@@ -65,7 +65,7 @@ const Header: React.FC = () => {
 
           if (response.ok) {
             const userData = await response.json();
-            const photoUrl = userData.photo ? `${BASE_URL}${userData.photo}` : '';
+            const photoUrl = userData.photo ? `${userData.photo}` : '';
             setUserContext({
               first_name: userData.first_name,
               last_name: userData.last_name,

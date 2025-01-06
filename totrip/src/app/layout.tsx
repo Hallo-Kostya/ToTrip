@@ -17,7 +17,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <html lang="ru">
           <body className={`${manrope.className} antialiased bg-customGray`}>
             <Header />
-              {children}
+                {children}
             <Footer />
           </body>
         </html>

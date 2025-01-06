@@ -11,16 +11,16 @@ interface PhotoPostProps {
 }
   
 const PhotoPost: React.FC<PhotoPostProps> = ({ postTime, tripName, postImage, commentText, rating, onDelete }) => {
-    const { userImg, userName, userSurname } = useUser();
+    const { photo, first_name, last_name } = useUser();
     const starImg = '/img/profile/star.svg';
 
     return (
       <div className="w-full lg:w-[831px] h-auto bg-white rounded-2xl shadow-md p-[36px] mb-6">
           <div className="flex justify-between items-center">
               <div className="flex items-center">
-                  <Image src={userImg} className="w-20 h-20 object-cover rounded-full mr-4" width={80} height={80} alt="user" />
+                  <Image src={photo} className="w-20 h-20 object-cover rounded-full mr-4" width={80} height={80} alt="user" />
               <div>
-                  <p className="font-bold text-[24px]">{userName} {userSurname} <span className="font-medium ml-2 text-[18px]">выложил(а) фото</span></p>
+                  <p className="font-bold text-[24px]">{first_name} {last_name} <span className="font-medium ml-2 text-[18px]">выложил(а) фото</span></p>
                   <p className="text-gray-600 text-[20px] font-bold mt-2">{postTime}</p>
               </div>
           </div>

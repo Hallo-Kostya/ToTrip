@@ -5,40 +5,40 @@ import TripCard from '@/components/ui/trips/tripCard';
 import Image from 'next/image';
 import TripForm from '@/components/ui/trips/newTripForm';
 import { TripData } from '@/components/ui/types';
-import { useTrip, TripProvider } from '@/app/tripContext';
+import { TripProvider } from '@/app/tripContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useUser } from '../userContext';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
 const TripsPage = () => {
+    const { user_id } = useUser();
     const [futureTrips, setFutureTrips] = useState<TripData[]>([]);
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/api/trips/list/`, {
+                const userId = user_id; // используем ваш контекст
+                const response = await fetch(`${BASE_URL}/api/trips/list/${userId}/`, {
                     method: 'GET',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem('access')}`
                     }
                 });
-                
                 if (response.ok) {
                     const data = await response.json();
                     setFutureTrips(data.trips);
-                } else {
-                    console.error('Ошибка загрузки поездок');
                 }
             } catch (error) {
                 console.error('Ошибка сети:', error);
             }
         };
-
+    
         fetchTrips();
-    }, []);
+    }, [user_id]);
 
     const handleOpenPopup = () => {
         setPopupOpen(true);
@@ -67,7 +67,6 @@ const TripsPage = () => {
 };
 
 const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePopup, handleSubmit }) => {
-    const { setTripContext } = useTrip();
     const router = useRouter();
     const [isPastOpen, setPastOpen] = useState(true);
     const [isFutureOpen, setFutureOpen] = useState(true);
@@ -77,14 +76,8 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
     const handleToggleFuture = () => setFutureOpen(!isFutureOpen);
     const handleToggleCurrent = () => setCurrentOpen(!isCurrentOpen);
 
-    const handleTripClick = (tripId: string) => {
-        const trip = futureTrips.find(trip => trip.id === tripId);
-        if (trip) {
-            setTripContext(trip);
-            router.push(`/trip/${tripId}`);
-        } else {
-            console.warn(`Trip with ID ${tripId} was not found.`);
-        }
+    const handleTripClick = (tripId) => {
+        router.push(`/trip/${tripId}`);
     };
 
     const renderTripsContainer = (title, isOpen, toggleFunc, children) => (
@@ -117,7 +110,10 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                 futureTrips.map((trip) => (
                     <div key={trip.id} onClick={() => handleTripClick(trip.id)}>
                         <Link href={`/trip/${trip.id}`}>
-                            <TripCard {...trip} />
+                            <TripCard
+                                key={trip.id}
+                                {...trip}
+                            />
                         </Link>
                     </div>
                 ))

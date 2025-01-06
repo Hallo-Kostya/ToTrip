@@ -1,4 +1,5 @@
 export interface UserData {
+    user_id: string;
     first_name: string;
     last_name: string;
     username: string;
@@ -18,8 +19,8 @@ export interface TripData {
     title: string;
     description: string;
     tripPlace: string;
-    start_Date: string;
-    end_Date: string;
-    users: number;
+    startDate: Date;
+    endDate: Date;
+    trippers: number;
     cities: string[];
 }

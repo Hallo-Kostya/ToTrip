@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface UserContextState {
+  user_id: number;
   username: string;
   first_name: string;
   last_name: string;
@@ -22,6 +23,7 @@ const UserContext = createContext<UserContextState | undefined>(undefined);
 
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<UserContextState>({
+    user_id: 0,
     username: '',
     first_name: '',
     last_name: '',
@@ -54,8 +56,9 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
           if (response.ok) {
             const userData = await response.json();
-            const photoUrl = userData.photo ? `${BASE_URL}${userData.photo}` : '';
+            const photoUrl = userData.photo ? `${userData.photo}` : '';
             setUserContext({
+              user_id: userData.id,
               username: userData.username,
               first_name: userData.first_name,
               last_name: userData.last_name,
