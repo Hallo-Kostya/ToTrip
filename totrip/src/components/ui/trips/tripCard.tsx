@@ -6,7 +6,7 @@ interface TripCardProps {
     tripImage: string;
     title: string;
     description: string;
-    cities: string;
+    cities: [];
     start_Date: Date;
     end_Date: Date;
     trippers: number;

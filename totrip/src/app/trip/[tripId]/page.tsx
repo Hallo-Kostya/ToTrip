@@ -2,54 +2,53 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import axios from 'axios';
 import TripCard from '@/components/ui/trips/tripCard';
-// import { useUser } from '@/app/userContext';
+import { useUser } from '@/app/userContext';
 import TripHeadlines from '@/components/ui/trip/tripHeadlines';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
 const TripPage = () => {
-    const { id } = useParams();
-    const [trip, setTrip] = useState({
-        id: 0,
-        tripImage: '',
-        title: '',
-        description: '',
-        startDate: new Date(),
-        endDate: new Date(),
-        trippers: 0,
-        cities: ''
-    });
-    
-    // const { user_id } = useUser();s
+    const { tripId } = useParams();
+    const [trip, setTrip] = useState(null);
 
     useEffect(() => {
-        if (id) {
-            axios.get(`${BASE_URL}/api/trips/detail/${id}/`, {
+        if (true) {
+            fetch(`${BASE_URL}/api/trips/detail/${tripId}/`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
             })
             .then(response => {
-                const data = response.data.trip.id;
+                if (!response.ok) {
+                    throw new Error('Ошибка сети');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tripData = data.trip; // предположим, что на сервере пересылка данных в свойстве trip
                 setTrip({
-                    id: Number(data.id),
-                    tripImage: data.temp_image || '',
-                    title: data.title,
-                    description: data.description,
-                    startDate: new Date(data.start_Date),
-                    endDate: new Date(data.end_Date),
-                    trippers: data.trippers.length,
-                    cities: data.cities.join(', ')
+                    id: tripData.id,
+                    tripImage: tripData.temp_image || '',
+                    title: tripData.title,
+                    description: tripData.description,
+                    startDate: new Date(tripData.start_Date),
+                    endDate: new Date(tripData.end_Date),
+                    trippers: tripData.trippers.length,
+                    cities: tripData.cities.join(', ')
                 });
             })
             .catch(error => {
                 console.error(`Ошибка сети или ответа сервера: ${error.message}`);
             });
         }
-    }, [id]);
+    }, [tripId]);
+
+    if (!trip) {
+        return <div>Загрузка данных...</div>;
+    }
 
     return (
         <div className="my-[100px] max-w-full">

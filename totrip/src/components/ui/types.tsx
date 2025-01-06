@@ -21,5 +21,5 @@ export interface TripData {
     startDate: Date;
     endDate: Date;
     trippers: number;
-    cities: string;
+    cities: [];
 }

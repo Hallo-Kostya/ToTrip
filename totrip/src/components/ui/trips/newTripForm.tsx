@@ -40,7 +40,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
         setTripImage('');
         setTitle('');
         setDescription('');
-        setCities('');
+        setCities([]);
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);
@@ -83,7 +83,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             trippers: [user_id],
-            cities
+            cities: []
         };
 
         try {

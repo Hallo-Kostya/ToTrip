@@ -6,7 +6,6 @@ import Image from 'next/image';
 import TripForm from '@/components/ui/trips/newTripForm';
 import { TripData } from '@/components/ui/types';
 import { TripProvider } from '@/app/tripContext';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useUser } from '../userContext';
 
@@ -76,12 +75,6 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
     const handleToggleFuture = () => setFutureOpen(!isFutureOpen);
     const handleToggleCurrent = () => setCurrentOpen(!isCurrentOpen);
 
-    const router = useRouter();
-
-    const handleTripClick = (tripId) => {
-        router.push(`/trip/${tripId}`);
-      };
-
     const renderTripsContainer = (title, isOpen, toggleFunc, children) => (
         <div className="mt-[109px] flex flex-col mx-auto max-w-[1696px]">
             <div className="flex justify-between items-center">
@@ -110,10 +103,10 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
             ))}
             {renderTripsContainer("Предстоящие", isFutureOpen, handleToggleFuture, (
                 futureTrips.map((trip) => (
-                    <div key={trip.id}>
-                        <button onClick={() => handleTripClick(trip.id)}>
+                    <div className="flex flex-col max-w-[1696px] mx-auto" key={trip.id}>
+                        <Link href={`/trip/${trip.id}`}>
                             <TripCard key={trip.id} {...trip} />
-                        </button>
+                        </Link>
                     </div>
                 ))
             ))}
@@ -133,7 +126,7 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                     startDate: new Date(),
                     endDate: new Date(),
                     trippers: {user_id},
-                    cities: ''
+                    cities: []
                 }}
                 days={0}
             />

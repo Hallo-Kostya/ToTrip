@@ -14,7 +14,7 @@ interface TripContextState {
     endDate: Date;
     trippers: number;
     id: number;
-    cities: string;
+    cities: [];
     description: string;
 }
 
@@ -25,7 +25,7 @@ const defaultTripState: TripContextState = {
     endDate: new Date(),
     trippers: 0,
     id: 0,
-    cities: '',
+    cities: [],
     description: ''
 };
 
