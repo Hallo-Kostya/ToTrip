@@ -2,6 +2,7 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
+    path('detail/<int:trip_id>/', TripDetailApiView.as_view(), name = 'trip_detail_api'),
     path('list/', TripListApiView.as_view(), name = 'personal_triplist_api'),
     path('list/<int:user_id>/', TripListApiView.as_view(), name = 'triplist_api'),
     path('create/', CreateTripAPIView.as_view(), name = 'createtrip_api'),

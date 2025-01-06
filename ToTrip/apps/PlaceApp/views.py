@@ -101,6 +101,6 @@ class PlaceRecommendationView(APIView):
             favorites = set(FavoritePlace.objects.filter(user = user))
             places = places - favorites
         top_places = list(places)[:50] 
-        recommended_places = sample(top_places, min(len(top_places), 9))  
+        recommended_places = sample(top_places, min(len(top_places), 12))  
         serializer = SearchPlaceSerializer(recommended_places, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

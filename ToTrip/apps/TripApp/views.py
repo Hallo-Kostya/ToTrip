@@ -69,6 +69,15 @@ class CreateSubtripApiView(APIView):
                 status=status.HTTP_201_CREATED)
         else:
             return Response(subtripSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TripDetailApiView(APIView):
+    def get(self, request, trip_id):
+        try:
+            trip = Trip.objects.get(id = trip_id)
+            serializer = TripSerializer(trip)
+            return Response({"trip": serializer.data}, status=status.HTTP_200_OK)
+        except Trip.DoesNotExist:
+            return Response({"error": "данной поездки не сушествует"}, status=status.HTTP_404_NOT_FOUND)
         
 class DeleteSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]
