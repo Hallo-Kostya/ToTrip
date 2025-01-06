@@ -62,12 +62,13 @@ class CreateTripSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         user = self.context.get('request').user
-        trippers = validated_data.get('trippers', [])
+        trippers = validated_data.pop('trippers', [])
+        cities = validated_data.pop('cities', [])
+        trip = Trip.objects.create(**validated_data)
         if user.id not in trippers:
             trippers.append(user.id)
-        trip = Trip.objects.create(**validated_data)
         trip.trippers.set(trippers)
-
+        trip.cities.set(cities)
         return trip
 
 

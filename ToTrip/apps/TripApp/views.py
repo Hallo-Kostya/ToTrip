@@ -32,7 +32,7 @@ class CreateTripAPIView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        tripSerializer = CreateTripSerializer(data = request.data)
+        tripSerializer = CreateTripSerializer(data = request.data, context = {'request': request})
         if tripSerializer.is_valid():
             tripSerializer.save()
             return Response({"trip": tripSerializer.data},
