@@ -27,7 +27,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
     const [tripImage, setTripImage] = useState(initialData.tripImage || '');
     const [title, setTitle] = useState(initialData.title || '');
     const [description, setDescription] = useState(initialData.description || '');
-    const [tripPlace, setTripPlace] = useState(initialData.tripPlace || '');
+    const [cities, setCities] = useState(initialData.cities || '');
     const [startDate, setStartDate] = useState<Date | null>(initialData.startDate ? new Date(initialData.startDate) : null);
     const [endDate, setEndDate] = useState<Date | null>(initialData.endDate ? new Date(initialData.endDate) : null);
     const [trippers, setTrippers] = useState(initialData.trippers || 0);
@@ -40,7 +40,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
         setTripImage('');
         setTitle('');
         setDescription('');
-        setTripPlace('');
+        setCities('');
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);
@@ -82,9 +82,8 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
             description,
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
-            tripPlace,
             trippers: [user_id],
-            cities: []
+            cities
         };
 
         try {
@@ -167,8 +166,8 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
                     />
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
                     <select
-                        value={tripPlace}
-                        onChange={(e) => setTripPlace(e.target.value)}
+                        value={cities}
+                        onChange={(e) => setCities(e.target.value)}
                         name="tripplace"
                         required
                         className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"

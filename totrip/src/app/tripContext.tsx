@@ -4,37 +4,38 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface TripContextProps {
     trip: TripContextState;
-    setTripContext: (data: Partial<TripContextState>) => void;
+    setTripContext: (data: TripContextState) => void;
 }
 
 interface TripContextState {
     tripImage: string;
     title: string;
-    tripPlace: string;
-    startDate : Date;
+    startDate: Date;
     endDate: Date;
     trippers: number;
     id: number;
+    cities: string;
+    description: string;
 }
+
+const defaultTripState: TripContextState = {
+    tripImage: '',
+    title: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    trippers: 0,
+    id: 0,
+    cities: '',
+    description: ''
+};
 
 const TripContext = createContext<TripContextProps | undefined>(undefined);
 
 const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [trip, setTrip] = useState<TripContextState>({
-        tripImage: '',
-        title: '',
-        tripPlace: '',
-        startDate: new Date(),
-        endDate: new Date(),
-        trippers: 0,
-        id: 0,
-    });
+    const [trip, setTrip] = useState<TripContextState>(defaultTripState);
 
-    const setTripContext = (data: Partial<TripContextState>) => {
-        setTrip(prevState => ({
-            ...prevState,
-            ...data,
-        }));
+    const setTripContext = (data: TripContextState) => {
+        setTrip(data);
     };
 
     return (
@@ -46,24 +47,10 @@ const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const useTrip = () => {
     const context = useContext(TripContext);
-
-    // if (!context) {
-    //     // возвращаем безопасные значения по умолчанию
-    //     return {
-    //         trip: {
-    //             tripImage: '',
-    //             title: '',
-    //             tripPlace: '',
-    //             startDate: new Date(),
-    //             endDate: new Date(),
-    //             trippers: 0,
-    //             id: 0,
-    //         },
-    //         setTripContext: () => {}
-    //     };
-    // }
-
+    if (!context) {
+        throw new Error("useTrip должен использоваться внутри TripProvider");
+    }
     return context;
 };
 
-export { TripProvider, useTrip };
+export { TripProvider, useTrip, defaultTripState };

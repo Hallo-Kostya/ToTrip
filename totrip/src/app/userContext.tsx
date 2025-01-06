@@ -48,7 +48,7 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       const accessToken = localStorage.getItem('access');
       if (accessToken) {
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/users/profile/', {
+          const response = await fetch(`${BASE_URL}/api/users/profile/`, {
             headers: {
               Authorization: `Bearer ${accessToken}`
             }

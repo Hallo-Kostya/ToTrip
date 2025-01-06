@@ -9,7 +9,7 @@ import RoutePointCard from '@/components/ui/trip/routePointCard';
 interface TripHeadlinesProps {
     tripStart: Date;
     tripEnd: Date;
-    tripId: string;
+    tripId: number;
 }
 
 const tagImages = {

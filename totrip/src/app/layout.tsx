@@ -14,13 +14,16 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
 
       <UserProvider>
-        <html lang="ru">
-          <body className={`${manrope.className} antialiased bg-customGray`}>
-            <Header />
-                {children}
-            <Footer />
-          </body>
-        </html>
+        <TripProvider>
+          <html lang="ru">
+            <body className={`${manrope.className} antialiased bg-customGray`}>
+              <Header />
+                  {children}
+              <Footer />
+            </body>
+          </html>
+        </TripProvider>
+        
       </UserProvider>
 
 

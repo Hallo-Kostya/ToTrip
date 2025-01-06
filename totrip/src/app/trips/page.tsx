@@ -20,8 +20,7 @@ const TripsPage = () => {
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const userId = user_id;
-                const response = await fetch(`${BASE_URL}/api/trips/list/${userId}/`, {
+                const response = await fetch(`${BASE_URL}/api/trips/list/${user_id}/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -67,18 +66,21 @@ const TripsPage = () => {
 };
 
 const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePopup, handleSubmit }) => {
-    const router = useRouter();
     const [isPastOpen, setPastOpen] = useState(true);
     const [isFutureOpen, setFutureOpen] = useState(true);
     const [isCurrentOpen, setCurrentOpen] = useState(true);
+
+    const { user_id } = useUser();
 
     const handleTogglePast = () => setPastOpen(!isPastOpen);
     const handleToggleFuture = () => setFutureOpen(!isFutureOpen);
     const handleToggleCurrent = () => setCurrentOpen(!isCurrentOpen);
 
+    const router = useRouter();
+
     const handleTripClick = (tripId) => {
         router.push(`/trip/${tripId}`);
-    };
+      };
 
     const renderTripsContainer = (title, isOpen, toggleFunc, children) => (
         <div className="mt-[109px] flex flex-col mx-auto max-w-[1696px]">
@@ -108,13 +110,10 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
             ))}
             {renderTripsContainer("Предстоящие", isFutureOpen, handleToggleFuture, (
                 futureTrips.map((trip) => (
-                    <div key={trip.id} onClick={() => handleTripClick(trip.id)}>
-                        <Link href={`/trip/${trip.id}`}>
-                            <TripCard
-                                key={trip.id}
-                                {...trip}
-                            />
-                        </Link>
+                    <div key={trip.id}>
+                        <button onClick={() => handleTripClick(trip.id)}>
+                            <TripCard key={trip.id} {...trip} />
+                        </button>
                     </div>
                 ))
             ))}
@@ -131,11 +130,10 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                     tripImage: '',
                     title: '',
                     description: '',
-                    tripPlace: '',
                     startDate: new Date(),
                     endDate: new Date(),
-                    trippers: 0,
-                    cities: []
+                    trippers: {user_id},
+                    cities: ''
                 }}
                 days={0}
             />
@@ -144,3 +142,4 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
 };
 
 export default TripsPage;
+
