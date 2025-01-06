@@ -7,13 +7,16 @@ from apps.TripApp.models import Trip, SubTrip, SubtripPlace
 from apps.PlaceApp.models import Place
 from apps.UsersApp.models import User
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import AnonymousUser
 
 class TripListApiView(APIView):
     def get(self,request, user_id = None):
         if user_id == None:
-            [IsAuthenticated]
             user = request.user
-            trips = Trip.objects.filter(trippers = user)
+            if user.is_authenticated:
+                trips = Trip.objects.filter(trippers = user.id)
+            else:
+                return Response({"message": "У вас нет своего профиля! Авторизуйтесь сперва."}, status= status.HTTP_204_NO_CONTENT)
         else:
             trips = Trip.objects.filter(trippers__id = user_id)
         if trips:
@@ -45,8 +48,12 @@ class DeleteTripApiView(APIView):
         try:
             trip_to_delete = Trip.objects.get(id=trip_id)
             user = request.user
-            if trip_to_delete.delete():
-                return Response({'status': 'Поездка удалена'}, status=status.HTTP_200_OK)
+            if len(trip_to_delete.trippers)>1:
+                trip_to_delete.trippers.remove(user)
+                trip_to_delete.save()
+            else:
+                if trip_to_delete.delete():
+                    return Response({'status': 'Поездка удалена'}, status=status.HTTP_200_OK)
         except Trip.DoesNotExist:
             return Response({"error": "Данная поездка не найдена"}, status=status.HTTP_404_NOT_FOUND)
 

@@ -32,7 +32,7 @@ class RegisterView(APIView):
     """класс для регистрации пользователя, принимающий username, password, last_name, email, first_name как обязательные параметры"""
     renderer_classes = [UserJSONRenderer]
     def post(self, request):
-        if request.user:
+        if request.user.is_authenticated:
             return Response({"error":"Вы уже авторизованы"},
                 status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = RegisterSerializer(data=request.data)
@@ -64,7 +64,7 @@ class LogoutView(APIView):
 class LoginView(APIView):
     """класс для авторизации пользователя, после подтверждения сериализатора отправляет токены"""
     def post(self, request):
-        if request.user:
+        if request.user.is_authenticated:
             return Response({"error":"Вы уже авторизованы"},
                 status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = LoginSerializer(data=request.data)

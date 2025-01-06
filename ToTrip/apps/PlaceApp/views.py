@@ -5,13 +5,11 @@ from rest_framework import status
 from .models import Place, FavoritePlace
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect, render
-from django.http import JsonResponse
+from apps.SearchApp.serializers import SearchPlaceSerializer
 from .models import Place
 from apps.ImageApp.models import PlaceImage
 from .forms import PlaceForm
-from django.views import View
-from django.db import transaction
-from apps.PlaceApp.models import City, Category
+from random import sample
 
 class FavoritesView(APIView):
     """
@@ -81,6 +79,7 @@ class PlaceDetailAPIView(APIView):
         
 
 def create_place(request):
+    """временная форма для заполнения бд"""
     if request.method == 'POST':
         form = PlaceForm(request.POST)
         if form.is_valid():
@@ -92,3 +91,16 @@ def create_place(request):
     else:
         form = PlaceForm()
     return render(request, 'add_place_form.html', {'form': form})
+
+class PlaceRecommendationView(APIView):
+    """Рекомендации мест на основе случайного выбора и высокого рейтинга."""
+    def get(self, request):
+        user = request.user
+        places = set(Place.objects.all().order_by('-avg_rating', '-reviews_count'))
+        if user.is_authenticated:
+            favorites = set(FavoritePlace.objects.filter(user = user))
+            places = places - favorites
+        top_places = list(places)[:50] 
+        recommended_places = sample(top_places, min(len(top_places), 9))  
+        serializer = SearchPlaceSerializer(recommended_places, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

@@ -27,7 +27,6 @@ class PlaceSerializer(serializers.ModelSerializer):
     country_id = serializers.IntegerField(source = "city.region.district.country.id", read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
     category_ids = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True, write_only=True)  
-    avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Place
         fields = [

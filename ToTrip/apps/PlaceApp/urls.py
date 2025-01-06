@@ -8,5 +8,6 @@ urlpatterns = [
     path('list/', AllPlacesIds.as_view(), name='places_ids'),
     path('favorite/', FavoritesView.as_view(), name = 'favorite_places'),
     path('favorite/<int:place_id>/', FavoritesView.as_view(), name = 'favorite_places'),
-    path('addplace/', create_place, name='addplace')
+    path('addplace/', create_place, name='addplace'),
+    path('recomendation/', PlaceRecommendationView.as_view(), name = 'place_recomendation')
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
