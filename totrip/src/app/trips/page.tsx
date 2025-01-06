@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TripCard from '@/components/ui/trips/tripCard';
 import Image from 'next/image';
 import TripForm from '@/components/ui/trips/newTripForm';
@@ -8,12 +8,37 @@ import { TripData } from '@/components/ui/types';
 import { useTrip, TripProvider } from '@/app/tripContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { v4 as uuidv4 } from 'uuid';
+
+const BASE_URL = 'http://127.0.0.1:8000';
 
 const TripsPage = () => {
     const [futureTrips, setFutureTrips] = useState<TripData[]>([]);
     const [isPopupOpen, setPopupOpen] = useState(false);
-    // const { setTripContext } = useTrip();
+
+    useEffect(() => {
+        const fetchTrips = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/api/trips/list/`, {
+                    method: 'GET',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access')}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    setFutureTrips(data.trips);
+                } else {
+                    console.error('Ошибка загрузки поездок');
+                }
+            } catch (error) {
+                console.error('Ошибка сети:', error);
+            }
+        };
+
+        fetchTrips();
+    }, []);
 
     const handleOpenPopup = () => {
         setPopupOpen(true);
@@ -23,21 +48,10 @@ const TripsPage = () => {
         setPopupOpen(false);
     };
 
-    const handleSubmit = (data: TripData) => {
-        const newTrip = { ...data, id: uuidv4() };
-        setFutureTrips([...futureTrips, newTrip]);
+    const handleSubmit = (trip: TripData) => {
+        setFutureTrips([...futureTrips, trip]);
         handleClosePopup();
     };
-
-    // const router = useRouter();
-
-    // const handleTripClick = (tripId: string) => {
-    //     const trip = futureTrips.find(trip => trip.id === tripId);
-    //     if (trip) {
-    //         setTripContext(trip);
-    //         router.push(`/trip/${tripId}`);
-    //     }
-    // };
 
     return (
         <TripProvider>
@@ -55,7 +69,6 @@ const TripsPage = () => {
 const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePopup, handleSubmit }) => {
     const { setTripContext } = useTrip();
     const router = useRouter();
-
     const [isPastOpen, setPastOpen] = useState(true);
     const [isFutureOpen, setFutureOpen] = useState(true);
     const [isCurrentOpen, setCurrentOpen] = useState(true);
@@ -96,29 +109,19 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                     <span className="text-[24px] font-bold">Запланировать новую поездку</span>
                 </button>
             </div>
-
             {renderTripsContainer("Прошедшие", isPastOpen, handleTogglePast, (
                 /* Здесь отображать прошедшие поездки, если есть */
                 <div></div>
             ))}
-
             {renderTripsContainer("Предстоящие", isFutureOpen, handleToggleFuture, (
                 futureTrips.map((trip) => (
                     <div key={trip.id} onClick={() => handleTripClick(trip.id)}>
                         <Link href={`/trip/${trip.id}`}>
-                            <TripCard
-                                tripName={trip.tripName}
-                                tripStart={trip.tripStart}
-                                tripEnd={trip.tripEnd}
-                                tripPlace={trip.tripPlace}
-                                users={1}
-                                tripImage={'./img/trips-page/exp_photo.png'}
-                            />
+                            <TripCard {...trip} />
                         </Link>
                     </div>
                 ))
             ))}
-
             {renderTripsContainer("Текущие", isCurrentOpen, handleToggleCurrent, (
                 /* Здесь отображать текущие поездки, если есть */
                 <div></div>
@@ -130,12 +133,13 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                 onSubmit={handleSubmit}
                 initialData={{
                     tripImage: '',
-                    tripName: '',
+                    title: '',
+                    description: '',
                     tripPlace: '',
-                    tripStart: new Date(),
-                    tripEnd: new Date(),
-                    users: 0,
-                    tripId: '',
+                    startDate: new Date(),
+                    endDate: new Date(),
+                    trippers: 0,
+                    cities: []
                 }}
                 days={0}
             />

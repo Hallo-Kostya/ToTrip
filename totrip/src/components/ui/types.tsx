@@ -13,12 +13,13 @@ export interface UserData {
 }
 
 export interface TripData {
+    id: string;
     tripImage: string;
-    tripName: string;
+    title: string;
+    description: string;
     tripPlace: string;
-    tripStart: Date;
-    tripEnd: Date;
+    start_Date: string;
+    end_Date: string;
     users: number;
-    tripId: string;
+    cities: string[];
 }
-  

@@ -8,36 +8,36 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
+const BASE_URL = 'http://127.0.0.1:8000';
+
 interface TripFormProps {
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (data: TripData) => void;
-    initialData?: TripData;
+    initialData?: Partial<TripData>;
     days: number;
 }
 
 const popularCities = [
-    "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
-    "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск",
-    "Ростов-на-Дону", "Уфа", "Красноярск", "Воронеж", "Краснодар"
+    "Москва", "Санкт-Петербург", "Новосибирск", // и т.д.
 ];
 
 const TripForm: React.FC<TripFormProps> = ({
     isOpen,
     onClose,
     onSubmit,
-    initialData,
+    initialData = {},
     days: initialDays
 }) => {
-    // Updated validations and states
-    const [tripImage, setTripImage] = useState(initialData?.tripImage || '');
-    const [tripName, setTripName] = useState(initialData?.tripName || '');
-    const [tripPlace, setTripPlace] = useState(initialData?.tripPlace || '');
-    const [tripStart, setTripStart] = useState<Date | null>(initialData?.tripStart ? new Date(initialData.tripStart) : null);
-    const [tripEnd, setTripEnd] = useState<Date | null>(initialData?.tripEnd ? new Date(initialData.tripEnd) : null);
-    const [users, setUsers] = useState(initialData?.users || 0);
+    const [tripImage, setTripImage] = useState(initialData.tripImage || '');
+    const [title, setTitle] = useState(initialData.title || '');
+    const [description, setDescription] = useState(initialData.description || '');
+    const [tripPlace, setTripPlace] = useState(initialData.tripPlace || '');
+    const [startDate, setStartDate] = useState<Date | null>(initialData.startDate ? new Date(initialData.startDate) : null);
+    const [endDate, setEndDate] = useState<Date | null>(initialData.endDate ? new Date(initialData.endDate) : null);
+    const [trippers, setTrippers] = useState(initialData.trippers || 0);
     const [days, setDays] = useState(initialDays);
-    const [errors, setErrors] = useState<{ tripName?: string }>({});
+    const [errors, setErrors] = useState<{ title?: string }>({});
 
     useEffect(() => {
         if (isOpen) {
@@ -53,59 +53,77 @@ const TripForm: React.FC<TripFormProps> = ({
 
     const handleClose = useCallback(() => {
         setTripImage('');
-        setTripName('');
+        setTitle('');
+        setDescription('');
         setTripPlace('');
-        setTripStart(null);
-        setTripEnd(null);
-        setUsers(0);
+        setStartDate(null);
+        setEndDate(null);
+        setTrippers(0);
         setDays(initialDays);
         onClose();
     }, [initialDays, onClose]);
 
     const validateFields = () => {
         const newErrors: any = {};
-        if (!tripName.trim()) {
-            newErrors.tripName = "Название поездки обязательно";
+        if (!title.trim()) {
+            newErrors.title = "Название поездки обязательно";
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
         if (!validateFields()) return;
-
-        if (tripStart && tripEnd && tripEnd < tripStart) {
+        if (startDate && endDate && endDate < startDate) {
             alert('Дата окончания поездки не может быть раньше даты начала.');
             return;
         }
 
         const tripData = {
-            tripImage,
-            tripName,
-            tripPlace,
-            tripStart: tripStart ? format(tripStart, 'dd MMM', { locale: ru }) : '',
-            tripEnd: tripEnd ? format(tripEnd, 'dd MMM', { locale: ru }) : '',
-            users,
+            title,
+            description,
+            start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
+            end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
+            trippers: [1],
+            cities: []
         };
 
-        onSubmit(tripData);
-        handleClose();
+        try {
+            const accessToken = localStorage.getItem('access');
+            const response = await fetch(`${BASE_URL}/api/trips/create/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(tripData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                onSubmit(data.trip);
+                handleClose();
+            } else {
+                console.error('Ошибка создания поездки');
+            }
+        } catch (error) {
+            console.error('Ошибка сети:', error);
+        }
     };
 
     const updateTripEnd = (startDate: Date | null, daysCount: number) => {
         if (startDate) {
             const newEndDate = new Date(startDate);
             newEndDate.setDate(newEndDate.getDate() + daysCount);
-            setTripEnd(newEndDate);
+            setEndDate(newEndDate);
         }
     };
 
     const handleDaysChange = (newDays: number) => {
         if (newDays < 0) newDays = 0;
         setDays(newDays);
-        updateTripEnd(tripStart, newDays);
+        updateTripEnd(startDate, newDays);
     };
 
     const daysText = (days: number) => {
@@ -117,12 +135,12 @@ const TripForm: React.FC<TripFormProps> = ({
     };
 
     useEffect(() => {
-        if (tripStart && tripEnd) {
-            const timeDiff = tripEnd.getTime() - tripStart.getTime();
+        if (startDate && endDate) {
+            const timeDiff = endDate.getTime() - startDate.getTime();
             const dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
             setDays(dayDifference);
         }
-    }, [tripEnd, tripStart]);
+    }, [endDate, startDate]);
 
     return !isOpen ? null : (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-75">
@@ -131,15 +149,24 @@ const TripForm: React.FC<TripFormProps> = ({
                     <h2 className="text-[36px] font-bold">Название поездки</h2>
                     <input
                         type="text"
-                        value={tripName}
-                        onChange={(e) => setTripName(e.target.value)}
-                        name="tripname"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
                         placeholder="К примеру, командировка в Москве"
                         required
-                        className={`w-full mt-[20px] p-[13px] border ${errors.tripName ? 'border-red-500' : 'border-gray-300'} rounded-[16px]`}
+                        className={`w-full mt-[20px] p-[13px] border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded-[16px]`}
                     />
-                    {errors.tripName && <p className="text-red-500">{errors.tripName}</p>}
-                    
+                    {errors.title && <p className="text-red-500">{errors.title}</p>}
+                  
+                    <h2 className="mt-[20px] text-[36px] font-bold">Описание поездки</h2>
+                    <input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
+                        placeholder="Краткое описание поездки"
+                        className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"
+                    />
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
                     <select
                         value={tripPlace}
@@ -153,7 +180,6 @@ const TripForm: React.FC<TripFormProps> = ({
                             <option key={city} value={city}>{city}</option>
                         ))}
                     </select>
-
                     <div className="mt-[20px] flex justify-between">
                         <h2 className="text-[36px] font-bold">Длительность поездки</h2>
                         <div className="flex items-center">
@@ -168,9 +194,9 @@ const TripForm: React.FC<TripFormProps> = ({
                     </div>
                     <div className="flex gap-[30px] mt-[20px]">
                         <DatePicker
-                            selected={tripStart}
+                            selected={startDate}
                             onChange={(date: Date) => {
-                                setTripStart(date);
+                                setStartDate(date);
                                 updateTripEnd(date, days);
                             }}
                             dateFormat="dd MMM"
@@ -180,8 +206,8 @@ const TripForm: React.FC<TripFormProps> = ({
                         />
                         <p className="my-auto text-[25px]">-</p>
                         <DatePicker
-                            selected={tripEnd}
-                            onChange={(date: Date) => setTripEnd(date)}
+                            selected={endDate}
+                            onChange={(date: Date) => setEndDate(date)}
                             dateFormat="dd MMM"
                             locale={ru}
                             placeholderText="Конец"

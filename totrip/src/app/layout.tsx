@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from '@/components/ui/header';
 import Footer from "@/components/ui/footer";
 import { UserProvider } from "./userContext";
+import { TripProvider } from "./tripContext";
 
 export const metadata: Metadata = {
   title: "Welcome to ToTrip!",
@@ -12,13 +13,15 @@ export const metadata: Metadata = {
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <UserProvider>
-      <html lang="ru">
-        <body className={`${manrope.className} antialiased bg-customGray`}>
-          <Header />
-            {children}
-          <Footer />
-        </body>
-      </html>
+      <TripProvider>
+        <html lang="ru">
+          <body className={`${manrope.className} antialiased bg-customGray`}>
+            <Header />
+              {children}
+            <Footer />
+          </body>
+        </html>
+      </TripProvider>
     </UserProvider>
   );
 }
