@@ -47,21 +47,21 @@ const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 const useTrip = () => {
     const context = useContext(TripContext);
 
-    if (!context) {
-        // возвращаем безопасные значения по умолчанию
-        return {
-            trip: {
-                tripImage: '',
-                title: '',
-                tripPlace: '',
-                startDate: new Date(),
-                endDate: new Date(),
-                trippers: 0,
-                id: 0,
-            },
-            setTripContext: () => {}
-        };
-    }
+    // if (!context) {
+    //     // возвращаем безопасные значения по умолчанию
+    //     return {
+    //         trip: {
+    //             tripImage: '',
+    //             title: '',
+    //             tripPlace: '',
+    //             startDate: new Date(),
+    //             endDate: new Date(),
+    //             trippers: 0,
+    //             id: 0,
+    //         },
+    //         setTripContext: () => {}
+    //     };
+    // }
 
     return context;
 };

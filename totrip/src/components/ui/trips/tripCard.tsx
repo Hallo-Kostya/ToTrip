@@ -6,10 +6,9 @@ interface TripCardProps {
     title: string;
     description: string;
     tripPlace: string;
-    start_Date: string;
-    end_Date: string;
+    start_Date: Date;
+    end_Date: Date;
     trippers: number;
-    cities: string[];
 }
 
 const TripCard: React.FC<TripCardProps> = ({ tripImage, title, description, tripPlace, start_Date, end_Date, trippers }) => {
@@ -24,7 +23,7 @@ const TripCard: React.FC<TripCardProps> = ({ tripImage, title, description, trip
                         <div className="date flex items-center gap-[12px]">
                             <Image src="/img/calendar.svg" alt="Календарь" width={36} height={36} />
                             <p className="trip-date font-bold text-[24px] text-white">
-                                {start_Date} - {end_Date}
+                                {start_Date.toString()} - {end_Date.toString()}
                             </p>
                         </div>
                         <div className="place flex items-center gap-[12px]">

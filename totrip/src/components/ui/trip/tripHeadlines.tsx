@@ -26,9 +26,9 @@ const tagTitles = Object.keys(tagImages);
 
 const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripId }) => {
     const links = [
-        { title: 'Маршрут', url: `/trip/1/${tripId}?tab=route` },
-        { title: 'Закладки', url: `/trip/1/${tripId}?tab=marks` },
-        { title: 'Для Вас', url: `/trip/1/${tripId}?tab=for-you` },
+        { title: 'Маршрут', url: `/trip/${tripId}?tab=route` },
+        { title: 'Закладки', url: `/trip/${tripId}?tab=marks` },
+        { title: 'Для Вас', url: `/trip/${tripId}?tab=for-you` },
     ];
 
     const [activeLink, setActiveLink] = useState(links[0].title);

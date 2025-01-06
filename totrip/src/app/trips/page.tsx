@@ -20,7 +20,7 @@ const TripsPage = () => {
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const userId = user_id; // используем ваш контекст
+                const userId = user_id;
                 const response = await fetch(`${BASE_URL}/api/trips/list/${userId}/`, {
                     method: 'GET',
                     headers: {

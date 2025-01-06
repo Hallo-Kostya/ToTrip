@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <UserProvider>
-      <TripProvider>
+
+      <UserProvider>
         <html lang="ru">
           <body className={`${manrope.className} antialiased bg-customGray`}>
             <Header />
@@ -21,8 +21,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Footer />
           </body>
         </html>
-      </TripProvider>
-    </UserProvider>
+      </UserProvider>
+
+
   );
 }
 
