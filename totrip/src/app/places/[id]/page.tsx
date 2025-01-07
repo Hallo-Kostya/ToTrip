@@ -47,7 +47,6 @@ const placeData = [
 
 
 export default function Page() {
-    const BASE_URL = "http://127.0.0.1:8000";
     const { id } = useParams();
     const [object, setObject] = useState<null | iObjectCard>(null);
     const [loading, setLoading] = useState(true);
@@ -58,7 +57,7 @@ export default function Page() {
         if (!object || !object.placeimage_set.length) return;
         const nextIndex = (currentIndex + 1) % object.placeimage_set.length;
         setCurrentIndex(nextIndex);
-        setCurrentImage(`${BASE_URL}${object.placeimage_set[nextIndex].image}`);
+        setCurrentImage(`${object.placeimage_set[nextIndex].image}`);
     };
 
     const prevImageHandler = () => {
@@ -66,7 +65,7 @@ export default function Page() {
         const prevIndex =
             (currentIndex - 1 + object.placeimage_set.length) % object.placeimage_set.length;
         setCurrentIndex(prevIndex);
-        setCurrentImage(`${BASE_URL}${object.placeimage_set[prevIndex].image}`);
+        setCurrentImage(`${object.placeimage_set[prevIndex].image}`);
     };
 
     const handleImageClick = (index: number, imageUrl: string) => {
@@ -81,7 +80,7 @@ export default function Page() {
                     setObject(data);
                     setLoading(false);
                     if (data) {
-                        setCurrentImage(`${BASE_URL}${data.placeimage_set[0].image}`)
+                        setCurrentImage(`${data.placeimage_set[0].image}`)
                     }
                 })
                 .catch((error) => {
@@ -99,6 +98,18 @@ export default function Page() {
         objectName: "Отличное место", // Название объекта
         objectDescription: "Очень красивое место с отличным видом на горы. Рекомендую к посещению!Очень красивое место с отличным видом на горы. Рекомендую к посещениюОчень красивое место с отличным видом на горы. Рекомендую к посещениюОчень красивое место с отличным видом на горы. Рекомендую к посещениюОчень красивое место с отличным видом на горы. Рекомендую к посещению", // Описание объекта
         images: [
+            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
+            { image: "/img/common/noimage.jpg" },
+            { image: "/img/common/noimage.jpg" },
             { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
             { image: "/img/common/noimage.jpg" },
             { image: "/img/common/noimage.jpg" },
@@ -164,7 +175,7 @@ export default function Page() {
             <div>
                 <div className='max-w-[1696px] flex items-center mt-[112px]'>
                     <h1 className="text-[56px] font-bold">{object.name}</h1>
-                    <p className='ml-[24px] mt-[29px] font-bold font-[20px] color-[#323232]'>№1 / 532 в категории Отели, Москва</p>
+                    {/* <p className='ml-[24px] mt-[29px] font-bold font-[20px] color-[#323232]'>№1 / 532 в категории Отели, Москва</p> */}
                     <div className='ml-auto bg-white rounded-[36px]'>
                         <Image src="/img/common/heart.svg" alt="Избранное" width={72} height={72} className='p-[15px]' />
                     </div>
@@ -209,10 +220,10 @@ export default function Page() {
                                                 <div
                                                     key={index}
                                                     className='relative w-[220px] h-[170px] cursor-pointer'
-                                                    onClick={() => handleImageClick(index, `${BASE_URL}${image.image}`)}
+                                                    onClick={() => handleImageClick(index, `${image.image}`)}
                                                 >
                                                     <Image
-                                                        src={`${BASE_URL}${image.image}`}
+                                                        src={`${image.image}`}
                                                         alt="фото места"
                                                         fill
                                                         quality={100}
@@ -272,7 +283,7 @@ export default function Page() {
                 <div className='flex flex-row gap-[32px]'>
                     <div className='max-w-[1120px] flex p-[40px] flex-col bg-white rounded-[24px]'>
                         <h2 className='text-[48px] font-bold mb-[20px]'>О нас</h2>
-                        <ul className='mb-[64px] flex flex-col gap-[20px]'>
+                        <ul className='mb-[64px] flex flex-col gap-[20px] w-[1040px]'>
                             <ul className={`${styles.stars} ${styles.fiveStar}`}>
                                 <Stars rating={4.5} width={35} height={35} />
                                 <p className='text-[20px] font-bold'>Расположение</p>
@@ -294,7 +305,7 @@ export default function Page() {
                             <p className='text-[25px] font-medium'>{object.description}</p>
                         </div>
                     </div>
-                    <Map width={541} height={928} borderRadius={24} longitude={object.longitude} latitude={object.latitude} address={object.address} />
+                    <Map width={541} height={928} borderRadius={24} address={object.address} />
                 </div>
             </div>
             <div className='mt-[63px] mb-[63px]'><RecommendationsSection places={placeData} /></div>

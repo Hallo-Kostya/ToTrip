@@ -2,51 +2,43 @@
 import { SearchContainer } from '@/components/ui/main-page/Search/searchContainer';
 import Image from 'next/image';
 import { SearchElement } from '@/components/ui/main-page/Search/searchElement';
-import { SearchElementProps } from '@/components/ui/main-page/Search/searchElement';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { useDebouncedCallback } from 'use-debounce';
-
-const searchElements: SearchElementProps[] = [
-  {
-    id: 1,
-    imgUrl: '/img/town-page/places-photo__card.jpg',
-    name: 'Место 1',
-    rating: 4.5,
-    reviewCnt: 120,
-    description: 'Это описание первого места. Здесь можно увидеть много интересных достопримечательностей и провести время с комфортом.',
-    tags: [
-      { iconUrl: '/img/town-page/art__icon.svg', label: 'Искусство' },
-      { iconUrl: '/img/town-page/nature__icon.svg', label: 'Природа' },
-    ],
-  },
-  {
-    id: 1,
-    imgUrl: '/img/town-page/places-photo__card.jpg',
-    name: 'Место 2',
-    rating: 4.0,
-    reviewCnt: 80,
-    description: 'Второе место известно своими историческими памятниками и культурным наследием. Отличное место для любителей истории. Второе место известно своими историческими памятниками и культурным наследием. Отличное место для любителей истории.  Отличное место для любителей истории.  Отличное место для любителей истории.',
-    tags: [
-      { iconUrl: '/img/town-page/nature__icon.svg', label: 'История' },
-      { iconUrl: '/img/town-page/nature__icon.svg', label: 'Культура' },
-    ],
-  },
-];
+import { useState, useEffect } from 'react';
+import { BASE_URL, category, fetchFullSearchPlaceCards, iFullSearchPlaceCard } from '@/services/data';
 
 export default function Page() {
+  const [searchResults, setSearchResults] = useState<iFullSearchPlaceCard[]>([]);
+  const [loading, setLoading] = useState(false);
   const params = useSearchParams();
   const router = useRouter();
 
-  const clickHandler = useDebouncedCallback((tagName: string) => {
+  const [query, setQuery] = useState('екат');
+  const [category, setCategory] = useState('');
+  const [sortBy, setSortBy] = useState('rating');
+  const [sortThenBy, setSortThenBy] = useState('reviewCnt');
+  const [isAsc, setIsAsc] = useState('asc');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const results = await fetchFullSearchPlaceCards(query, category, sortBy, sortThenBy, isAsc);
+      setSearchResults(results);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [query, category, sortBy, sortThenBy, isAsc]);
+
+  const clickHandler = (tagName: string) => {
     const param = new URLSearchParams(params.toString());
     if (tagName) {
-      param.set('category', tagName)
+      param.set('category', tagName);
     } else {
-      param.delete('category')
+      param.delete('category');
     }
-    router.push(`?${param.toString()}`, { scroll: false })
-  }, 500);
+    router.push(`?${param.toString()}`, { scroll: false });
+  };
 
   return (
     <section className='bg-[#E4E4E4] pb-[100px]'>
@@ -58,41 +50,45 @@ export default function Page() {
       </div>
       <div className='flex flex-row gap-[32px] justify-center'>
         <ul className='flex flex-col w-[400px] gap-[12px] font-[600] text-[18px] text-center'>
-        <ul className='flex flex-row gap-[23px] mb-[64px]'>
-          <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
-            <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра'/>
-            <p>Рейтинг</p>
-          </li>
-          <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
-            <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра'/>
-            <p>Кол-во отзывов</p>
-          </li>
-        </ul>
+          <ul className='flex flex-row gap-[23px] mb-[64px]'>
+            <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
+              <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра' />
+              <p>Рейтинг</p>
+            </li>
+            <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
+              <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра' />
+              <p>Кол-во отзывов</p>
+            </li>
+          </ul>
           <li className='w-[400px]'>
             <p className='py-[16px] bg-white rounded-[16px]'>Все категории</p>
           </li>
-          {searchElements.map((element) =>
-            element.tags.map((tag, tagIndex) => (
-              <li onClick={() => clickHandler(tag.label)} key={tagIndex} className="items-center cursor-pointer flex flex-row gap-[12px] p-[12px] bg-white rounded-[16px] w-[400] justify-center items-center">
-                <Image src={tag.iconUrl} width={32} height={32} alt="категория" />
-                <p>{tag.label}</p>
+          {searchResults.map((element) =>
+            element.categories?.map((category : category, index : number) => (
+              <li onClick={() => clickHandler(category.name)} key={index} className="items-center cursor-pointer flex flex-row gap-[12px] p-[12px] bg-white rounded-[16px] w-[400] justify-center items-center">
+                <Image src={`${BASE_URL}${category.icon}`} width={32} height={32} alt="категория" />
+                <p>{category.name}</p>
               </li>
             ))
           )}
         </ul>
-        <div className='flex flex-col gap-[60px] w-[1264px] '>
+        <div className='flex flex-col gap-[60px] w-[1264px]'>
           <h2 className='font-bold text-[48px]'>Результаты поиска</h2>
-          {searchElements.map((element, index) => (
-            <SearchElement
-              key={index}
-              id={element.id}
-              imgUrl={element.imgUrl}
-              name={element.name}
-              rating={element.rating}
-              reviewCnt={element.reviewCnt}
-              description={element.description}
-              tags={element.tags} />
-          ))}
+          {loading ? (
+            <p>Загрузка...</p>
+          ) : (
+            searchResults.map((element, index) => (
+              <SearchElement
+                key={index}
+                id={element.id}
+                imgUrl={element.photo}
+                name={element.name}
+                rating={element.avg_rating}
+                reviewCnt={element.reviews_count}
+                description={element.description}
+                tags={element.categories} />
+            ))
+          )}
         </div>
       </div>
     </section>

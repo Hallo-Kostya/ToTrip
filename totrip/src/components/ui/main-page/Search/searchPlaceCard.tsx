@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const PlaceCard = ({ id, name, photo, location }: iSearchPlaceCard) => {
     return (
         <Link href={`/places/${id}`}>
-            <div className="flex flex-row gap-[24px] items-center hover:bg-sky-700 active:bg-black rounded-lg w-[816px]">
+            <div className="flex flex-row gap-[24px] items-center hover:bg-gray-100 active:bg-black rounded-lg w-[816px]">
             <Image src={photo} alt={name} className="rounded-lg" height={80} width={80}/>
             <div className="flex flex-col gap-[8px]">
                 <h2 className='text-[16px] text-black font-medium'>{name}</h2>
