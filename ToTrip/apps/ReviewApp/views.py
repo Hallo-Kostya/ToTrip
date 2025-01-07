@@ -5,7 +5,7 @@ from .serializers import ReviewSerializer
 from apps.ImageApp.models import ReviewImage
 from rest_framework.response import Response
 from rest_framework import status
-
+from apps.ReviewApp.models import Review
 
 # Create your views here.
 class AddReviewApiView(APIView):
@@ -20,4 +20,18 @@ class AddReviewApiView(APIView):
                 ReviewImage.objects.create(review=review, image=image, author = user)
             return Response({"review": serializer.data}, status=status.HTTP_200_OK)
         return Response({"error": serializer.errors}, status= status.HTTP_406_NOT_ACCEPTABLE)
+
+class DeleteReviewApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    def delete(self, request, review_id):
+        user = request.user
+        try:
+            review = Review.objects.get(id=review_id)
+            if user == review.author:
+                review.delete()
+                return Response({"message": "отзыв успешно удалён"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_403_FORBIDDEN)
+        except Review.DoesNotExist:
+            return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_404_NOT_FOUND)
     

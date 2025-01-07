@@ -18,7 +18,7 @@ class UserReviewSerializer(serializers.ModelSerializer):
             "photo",
         ]
 
-        
+
 class ReviewSerializer(serializers.ModelSerializer):
     """сериализатор отзыва"""
     reviewimage_set = ReviewImageSerializer(many=True, read_only=True)
@@ -26,7 +26,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     author = UserReviewSerializer(read_only=True)
     class Meta:
         model = Review
-        fields = ["place_id","author", "rating", "text", "created_at", "reviewimage_set"]
+        fields = ["id","place_id","author", "rating", "text", "created_at", "reviewimage_set"]
 
     def create(self, validated_data):
         # Получаем текущего пользователя из контекста запроса

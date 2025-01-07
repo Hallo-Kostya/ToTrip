@@ -1,5 +1,7 @@
 from django.urls import path, include
 from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('detail/<int:trip_id>/', TripDetailApiView.as_view(), name = 'trip_detail_api'),
@@ -15,4 +17,4 @@ urlpatterns = [
     path('subtrip/add_note/', NotesApiView.as_view(), name = 'add_note_api'),
     path('subtrip/delete_note/', NotesApiView.as_view(), name = 'delete_note_api'),
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
