@@ -11,4 +11,7 @@ urlpatterns = [
     path('subtrip/add/<int:subtrip_id>/', AddPlaceToSubtripApiView.as_view(), name = 'add_place_to_subtrip_api'),
     path('subtrip/remove/<int:subtripplace_id>/', DeleteSubtripPlaceApiView.as_view(), name = 'delete_place_from_subtrip_api'),
     path('subtrip/delete/<int:subtrip_id>/', DeleteSubtripApiView.as_view(), name = 'delete_subtrip_api'),
+    path('subtrip/add_note/', NotesApiView.as_view(), name = 'add_note_api'),
+    path('subtrip/delete_note/', NotesApiView.as_view(), name = 'delete_note_api'),
+    
 ]

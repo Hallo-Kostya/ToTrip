@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import TripSerializer, SubTripSerializer, SubtripPlaceSerializer, CreateTripSerializer
+from .serializers import TripSerializer, SubTripSerializer, SubtripPlaceSerializer, CreateTripSerializer, NoteSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from apps.TripApp.models import Trip, SubTrip, SubtripPlace
 from apps.PlaceApp.models import Place
 from apps.UsersApp.models import User
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import AnonymousUser
+from .models import Note
 
 class TripListApiView(APIView):
     def get(self,request, user_id = None):
@@ -48,7 +48,7 @@ class DeleteTripApiView(APIView):
         try:
             trip_to_delete = Trip.objects.get(id=trip_id)
             user = request.user
-            if len(trip_to_delete.trippers)>1:
+            if trip_to_delete.trippers.count()>1:
                 trip_to_delete.trippers.remove(user)
                 trip_to_delete.save()
             else:
@@ -64,7 +64,14 @@ class CreateSubtripApiView(APIView):
     def post(self, request):
         subtripSerializer = SubTripSerializer(data = request.data)
         if subtripSerializer.is_valid():
-            subtripSerializer.save()
+            subtrip = subtripSerializer.save()
+            places_ids = request.data.get('places_ids') 
+            subtrip_places = [
+                SubtripPlace(subtrip = subtrip, place_id = place_id)
+                for place_id in places_ids
+            ]
+            SubtripPlace.objects.bulk_create(subtrip_places)
+            subtrip.subtrip_places.set(subtrip_places)
             return Response({"subtrip": subtripSerializer.data},
                 status=status.HTTP_201_CREATED)
         else:
@@ -121,3 +128,21 @@ class DeleteSubtripPlaceApiView(APIView):
                 return Response({'status': 'место успешно удалено из дня поездки'}, status=status.HTTP_200_OK)
         except SubtripPlace.DoesNotExist:
             return Response({"error": "Данного места в этот день не найдено"}, status=status.HTTP_404_NOT_FOUND)
+
+class NotesApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        note = NoteSerializer(data = request.data, context={'request': request})
+        if note.is_valid():
+            note.save()
+            return Response({"note": note.data}, status = status.HTTP_200_OK)
+        return Response({"error": note.errors}, status = status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request):
+        note_id = request.data.get('note_id')
+        try:
+            note = Note.objects.get(id = note_id)
+            if note.delete():
+                return Response({"message": "заметка успешно удалена"}, status = status.HTTP_200_OK)
+        except Note.DoesNotExist:
+            return Response({"error": "данной заметки не существует!"}, status = status.HTTP_404_NOT_FOUND)

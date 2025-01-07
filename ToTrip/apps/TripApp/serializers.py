@@ -21,10 +21,10 @@ class NoteSerializer(serializers.ModelSerializer):
 class SubtripPlaceSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all(), source='place', write_only=True)
     place = PlaceSerializer(read_only=True)
-    subtrip_notes = NoteSerializer()
+    
     class Meta:
         model = SubtripPlace
-        fields = ["id", "place_id", "place", "subtrip_notes"]
+        fields = ["id", "place_id", "place"]
 
     def to_representation(self, instance):
         """Добавляем полную информацию о месте при запросе"""
@@ -33,28 +33,32 @@ class SubtripPlaceSerializer(serializers.ModelSerializer):
         return representation
 
 class SubTripSerializer(serializers.ModelSerializer):
-    subtrip_places = SubtripPlaceSerializer(many = True)
     trip_id = serializers.PrimaryKeyRelatedField(queryset=Trip.objects.all(), write_only=True)
+    subtrip_notes = serializers.SerializerMethodField()
+    subtrip_places = SubtripPlaceSerializer(many=True, required=False)
     class Meta:
         model = SubTrip
-        fields = ["id", "date", "subtrip_places", "trip_id"]
+        fields = ["id", "date", "trip_id", "subtrip_places", "subtrip_notes"]
 
+    def get_subtrip_notes(self,obj):
+        user = self.context.get('request').user
+        try:
+            notes = Note.objects.filter(author = user, subtrip = obj.id)
+        except Note.DoesNotExist:
+            notes = []
+        return notes
+
+    
     def create(self, validated_data):
-        places_data = validated_data.pop('subtrip_places')
         trip = validated_data.pop('trip_id')
-        
         # Создаем SubTrip, привязываем к Trip
         subtrip = SubTrip.objects.create(trip=trip, **validated_data)
-        
-        # Создаем связанные места для SubTrip
-        for place_data in places_data:
-            place = place_data.pop('place')
-            SubtripPlace.objects.create(subtrip=subtrip, place=place, **place_data)
-        
         return subtrip
+    
+
 
 class CreateTripSerializer(serializers.ModelSerializer):
-    trippers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    trippers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True, required = False)
     cities = serializers.PrimaryKeyRelatedField(queryset=City.objects.all(), many=True)
     class Meta:
         model = Trip
