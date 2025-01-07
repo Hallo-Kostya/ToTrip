@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -23,6 +24,7 @@ export default {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     require('tailwindcss-filters'), 
   ],
 } satisfies Config;
