@@ -40,7 +40,7 @@ const TripPage = () => {
                     startDate: new Date(tripData.start_Date),
                     endDate: new Date(tripData.end_Date),
                     trippers: tripData.trippers.length,
-                    cities: tripData.cities.map(city => city.name).join(', '),
+                    // cities: tripData.cities.map(city => city.name).join(', '),
                     tripPlace: tripData.tripPlace,
                 });
             })
@@ -83,7 +83,7 @@ const TripPage = () => {
                     tripImage={trip.tripImage}
                     title={trip.title}
                     description={trip.description}
-                    cities={trip.cities}
+                    // cities={trip.cities}
                     start_Date={trip.startDate}
                     end_Date={trip.endDate}
                     trippers={trip.trippers}

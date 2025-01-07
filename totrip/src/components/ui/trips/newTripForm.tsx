@@ -44,7 +44,7 @@ const TripForm: React.FC<TripFormProps> = ({
         setTitle('');
         setTripPlace('');
         setDescription('');
-        setCities([]);
+        // setCities([]);
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);
@@ -88,7 +88,7 @@ const TripForm: React.FC<TripFormProps> = ({
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             trippers: [user_id],
-            cities, // Передаем массив городов
+            // cities,
             tripPlace,
         };
         try {
