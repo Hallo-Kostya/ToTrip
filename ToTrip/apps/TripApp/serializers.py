@@ -42,11 +42,18 @@ class SubTripSerializer(serializers.ModelSerializer):
 
     def get_subtrip_notes(self,obj):
         try:
-            user = self.context.get('request').user
-            notes = Note.objects.filter(author = user, subtrip = obj.id)
-        except Note.DoesNotExist or AttributeError:
-            notes = []
-        return notes
+            request = self.context.get('request')
+            if request and hasattr(request, 'user') and request.user.is_authenticated:
+                notes = Note.objects.filter(author = request.user, subtrip = obj.id)
+                if notes:
+                    return notes
+                else:
+                    return []
+        except AttributeError:
+            return []
+        except Note.DoesNotExist:
+            return []
+        
 
     
     def create(self, validated_data):
@@ -79,7 +86,6 @@ class CreateTripSerializer(serializers.ModelSerializer):
 
 class TripSerializer(serializers.ModelSerializer):
     trippers = FollowSerializer(many = True)
-    cities = CityShortSerializer(many = True)
     tripimage_set = TripImageSerializer(many=True, read_only=True)
     subtrips = SubTripSerializer(many = True)
     class Meta: 
