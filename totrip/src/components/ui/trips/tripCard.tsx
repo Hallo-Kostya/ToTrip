@@ -42,9 +42,9 @@ const TripCard: React.FC<TripCardProps> = ({ userphoto, tripImage, title, descri
                 </div>
 
                 {/* Блок с пользователями */}
-                <div className="trippers flex mt-[20px] gap-[16px]">
+                <div className="trippers mt-[20px] gap-[16px]">
                     {Array.from({ length: 1 }).map((_, index) => (
-                        <Image key={index} src={photo} width={52} height={52} alt={`Пользователь ${index + 1}`} className="rounded-full" />
+                        <Image key={index} src={photo} width={52} height={52} alt={`Пользователь ${index + 1}`} className="h-[52px] rounded-full" />
                     ))}
                 </div>
             </div>

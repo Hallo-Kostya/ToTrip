@@ -12,6 +12,7 @@ const TripPage = () => {
     const router = useRouter();
     const [trip, setTrip] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [activeTab, setActiveTab] = useState('route');
 
     useEffect(() => {
         if (tripId) {
@@ -46,6 +47,11 @@ const TripPage = () => {
             });
         }
     }, [tripId]);
+
+    const handleTabChange = (tabName) => {
+        setActiveTab(tabName);
+        router.push(`/trip/${tripId}?tab=${tabName}`);
+    };
 
     const handleDelete = async () => {
         try {
@@ -110,7 +116,31 @@ const TripPage = () => {
                         </div>
                         )}
                     </div>
-                <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={tripId} />
+                    <div className="flex justify-start">
+                        <button
+                            className={`text-[24px] font-[500] pb-3 px-3 ${activeTab === 'route' ? 'border-b-4 border-black' : ''}`}
+                            onClick={() => handleTabChange('route')}
+                        >
+                            Маршрут
+                        </button>
+                        <button
+                            className={`text-[24px] font-[500] pb-3 px-3 ${activeTab === 'notes' ? 'border-b-4 border-black' : ''}`}
+                            onClick={() => handleTabChange('notes')}
+                        >
+                            Закладки
+                        </button>
+                        <button
+                            className={`text-[24px] font-[500] pb-3 px-3 ${activeTab === 'foryou' ? 'border-b-4 border-black' : ''}`}
+                            onClick={() => handleTabChange('foryou')}
+                        >
+                            Для вас
+                        </button>
+                    </div>
+                    
+                {activeTab === 'route' && (
+                    <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={tripId} />
+                )}
+                {/* Здесь можно добавить дополнительные условия для рендера контента для заметок и "для вас" */}
             </div>
         </div>
     );
