@@ -26,6 +26,7 @@ const popularCities = [
 const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialData = {}, days: initialDays }) => {
     const [tripImage, setTripImage] = useState(initialData.tripImage || '');
     const [title, setTitle] = useState(initialData.title || '');
+    const [tripPlace, setTripPlace] = useState(initialData.tripPlace || '');
     const [description, setDescription] = useState(initialData.description || '');
     const [cities, setCities] = useState(initialData.cities || '');
     const [startDate, setStartDate] = useState<Date | null>(initialData.startDate ? new Date(initialData.startDate) : null);
@@ -39,6 +40,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
     const handleClose = useCallback(() => {
         setTripImage('');
         setTitle('');
+        setTripPlace('');
         setDescription('');
         setCities([]);
         setStartDate(null);
@@ -78,14 +80,15 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
         }
 
         const tripData = {
+            tripImage,
             title,
             description,
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             trippers: [user_id],
-            cities: []
+            cities: [],
+            tripPlace,
         };
-
         try {
             const accessToken = localStorage.getItem('access');
             const response = await fetch(`${BASE_URL}/api/trips/create/`, {

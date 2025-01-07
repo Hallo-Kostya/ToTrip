@@ -5,7 +5,6 @@ import TripCard from '@/components/ui/trips/tripCard';
 import Image from 'next/image';
 import TripForm from '@/components/ui/trips/newTripForm';
 import { TripData } from '@/components/ui/types';
-import { TripProvider } from '@/app/tripContext';
 import Link from 'next/link';
 import { useUser } from '../userContext';
 
@@ -52,15 +51,13 @@ const TripsPage = () => {
     };
 
     return (
-        <TripProvider>
-            <TripsContent
-                futureTrips={futureTrips}
-                isPopupOpen={isPopupOpen}
-                handleOpenPopup={handleOpenPopup}
-                handleClosePopup={handleClosePopup}
-                handleSubmit={handleSubmit}
-            />
-        </TripProvider>
+        <TripsContent
+            futureTrips={futureTrips}
+            isPopupOpen={isPopupOpen}
+            handleOpenPopup={handleOpenPopup}
+            handleClosePopup={handleClosePopup}
+            handleSubmit={handleSubmit}
+        />
     );
 };
 
@@ -126,7 +123,8 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                     startDate: new Date(),
                     endDate: new Date(),
                     trippers: {user_id},
-                    cities: []
+                    cities: [],
+                    tripPlace: '',
                 }}
                 days={0}
             />
