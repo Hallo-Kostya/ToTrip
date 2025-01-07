@@ -20,7 +20,10 @@ interface TripFormProps {
 }
 
 const popularCities = [
-    "Москва", "Санкт-Петербург", "Новосибирск", // и т.д.
+    "Москва", "Санкт-Петербург", "Новосибирск",
+    "Екатеринбург", "Воронеж", "Омск", "Казань", 
+    "Киров", "Крым", "Челябинск", "Волгоград", 
+    "Магнитогорск", "Оренбург", "Калининград" 
 ];
 
 const TripForm: React.FC<TripFormProps> = ({
@@ -28,9 +31,8 @@ const TripForm: React.FC<TripFormProps> = ({
 }) => {
     const [tripImage, setTripImage] = useState(initialData.tripImage || '');
     const [title, setTitle] = useState(initialData.title || '');
-    const [tripPlace, setTripPlace] = useState(initialData.tripPlace || '');
     const [description, setDescription] = useState(initialData.description || '');
-    const [cities, setCities] = useState<string[]>(initialData.cities || []);
+    const [city, setCity] = useState(initialData.cities || '');
     const [startDate, setStartDate] = useState<Date | null>(initialData.startDate ? new Date(initialData.startDate) : null);
     const [endDate, setEndDate] = useState<Date | null>(initialData.endDate ? new Date(initialData.endDate) : null);
     const [trippers, setTrippers] = useState(initialData.trippers || 0);
@@ -42,9 +44,8 @@ const TripForm: React.FC<TripFormProps> = ({
     const handleClose = useCallback(() => {
         setTripImage('');
         setTitle('');
-        setTripPlace('');
         setDescription('');
-        // setCities([]);
+        setCity(''); // Reset single city
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);
@@ -88,8 +89,7 @@ const TripForm: React.FC<TripFormProps> = ({
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             trippers: [user_id],
-            // cities,
-            tripPlace,
+            cities: city,
         };
         try {
             const accessToken = localStorage.getItem('access');
@@ -171,9 +171,8 @@ const TripForm: React.FC<TripFormProps> = ({
                     />
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
                     <select
-                        multiple
-                        value={cities}
-                        onChange={(e) => setCities(Array.from(e.target.selectedOptions, option => option.value))}
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                         name="cities"
                         required
                         className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"

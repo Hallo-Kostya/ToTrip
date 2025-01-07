@@ -1,9 +1,10 @@
 import React from 'react';
 
-
 interface DatesBarProps {
-  tripStart: Date; 
-  tripEnd: Date; 
+  tripStart: Date;
+  tripEnd: Date;
+  onDateClick: (dateIndex: number) => void;
+  activeDateIndex: number | null;
 }
 
 const getDatesBetween = (start: Date, end: Date) => {
@@ -16,13 +17,21 @@ const getDatesBetween = (start: Date, end: Date) => {
   return dates;
 };
 
-const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd }) => {
+const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd, onDateClick, activeDateIndex }) => {
   const dates = getDatesBetween(tripStart, tripEnd);
 
   return (
     <div className="flex py-[30px] border-y-[3px] border-black border-opacity-30 gap-[12px]">
-      {dates.map(date => (
-        <div className="px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600]" key={date.toDateString()}>{date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}</div>
+      {dates.map((date, index) => (
+        <div
+          key={date.toDateString()}
+          className={`px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
+            activeDateIndex === index ? 'bg-blue-500 text-white' : ''
+          }`}
+          onClick={() => onDateClick(index)} // добавляем обработчик кликов
+        >
+          {date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}
+        </div>
       ))}
     </div>
   );

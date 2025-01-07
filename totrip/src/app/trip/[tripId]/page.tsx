@@ -4,12 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import TripCard from '@/components/ui/trips/tripCard';
 import TripHeadlines from '@/components/ui/trip/tripHeadlines';
-import { useUser } from '@/app/userContext';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
 const TripPage = () => {
-    const { photo } = useUser();
     const { tripId } = useParams();
     const router = useRouter();
     const [trip, setTrip] = useState(null);
@@ -40,8 +38,7 @@ const TripPage = () => {
                     startDate: new Date(tripData.start_Date),
                     endDate: new Date(tripData.end_Date),
                     trippers: tripData.trippers.length,
-                    // cities: tripData.cities.map(city => city.name).join(', '),
-                    tripPlace: tripData.tripPlace,
+                    cities: tripData.cities
                 });
             })
             .catch(error => {
@@ -83,25 +80,36 @@ const TripPage = () => {
                     tripImage={trip.tripImage}
                     title={trip.title}
                     description={trip.description}
-                    // cities={trip.cities}
+                    cities={trip.cities}
                     start_Date={trip.startDate}
                     end_Date={trip.endDate}
                     trippers={trip.trippers}
-                    tripPlace={trip.tripPlace}
                 />
-                <div>
-                    <p className="mt-[40px] opacity-60 text-[20px]">{trip.description}</p>
-                    <button className=" mb-[80px]" onClick={() => setShowModal(true)}>Удалить поездку</button>
+                <div className="flex mt-[40px] mb-[80px] justify-between">
+                    <p className="opacity-60 text-[20px]">{trip.description}</p>
+                    <button className="text-red-500 border-b-[1.5px] border-red-500" onClick={() => setShowModal(true)}>Удалить поездку</button>
                     {showModal && (
-                        <div className="modal">
-                            <div className="modal-content">
-                                <p>Вы уверены, что хотите удалить поездку?</p>
-                                <button onClick={handleDelete}>Удалить</button>
-                                <button onClick={() => setShowModal(false)}>Отменить</button>
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="bg-white p-4 rounded shadow-lg max-w-sm w-full">
+                            <p className="mb-4">Вы уверены, что хотите удалить поездку?</p>
+                            <div className="flex justify-end gap-2">
+                                <button
+                                className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition"
+                                onClick={handleDelete}
+                                >
+                                Удалить
+                                </button>
+                                <button
+                                className="bg-gray-300 py-1 px-3 rounded hover:bg-gray-400 transition"
+                                onClick={() => setShowModal(false)}
+                                >
+                                Отменить
+                                </button>
+                            </div>
                             </div>
                         </div>
-                    )}
-                </div>
+                        )}
+                    </div>
                 <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={trip.id} />
             </div>
         </div>
