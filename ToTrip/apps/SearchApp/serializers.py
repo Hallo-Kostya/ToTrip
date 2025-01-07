@@ -80,7 +80,7 @@ class SearchDistrictSerializer(serializers.ModelSerializer):
     country_name = serializers.CharField(source="country.name", read_only=True)
     class Meta:
         model = District
-        fields = ["id", "name", "search_image", "country_name"]
+        fields = ["id", "name", "description", "search_image", "country_name"]
 
     def get_search_image(self, obj):
         """метод для вызова обрезающей функции для первой фотографии"""
