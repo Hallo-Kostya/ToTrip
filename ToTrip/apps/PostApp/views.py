@@ -6,10 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class AddPostView(ApiView):
+class AddPostView(APIView):
     """
     Класс принимающий только request, создающий статью (текст и фото), привязанную к конкретному пользователю.
-    По задумке им могут пользоваться только пользователи с ролью - модератор.
     """
     permission_classes = [IsAuthenticated]
     def post(self, request):

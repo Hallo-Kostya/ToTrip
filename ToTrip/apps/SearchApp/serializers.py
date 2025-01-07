@@ -124,6 +124,7 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
             "district_name",
             "country_name",
             "address",
+            "services",
             "search_image",
             "categories",
             "avg_rating",

@@ -4,18 +4,26 @@ from apps.UsersApp.serializers import FollowSerializer
 from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer
 from apps.PlaceApp.models import City, Place
 from apps.ImageApp.serializers import TripImageSerializer
-from apps.UsersApp.models import User 
+from apps.UsersApp.models import User
+from apps.UsersApp.serializers import UserSerializer
     
 class NoteSerializer(serializers.ModelSerializer):
-    subtrip = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all())
+    subtrip_id = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all(), write_only = True)
     author = serializers.SerializerMethodField()
     class Meta:
         model = Note
-        fields = ["id", "subtrip", "author", "tittle", "content"]
+        fields = ["id", "subtrip_id", "author", "title", "content"]
 
     def get_author(self,obj):
         user = self.context.get('request').user
-        return user
+        return user.id
+    
+    def create(self, validated_data):
+        request = self.context.get('request')
+        subtrip = validated_data.pop('subtrip_id')
+        author = request.user if request and request.user.is_authenticated else None
+        note = Note.objects.create(subtrip=subtrip, author = author, **validated_data)
+        return note
     
 
 class SubtripPlaceSerializer(serializers.ModelSerializer):
@@ -35,7 +43,7 @@ class SubtripPlaceSerializer(serializers.ModelSerializer):
 class SubTripSerializer(serializers.ModelSerializer):
     trip_id = serializers.PrimaryKeyRelatedField(queryset=Trip.objects.all(), write_only=True)
     subtrip_notes = serializers.SerializerMethodField()
-    subtrip_places = SubtripPlaceSerializer(many=True, read_only=True) 
+    subtrip_places = SubtripPlaceSerializer(many=True, read_only = True) 
     class Meta:
         model = SubTrip
         fields = ["id", "date", "trip_id", "subtrip_places", "subtrip_notes"]
@@ -45,8 +53,9 @@ class SubTripSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             if request and hasattr(request, 'user') and request.user.is_authenticated:
                 notes = Note.objects.filter(author = request.user, subtrip = obj.id)
-                if notes:
-                    return notes
+                if notes.exists():
+                    print(notes)
+                    return NoteSerializer(notes, many=True).data
                 else:
                     return []
         except AttributeError:

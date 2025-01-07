@@ -21,7 +21,7 @@ class AddReviewApiView(APIView):
             return Response({"review": serializer.data}, status=status.HTTP_200_OK)
         return Response({"error": serializer.errors}, status= status.HTTP_406_NOT_ACCEPTABLE)
 
-class DeleteReviewApiView(APIView):
+class ReviewApiView(APIView):
     permission_classes = [IsAuthenticated]
     def delete(self, request, review_id):
         user = request.user
@@ -34,4 +34,11 @@ class DeleteReviewApiView(APIView):
                 return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_403_FORBIDDEN)
         except Review.DoesNotExist:
             return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_404_NOT_FOUND)
-    
+        
+    def get(self,request, review_id):
+        try:
+            review = Review.objects.get(id=review_id)
+            serializer = ReviewSerializer(review)
+            return Response({"review": serializer.data}, status = status.HTTP_200_OK)
+        except Review.DoesNotExist:
+            return Response({"review": serializer.data}, status = status.HTTP_404_NOT_FOUND)

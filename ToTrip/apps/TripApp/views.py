@@ -51,6 +51,7 @@ class DeleteTripApiView(APIView):
             if trip_to_delete.trippers.count()>1:
                 trip_to_delete.trippers.remove(user)
                 trip_to_delete.save()
+                return Response({'status': 'Поездка удалена'}, status=status.HTTP_200_OK)
             else:
                 if trip_to_delete.delete():
                     return Response({'status': 'Поездка удалена'}, status=status.HTTP_200_OK)
@@ -140,7 +141,7 @@ class DeleteSubtripPlaceApiView(APIView):
         except SubtripPlace.DoesNotExist:
             return Response({"error": "Данного места в этот день не найдено"}, status=status.HTTP_404_NOT_FOUND)
 
-class NotesApiView(APIView):
+class AddNoteApiView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
         note = NoteSerializer(data = request.data, context={'request': request})
@@ -149,8 +150,9 @@ class NotesApiView(APIView):
             return Response({"note": note.data}, status = status.HTTP_200_OK)
         return Response({"error": note.errors}, status = status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request):
-        note_id = request.data.get('note_id')
+class DeleteNoteApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    def delete(self, request, note_id):
         try:
             note = Note.objects.get(id = note_id)
             if note.delete():

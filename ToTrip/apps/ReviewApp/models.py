@@ -21,9 +21,9 @@ class Review(models.Model):
     def update_place_avg_rating(self):
         try:
             reviews = Review.objects.filter(place=self.place).values_list('rating', flat = True).distinct()
-            if len(reviews) > 0:
-                rating = sum(reviews)/len(reviews)
-                count = len(reviews)
+            if reviews.count() > 0:
+                rating = sum(reviews)/reviews.count()
+                count = reviews.count()
             else:
                 rating = 0.0
             self.place.avg_rating = rating 

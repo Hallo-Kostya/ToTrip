@@ -37,5 +37,5 @@ class SubtripPlace(models.Model):
 class Note(models.Model):
     subtrip = models.ForeignKey(SubTrip, on_delete = models.CASCADE, related_name = "subtrip_notes")
     author = models.ForeignKey(User, on_delete= models.CASCADE, related_name="user_notes")
-    tittle = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     content = models.TextField(blank=False, null = False)

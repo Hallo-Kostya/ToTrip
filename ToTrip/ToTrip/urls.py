@@ -25,7 +25,7 @@ urlpatterns = [
     path('api/users/', include('apps.UsersApp.urls')),
     path('api/search/', include('apps.SearchApp.urls')),
     path('api/reviews/', include('apps.ReviewApp.urls')),
-    # path('api/posts/', include('apps.PostApp.urls')),
+    path('api/posts/', include('apps.PostApp.urls')),
     path('api/trips/', include('apps.TripApp.urls')),
     # path('api/images/', include('apps.ImageApp.urls')),
     path('api/places/', include('apps.PlaceApp.urls'))
