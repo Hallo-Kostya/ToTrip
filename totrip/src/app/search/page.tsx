@@ -39,14 +39,14 @@ export default function Page() {
   const router = useRouter();
 
   const clickHandler = useDebouncedCallback((tagName: string) => {
-    const param = new URLSearchParams(params.toString()); 
+    const param = new URLSearchParams(params.toString());
     if (tagName) {
       param.set('category', tagName)
     } else {
       param.delete('category')
     }
-    router.push(`?${param.toString()}`,{ scroll: false })
-  },500);
+    router.push(`?${param.toString()}`, { scroll: false })
+  }, 500);
 
   return (
     <section className='bg-[#E4E4E4] pb-[100px]'>
@@ -58,12 +58,22 @@ export default function Page() {
       </div>
       <div className='flex flex-row gap-[32px] justify-center'>
         <ul className='flex flex-col w-[400px] gap-[12px] font-[600] text-[18px] text-center'>
+        <ul className='flex flex-row gap-[23px] mb-[64px]'>
+          <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
+            <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра'/>
+            <p>Рейтинг</p>
+          </li>
+          <li className='flex flex-row gap-[12px] p-[16px] bg-white rounded-[16px] items-center'>
+            <Image src='/img/common/arrow-down-wide-narrow-1.svg' height={32} width={32} alt='иконка фильтра'/>
+            <p>Кол-во отзывов</p>
+          </li>
+        </ul>
           <li className='w-[400px]'>
             <p className='py-[16px] bg-white rounded-[16px]'>Все категории</p>
           </li>
           {searchElements.map((element) =>
             element.tags.map((tag, tagIndex) => (
-              <li onClick={() => clickHandler(tag.label)} key={tagIndex} className="cursor-pointer flex flex-row gap-[12px] p-[12px] bg-white rounded-[16px] w-[400] justify-center items-center">
+              <li onClick={() => clickHandler(tag.label)} key={tagIndex} className="items-center cursor-pointer flex flex-row gap-[12px] p-[12px] bg-white rounded-[16px] w-[400] justify-center items-center">
                 <Image src={tag.iconUrl} width={32} height={32} alt="категория" />
                 <p>{tag.label}</p>
               </li>

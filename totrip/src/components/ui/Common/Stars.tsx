@@ -16,7 +16,7 @@ export default function Stars({ rating, width=26, height=26}: StarsProps) {
             {[...Array(fullStars)].map((_, index) => (
                 <Image
                     key={`full-${index}`}
-                    src="/img/common/Star.svg"
+                    src="/img/common/star.svg"
                     alt="star"
                     width={width}
                     height={height}
@@ -25,7 +25,7 @@ export default function Stars({ rating, width=26, height=26}: StarsProps) {
             {halfStar > 0 && (
                 <Image
                     key="half"
-                    src="/img/common/rating-star-half-orange.svg"
+                    src="/img/common/half-star.svg"
                     alt="half-star"
                     width={width}
                     height={height}
@@ -34,7 +34,7 @@ export default function Stars({ rating, width=26, height=26}: StarsProps) {
             {[...Array(emptyStars)].map((_, index) => (
                 <Image
                     key={`empty-${index}`}
-                    src="/img/common/rating-star-gray.svg"
+                    src="/img/common/empty-star.svg"
                     alt="star"
                     width={width}
                     height={height}

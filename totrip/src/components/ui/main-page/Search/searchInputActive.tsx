@@ -56,6 +56,9 @@ export const SearchInputActive = ({ defaultValue, onChange, onKeyDown}: SearchIn
     }, 300);
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Escape') {
+            onKeyDown(false);
+        }
         if (event.key === 'Enter') {
           const trimmedQuery = defaultValue.trim();
           const params = new URLSearchParams(searchParams);

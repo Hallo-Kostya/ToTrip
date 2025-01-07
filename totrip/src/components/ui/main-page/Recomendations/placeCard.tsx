@@ -17,7 +17,7 @@ export default function PlaceCard({ id, title, reviewsCount, placeImg, rating }:
     <Link href={`/places/${id}`}>
       <li className='relative'>
         <div>
-          <Image src={placeImg} alt={title} width={400} height={320} />
+          <Image className='rounded-[15px]' src={placeImg} alt={title} width={400} height={320} />
           <div>
             <div className='max-w-full flex mt-[20px] items-center mr-[20px] last:mr-[0px]'>
               <h3 className='text-[24px] font-bold mr-[52px]'>{title}</h3>

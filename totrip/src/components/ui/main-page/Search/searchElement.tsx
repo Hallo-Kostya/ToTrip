@@ -25,7 +25,7 @@ export const SearchElement = ({ id, imgUrl, name, rating, reviewCnt, description
                     style={{ objectFit: "cover" }}
                 />
                 <div className='flex flex-col'>
-                    <div className='flex mb-[32px] mt-[24px]'>
+                    <div className='flex mb-[32px] mt-[24px] items-center'>
                         <p className='text-[24px] font-bold mr-[20px]'>{name}</p>
                         <Stars rating={rating} />
                         <p className='text-[18px] font-[500] text-[#525151] ml-[10px]'>{reviewCnt}</p>
