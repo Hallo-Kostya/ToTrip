@@ -19,18 +19,18 @@ const Subtrip = ({ subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
         }
     };
 
-    const handleDeletePlace = async (placeId) => {
+    const handleDeletePlace = async (place_id) => {
         try {
-            await deletePlace(placeId);
+            await deletePlace(place_id);
             onUpdateSubtrip();
         } catch (error) {
             console.error('Ошибка при удалении места', error);
         }
     };
 
-    const handleDeleteNote = async (noteId) => {
+    const handleDeleteNote = async (note_id) => {
         try {
-            await deleteNote(noteId);
+            await deleteNote(note_id);
             onUpdateSubtrip();
         } catch (error) {
             console.error('Ошибка при удалении заметки', error);

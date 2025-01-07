@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
-export const createSubtrip = (tripId: number, dateStr: string) => {
-    return axios.post(`${BASE_URL}/api/trips/subtrip/create/`, { tripId, dateStr }, {
+export const createSubtrip = (trip_id: number, date: string) => {
+    return axios.post(`${BASE_URL}/api/trips/subtrip/create/`, { trip_id, date }, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -11,8 +11,8 @@ export const createSubtrip = (tripId: number, dateStr: string) => {
     });
 };
 
-export const getSubtripDetails = (tripId: number, dateStr: string) => {
-    return axios.get(`${BASE_URL}/api/trips/subtrip/detail/${tripId}?date=${dateStr}`, {
+export const getSubtripDetails = (subtrip_id: number) => {
+    return axios.get(`${BASE_URL}/api/trips/subtrip/detail/${subtrip_id}/`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -20,8 +20,8 @@ export const getSubtripDetails = (tripId: number, dateStr: string) => {
     });
 };
 
-export const deleteSubtrip = (subtripId: number) => {
-    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete/${subtripId}/`, {
+export const deleteSubtrip = (subtrip_id: number) => {
+    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete/${subtrip_id}/`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -29,8 +29,8 @@ export const deleteSubtrip = (subtripId: number) => {
     });
 };
 
-export const deletePlace = (placeId: number) => {
-    return axios.delete(`${BASE_URL}/api/trips/subtrip/remove_place/${placeId}/`, {
+export const deletePlace = (place_id: number) => {
+    return axios.delete(`${BASE_URL}/api/trips/subtrip/remove_place/${place_id}/`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -38,9 +38,9 @@ export const deletePlace = (placeId: number) => {
     });
 };
 
-export const deleteNote = (noteId: number) => {
+export const deleteNote = (note_id: number) => {
     return axios.delete(`${BASE_URL}/api/trips/subtrip/delete_note/`, {
-        data: { noteId },
+        data: { note_id },
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`

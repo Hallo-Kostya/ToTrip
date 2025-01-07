@@ -22,7 +22,7 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
         const response = await createSubtrip(tripId, dateStr);
         setSubtrips((prev) => ({ ...prev, [dateIndex]: response.data }));
       } catch (error) {
-        const existingSubtrip = await getSubtripDetails(tripId, dateStr);
+        const existingSubtrip = await getSubtripDetails(tripId);
         if (existingSubtrip) {
           setSubtrips((prev) => ({ ...prev, [dateIndex]: existingSubtrip.data }));
         }

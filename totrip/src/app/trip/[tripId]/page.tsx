@@ -110,7 +110,7 @@ const TripPage = () => {
                         </div>
                         )}
                     </div>
-                <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={trip.id} />
+                <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={tripId} />
             </div>
         </div>
     );
