@@ -57,6 +57,15 @@ class DeleteTripApiView(APIView):
         except Trip.DoesNotExist:
             return Response({"error": "Данная поездка не найдена"}, status=status.HTTP_404_NOT_FOUND)
 
+class SubtripDetailApiView(APIView):
+    def get(self, request, subtrip_id):
+        try:
+            subtrip = SubTrip.objects.get(id = subtrip_id)
+            serializer = SubTripSerializer(subtrip, context= {'request': request})
+            return Response({"subtrip": serializer.data}, status = status.HTTP_200_OK)
+        except SubTrip.DoesNotExist:
+            return Response({"error": "данного сабтрипа нет в базе данных!"}, status = status.HTTP_404_NOT_FOUND)
+        
 
 class CreateSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]
@@ -71,8 +80,8 @@ class CreateSubtripApiView(APIView):
                 for place_id in places_ids
             ]
             SubtripPlace.objects.bulk_create(subtrip_places)
-            subtrip.subtrip_places.set(subtrip_places)
-            return Response({"subtrip": subtripSerializer.data},
+            response_data = SubTripSerializer(subtrip, context={'request': request}).data
+            return Response({"subtrip": response_data},
                 status=status.HTTP_201_CREATED)
         else:
             return Response(subtripSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -81,7 +90,7 @@ class TripDetailApiView(APIView):
     def get(self, request, trip_id):
         try:
             trip = Trip.objects.get(id = trip_id)
-            serializer = TripSerializer(trip)
+            serializer = TripSerializer(trip, context = {'request': request})
             return Response({"trip": serializer.data}, status=status.HTTP_200_OK)
         except Trip.DoesNotExist:
             return Response({"error": "данной поездки не сушествует"}, status=status.HTTP_404_NOT_FOUND)
@@ -115,6 +124,8 @@ class AddPlaceToSubtripApiView(APIView):
             return Response({'status': 'место успешно добавлено'}, status=status.HTTP_200_OK)
         except SubTrip.DoesNotExist:
             return Response({"error": "день поездки не найден"}, status=status.HTTP_404_NOT_FOUND)
+        except Place.DoesNotExist:
+            return Response({"error": "место не найдено"}, status=status.HTTP_404_NOT_FOUND)
     
 class DeleteSubtripPlaceApiView(APIView):
     permission_classes = [IsAuthenticated]

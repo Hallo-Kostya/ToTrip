@@ -12,7 +12,7 @@ class Trip(models.Model):
     start_Date = models.DateField()
     end_Date = models.DateField()
     temp_image = models.ImageField(upload_to="trip_photos/", default= "trip_photos/trip_base.png")
-    cities = models.ManyToManyField(City, related_name='trip_cities')
+    cities = models.CharField(max_length=150, default='Не указан')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

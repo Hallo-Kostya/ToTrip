@@ -35,16 +35,16 @@ class SubtripPlaceSerializer(serializers.ModelSerializer):
 class SubTripSerializer(serializers.ModelSerializer):
     trip_id = serializers.PrimaryKeyRelatedField(queryset=Trip.objects.all(), write_only=True)
     subtrip_notes = serializers.SerializerMethodField()
-    subtrip_places = SubtripPlaceSerializer(many=True, required=False)
+    subtrip_places = SubtripPlaceSerializer(many=True, read_only=True) 
     class Meta:
         model = SubTrip
         fields = ["id", "date", "trip_id", "subtrip_places", "subtrip_notes"]
 
     def get_subtrip_notes(self,obj):
-        user = self.context.get('request').user
         try:
+            user = self.context.get('request').user
             notes = Note.objects.filter(author = user, subtrip = obj.id)
-        except Note.DoesNotExist:
+        except Note.DoesNotExist or AttributeError:
             notes = []
         return notes
 
@@ -59,7 +59,7 @@ class SubTripSerializer(serializers.ModelSerializer):
 
 class CreateTripSerializer(serializers.ModelSerializer):
     trippers = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True, required = False)
-    cities = serializers.PrimaryKeyRelatedField(queryset=City.objects.all(), many=True)
+    # cities = serializers.PrimaryKeyRelatedField(queryset=City.objects.all(), many=True)
     class Meta:
         model = Trip
         fields = ['id', 'trippers', 'title', 'description', 'start_Date', 'end_Date', 'cities']
@@ -67,12 +67,12 @@ class CreateTripSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get('request').user
         trippers = validated_data.pop('trippers', [])
-        cities = validated_data.pop('cities', [])
+        # cities = validated_data.pop('cities', [])
         trip = Trip.objects.create(**validated_data)
         if user.id not in trippers:
             trippers.append(user.id)
         trip.trippers.set(trippers)
-        trip.cities.set(cities)
+        # trip.cities.set(cities)
         return trip
 
 
