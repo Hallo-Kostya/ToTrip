@@ -23,12 +23,14 @@ const popularCities = [
     "Москва", "Санкт-Петербург", "Новосибирск", // и т.д.
 ];
 
-const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialData = {}, days: initialDays }) => {
+const TripForm: React.FC<TripFormProps> = ({
+    isOpen, onClose, onSubmit, initialData = {}, days: initialDays
+}) => {
     const [tripImage, setTripImage] = useState(initialData.tripImage || '');
     const [title, setTitle] = useState(initialData.title || '');
     const [tripPlace, setTripPlace] = useState(initialData.tripPlace || '');
     const [description, setDescription] = useState(initialData.description || '');
-    const [cities, setCities] = useState(initialData.cities || '');
+    const [cities, setCities] = useState<string[]>(initialData.cities || []);
     const [startDate, setStartDate] = useState<Date | null>(initialData.startDate ? new Date(initialData.startDate) : null);
     const [endDate, setEndDate] = useState<Date | null>(initialData.endDate ? new Date(initialData.endDate) : null);
     const [trippers, setTrippers] = useState(initialData.trippers || 0);
@@ -86,7 +88,7 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
             start_Date: format(startDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             end_Date: format(endDate || new Date(), 'yyyy-MM-dd', { locale: ru }),
             trippers: [user_id],
-            cities: [],
+            cities, // Передаем массив городов
             tripPlace,
         };
         try {
@@ -169,9 +171,10 @@ const TripForm: React.FC<TripFormProps> = ({isOpen, onClose, onSubmit, initialDa
                     />
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
                     <select
+                        multiple
                         value={cities}
-                        onChange={(e) => setCities(e.target.value)}
-                        name="tripplace"
+                        onChange={(e) => setCities(Array.from(e.target.selectedOptions, option => option.value))}
+                        name="cities"
                         required
                         className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"
                     >

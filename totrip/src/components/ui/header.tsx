@@ -65,7 +65,7 @@ const Header: React.FC = () => {
 
           if (response.ok) {
             const userData = await response.json();
-            const photoUrl = userData.photo ? `${userData.photo}` : '';
+            const photoUrl = userData.photo;
             setUserContext({
               first_name: userData.first_name,
               last_name: userData.last_name,
@@ -114,9 +114,14 @@ const Header: React.FC = () => {
                   <button onClick={handleLogout}>Выход</button>
                 </div>
                 <div className={styles['user-icon']}>
-                  <Link href="/profile">
-                    <Image src={photo} alt="Профиль" width={52} height={52} />
-                  </Link>
+
+                  {photo && (
+                    <>
+                      <Link href="/profile">
+                        <Image src={photo} alt="Профиль" width={52} height={52} />
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             ) : (
