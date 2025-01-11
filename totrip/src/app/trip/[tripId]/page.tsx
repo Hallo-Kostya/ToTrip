@@ -80,7 +80,7 @@ const TripPage = () => {
     };
 
     if (!trip) {
-        return <div>Загрузка данных...</div>;
+        return <div>Загрузка...</div>;
     }
 
     return (

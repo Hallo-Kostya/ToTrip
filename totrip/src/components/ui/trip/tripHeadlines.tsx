@@ -16,40 +16,32 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
 
   const handleDateClick = async (dateIndex: number) => {
     const dateStr = dateList[dateIndex].toISOString().split('T')[0];
-    const placesIds = [];
-  
-    if (!subtrips[dateIndex]) {
-      try {
-        const response = await createSubtrip(tripId, dateStr, placesIds);
-        if (response.data && response.data.subtrip) {
-          const newSubtripId = response.data.subtrip.id;
+    const placesIds: number[] = []; 
+
+    try {
+
+      const createResponse = await createSubtrip(tripId, dateStr, placesIds);
+
+      if (createResponse.status === 201 && createResponse.data.subtrip) {
+
+        const detailResponse = await getSubtripDetails(tripId, dateStr);
+
+        if (detailResponse.status === 200 && detailResponse.data.subtrip) {
+
           setSubtrips((prev) => ({
             ...prev,
-            [dateIndex]: { id: newSubtripId, ...response.data.subtrip },
+            [dateIndex]: detailResponse.data.subtrip,
           }));
-          setActiveDateIndex(dateIndex);
         } else {
-          console.error('Ответ от сервера не содержит данные о subtrip');
+          console.error('Ошибка получения деталей subtrip:', detailResponse.data);
         }
-      } catch (error: any) {
-        if (error.response && error.response.status === 400) {
-          console.warn('Subtrip уже существует. Получаем существующий сабтрип.');
-          try {
-            const existingSubtrip = await getSubtripDetails(tripId, dateStr);
-            setSubtrips((prev) => ({
-              ...prev,
-              [dateIndex]: existingSubtrip.data,
-            }));
-            setActiveDateIndex(dateIndex);
-          } catch (detailError) {
-            console.error('Ошибка при получении существующего subtrip:', detailError);
-          }
-        } else {
-          console.error('Ошибка при создании subtrip:', error);
-        }
+      } else {
+        console.error('Ответ сервера при создании subtrip не содержит данных:', createResponse.data);
       }
-    } else {
+
       setActiveDateIndex(dateIndex);
+    } catch (error: any) {
+      console.error('Ошибка при создании subtrip или получении деталей:', error);
     }
   };
 
@@ -63,13 +55,16 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
       />
       <div className="flex flex-col mt-10">
         {activeDateIndex !== null && subtrips[activeDateIndex] && (
-          <Subtrip 
-            subtrip={subtrips[activeDateIndex]} 
-            onDeleteSubtrip={(id) => setSubtrips((prev) => {
-              const newSubtrips = { ...prev };
-              delete newSubtrips[activeDateIndex];
-              return newSubtrips;
-            })}
+          <Subtrip
+            tripId={tripId}
+            subtrip={subtrips[activeDateIndex]}
+            onDeleteSubtrip={(id) => {
+              setSubtrips((prev) => {
+                const newSubtrips = { ...prev };
+                delete newSubtrips[activeDateIndex];
+                return newSubtrips;
+              });
+            }}
             onUpdateSubtrip={() => handleDateClick(activeDateIndex)}
           />
         )}
@@ -87,4 +82,5 @@ const generateDateList = (start: Date, end: Date) => {
   }
   return dates;
 };
+
 export default TripHeadlines;

@@ -6,12 +6,12 @@ import NoteCard from '@/components/ui/trip/noteCard';
 import { deleteSubtrip, deletePlace, deleteNote } from '@/services/subtripService';
 import DeleteConfirmationModal from '@/components/ui/trip/deleteModal';
 
-const Subtrip = ({ subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
+const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
   
     const handleDeleteSubtrip = async () => {
       try {
-        await deleteSubtrip(subtrip.id);
+        await deleteSubtrip(tripId, subtrip.date);
         setShowDeleteModal(false);
         onDeleteSubtrip(subtrip.id);
       } catch (error) {
