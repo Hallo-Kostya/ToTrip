@@ -17,7 +17,7 @@ class SearchPlacesAPIView(APIView):
     то в поиск идут просто места из города в запросе. Если же наоборот нет города,
     то поиск дополняется местами по данной категории из других городов."""
     class CustomPagination(PageNumberPagination):
-        page_size = 2
+        page_size = 10
         page_size_query_param = 'page_size'
         max_page_size = 100
     def post(self, request):

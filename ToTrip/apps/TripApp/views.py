@@ -59,9 +59,9 @@ class DeleteTripApiView(APIView):
             return Response({"error": "Данная поездка не найдена"}, status=status.HTTP_404_NOT_FOUND)
 
 class SubtripDetailApiView(APIView):
-    def get(self, request, subtrip_id):
+    def get(self, request, trip_id, date):
         try:
-            subtrip = SubTrip.objects.get(id = subtrip_id)
+            subtrip = SubTrip.objects.get(trip_id = trip_id, date = date)
             serializer = SubTripSerializer(subtrip, context= {'request': request})
             return Response({"subtrip": serializer.data}, status = status.HTTP_200_OK)
         except SubTrip.DoesNotExist:
@@ -99,9 +99,9 @@ class TripDetailApiView(APIView):
 class DeleteSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]
     
-    def delete(self, request, subtrip_id):
+    def delete(self, request, trip_id, date):
         try:
-            subtrip_to_delete = SubTrip.objects.get(id=subtrip_id)
+            subtrip_to_delete = SubTrip.objects.get(trip_id=trip_id, date = date)
             if subtrip_to_delete.delete():
                 return Response({'status': 'день поездки удален'}, status=status.HTTP_200_OK)
         except SubTrip.DoesNotExist:
@@ -110,9 +110,9 @@ class DeleteSubtripApiView(APIView):
 class AddPlaceToSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]
     
-    def patch(self, request, subtrip_id):
+    def patch(self, request, trip_id, date):
         try:
-            subtrip = SubTrip.objects.get(id=subtrip_id)
+            subtrip = SubTrip.objects.get(trip_id=trip_id, date = date)
             place_id = request.data.get('place_id')
             place = Place.objects.get(id=place_id)
             if not place_id:
