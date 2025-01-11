@@ -16,37 +16,41 @@ const TripPage = () => {
 
     useEffect(() => {
         if (tripId) {
-            fetch(`${BASE_URL}/api/trips/detail/${tripId}/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('access')}`
-                }
+          fetch(`${BASE_URL}/api/trips/detail/${tripId}/`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('access')}`,
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Ошибка сети');
+              }
+              return response.json();
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Ошибка сети');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const tripData = data.trip;
+            .then((data) => {
+              const tripData = data.trip;
+              if (tripData) {
                 setTrip({
-                    id: tripData.id,
-                    tripImage: tripData.temp_image,
-                    title: tripData.title,
-                    description: tripData.description,
-                    startDate: new Date(tripData.start_Date),
-                    endDate: new Date(tripData.end_Date),
-                    trippers: tripData.trippers.length,
-                    cities: tripData.cities
+                  id: tripData.id,
+                  tripImage: tripData.temp_image,
+                  title: tripData.title,
+                  description: tripData.description,
+                  startDate: new Date(tripData.start_Date),
+                  endDate: new Date(tripData.end_Date),
+                  trippers: tripData.trippers.length,
+                  cities: tripData.cities,
                 });
+              } else {
+                console.error('Ответ от сервера пуст');
+              }
             })
-            .catch(error => {
-                console.error(`Ошибка сети или ответа сервера: ${error.message}`);
-            });
+            .catch((error) =>
+              console.error(`Ошибка сети или ответа сервера: ${error.message}`),
+            );
         }
-    }, [tripId]);
+      }, [tripId]);
 
     const handleTabChange = (tabName) => {
         setActiveTab(tabName);
@@ -138,7 +142,7 @@ const TripPage = () => {
                     </div>
                     
                 {activeTab === 'route' && (
-                    <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={tripId} />
+                    <TripHeadlines tripStart={trip.startDate} tripEnd={trip.endDate} tripId={trip.id} />
                 )}
                 {/* Здесь можно добавить дополнительные условия для рендера контента для заметок и "для вас" */}
             </div>

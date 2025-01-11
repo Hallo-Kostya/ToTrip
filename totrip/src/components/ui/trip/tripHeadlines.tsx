@@ -16,19 +16,41 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
 
   const handleDateClick = async (dateIndex: number) => {
     const dateStr = dateList[dateIndex].toISOString().split('T')[0];
-    
+    const placesIds = [];
+  
     if (!subtrips[dateIndex]) {
       try {
-        const response = await createSubtrip(tripId, dateStr);
-        setSubtrips((prev) => ({ ...prev, [dateIndex]: response.data }));
-      } catch (error) {
-        const existingSubtrip = await getSubtripDetails(tripId);
-        if (existingSubtrip) {
-          setSubtrips((prev) => ({ ...prev, [dateIndex]: existingSubtrip.data }));
+        const response = await createSubtrip(tripId, dateStr, placesIds);
+        if (response.data && response.data.subtrip) {
+          const newSubtripId = response.data.subtrip.id;
+          setSubtrips((prev) => ({
+            ...prev,
+            [dateIndex]: { id: newSubtripId, ...response.data.subtrip },
+          }));
+          setActiveDateIndex(dateIndex);
+        } else {
+          console.error('Ответ от сервера не содержит данные о subtrip');
+        }
+      } catch (error: any) {
+        if (error.response && error.response.status === 400) {
+          console.warn('Subtrip уже существует. Получаем существующий сабтрип.');
+          try {
+            const existingSubtrip = await getSubtripDetails(tripId, dateStr);
+            setSubtrips((prev) => ({
+              ...prev,
+              [dateIndex]: existingSubtrip.data,
+            }));
+            setActiveDateIndex(dateIndex);
+          } catch (detailError) {
+            console.error('Ошибка при получении существующего subtrip:', detailError);
+          }
+        } else {
+          console.error('Ошибка при создании subtrip:', error);
         }
       }
+    } else {
+      setActiveDateIndex(dateIndex);
     }
-    setActiveDateIndex(dateIndex);
   };
 
   return (
@@ -65,5 +87,4 @@ const generateDateList = (start: Date, end: Date) => {
   }
   return dates;
 };
-
 export default TripHeadlines;
