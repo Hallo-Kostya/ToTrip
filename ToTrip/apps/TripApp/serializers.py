@@ -23,18 +23,25 @@ class SubtripPlaceSerializer(serializers.ModelSerializer):
         return representation
     
 class NoteSerializer(serializers.ModelSerializer):
-    subtrip_id = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all(), write_only = True)
+    subtrip_id = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all(), required = False)
     author_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required = False)
+
     class Meta:
         model = Note
-        fields = ["id", "subtrip_id", "author_id", "title", "content"]
+        fields = ["id", "subtrip_id",  "author_id", "title", "content"]
     
     def create(self, validated_data):
         request = self.context.get('request')
-        subtrip = validated_data.pop('subtrip_id')
-        author = request.user if request and request.user.is_authenticated else None
-        note = Note.objects.create(subtrip=subtrip, author = author, **validated_data)
-        return note
+        sub_date = self.context.get('date')
+        trip = self.context.get('trip_id')
+        try:
+            subtrip = SubTrip.objects.get(date = sub_date, trip_id = trip)
+            author = request.user if request and request.user.is_authenticated else None
+            note = Note.objects.create(subtrip = subtrip, author = author, **validated_data)
+            return note
+        except SubTrip.DoesNotExist:
+            raise serializers.ValidationError("Данного сабтрипа не существует!!!")
+        
     
 
 

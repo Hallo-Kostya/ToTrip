@@ -20,7 +20,7 @@ class TripListApiView(APIView):
         else:
             trips = Trip.objects.filter(trippers__id = user_id)
         if trips:
-            trips_data = TripSerializer(trips, many = True).data
+            trips_data = TripSerializer(trips, many = True, context = {'request': request}).data
             return Response({"trips": trips_data},
                 status=status.HTTP_200_OK)
         else:
@@ -156,7 +156,9 @@ class DeleteSubtripPlaceApiView(APIView):
 class AddNoteApiView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        note = NoteSerializer(data = request.data, context={'request': request})
+        date = request.data.get('date')
+        trip_id = request.data.get('trip_id')
+        note = NoteSerializer(data = request.data, context={'request': request, 'date': date, 'trip_id': trip_id})
         if note.is_valid():
             note.save()
             return Response({"note": note.data}, status = status.HTTP_200_OK)
