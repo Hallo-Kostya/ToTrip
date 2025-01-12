@@ -16,33 +16,40 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
 
   const handleDateClick = async (dateIndex: number) => {
     const dateStr = dateList[dateIndex].toISOString().split('T')[0];
-    const placesIds: number[] = []; 
-
+    const placesIds: number[] = [];
+  
     try {
-
       const createResponse = await createSubtrip(tripId, dateStr, placesIds);
-
+  
       if (createResponse.status === 201 && createResponse.data.subtrip) {
-
         const detailResponse = await getSubtripDetails(tripId, dateStr);
-
         if (detailResponse.status === 200 && detailResponse.data.subtrip) {
-
           setSubtrips((prev) => ({
             ...prev,
             [dateIndex]: detailResponse.data.subtrip,
           }));
-        } else {
-          console.error('Ошибка получения деталей subtrip:', detailResponse.data);
+        }
+      }
+    } catch (error: any) {
+
+      if (error.response?.status === 400) {
+        try {
+          const detailResponse = await getSubtripDetails(tripId, dateStr);
+          if (detailResponse.status === 200 && detailResponse.data.subtrip) {
+            setSubtrips((prev) => ({
+              ...prev,
+              [dateIndex]: detailResponse.data.subtrip,
+            }));
+          }
+        } catch (detailError: any) {
+          console.error('Ошибка получения деталей существующей подпоездки:', detailError);
         }
       } else {
-        console.error('Ответ сервера при создании subtrip не содержит данных:', createResponse.data);
+        console.error('Ошибка обработки createSubtrip:', error.message);
       }
-
-      setActiveDateIndex(dateIndex);
-    } catch (error: any) {
-      console.error('Ошибка при создании subtrip или получении деталей:', error);
     }
+  
+    setActiveDateIndex(dateIndex);
   };
 
   return (

@@ -40,8 +40,8 @@ export const createSubtrip = (
     );
   };
 
-export const deletePlace = (place_id: number) => {
-    return axios.delete(`${BASE_URL}/api/trips/subtrip/remove_place/${place_id}/`, {
+export const deletePlace = (subtripplace_id: number) => {
+    return axios.delete(`${BASE_URL}/api/trips/subtrip/remove_place/${subtripplace_id}/`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
@@ -50,11 +50,35 @@ export const deletePlace = (place_id: number) => {
 };
 
 export const deleteNote = (note_id: number) => {
-    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete_note/`, {
+    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete_note/<int:note_id>/`, {
         data: { note_id },
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access')}`
         }
     });
+};
+
+export const addPlaceToSubtrip = (trip_id: number, date: number) => {
+  return axios.patch(
+    `${BASE_URL}/api/trips/subtrip/add_place/${trip_id}/${date}/`,
+    { trip_id, date },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+      },
+    }
+  );
+};
+
+export const addNoteToSubtrip = (trip_id: number, date: string ) => {
+  return axios.post(`${BASE_URL}/api/trips/subtrip/add_note/`, 
+    { trip_id, date }, 
+    {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('access')}`,
+    },
+  });
 };
