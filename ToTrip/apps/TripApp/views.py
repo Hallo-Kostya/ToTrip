@@ -95,6 +95,18 @@ class TripDetailApiView(APIView):
             return Response({"trip": serializer.data}, status=status.HTTP_200_OK)
         except Trip.DoesNotExist:
             return Response({"error": "данной поездки не сушествует"}, status=status.HTTP_404_NOT_FOUND)
+
+class GetUserNotesApiView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        notes = Note.objects.filter(author_id = user.id)
+        if notes.exists():
+            serializer = NoteSerializer(notes, many=True, context = {'request': request})
+            return Response({"notes": serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "у данного пользователя нет заметок!"}, status=status.HTTP_404_NOT_FOUND)
+    
         
 class DeleteSubtripApiView(APIView):
     permission_classes = [IsAuthenticated]

@@ -5,25 +5,7 @@ from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer
 from apps.PlaceApp.models import City, Place
 from apps.ImageApp.serializers import TripImageSerializer
 from apps.UsersApp.models import User
-from apps.UsersApp.serializers import UserSerializer
-    
-class NoteSerializer(serializers.ModelSerializer):
-    subtrip_id = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all(), write_only = True)
-    author = serializers.SerializerMethodField()
-    class Meta:
-        model = Note
-        fields = ["id", "subtrip_id", "author", "title", "content"]
-
-    def get_author(self,obj):
-        user = self.context.get('request').user
-        return user.id
-    
-    def create(self, validated_data):
-        request = self.context.get('request')
-        subtrip = validated_data.pop('subtrip_id')
-        author = request.user if request and request.user.is_authenticated else None
-        note = Note.objects.create(subtrip=subtrip, author = author, **validated_data)
-        return note
+from datetime import date
     
 
 class SubtripPlaceSerializer(serializers.ModelSerializer):
@@ -39,10 +21,27 @@ class SubtripPlaceSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['place'] = PlaceSerializer(instance.place).data
         return representation
+    
+class NoteSerializer(serializers.ModelSerializer):
+    subtrip_id = serializers.PrimaryKeyRelatedField(queryset=SubTrip.objects.all(), write_only = True)
+    author_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required = False)
+    class Meta:
+        model = Note
+        fields = ["id", "subtrip_id", "author_id", "title", "content"]
+    
+    def create(self, validated_data):
+        request = self.context.get('request')
+        subtrip = validated_data.pop('subtrip_id')
+        author = request.user if request and request.user.is_authenticated else None
+        note = Note.objects.create(subtrip=subtrip, author = author, **validated_data)
+        return note
+    
+
+
 
 class SubTripSerializer(serializers.ModelSerializer):
     trip_id = serializers.PrimaryKeyRelatedField(queryset=Trip.objects.all(), write_only=True)
-    subtrip_notes = serializers.SerializerMethodField()
+    subtrip_notes = serializers.SerializerMethodField(default = [])
     subtrip_places = SubtripPlaceSerializer(many=True, read_only = True) 
     class Meta:
         model = SubTrip
@@ -52,16 +51,16 @@ class SubTripSerializer(serializers.ModelSerializer):
         try:
             request = self.context.get('request')
             if request and hasattr(request, 'user') and request.user.is_authenticated:
-                notes = Note.objects.filter(author = request.user, subtrip = obj.id)
+                print(request.user.id, obj.id)
+                notes = Note.objects.filter(author_id = request.user.id, subtrip_id = obj.id)
                 if notes.exists():
                     print(notes)
                     return NoteSerializer(notes, many=True).data
-                else:
-                    return []
         except AttributeError:
             return []
         except Note.DoesNotExist:
             return []
+        return []
         
 
     
@@ -97,12 +96,22 @@ class TripSerializer(serializers.ModelSerializer):
     trippers = FollowSerializer(many = True)
     tripimage_set = TripImageSerializer(many=True, read_only=True)
     subtrips = SubTripSerializer(many = True)
+    actuality = serializers.SerializerMethodField()
     class Meta: 
         model = Trip
-        fields = ['id', 'trippers', 'title', 'description', 'start_Date', 'end_Date', 'cities', 'subtrips', 'tripimage_set','temp_image']
+        fields = ['id', 'trippers', 'title', 'description', 'start_Date', 'end_Date', 'actuality','cities', 'subtrips', 'tripimage_set','temp_image']
 
     def validate(self, data):
         """Проверка, что даты корректны"""
         if data['start_Date'] > data['end_Date']:
             raise serializers.ValidationError("Дата начала не может быть позже даты окончания.")
         return data
+    
+    def get_actuality(self,obj):
+        if obj.start_Date > date.today():
+            actuality = 'upcoming'
+        elif obj.end_Date < date.today():
+           actuality = 'finished'
+        else:
+            actuality = 'current'
+        return actuality

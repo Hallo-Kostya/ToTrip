@@ -15,6 +15,7 @@ urlpatterns = [
     path('subtrip/remove_place/<int:subtripplace_id>/', DeleteSubtripPlaceApiView.as_view(), name = 'delete_place_from_subtrip_api'),
     path('subtrip/delete/<int:trip_id>/<str:date>/', DeleteSubtripApiView.as_view(), name = 'delete_subtrip_api'),
     path('subtrip/add_note/', AddNoteApiView.as_view(), name = 'add_note_api'),
+    path('subtrip/notes/', GetUserNotesApiView.as_view(), name = 'notes_list_api'),
     path('subtrip/delete_note/<int:note_id>/', DeleteNoteApiView.as_view(), name = 'delete_note_api'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
