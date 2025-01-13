@@ -26,8 +26,12 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
         if (detailResponse.status === 200 && detailResponse.data.subtrip) {
           setSubtrips((prev) => ({
             ...prev,
-            [dateIndex]: detailResponse.data.subtrip,
-          }));
+            [dateIndex]: {
+                ...detailResponse.data.subtrip,
+                places: detailResponse.data.subtrip.places,
+                notes: detailResponse.data.subtrip.notes
+            },
+        }));
         }
       }
     } catch (error: any) {

@@ -31,7 +31,7 @@ const DatesBar: React.FC<DatesBarProps> = ({
         <div
           key={date.toDateString()}
           className={`px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
-            activeDateIndex === index ? 'bg-blue-500 text-white' : ''
+            activeDateIndex === index ? 'bg-blue-500 text-white border-white' : ''
           }`}
           onClick={() => onDateClick(index)}
         >

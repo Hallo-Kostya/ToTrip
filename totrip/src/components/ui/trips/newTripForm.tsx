@@ -45,7 +45,7 @@ const TripForm: React.FC<TripFormProps> = ({
         setTripImage('');
         setTitle('');
         setDescription('');
-        setCity(''); // Reset single city
+        setCity('');
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);

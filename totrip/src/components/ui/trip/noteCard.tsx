@@ -7,17 +7,20 @@ interface NoteCardProps {
 }
 
 const NoteCard: React.FC<NoteCardProps> = ({ title, content, onDelete }) => {
-
     return (
-        <div className="flex justify-between items-center bg-white p-4 mb-2 shadow rounded">
-            <h3>{title}</h3>
-            <p>{content}</p>
-            <button 
-                className="text-red-500"
-                onClick={onDelete}
-            >
-                Удалить
-            </button>
+        <div className="flex items-start border-l-[2px] border-gray-300 relative left-[20px] pl-6 pb-4 pt-2">
+            <div className="flex flex-col justify-between w-full">
+                <div>
+                    <h4 className="text-[24px] font-bold mb-2">{title}</h4>
+                    <p className="text-[18px] text-gray-700">{content}</p>
+                </div>
+                <button
+                    className="text-red-500 mt-4 text-right"
+                    onClick={onDelete}
+                >
+                    Удалить
+                </button>
+            </div>
         </div>
     );
 };

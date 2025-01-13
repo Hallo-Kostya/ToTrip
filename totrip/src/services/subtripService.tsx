@@ -13,7 +13,7 @@ export const createSubtrip = (
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          'Authorization': `Bearer ${localStorage.getItem('access')}`,
         },
       }
     );
@@ -23,7 +23,7 @@ export const createSubtrip = (
     return axios.get(`${BASE_URL}/api/trips/subtrip/detail/${trip_id}/${date}/`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        'Authorization': `Bearer ${localStorage.getItem('access')}`,
       },
     });
   };
@@ -34,7 +34,7 @@ export const createSubtrip = (
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`,
+          'Authorization': `Bearer ${localStorage.getItem('access')}`,
         },
       }
     );
@@ -59,26 +59,24 @@ export const deleteNote = (note_id: number) => {
     });
 };
 
-export const addPlaceToSubtrip = (trip_id: number, date: number) => {
-  return axios.patch(
-    `${BASE_URL}/api/trips/subtrip/add_place/${trip_id}/${date}/`,
-    { trip_id, date },
+export const addPlaceToSubtrip = async (trip_id, date, place) => {
+  return axios.patch(`${BASE_URL}/api/trips/subtrip/add_place/${trip_id}/${date}/`,
+    { trip_id, date, place },
     {
-      headers: {
+      headers: { 
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        'Authorization': `Bearer ${localStorage.getItem('access')}` 
       },
-    }
-  );
+  });
 };
 
-export const addNoteToSubtrip = (trip_id: number, date: string ) => {
+export const addNoteToSubtrip = (trip_id: number, date: string, title: string, content: string ) => {
   return axios.post(`${BASE_URL}/api/trips/subtrip/add_note/`, 
-    { trip_id, date }, 
+    { trip_id, date, title, content }, 
     {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('access')}`,
+      'Authorization': `Bearer ${localStorage.getItem('access')}`,
     },
   });
 };

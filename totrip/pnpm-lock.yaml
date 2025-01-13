@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@next/react-refresh-utils':
+        specifier: ^15.1.4
+        version: 15.1.4(react-refresh@0.16.0)
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -26,6 +29,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-refresh:
+        specifier: ^0.16.0
+        version: 0.16.0
       tailwindcss-filters:
         specifier: ^3.0.0
         version: 3.0.0
@@ -254,6 +260,15 @@ packages:
 
   '@next/eslint-plugin-next@15.0.3':
     resolution: {integrity: sha512-3Ln/nHq2V+v8uIaxCR6YfYo7ceRgZNXfTd3yW1ukTaFbO+/I8jNakrjYWODvG9BuR2v5kgVtH/C8r0i11quOgw==}
+
+  '@next/react-refresh-utils@15.1.4':
+    resolution: {integrity: sha512-nLiYThtSv/5K4TIgcEoNzhxJubO0MlQRqmh4C+gYFtIAvcXSoYA88xdty8VzGsSO6zd5kDVq8sV4VjO7EjuQPg==}
+    peerDependencies:
+      react-refresh: 0.12.0
+      webpack: ^4 || ^5
+    peerDependenciesMeta:
+      webpack:
+        optional: true
 
   '@next/swc-darwin-arm64@15.0.3':
     resolution: {integrity: sha512-s3Q/NOorCsLYdCKvQlWU+a+GeAd3C8Rb3L1YnetsgwXzhc3UTWrtQpB/3eCjFOdGUj5QmXfRak12uocd1ZiiQw==}
@@ -1445,6 +1460,10 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
+  react-refresh@0.16.0:
+    resolution: {integrity: sha512-FPvF2XxTSikpJxcr+bHut2H4gJ17+18Uy20D5/F+SKzFap62R3cM5wH6b8WN3LyGSYeQilLEcJcR1fjBSI2S1A==}
+    engines: {node: '>=0.10.0'}
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -1931,6 +1950,10 @@ snapshots:
   '@next/eslint-plugin-next@15.0.3':
     dependencies:
       fast-glob: 3.3.1
+
+  '@next/react-refresh-utils@15.1.4(react-refresh@0.16.0)':
+    dependencies:
+      react-refresh: 0.16.0
 
   '@next/swc-darwin-arm64@15.0.3':
     optional: true
@@ -3265,6 +3288,8 @@ snapshots:
       scheduler: 0.23.2
 
   react-is@16.13.1: {}
+
+  react-refresh@0.16.0: {}
 
   react@18.3.1:
     dependencies:
