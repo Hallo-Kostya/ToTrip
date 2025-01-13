@@ -11,12 +11,13 @@ export interface SearchElementProps {
     reviewCnt: number; // Количество отзывов
     description: string; // Описание места
     tags: category[]; // Массив тегов с иконкой и текстом
+    width: number;
 }
 
-export const SearchElement = ({ id, imgUrl, name, rating, reviewCnt, description, tags }: SearchElementProps) => {
+export const SearchElement = ({ id, imgUrl, name, rating, reviewCnt, description, tags, width}: SearchElementProps) => {
     return (
         <Link href={`/places/${id}`}>
-            <div className='gap-[32px] max-w-[1264px] flex bg-white rounded-[20px] h-[320px]'>
+            <div className={`gap-[32px] max-w-[${width}px] flex bg-white rounded-[20px] h-[320px]`}>
                 <Image
                     src={imgUrl}
                     width={400}

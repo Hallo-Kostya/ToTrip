@@ -86,7 +86,8 @@ export default function Page() {
                 rating={element.avg_rating}
                 reviewCnt={element.reviews_count}
                 description={element.description}
-                tags={element.categories} />
+                tags={element.categories}
+                width={1264} />
             ))
           )}
         </div>
