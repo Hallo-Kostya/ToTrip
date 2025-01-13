@@ -28,8 +28,8 @@ class SearchPlacesAPIView(APIView):
         then_by = request.data.get("then_by", "").lower()
         is_asc = request.data.get("is_asc", "false").lower() == "true"
        
-        if query == "":
-            return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
+        # if query == "":
+        #     return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
         query=query.lower()
         query_parts = query.split()
 

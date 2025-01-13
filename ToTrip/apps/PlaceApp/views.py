@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Place, FavoritePlace
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.shortcuts import redirect, render
 from apps.SearchApp.serializers import SearchPlaceSerializer
 from .models import Place
@@ -104,3 +104,13 @@ class PlaceRecommendationView(APIView):
         recommended_places = sample(top_places, min(len(top_places), 12))  
         serializer = SearchPlaceSerializer(recommended_places, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AddPlaceApiView(APIView):
+    permission_classes = [IsAdminUser]
+    def post(self, request):
+        serializer = PlaceSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "место успешно создано"}, status=status.HTTP_201_CREATED)
+        return Response({"error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
