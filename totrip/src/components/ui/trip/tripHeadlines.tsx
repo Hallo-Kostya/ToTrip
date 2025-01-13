@@ -32,7 +32,7 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
       }
     } catch (error: any) {
 
-      if (error.response?.status === 400) {
+      if (error.response?.status === 500) {
         try {
           const detailResponse = await getSubtripDetails(tripId, dateStr);
           if (detailResponse.status === 200 && detailResponse.data.subtrip) {

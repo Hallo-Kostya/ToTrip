@@ -49,11 +49,12 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
       { id: 6, label: 'Достопримечательности', icon: '/img/trip-page/castle.svg' },
       { id: 7, label: 'Еда', icon: '/img/trip-page/soup.svg' },
       { id: 8, label: 'Заметки', icon: '/img/trip-page/notes.svg' },
-      { id: 9, label: 'Свернуть', icon: '/img/trip-page/x.svg' },
+      { id: 9, label: 'Поиск', icon: '/img/trip-page/search.svg' },
+      { id: 10, label: 'Свернуть', icon: '/img/trip-page/x.svg' },
     ];
 
     const handleTagClick = async (tag) => {
-      if (tag.id === 9) {
+      if (tag.id === 10) {
         setIsExpanded(false);
       } else if (tag.id === 8) {
         await addNoteToSubtrip(tripId, subtrip.date)
@@ -71,7 +72,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
       <div key={subtrip.id}>
         <div className="flex items-center justify-between">
         <h3 className="text-[24px] font-bold">
-          {new Date(subtrip.date).toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}
+          {new Date(subtrip.date).toLocaleDateString('ru-RU', { day: '2-digit', month: 'long' })}
         </h3>
           <button onClick={() => setShowDeleteModal(true)}>Удалить сабтрип</button>
         </div>
