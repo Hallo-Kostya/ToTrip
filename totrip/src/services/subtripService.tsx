@@ -59,9 +59,9 @@ export const deleteNote = (note_id: number) => {
     });
 };
 
-export const addPlaceToSubtrip = async (trip_id, date, place, category) => {
+export const addPlaceToSubtrip = async (trip_id, date, place) => {
   return axios.patch(`${BASE_URL}/api/trips/subtrip/add_place/${trip_id}/${date}/`,
-    { trip_id, date, place, category },
+    { trip_id, date, place },
     {
       headers: { 
         'Content-Type': 'application/json',
