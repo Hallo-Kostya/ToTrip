@@ -4,9 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 
 
-const RoutePointCard = ({ tagImg, placeImg, placeName, description, additionalClasses, onDelete }) => {
+const RoutePointCard = ({ tagImg, placeImg, placeName, description, onDelete, dynamicStyles }) => {
+    if (description.length > 400) {
+        description = description.slice(0, 400) + '...';
+    }
+
     return (
-        <div className={`flex border-l-[2px] border-black relative left-[20px] ${additionalClasses}`}>
+        <div className={`${dynamicStyles} border-l-2 border-black`}>
             <div className="relative right-[22.5px]">
                 <span className="">
                     <Image 
@@ -18,27 +22,28 @@ const RoutePointCard = ({ tagImg, placeImg, placeName, description, additionalCl
                     />
                 </span>
             </div>
-            
-            <div className="ml-[96px]">
+            <div className="relative w-[296px] h-[201px] ml-[96px]">
                 <Image 
                     src={placeImg} 
                     alt={placeName} 
-                    width={296} 
-                    height={201} 
-                    className="rounded-[20px]"
+                    className="object-cover rounded-[20px]" 
+                    fill
                 />
             </div>
             <div className="ml-[18px]">
                 <div className="flex items-center">
                     <h4 className="text-[24px] font-bold">{placeName}</h4>
                 </div>
-                <p className="mt-[7px] text-[20px] font-[600]">{description || 'Описание отсутствует'}</p>
+                <p className="w-[1150px] mt-[7px] text-[20px] font-[600]">
+                    {description || 'Описание отсутствует'}
+                </p>
+                
             </div>
             <button
-                className="text-red-500 mt-4 text-right"
+                className="flex relative text-red-500 ml-auto mt-8 mr-4"
                 onClick={onDelete}
             >
-                Удалить
+                <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="relative flex" width={32} height={32}/>
             </button>
         </div>
     );

@@ -128,35 +128,68 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
         </h3>
         <button onClick={() => setShowDeleteModal(true)}>Удалить сабтрип</button>
       </div>
-      <div className="mt-4">
-        {Array.isArray(places) && places.length > 0 ? (
-          places.map((place) => (
-            <RoutePointCard
-              key={place.id}
-              tagImg={place.category_icon}
-              placeImg={`${BASE_URL}/${place?.place?.placeimage_set?.[0]?.image}`}
-              placeName={place?.place?.name}
-              // rating={place?.place?.rating}
-              description={place?.place?.description}
-              onDelete={() => handleDeletePlace(place.id)}
-            />
-          ))
-        ) : (
-          <p className="text-gray-500">Места для этой подпоездки пока не добавлены.</p>
-        )}
-        {Array.isArray(notes) && notes.length > 0 ? (
-          notes.map((note) => (
-            <NoteCard
-              key={note.id}
-              tagImg={`${BASE_URL}/${note.icon}`}
-              title={note.title}
-              content={note.content}
-              onDelete={() => handleDeleteNote(note.id)}
-            />
-          ))
-        ) : (
-          <p className="text-gray-500">Заметки для этой подпоездки пока не добавлены.</p>
-        )}
+      <div className="mt-20 mb-15">
+      {
+        Array.isArray(places) && places.length > 0
+          ? places.concat(notes).map((item, index, array) => {
+              const isFirst = index === 0;
+              const isLast = index === array.length - 1;
+              const isSecondToLast = array.length >= 3 && index === array.length - 2;
+
+              const isRoutePoint = places.includes(item);
+
+              let styles = 'flex border-l-[2px] relative left-[20px] ';
+
+              if (!isLast) {
+                styles += 'pt-[120px] ';
+              }
+
+              if (isSecondToLast) {
+                styles += 'pb-[120px] ';
+              }
+
+              if (isLast) {
+                styles += 'border-l-0 ';
+              }
+
+              if (array.length === 2) {
+                if (isFirst) {
+                  styles = 'flex border-l-[2px] relative left-[20px] pb-[120px] ';
+                }
+              } else if (isFirst) {
+                styles = 'flex border-l-[2px] relative left-[20px] ';
+              }
+
+              if (isRoutePoint) {
+                return (
+                  <RoutePointCard
+                    key={item.id}
+                    tagImg={item.category_icon}
+                    placeImg={`${BASE_URL}/${item?.place?.placeimage_set?.[0]?.image}`}
+                    placeName={item?.place?.name}
+                    description={item?.place?.description}
+                    onDelete={() => handleDeletePlace(item.id)}
+                    dynamicStyles={styles}
+                  />
+                );
+              } else {
+                // NoteCard рендерится здесь
+                return (
+                  <NoteCard
+                    key={item.id}
+                    tagImg={`${BASE_URL}/${item.icon}`}
+                    title={item.title}
+                    content={item.content}
+                    onDelete={() => handleDeleteNote(item.id)}
+                    dynamicStyles={styles}
+                  />
+                );
+              }
+            })
+          : (
+            <p className="text-gray-500">Элементы отсутствуют.</p>
+          )
+      }
       </div>
       {showDeleteModal && (
         <DeleteConfirmationModal
@@ -165,15 +198,15 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
           itemName={`подпоездку с текущей датой: ${subtrip.date}`}
         />
       )}
-      <div className="tags-container">
+      <div className="mt-14">
         {isExpanded
           ? tags.map((tag) => (
-            <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag">
+            <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag border-[1.5px] rounded-full border-black p-[10px] mr-[12px]">
               <Image src={tag.icon} alt={tag.label} width={32} height={32} />
             </button>
           ))
         : (
-            <button className="expand-btn" onClick={() => setIsExpanded(true)}>
+            <button className="expand-btn border-[1.5px] rounded-full border-black p-[10px]" onClick={() => setIsExpanded(true)}>
               <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
             </button>
           )}
