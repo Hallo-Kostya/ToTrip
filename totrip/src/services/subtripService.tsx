@@ -50,7 +50,7 @@ export const deletePlace = (subtripplace_id: number) => {
 };
 
 export const deleteNote = (note_id: number) => {
-    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete_note/<int:note_id>/`, {
+    return axios.delete(`${BASE_URL}/api/trips/subtrip/delete_note/${note_id}/`, {
         data: { note_id },
         headers: {
             'Content-Type': 'application/json',
@@ -59,9 +59,9 @@ export const deleteNote = (note_id: number) => {
     });
 };
 
-export const addPlaceToSubtrip = async (trip_id, date, place) => {
+export const addPlaceToSubtrip = async (trip_id, date, place, tag) => {
   return axios.patch(`${BASE_URL}/api/trips/subtrip/add_place/${trip_id}/${date}/`,
-    { trip_id, date, place },
+    { trip_id, date, place, tag },
     {
       headers: { 
         'Content-Type': 'application/json',

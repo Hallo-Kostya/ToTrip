@@ -12,7 +12,7 @@ const SearchPlacesModal = ({ selectedTag, onSelect }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (query || !selectedTag) {
+    if (query || !selectedTag || selectedTag) {
       fetchPlaces();
     }
   }, [query, selectedTag]);
@@ -27,9 +27,9 @@ const SearchPlacesModal = ({ selectedTag, onSelect }) => {
   
       const placesWithDefaults = response.data.places.map((place) => ({
         id: place.id,
-        photo: place.photo || '/img/default-place.svg',
-        name: place.name || 'Неизвестное место',
-        description: place.description || 'Описание отсутствует',
+        photo: `${BASE_URL}/${place.search_image}`,
+        name: place.name,
+        description: place.description,
       }));
       
       setPlaces(placesWithDefaults);
@@ -60,14 +60,14 @@ const SearchPlacesModal = ({ selectedTag, onSelect }) => {
               onClick={() => onSelect(place.id)}
             >
               <Image 
-                src={place?.photo || '/img/default-place.svg'} // Если фото недоступно, добавляем дефолтное
-                alt={place?.name || 'Неизвестное место'} 
+                src={place?.photo}
+                alt={place?.name} 
                 className="rounded-lg" 
                 height={80} 
                 width={80}
               />
               <div className="flex flex-col gap-[8px]">
-                <h2 className='text-[16px] text-black font-medium'>{place?.name || 'Неизвестное место'}</h2>
+                <h2 className='text-[16px] text-black font-medium'>{place?.name}</h2>
                 <p className='text-[14px] text-[#5B5B5B] font-light'>{place?.description || 'Описание отсутствует'}</p>
               </div>
             </div>

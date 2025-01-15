@@ -10,8 +10,10 @@ import Image from 'next/image';
 import Modal from './modal';
 import SearchPlacesModal from './searchModal';
 
+const BASE_URL = 'http://127.0.0.1:8000';
 
-const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
+
+const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
   const [places, setPlaces] = useState(subtrip.subtrip_places);
   const [notes, setNotes] = useState(subtrip.subtrip_notes);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -21,6 +23,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
   const [selectedTag, setSelectedTag] = useState(null);
+  const [currentTagIcon, setCurrentTagIcon] = useState(null);
 
   const handleDeleteSubtrip = async () => {
     try {
@@ -60,11 +63,14 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
       setIsExpanded(false);
     } else if (tag.id >= 1 && tag.id <= 7) {
       setSelectedTag(tag.label);
+      setCurrentTagIcon(tag.icon);
       setSearchModalVisible(true);
     } else if (tag.id === 9) {
       setSelectedTag(null);
       setSearchModalVisible(true);
     } else if (tag.id === 8) {
+      setSelectedTag(tag.label);
+      setCurrentTagIcon(tag.icon);
       setNoteModalVisible(true);
     }
   };
@@ -87,7 +93,8 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
 
   const handleAddPlace = async (placeId) => {
     try {
-      await addPlaceToSubtrip(tripId, subtrip.date, placeId );
+      await addPlaceToSubtrip(tripId, subtrip.date, placeId, currentTagIcon);
+  
       await updateSubtripDetails();
       setSearchModalVisible(false);
     } catch (error) {
@@ -126,8 +133,8 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
           places.map((place) => (
             <RoutePointCard
               key={place.id}
-              tagImg={place?.place?.icon}
-              placeImg={place?.place?.image}
+              tagImg={currentTagIcon}
+              placeImg={`${BASE_URL}/${place?.place?.placeimage_set?.[0]?.image}`}
               placeName={place?.place?.name}
               rating={place?.place?.rating}
               description={place?.place?.description}
@@ -160,15 +167,15 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
       <div className="tags-container">
         {isExpanded
           ? tags.map((tag) => (
-              <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag">
-                <Image src={tag.icon} alt={tag.label} width={32} height={32} />
-              </button>
-            ))
-          : (
-              <button className="expand-btn" onClick={() => setIsExpanded(true)}>
-                <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
-              </button>
-            )}
+            <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag">
+              <Image src={tag.icon} alt={tag.label} width={32} height={32} />
+            </button>
+          ))
+        : (
+            <button className="expand-btn" onClick={() => setIsExpanded(true)}>
+              <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
+            </button>
+          )}
       </div>
       {/* Модальное окно поиска */}
       {searchModalVisible && (

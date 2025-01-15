@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import DatesBar from '@/components/ui/trip/datesBar';
 import Subtrip from '@/components/ui/trip/subtrip';
 import { createSubtrip, getSubtripDetails } from '@/services/subtripService';
@@ -14,28 +14,34 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
   const [subtrips, setSubtrips] = useState<Record<number, any>>({});
   const [activeDateIndex, setActiveDateIndex] = useState<number | null>(null);
 
-  const handleDateClick = async (dateIndex: number) => {
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleDateClick = async (dateIndex: number, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
     const dateStr = dateList[dateIndex].toISOString().split('T')[0];
     const placesIds: number[] = [];
-  
+    setSubtrips((prev) => ({ ...prev, [dateIndex]: null }));
+
     try {
       const createResponse = await createSubtrip(tripId, dateStr, placesIds);
-  
+
       if (createResponse.status === 201 && createResponse.data.subtrip) {
         const detailResponse = await getSubtripDetails(tripId, dateStr);
         if (detailResponse.status === 200 && detailResponse.data.subtrip) {
           setSubtrips((prev) => ({
             ...prev,
             [dateIndex]: {
-                ...detailResponse.data.subtrip,
-                places: detailResponse.data.subtrip.places,
-                notes: detailResponse.data.subtrip.notes
+              ...detailResponse.data.subtrip,
+              places: detailResponse.data.subtrip.places,
+              notes: detailResponse.data.subtrip.notes,
             },
-        }));
+          }));
         }
       }
     } catch (error: any) {
-
       if (error.response?.status === 500) {
         try {
           const detailResponse = await getSubtripDetails(tripId, dateStr);
@@ -52,8 +58,13 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
         console.error('Ошибка обработки createSubtrip:', error.message);
       }
     }
-  
+
     setActiveDateIndex(dateIndex);
+
+    // Prevent automatic scroll jumps
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollTop;
+    }
   };
 
   return (
@@ -61,7 +72,7 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
       <DatesBar
         tripStart={tripStart}
         tripEnd={tripEnd}
-        onDateClick={handleDateClick}
+        onDateClick={(dateIndex, e) => handleDateClick(dateIndex, e)}
         activeDateIndex={activeDateIndex}
       />
       <div className="flex flex-col mt-10">
