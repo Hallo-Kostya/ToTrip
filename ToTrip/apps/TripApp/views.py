@@ -125,7 +125,7 @@ class AddPlaceToSubtripApiView(APIView):
     def patch(self, request, trip_id, date):
         try:
             subtrip = SubTrip.objects.get(trip_id=trip_id, date = date)
-            place_id = request.data.get('place_id')
+            place_id = request.data.get('place')
             place = Place.objects.get(id=place_id)
             if not place_id:
                 return Response({'error': 'не передан Id места'}, status=status.HTTP_400_BAD_REQUEST)

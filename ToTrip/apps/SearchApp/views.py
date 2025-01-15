@@ -6,8 +6,7 @@ from .serializers import  SearchCitySerializer, SearchCountrySerializer, SearchD
 from django.db.models import Q
 from django.db.models.functions import Lower
 from rest_framework.pagination import PageNumberPagination      
-from django.db.models import F 
-from django.db.models import Avg
+
 
 class SearchPlacesAPIView(APIView):
     """метод для получения городов, мест, округов, стран, регионов из бд.
@@ -27,9 +26,7 @@ class SearchPlacesAPIView(APIView):
         order_by = request.data.get("order_by", "").lower()
         then_by = request.data.get("then_by", "").lower()
         is_asc = request.data.get("is_asc", "false").lower() == "true"
-       
-        # if query == "":
-        #     return Response({"error": "Отправлен пустой запрос"}, status=status.HTTP_400_BAD_REQUEST)
+
         query=query.lower()
         query_parts = query.split()
 
@@ -125,8 +122,7 @@ class SearchPlacesAPIView(APIView):
             # "cities": cities_data,
             "places": places_data,
             "total_pages": paginator_places.page.paginator.num_pages,
-            "count": paginator_places.page.paginator.count,
-            "next": paginator_places.get_next_link()
+            "count_objects": paginator_places.page.paginator.count,
             # "countries": countries_data,
             # "regions": regions_data,
             # "districts": districts_data
