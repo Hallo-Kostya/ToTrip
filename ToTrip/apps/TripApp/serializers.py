@@ -11,17 +11,14 @@ from datetime import date
 class SubtripPlaceSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all(), source='place', write_only=True)
     place = PlaceSerializer(read_only=True)
-    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source ='category', write_only = True)
-    category = CategorySerializer(read_only=True)
     class Meta:
         model = SubtripPlace
-        fields = ["id", "category_id", "category", "place_id", "place"]
+        fields = ["id",  "category_icon", "place_id", "place"]
 
     def to_representation(self, instance):
         """Добавляем полную информацию о месте при запросе"""
         representation = super().to_representation(instance)
         representation['place'] = PlaceSerializer(instance.place).data
-        representation['category'] = CategorySerializer(instance.category).data
         return representation
     
 class NoteSerializer(serializers.ModelSerializer):
@@ -30,7 +27,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ["id", "subtrip_id",  "author_id", "category_icon", "title", "content"]
+        fields = ["id", "subtrip_id",  "author_id", "icon", "title", "content"]
     
     def create(self, validated_data):
         request = self.context.get('request')
