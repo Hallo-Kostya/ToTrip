@@ -96,6 +96,8 @@ class SearchPlacesAPIView(APIView):
                 ).values_list('id', flat=True)
             if category_ids.exists():
                 places = places.filter(categories__id__in=category_ids).distinct()
+            else:
+                places = []
 
         places = self.sort_output(order_by, then_by, is_asc, places)
 
