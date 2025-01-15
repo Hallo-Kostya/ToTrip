@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from .models import Trip, SubTrip, SubtripPlace, Note
 from apps.UsersApp.serializers import FollowSerializer
-from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer
-from apps.PlaceApp.models import City, Place
+from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer, CategorySerializer
+from apps.PlaceApp.models import City, Place, Category
 from apps.ImageApp.serializers import TripImageSerializer
 from apps.UsersApp.models import User
 from datetime import date
@@ -11,15 +11,17 @@ from datetime import date
 class SubtripPlaceSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all(), source='place', write_only=True)
     place = PlaceSerializer(read_only=True)
-    
+    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source ='category', write_only = True)
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = SubtripPlace
-        fields = ["id", "place_id", "place"]
+        fields = ["id", "category_id", "category", "place_id", "place"]
 
     def to_representation(self, instance):
         """Добавляем полную информацию о месте при запросе"""
         representation = super().to_representation(instance)
         representation['place'] = PlaceSerializer(instance.place).data
+        representation['category'] = CategorySerializer(instance.category).data
         return representation
     
 class NoteSerializer(serializers.ModelSerializer):

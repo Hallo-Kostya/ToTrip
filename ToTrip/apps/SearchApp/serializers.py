@@ -119,6 +119,7 @@ class SearchPlaceSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "description",
             "city_name",
             "region_name",
             "district_name",

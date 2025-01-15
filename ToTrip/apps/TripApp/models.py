@@ -1,6 +1,6 @@
 from django.db import models
 from ToTrip import settings
-from apps.PlaceApp.models import Place, City
+from apps.PlaceApp.models import Place, City, Category
 from apps.UsersApp.models import User
 # Create your models here.
 class Trip(models.Model):
@@ -31,6 +31,7 @@ class  SubTrip(models.Model):
 class SubtripPlace(models.Model):
     subtrip = models.ForeignKey(SubTrip, on_delete = models.CASCADE, related_name = 'subtrip_places')
     place = models.ForeignKey(Place, on_delete = models.DO_NOTHING, related_name = 'subtrip_review_places')
+    category = models.ForeignKey(Category, on_delete = models.DO_NOTHING, related_name = 'subtrip_places', default=1 )
     class Meta:
         unique_together = ('subtrip', 'place')
 

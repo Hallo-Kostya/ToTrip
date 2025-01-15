@@ -18,6 +18,28 @@ class UserReviewSerializer(serializers.ModelSerializer):
             "photo",
         ]
 
+class EditReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Review
+
+    fields = [
+            "rating",
+            "text"
+    ]
+    # extra_kwargs = {
+    #         'password': {'write_only': True, 'required': False},
+    #         'email': {'required': False},
+    #         'first_name': {'required': False},
+    #         'last_name': {'required': False},
+    #         'username': {'required': False}
+    #     }
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
 
 class ReviewSerializer(serializers.ModelSerializer):
     """сериализатор отзыва"""

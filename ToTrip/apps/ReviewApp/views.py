@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import ReviewSerializer
+from .serializers import ReviewSerializer,EditReviewSerializer
 from apps.ImageApp.models import ReviewImage
 from rest_framework.response import Response
 from rest_framework import status
@@ -33,7 +33,7 @@ class ReviewApiView(APIView):
             else:
                 return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_403_FORBIDDEN)
         except Review.DoesNotExist:
-            return Response({"error": "удалять отзыв может только автор или модератор!"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "данного отзыва не существует!"}, status=status.HTTP_404_NOT_FOUND)
         
     def get(self,request, review_id):
         try:
@@ -42,3 +42,15 @@ class ReviewApiView(APIView):
             return Response({"review": serializer.data}, status = status.HTTP_200_OK)
         except Review.DoesNotExist:
             return Response({"review": serializer.data}, status = status.HTTP_404_NOT_FOUND)
+
+    def patch(self, request, review_id):
+        try:
+            review = Review.objects.get(id=review_id)
+            serializer = EditReviewSerializer(review, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status = status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status = status.HTTP_418_IM_A_TEAPOT)
+        except Review.DoesNotExist:
+            return Response({"error": "данного отзыва нет в базе данных!"}, status = status.HTTP_404_NOT_FOUND)
