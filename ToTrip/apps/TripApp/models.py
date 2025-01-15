@@ -31,7 +31,7 @@ class SubTrip(models.Model):
 class SubtripPlace(models.Model):
     subtrip = models.ForeignKey(SubTrip, on_delete = models.CASCADE, related_name = 'subtrip_places')
     place = models.ForeignKey(Place, on_delete = models.DO_NOTHING, related_name = 'subtrip_review_places')
-    category = models.ForeignKey(Category, on_delete = models.DO_NOTHING, related_name = 'subtrip_places', default=1 )
+    category_icon = models.ImageField(upload_to = 'subtripplace/', default = 'subtripplace/defaultik.svg')
     class Meta:
         unique_together = ('subtrip', 'place')
 
