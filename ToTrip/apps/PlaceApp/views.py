@@ -1,8 +1,8 @@
-from .serializers import PlaceSerializer
+from .serializers import PlaceSerializer, CategorySerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Place, FavoritePlace
+from .models import Place, FavoritePlace, Category
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.shortcuts import redirect, render
 from apps.SearchApp.serializers import SearchPlaceSerializer
@@ -52,6 +52,15 @@ class FavoritesView(APIView):
             return Response({"message": "Места нет в избранном"}, status=status.HTTP_200_OK)
         except Place.DoesNotExist:
             return Response({"error": "Место не найдено."}, status=status.HTTP_404_NOT_FOUND)
+        
+class GetAllCategoriesApiView(APIView):
+    def get(self, request):
+        try:
+            categories = Category.objects.all()
+            serializer = CategorySerializer(categories, many=True)
+            return Response({"categories": serializer.data}, status=status.HTTP_200_OK)
+        except Category.DoesNotExist:
+            return Response({"error", "категорий нет в бд!"}, status=status.HTTP_404_NOT_FOUND)
         
 
 class AllPlacesIds(APIView):
