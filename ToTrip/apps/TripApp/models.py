@@ -21,7 +21,7 @@ class Trip(models.Model):
 
 
 
-class  SubTrip(models.Model):
+class SubTrip(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name = 'subtrips')
     date = models.DateField()
     class Meta:
@@ -39,4 +39,5 @@ class Note(models.Model):
     subtrip = models.ForeignKey(SubTrip, on_delete = models.CASCADE, related_name = "subtrip_notes")
     author = models.ForeignKey(User, on_delete= models.CASCADE, related_name="user_notes")
     title = models.CharField(max_length=100)
+    icon = models.ImageField(upload_to='note_icon/', default= "note_icon/default.svg" )
     content = models.TextField(blank=False, null = False)

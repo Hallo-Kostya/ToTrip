@@ -22,11 +22,10 @@ class EditReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-
-    fields = [
+        fields = (
             "rating",
             "text"
-    ]
+        )
     # extra_kwargs = {
     #         'password': {'write_only': True, 'required': False},
     #         'email': {'required': False},

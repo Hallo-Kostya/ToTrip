@@ -30,7 +30,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ["id", "subtrip_id",  "author_id", "title", "content"]
+        fields = ["id", "subtrip_id",  "author_id", "icon", "title", "content"]
     
     def create(self, validated_data):
         request = self.context.get('request')
