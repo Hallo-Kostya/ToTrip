@@ -23,7 +23,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
   const [selectedTag, setSelectedTag] = useState(null);
-  const [currentTagIcon, setCurrentTagIcon] = useState(null);
+  const [currentTag, setCurrentTag] = useState(null);
 
   const handleDeleteSubtrip = async () => {
     try {
@@ -63,14 +63,14 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
       setIsExpanded(false);
     } else if (tag.id >= 1 && tag.id <= 7) {
       setSelectedTag(tag.label);
-      setCurrentTagIcon(tag.icon);
+      setCurrentTag(tag);
       setSearchModalVisible(true);
     } else if (tag.id === 9) {
       setSelectedTag(null);
       setSearchModalVisible(true);
     } else if (tag.id === 8) {
       setSelectedTag(tag.label);
-      setCurrentTagIcon(tag.icon);
+      setCurrentTag(tag);
       setNoteModalVisible(true);
     }
   };
@@ -93,7 +93,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
 
   const handleAddPlace = async (placeId) => {
     try {
-      await addPlaceToSubtrip(tripId, subtrip.date, placeId, currentTagIcon);
+      await addPlaceToSubtrip(tripId, subtrip.date, placeId, currentTag.id);
   
       await updateSubtripDetails();
       setSearchModalVisible(false);
@@ -133,7 +133,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
           places.map((place) => (
             <RoutePointCard
               key={place.id}
-              tagImg={currentTagIcon}
+              tagImg={place.category.icon}
               placeImg={`${BASE_URL}/${place?.place?.placeimage_set?.[0]?.image}`}
               placeName={place?.place?.name}
               rating={place?.place?.rating}
@@ -148,6 +148,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
           notes.map((note) => (
             <NoteCard
               key={note.id}
+              tagImg={note.icon}
               title={note.title}
               content={note.content}
               onDelete={() => handleDeleteNote(note.id)}

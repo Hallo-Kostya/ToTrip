@@ -33,7 +33,7 @@ const DatesBar: React.FC<DatesBarProps> = ({
           className={`px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
             activeDateIndex === index ? 'bg-blue-500 text-white border-white' : ''
           }`}
-          onClick={() => onDateClick(index)}
+          onClick={() => onDateClick(index)} // Переход по дате
         >
           {date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}
         </div>
@@ -41,5 +41,4 @@ const DatesBar: React.FC<DatesBarProps> = ({
     </div>
   );
 };
-
 export default DatesBar;
