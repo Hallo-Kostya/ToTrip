@@ -12,10 +12,10 @@
     "@next/react-refresh-utils": "^15.1.4",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
-    "next": "15.0.3",
-    "react": "^18.2.0",
+    "next": "^15.2.0-canary.11",
+    "react": "^19.0.0",
     "react-datepicker": "^7.5.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.0.0",
     "react-refresh": "^0.16.0",
     "tailwindcss-filters": "^3.0.0",
     "uuid": "^11.0.3"

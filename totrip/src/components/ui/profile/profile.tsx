@@ -50,7 +50,6 @@ const Profile: React.FC = () => {
           window.location.reload();
         })
         .catch((error) => {
-          console.error('Ошибка обновления профиля:', error);
           alert('Не удалось обновить профиль. Попробуйте снова.');
         });
     }
@@ -60,7 +59,13 @@ const Profile: React.FC = () => {
     <section className="size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] shadow-md mb-4 -mt-[100px]">
       <div className="flex justify-between items-start gap-5">
         <div className="flex gap-6">
-          <Image className="w-[160px] h-[160px] object-cover rounded-full" src={photo} width={160} height={160} alt="Фото профиля" />
+          <Image
+            className="w-[160px] h-[160px] object-cover rounded-full"
+            src={photo || '/img/default-avatar.png'} // Задаём заглушку
+            width={160}
+            height={160}
+            alt="Фото профиля"
+          />
           <div className="flex flex-col mt-2">
             <h6 className="text-gray-600 font-bold text-[20px]">@{username}</h6>
             <h4 className="font-bold text-[32px]">{first_name} {last_name}</h4>

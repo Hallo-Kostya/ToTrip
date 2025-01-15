@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 interface AvatarUploaderProps {
-  currentAvatar?: string;
+  currentAvatar: File | string | null;
   onAvatarChange: (newAvatar: File | null) => void;
 }
 
@@ -23,17 +23,23 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatar
     }
   };
 
+  const imageSrc = selectedImagePreview || (typeof currentAvatar === 'string' ? currentAvatar : null);
+
   return (
     <div className="relative w-[177px] h-[177px] mt-3">
-      <div className="flex justify-center items-center max-w-[177px] max-h-[177px]">
+      {imageSrc ? (
         <Image
-          src={selectedImagePreview || currentAvatar || ''}
+          src={imageSrc}
           alt="Avatar"
           className="w-[177px] h-[177px] rounded-full object-cover"
           width={177}
           height={177}
         />
-      </div>
+      ) : (
+        <div className="flex items-center justify-center w-[177px] h-[177px] rounded-full bg-gray-200">
+          <span className="text-gray-500">Нет фото</span>
+        </div>
+      )}
       <input
         type="file"
         accept="image/*"
@@ -44,7 +50,7 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatar
       <label htmlFor="file-input" className={`
         absolute inset-0 cursor-pointer flex items-center justify-center
         bg-black bg-opacity-50 rounded-full text-white transition-opacity
-        duration-300 ${selectedImagePreview ? 'opacity-0' : 'opacity-100'}
+        duration-300 hover:opacity-100
       `}>
         <span>Загрузить</span>
       </label>

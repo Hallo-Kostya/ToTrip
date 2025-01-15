@@ -122,8 +122,8 @@ const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePo
                     description: '',
                     startDate: new Date(),
                     endDate: new Date(),
-                    trippers: {user_id},
-                    cities: [],
+                    trippers: [user_id],
+                    cities: '',
                     tripPlace: '',
                 }}
                 days={0}

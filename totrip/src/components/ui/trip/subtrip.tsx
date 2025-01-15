@@ -12,8 +12,8 @@ import SearchPlacesModal from './searchModal';
 
 
 const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
-  const [places, setPlaces] = useState<Array<any>>(subtrip.places || []);
-  const [notes, setNotes] = useState<Array<any>>(subtrip.notes || []);
+  const [places, setPlaces] = useState(subtrip.subtrip_places);
+  const [notes, setNotes] = useState(subtrip.subtrip_notes);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchModalVisible, setSearchModalVisible] = useState(false);
@@ -48,8 +48,8 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
   const updateSubtripDetails = async () => {
     try {
       const { data } = await getSubtripDetails(tripId, subtrip.date);
-      setPlaces(data.places);
-      setNotes(data.notes);
+      setPlaces(data.subtrip.subtrip_places);
+      setNotes(data.subtrip.subtrip_notes);
     } catch (error) {
       console.error('Ошибка при обновлении данных подпоездки:', error);
     }
@@ -87,7 +87,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
 
   const handleAddPlace = async (placeId) => {
     try {
-      await addPlaceToSubtrip(tripId, subtrip.date, { place_id: placeId });
+      await addPlaceToSubtrip(tripId, subtrip.date, placeId );
       await updateSubtripDetails();
       setSearchModalVisible(false);
     } catch (error) {
@@ -122,17 +122,22 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
         <button onClick={() => setShowDeleteModal(true)}>Удалить сабтрип</button>
       </div>
       <div className="mt-4">
-        {/* Рендер мест */}
-        {Array.isArray(places) &&
-          places.map((point) => (
+        {Array.isArray(places) && places.length > 0 ? (
+          places.map((place) => (
             <RoutePointCard
-              key={point.id}
-              {...point}
-              onDelete={() => handleDeletePlace(point.id)}
+              key={place.id}
+              tagImg={place?.place?.icon}
+              placeImg={place?.place?.image}
+              placeName={place?.place?.name}
+              rating={place?.place?.rating}
+              description={place?.place?.description}
+              onDelete={() => handleDeletePlace(place.id)}
             />
-        ))}
-        {/* Рендер заметок */}
-        {Array.isArray(notes) &&
+          ))
+        ) : (
+          <p className="text-gray-500">Места для этой подпоездки пока не добавлены.</p>
+        )}
+        {Array.isArray(notes) && notes.length > 0 ? (
           notes.map((note) => (
             <NoteCard
               key={note.id}
@@ -140,7 +145,10 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
               content={note.content}
               onDelete={() => handleDeleteNote(note.id)}
             />
-        ))}
+          ))
+        ) : (
+          <p className="text-gray-500">Заметки для этой подпоездки пока не добавлены.</p>
+        )}
       </div>
       {showDeleteModal && (
         <DeleteConfirmationModal
@@ -150,16 +158,17 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip, onUpdateSubtrip }) => {
         />
       )}
       <div className="tags-container">
-        {(isExpanded ? tags : tags.slice(-1)).map((tag) => (
-          <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag">
-            <Image src={tag.icon} alt={tag.label} width={32} height={32} />
-          </button>
-        ))}
-        {!isExpanded && (
-          <button className="expand-btn" onClick={() => setIsExpanded(true)}>
-            <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
-          </button>
-        )}
+        {isExpanded
+          ? tags.map((tag) => (
+              <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag">
+                <Image src={tag.icon} alt={tag.label} width={32} height={32} />
+              </button>
+            ))
+          : (
+              <button className="expand-btn" onClick={() => setIsExpanded(true)}>
+                <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
+              </button>
+            )}
       </div>
       {/* Модальное окно поиска */}
       {searchModalVisible && (
