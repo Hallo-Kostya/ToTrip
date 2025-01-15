@@ -37,6 +37,14 @@ class SearchPlacesAPIView(APIView):
         annotated_countries = Country.objects.annotate(lower_name=Lower('name'))
         annotated_category = Category.objects.annotate(lower_name=Lower('name'))
 
+        if query_cat != "":
+            category_ids = annotated_category.filter(
+            Q(lower_name__icontains=query_cat)).values_list('id', flat=True)
+            if category_ids.exists():
+                annotated_places = annotated_places.filter(categories__id__in=category_ids)
+            else:
+                annotated_places = []
+
         cities = annotated_cities.filter(
             Q(lower_name__icontains=query) | 
             Q(lower_name__in=query_parts)
@@ -64,40 +72,38 @@ class SearchPlacesAPIView(APIView):
 
         # Сериализация данных
         
-        if query_cat == "":
-            if full_search or len(places)<8:
-                category = annotated_category.filter(
-                    Q(lower_name__icontains=query) | 
-                    Q(lower_name__in=query_parts)
-                )
-                if category:
-                    category_ids = category.values_list('id', flat=True)
-                    if cities:
-                        city_ids = cities.values_list('id', flat=True)
-                        category_places = (annotated_places.filter(
-                            Q(categories__in = category) &
-                            Q(city_id__in = city_ids)
-                        ))
-                        places = places.union(category_places)
-                    elif not cities:
-                        category_places = (annotated_places.filter(
-                            Q(categories__in = category) 
-                        ))
-                        places = places.union(category_places)
-                elif cities and not category:
+        if full_search or len(places)<8:
+            category = annotated_category.filter(
+                Q(lower_name__icontains=query) | 
+                Q(lower_name__in=query_parts)
+            )
+            if category:
+                category_ids = category.values_list('id', flat=True)
+                if cities:
                     city_ids = cities.values_list('id', flat=True)
-                    city_places = (annotated_places.filter(
+                    category_places = (annotated_places.filter(
+                        Q(categories__in = category) &
                         Q(city_id__in = city_ids)
                     ))
-                    places = places.union(city_places)
-        else:
-            category_ids = annotated_category.filter(
-                    Q(lower_name__icontains=query_cat)
-                ).values_list('id', flat=True)
-            if category_ids.exists():
-                places = places.filter(categories__id__in=category_ids).distinct()
-            else:
-                places = []
+                    places = places.union(category_places)
+                elif not cities:
+                    category_places = (annotated_places.filter(
+                        Q(categories__in = category) 
+                    ))
+                    places = places.union(category_places)
+            elif cities and not category:
+                city_ids = cities.values_list('id', flat=True)
+                city_places = (annotated_places.filter(
+                    Q(city_id__in = city_ids)
+                ))
+                places = places.union(city_places)
+        # if query_cat!="":
+        #     category_ids = annotated_category.filter(
+        #         Q(lower_name__icontains=query_cat)).values_list('id', flat=True)
+        #     if category_ids.exists():
+        #         places = places.filter(categories__id__in=category_ids).distinct()
+        #     else:
+        #         places = []
 
         places = self.sort_output(order_by, then_by, is_asc, places)
 
