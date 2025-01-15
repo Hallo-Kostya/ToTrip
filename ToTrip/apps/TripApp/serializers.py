@@ -11,9 +11,13 @@ from datetime import date
 class SubtripPlaceSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(queryset=Place.objects.all(), source='place', write_only=True)
     place = PlaceSerializer(read_only=True)
+    category_icon = serializers.SerializerMethodField()
     class Meta:
         model = SubtripPlace
         fields = ["id",  "category_icon", "place_id", "place"]
+
+    def get_category_icon(self, obj):
+        return obj.category_icon.url
 
     def to_representation(self, instance):
         """Добавляем полную информацию о месте при запросе"""
