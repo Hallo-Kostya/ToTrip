@@ -159,7 +159,7 @@ export interface iRecommendationPlace {
   region_name: string;
   district_name: string;
   address: string;
-  search_image: string;
+  search_image: string | null;
   categories: category[];
   avg_rating: number;
   reviews_count: number;
@@ -167,19 +167,33 @@ export interface iRecommendationPlace {
 
 export const fetchRecommendationPlaces = async (): Promise<iRecommendationPlace[]> => {
   try {
+    // Получаем токен из localStorage или другого хранилища
+    const token = localStorage.getItem('token');
+    
     const response = await fetch(`${API_BASE_URL}/places/recommendation/`, {
-      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-      },
+        // Добавляем токен в заголовок, если он есть
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      }
     });
 
-    if (!response.ok) {
-      console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
+    if (response.status === 401) {
+      console.log('Пользователь не авторизован, возвращаем пустой список рекомендаций');
       return [];
     }
 
-    const data: iRecommendationPlace[] = await response.json();
+    if (!response.ok) {
+      throw new Error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    if (!Array.isArray(data)) {
+      console.error('Неверный формат данных:', data);
+      return [];
+    }
+
     return data;
   } catch (error) {
     console.error("Ошибка при выполнении запроса: ", error);

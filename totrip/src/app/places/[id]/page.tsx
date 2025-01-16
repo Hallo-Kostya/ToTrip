@@ -102,15 +102,7 @@ export default function Page() {
             { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
             { image: "/img/common/noimage.jpg" },
             { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
-            { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
-            { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" }, // Список фотографий объекта
-            { image: "/img/common/noimage.jpg" },
-            { image: "/img/common/noimage.jpg" },
+
         ],
     };
 
