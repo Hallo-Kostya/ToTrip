@@ -109,7 +109,7 @@ export const fetchFullSearchPlaceCards = async (query: string, category: string,
     });
 
     if (!response.ok) {
-      console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
+      // console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
       return [];
     }
 
@@ -140,7 +140,7 @@ export const fetchObjectCard = async (id: number): Promise<iObjectCard | null> =
   try {
     const response = await fetch(`${API_BASE_URL}/places/${id}`);
     if (!response.ok) {
-      console.error(`Ошибка HTTP: ${response.status}`);
+      // console.error(`Ошибка HTTP: ${response.status}`);
       return null;
     }
 
@@ -175,7 +175,7 @@ export const fetchRecommendationPlaces = async (): Promise<iRecommendationPlace[
     });
 
     if (!response.ok) {
-      console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
+      // console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
       return [];
     }
 
