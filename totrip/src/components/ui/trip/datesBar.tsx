@@ -30,10 +30,10 @@ const DatesBar: React.FC<DatesBarProps> = ({
       {dates.map((date, index) => (
         <div
           key={date.toDateString()}
-          className={`px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
+          className={`hover:cursor-pointer px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
             activeDateIndex === index ? 'bg-blue-500 text-white border-white' : ''
           }`}
-          onClick={() => onDateClick(index)} // Переход по дате
+          onClick={() => onDateClick(index)}
         >
           {date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}
         </div>

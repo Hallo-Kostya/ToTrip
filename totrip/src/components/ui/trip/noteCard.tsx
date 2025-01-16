@@ -8,30 +8,31 @@ interface NoteCardProps {
     onDelete: () => void;
 }
 
-const NoteCard: React.FC<NoteCardProps> = ({ tagImg, title, content, onDelete }) => {
+const NoteCard: React.FC<NoteCardProps> = ({ tagImg, title, content, onDelete, dynamicStyles }) => {
     return (
-        <div className="flex items-start border-l-[2px] border-gray-300 relative left-[20px] pl-6 pb-4 pt-2">
-            <div className="relative right-[22.5px]">
+        <div className={`${dynamicStyles} border-l-2 border-black`}>
+            <div className="relative right-[21.5px]">
                 <span className="">
                     <Image 
                         src={tagImg}
                         alt="Tag" 
                         width={44} 
                         height={44} 
-                        className="p-[6.67px] bg-white invert rounded-[100px]" 
+                        className="p-[7.67px] bg-white invert rounded-[100px]" 
                     />
                 </span>
             </div>
             <div className="flex flex-col justify-between w-full">
                 <div>
-                    <h4 className="text-[24px] font-bold mb-2">{title}</h4>
-                    <p className="text-[18px] text-gray-700">{content}</p>
+                    <h4 className="text-[24px] font-bold mb-2 ml-[96px]">{title}</h4>
+                    <p className="text-[18px] text-gray-700 ml-[96px]">{content}</p>
+                    
                 </div>
                 <button
-                    className="text-red-500 mt-4 text-right"
+                    className="flex relative text-red-500 ml-auto mb-10 mr-4 mt-4"
                     onClick={onDelete}
                 >
-                    Удалить
+                    <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="relative flex mb-3" width={32} height={32}/>
                 </button>
             </div>
         </div>

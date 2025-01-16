@@ -20,8 +20,10 @@ const Profile: React.FC = () => {
     if (accessToken) {
       const formDataObject = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          formDataObject.append(key, value instanceof File ? value : value.toString());
+        if (key === 'photo' && value instanceof File) {
+          formDataObject.append(key, value);
+        } else if (value !== null && value !== undefined) {
+          formDataObject.append(key, value.toString());
         }
       });
 
@@ -38,7 +40,7 @@ const Profile: React.FC = () => {
             username: updatedData.username,
             first_name: updatedData.first_name,
             last_name: updatedData.last_name,
-            photo: updatedData.photo || '',
+            photo: updatedData.photo || '/img/default_avatar.png',
             city: updatedData.city || '',
             country: updatedData.country || '',
             slogan: updatedData.slogan || '',
@@ -59,13 +61,13 @@ const Profile: React.FC = () => {
     <section className="size-full max-w-[1120px] bg-white rounded-[38.4px] p-[36px] shadow-md mb-4 -mt-[100px]">
       <div className="flex justify-between items-start gap-5">
         <div className="flex gap-6">
-          <Image
-            className="w-[160px] h-[160px] object-cover rounded-full"
-            src={photo || '/img/default-avatar.png'} // Задаём заглушку
-            width={160}
-            height={160}
-            alt="Фото профиля"
-          />
+        <Image
+          className="w-[160px] h-[160px] object-cover rounded-full"
+          src={photo || '/img/default_avatar.png'}
+          width={160}
+          height={160}
+          alt="Фото профиля"
+        />
           <div className="flex flex-col mt-2">
             <h6 className="text-gray-600 font-bold text-[20px]">@{username}</h6>
             <h4 className="font-bold text-[32px]">{first_name} {last_name}</h4>
@@ -80,9 +82,9 @@ const Profile: React.FC = () => {
         isOpen={isPopupOpen}
         onClose={handleClosePopup}
         onSubmit={handleSubmit}
-        onAvatarChange={(newImg: File | null) => setUserContext({ photo: newImg })}
+        onAvatarChange={() => null}
         initialData={{
-          photo: photo,
+          photo: photo || '/img/default_avatar.png',
           first_name: first_name,
           last_name: last_name,
           username: username,

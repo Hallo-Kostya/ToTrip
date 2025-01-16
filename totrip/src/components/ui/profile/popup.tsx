@@ -23,9 +23,9 @@ interface PopupControlsProps {
 }
 
 const popularCities = [
-  "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
-  "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск",
-  "Ростов-на-Дону", "Уфа", "Красноярск", "Воронеж", "Краснодар",
+  'Москва', 'Санкт-Петербург', 'Новосибирск', 'Екатеринбург',
+  'Казань', 'Нижний Новгород', 'Челябинск', 'Самара', 'Омск',
+  'Ростов-на-Дону', 'Уфа', 'Красноярск', 'Воронеж', 'Краснодар',
 ];
 
 const Popup: React.FC<PopupControlsProps> = ({
@@ -33,7 +33,7 @@ const Popup: React.FC<PopupControlsProps> = ({
   onClose,
   onSubmit,
   onAvatarChange,
-  initialData
+  initialData,
 }) => {
   const [profileData, setProfileData] = useState<UserProfile>({
     photo: initialData?.photo || null,
@@ -54,7 +54,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     if (isOpen) {
       setProfileData({
         ...initialData,
-        photo: initialData?.photo || null
+        photo: initialData?.photo || null,
       });
       setTempAvatar(null);
     }
@@ -63,19 +63,13 @@ const Popup: React.FC<PopupControlsProps> = ({
   const validateFields = () => {
     const newErrors: Partial<UserProfile> = {};
     if (!profileData.first_name.trim()) {
-      newErrors.first_name = "Имя обязательно";
-    }
-    if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.first_name)) {
-      newErrors.first_name = "Разрешены только буквы и пробелы";
+      newErrors.first_name = 'Имя обязательно';
     }
     if (!profileData.last_name.trim()) {
-      newErrors.last_name = "Фамилия обязательна";
+      newErrors.last_name = 'Фамилия обязательна';
     }
-    if (!/^[A-Za-zА-Яа-яёЁ\s]*$/.test(profileData.last_name)) {
-      newErrors.last_name = "Разрешены только буквы и пробелы";
-    }
-    if (!/^(?!.*[:&!?]).*$/.test(profileData.username)) {
-      newErrors.username = "Недопустимые символы: : & ! ?";
+    if (!profileData.username.trim()) {
+      newErrors.username = 'Имя пользователя обязательно';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -85,7 +79,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     const { name, value } = event.target;
     setProfileData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -94,7 +88,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     if (validateFields()) {
       const formDataToSubmit: UserProfile = {
         ...profileData,
-        photo: tempAvatar,
+        photo: tempAvatar || profileData.photo,
       };
       onSubmit(formDataToSubmit);
     }
@@ -103,7 +97,7 @@ const Popup: React.FC<PopupControlsProps> = ({
   const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setProfileData(prevState => ({
       ...prevState,
-      city: event.target.value
+      city: event.target.value,
     }));
   };
 
@@ -163,7 +157,13 @@ const Popup: React.FC<PopupControlsProps> = ({
           <div className="mb-[12px]">
             <h5 className="text-[24px] font-bold mb-[4px]">Город проживания</h5>
             <div className="relative">
-              <Image src="/img/profile/Map Point.svg" alt="" className="absolute left-3 top-1/2 transform -translate-y-1/2" width={20} height={20} />
+              <Image
+                src="/img/profile/Map Point.svg"
+                alt="Иконка города"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2"
+                width={20}
+                height={20}
+              />
               <select
                 name="city"
                 value={profileData.city}
@@ -225,7 +225,16 @@ const Popup: React.FC<PopupControlsProps> = ({
           </div>
         </div>
         <div className="flex justify-between w-full">
-          <button type="button" className="bg-gray-500 text-white rounded-lg py-2 px-4" onClick={onClose}>Отменить</button>
+        <button 
+          type="button" 
+          className="bg-gray-500 text-white rounded-lg py-2 px-4" 
+          onClick={() => {
+            onClose();
+            window.location.reload(); // Добавляем перезагрузку страницы
+          }}
+        >
+          Отменить
+        </button>
           <button type="submit" className="bg-black text-white rounded-lg py-2 px-4">Подтвердить</button>
         </div>
       </form>
