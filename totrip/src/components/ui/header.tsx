@@ -58,25 +58,19 @@ const Header: React.FC = () => {
     const accessToken = localStorage.getItem('access');
     if (accessToken && !isRegistered) {
       const fetchUserProfile = async () => {
-        try {
-          const response = await fetch(`${BASE_URL}/api/users/profile/`, {
-            headers: { Authorization: `Bearer ${accessToken}` }
-          });
+        const response = await fetch(`${BASE_URL}/api/users/profile/`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        });
 
-          if (response.ok) {
-            const userData = await response.json();
-            const photoUrl = userData.photo;
-            setUserContext({
-              first_name: userData.first_name,
-              last_name: userData.last_name,
-              photo: photoUrl,
-            });
-          } else {
-            console.error('Ошибка получения профиля');
-          }
-        } catch (error) {
-          console.error('Ошибка сети:', error);
-        }
+        if (response.ok) {
+          const userData = await response.json();
+          const photoUrl = userData.photo;
+          setUserContext({
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+            photo: photoUrl,
+          });
+        };
       };
 
       fetchUserProfile();

@@ -45,7 +45,7 @@ const TripForm: React.FC<TripFormProps> = ({
         setTripImage('');
         setTitle('');
         setDescription('');
-        setCity(''); // Reset single city
+        setCity('');
         setStartDate(null);
         setEndDate(null);
         setTrippers(0);
@@ -171,8 +171,8 @@ const TripForm: React.FC<TripFormProps> = ({
                     />
                     <h2 className="mt-[20px] text-[36px] font-bold">Направление</h2>
                     <select
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
+                        value={city} // `city` is now a string
+                        onChange={(e) => setCity(e.target.value)} // Set the scalar value
                         name="cities"
                         required
                         className="w-full mt-[20px] p-[13px] border border-gray-300 rounded-[16px]"

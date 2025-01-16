@@ -17,7 +17,12 @@ const getDatesBetween = (start: Date, end: Date) => {
   return dates;
 };
 
-const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd, onDateClick, activeDateIndex }) => {
+const DatesBar: React.FC<DatesBarProps> = ({
+  tripStart,
+  tripEnd,
+  onDateClick,
+  activeDateIndex,
+}) => {
   const dates = getDatesBetween(tripStart, tripEnd);
 
   return (
@@ -26,9 +31,9 @@ const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd, onDateClick, ac
         <div
           key={date.toDateString()}
           className={`px-[14px] py-[6px] border-[1px] border-black border-opacity-30 rounded-[100px] text-[20px] font-[600] ${
-            activeDateIndex === index ? 'bg-blue-500 text-white' : ''
+            activeDateIndex === index ? 'bg-blue-500 text-white border-white' : ''
           }`}
-          onClick={() => onDateClick(index)} // добавляем обработчик кликов
+          onClick={() => onDateClick(index)} // Переход по дате
         >
           {date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}
         </div>
@@ -36,5 +41,4 @@ const DatesBar: React.FC<DatesBarProps> = ({ tripStart, tripEnd, onDateClick, ac
     </div>
   );
 };
-
 export default DatesBar;

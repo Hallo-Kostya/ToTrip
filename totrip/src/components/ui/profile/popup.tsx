@@ -36,7 +36,7 @@ const Popup: React.FC<PopupControlsProps> = ({
   initialData
 }) => {
   const [profileData, setProfileData] = useState<UserProfile>({
-    photo: initialData?.photo || '',
+    photo: initialData?.photo || null,
     first_name: initialData?.first_name || '',
     last_name: initialData?.last_name || '',
     username: initialData?.username || '',
@@ -51,10 +51,10 @@ const Popup: React.FC<PopupControlsProps> = ({
   const [tempAvatar, setTempAvatar] = useState<File | null>(null);
 
   useEffect(() => {
-    if (isOpen && initialData) {
+    if (isOpen) {
       setProfileData({
         ...initialData,
-        photo: null
+        photo: initialData?.photo || null
       });
       setTempAvatar(null);
     }
@@ -89,7 +89,7 @@ const Popup: React.FC<PopupControlsProps> = ({
     }));
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (validateFields()) {
       const formDataToSubmit: UserProfile = {
@@ -109,6 +109,7 @@ const Popup: React.FC<PopupControlsProps> = ({
 
   const handleAvatarChange = (newAvatar: File | null) => {
     setTempAvatar(newAvatar);
+    onAvatarChange(newAvatar);
   };
 
   return (

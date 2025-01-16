@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import DatesBar from '@/components/ui/trip/datesBar';
 import Subtrip from '@/components/ui/trip/subtrip';
 import { createSubtrip, getSubtripDetails } from '@/services/subtripService';
@@ -14,21 +14,57 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
   const [subtrips, setSubtrips] = useState<Record<number, any>>({});
   const [activeDateIndex, setActiveDateIndex] = useState<number | null>(null);
 
-  const handleDateClick = async (dateIndex: number) => {
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const handleDateClick = async (dateIndex: number, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
     const dateStr = dateList[dateIndex].toISOString().split('T')[0];
-    
-    if (!subtrips[dateIndex]) {
-      try {
-        const response = await createSubtrip(tripId, dateStr);
-        setSubtrips((prev) => ({ ...prev, [dateIndex]: response.data }));
-      } catch (error) {
-        const existingSubtrip = await getSubtripDetails(tripId);
-        if (existingSubtrip) {
-          setSubtrips((prev) => ({ ...prev, [dateIndex]: existingSubtrip.data }));
+    const placesIds: number[] = [];
+    setSubtrips((prev) => ({ ...prev, [dateIndex]: null }));
+
+    try {
+      const createResponse = await createSubtrip(tripId, dateStr, placesIds);
+
+      if (createResponse.status === 201 && createResponse.data.subtrip) {
+        const detailResponse = await getSubtripDetails(tripId, dateStr);
+        if (detailResponse.status === 200 && detailResponse.data.subtrip) {
+          setSubtrips((prev) => ({
+            ...prev,
+            [dateIndex]: {
+              ...detailResponse.data.subtrip,
+              places: detailResponse.data.subtrip.places,
+              notes: detailResponse.data.subtrip.notes,
+            },
+          }));
         }
       }
+    } catch (error: any) {
+      if (error.response?.status === 500) {
+        try {
+          const detailResponse = await getSubtripDetails(tripId, dateStr);
+          if (detailResponse.status === 200 && detailResponse.data.subtrip) {
+            setSubtrips((prev) => ({
+              ...prev,
+              [dateIndex]: detailResponse.data.subtrip,
+            }));
+          }
+        } catch (detailError: any) {
+          console.error('Ошибка получения деталей существующей подпоездки:', detailError);
+        }
+      } else {
+        console.error('Ошибка обработки createSubtrip:', error.message);
+      }
     }
+
     setActiveDateIndex(dateIndex);
+
+    // Prevent automatic scroll jumps
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollTop;
+    }
   };
 
   return (
@@ -36,18 +72,21 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
       <DatesBar
         tripStart={tripStart}
         tripEnd={tripEnd}
-        onDateClick={handleDateClick}
+        onDateClick={(dateIndex, e) => handleDateClick(dateIndex, e)}
         activeDateIndex={activeDateIndex}
       />
       <div className="flex flex-col mt-10">
         {activeDateIndex !== null && subtrips[activeDateIndex] && (
-          <Subtrip 
-            subtrip={subtrips[activeDateIndex]} 
-            onDeleteSubtrip={(id) => setSubtrips((prev) => {
-              const newSubtrips = { ...prev };
-              delete newSubtrips[activeDateIndex];
-              return newSubtrips;
-            })}
+          <Subtrip
+            tripId={tripId}
+            subtrip={subtrips[activeDateIndex]}
+            onDeleteSubtrip={(id) => {
+              setSubtrips((prev) => {
+                const newSubtrips = { ...prev };
+                delete newSubtrips[activeDateIndex];
+                return newSubtrips;
+              });
+            }}
             onUpdateSubtrip={() => handleDateClick(activeDateIndex)}
           />
         )}
