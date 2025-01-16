@@ -157,7 +157,10 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
                   styles = 'flex border-l-[2px] relative left-[20px] pb-[120px] ';
                 }
               } else if (isFirst) {
-                styles = 'flex border-l-[2px] relative left-[20px] ';
+                styles = 'flex border-l-[2px] relative left-[20px] pb-10';
+                
+              } else if (isFirst && array.length > 1) {
+                styles = 'flex border-l-[2px] relative left-[20px]'
               }
 
               if (isRoutePoint) {
