@@ -18,16 +18,33 @@ const TripsPage = () => {
     useEffect(() => {
         const fetchTrips = async () => {
             try {
+                
+    
                 const response = await fetch(`${BASE_URL}/api/trips/list/${user_id}/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('access')}`
-                    }
+                        'Authorization': `Bearer ${localStorage.getItem('access')}`,
+                    },
                 });
-                if (response.ok) {
+    
+                if (!response.ok) {
+                    console.error(`Ошибка запроса: ${response.status} ${response.statusText}`);
+                    return;
+                }
+    
+                if (response.status === 204) {
+                    setFutureTrips([]); // Пустой список, если контента нет
+                    return;
+                }
+    
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
                     const data = await response.json();
-                    setFutureTrips(data.trips);
+                    setFutureTrips(data.trips || []); // Обработка случая, если `trips` пусто
+                } else {
+                    console.warn('Ответ сервера не содержит JSON.');
+                    setFutureTrips([]);
                 }
             } catch (error) {
                 console.error('Ошибка сети:', error);
