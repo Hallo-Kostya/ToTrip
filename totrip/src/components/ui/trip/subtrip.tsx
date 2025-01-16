@@ -138,18 +138,18 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
 
               const isRoutePoint = places.includes(item);
 
-              let styles = 'flex border-l-[2px] relative left-[20px] ';
+              let styles = 'flex relative left-[20px] ';
 
               if (!isLast) {
-                styles += 'pt-[120px] ';
+                styles += 'border-l-[2px] pt-[120px] ';
               }
 
               if (isSecondToLast) {
-                styles += 'pb-[120px] ';
+                styles += 'border-l-[2px] pb-[120px] ';
               }
 
               if (isLast) {
-                styles += 'border-l-0 ';
+                styles += 'pb-10';
               }
 
               if (array.length === 2) {
@@ -164,7 +164,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
                 return (
                   <RoutePointCard
                     key={item.id}
-                    tagImg={item.category_icon}
+                    tagImg={`${BASE_URL}/${item.category_icon}`}
                     placeImg={`${BASE_URL}/${item?.place?.placeimage_set?.[0]?.image}`}
                     placeName={item?.place?.name}
                     description={item?.place?.description}
@@ -173,7 +173,6 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
                   />
                 );
               } else {
-                // NoteCard рендерится здесь
                 return (
                   <NoteCard
                     key={item.id}
@@ -187,7 +186,7 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
               }
             })
           : (
-            <p className="text-gray-500">Элементы отсутствуют.</p>
+            <p className="text-gray-500 mb-12">Элементы отсутствуют.</p>
           )
       }
       </div>
@@ -198,15 +197,15 @@ const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {
           itemName={`подпоездку с текущей датой: ${subtrip.date}`}
         />
       )}
-      <div className="mt-14">
+      <div className="">
         {isExpanded
           ? tags.map((tag) => (
-            <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag border-[1.5px] rounded-full border-black p-[10px] mr-[12px]">
+            <button key={tag.id} onClick={() => handleTagClick(tag)} className="tag border-[1.5px] rounded-full border-black p-[6px] mr-[12px] relative right-[1.5px]">
               <Image src={tag.icon} alt={tag.label} width={32} height={32} />
             </button>
           ))
         : (
-            <button className="expand-btn border-[1.5px] rounded-full border-black p-[10px]" onClick={() => setIsExpanded(true)}>
+            <button className="expand-btn border-[1.5px] rounded-full border-black p-[6px] relative right-[1.5px]" onClick={() => setIsExpanded(true)}>
               <Image src="/img/trip-page/plus.svg" alt="развернуть список тегов" width={32} height={32} />
             </button>
           )}

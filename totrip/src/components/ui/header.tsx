@@ -112,7 +112,7 @@ const Header: React.FC = () => {
                   {photo && (
                     <>
                       <Link href="/profile">
-                        <Image src={photo} alt="Профиль" width={52} height={52} />
+                        <Image src={photo || '/img/default_avatar.png'} alt="Профиль" width={52} height={52} />
                       </Link>
                     </>
                   )}
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                   Зарегистрироваться
                 </button>
                 <div className={styles['user-icon']}>
-                  <Image src='/img/no-user-icon.png' alt="Профиль" width={52} height={52} />
+                  <Image src='/img/default_avatar.png' alt="Профиль" width={52} height={52} />
                 </div>
               </div>
             )}

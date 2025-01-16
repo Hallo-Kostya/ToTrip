@@ -11,14 +11,14 @@ interface NoteCardProps {
 const NoteCard: React.FC<NoteCardProps> = ({ tagImg, title, content, onDelete, dynamicStyles }) => {
     return (
         <div className={`${dynamicStyles} border-l-2 border-black`}>
-            <div className="relative right-[22.5px]">
+            <div className="relative right-[21.5px]">
                 <span className="">
                     <Image 
                         src={tagImg}
                         alt="Tag" 
                         width={44} 
                         height={44} 
-                        className="p-[6.67px] bg-white invert rounded-[100px]" 
+                        className="p-[7.67px] bg-white invert rounded-[100px]" 
                     />
                 </span>
             </div>
@@ -29,10 +29,10 @@ const NoteCard: React.FC<NoteCardProps> = ({ tagImg, title, content, onDelete, d
                     
                 </div>
                 <button
-                    className="flex relative text-red-500 ml-auto mb-10 mr-4"
+                    className="flex relative text-red-500 ml-auto mb-10 mr-4 mt-4"
                     onClick={onDelete}
                 >
-                    <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="relative flex" width={32} height={32}/>
+                    <Image src="/img/profile/Trash Bin 2.svg" alt="delete" className="relative flex mb-3" width={32} height={32}/>
                 </button>
             </div>
         </div>

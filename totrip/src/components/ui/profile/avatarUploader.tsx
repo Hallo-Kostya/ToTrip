@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface AvatarUploaderProps {
@@ -9,37 +9,42 @@ interface AvatarUploaderProps {
 }
 
 const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatarChange }) => {
-  const [selectedImagePreview, setSelectedImagePreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (currentAvatar instanceof File) {
+      const objectUrl = URL.createObjectURL(currentAvatar);
+      setPreview(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+    } else if (typeof currentAvatar === 'string' && currentAvatar.trim()) {
+      setPreview(currentAvatar);
+    } else {
+      setPreview('/img/default-avatar.png');
+    }
+  }, [currentAvatar]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const result = reader.result as string;
-        setSelectedImagePreview(result);
+        setPreview(reader.result as string);
       };
+      reader.readAsDataURL(file);
       onAvatarChange(file);
     }
   };
 
-  const imageSrc = selectedImagePreview || (typeof currentAvatar === 'string' ? currentAvatar : null);
-
   return (
     <div className="relative w-[177px] h-[177px] mt-3">
-      {imageSrc ? (
-        <Image
-          src={imageSrc}
-          alt="Avatar"
-          className="w-[177px] h-[177px] rounded-full object-cover"
-          width={177}
-          height={177}
-        />
-      ) : (
-        <div className="flex items-center justify-center w-[177px] h-[177px] rounded-full bg-gray-200">
-          <span className="text-gray-500">Нет фото</span>
-        </div>
-      )}
+      <Image
+        src={preview || '/img/default-avatar.png'}
+        alt="Avatar"
+        className="w-[177px] h-[177px] rounded-full object-cover"
+        width={177}
+        height={177}
+      />
       <input
         type="file"
         accept="image/*"
@@ -47,11 +52,10 @@ const AvatarUploader: React.FC<AvatarUploaderProps> = ({ currentAvatar, onAvatar
         className="hidden"
         id="file-input"
       />
-      <label htmlFor="file-input" className={`
-        absolute inset-0 cursor-pointer flex items-center justify-center
-        bg-black bg-opacity-50 rounded-full text-white transition-opacity
-        duration-300 hover:opacity-100
-      `}>
+      <label
+        htmlFor="file-input"
+        className="absolute inset-0 cursor-pointer flex items-center justify-center bg-black bg-opacity-50 rounded-full text-white transition-opacity duration-300 hover:opacity-100"
+      >
         <span>Загрузить</span>
       </label>
     </div>

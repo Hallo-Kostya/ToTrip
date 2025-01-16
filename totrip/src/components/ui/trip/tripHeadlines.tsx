@@ -61,7 +61,6 @@ const TripHeadlines: React.FC<TripHeadlinesProps> = ({ tripStart, tripEnd, tripI
 
     setActiveDateIndex(dateIndex);
 
-    // Prevent automatic scroll jumps
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollTop;
     }

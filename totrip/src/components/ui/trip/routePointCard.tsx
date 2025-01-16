@@ -11,14 +11,14 @@ const RoutePointCard = ({ tagImg, placeImg, placeName, description, onDelete, dy
 
     return (
         <div className={`${dynamicStyles} border-l-2 border-black`}>
-            <div className="relative right-[22.5px]">
+            <div className="relative right-[21.5px]">
                 <span className="">
                     <Image 
                         src={tagImg}
                         alt="Tag" 
-                        width={44} 
-                        height={44} 
-                        className="p-[6.67px] bg-white invert rounded-[100px]" 
+                        width={41} 
+                        height={41} 
+                        className="p-[7.67px] px-[10.67px] bg-white invert rounded-[100px]" 
                     />
                 </span>
             </div>

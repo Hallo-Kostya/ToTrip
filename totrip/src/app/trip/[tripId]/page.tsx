@@ -127,18 +127,7 @@ const TripPage = () => {
                         >
                             Маршрут
                         </button>
-                        <button
-                            className={`text-[24px] font-[500] pb-3 px-3 ${activeTab === 'notes' ? 'border-b-4 border-black' : ''}`}
-                            onClick={() => handleTabChange('notes')}
-                        >
-                            Закладки
-                        </button>
-                        <button
-                            className={`text-[24px] font-[500] pb-3 px-3 ${activeTab === 'foryou' ? 'border-b-4 border-black' : ''}`}
-                            onClick={() => handleTabChange('foryou')}
-                        >
-                            Для вас
-                        </button>
+  
                     </div>
                     
                 {activeTab === 'route' && (

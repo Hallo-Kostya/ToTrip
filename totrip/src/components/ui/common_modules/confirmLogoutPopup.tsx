@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface ConfirmLogoutPopupProps {
     onConfirm: () => void;
@@ -12,7 +13,7 @@ const ConfirmLogoutPopup: React.FC<ConfirmLogoutPopupProps> = ({ onConfirm, onCa
                 <p className='font-bold text-[20px]'>Вы действительно хотите выйти?</p>
                 <div className='flex justify-end gap-3 mt-4'>
                     <button className='p-2 px-4 bg-gray-500 text-white rounded-xl' onClick={onCancel}>Отменить</button>
-                    <button className='p-2 px-4 bg-black text-white rounded-xl' onClick={onConfirm}>Выйти</button>
+                    <Link href="/" className='p-2 px-4 bg-black text-white rounded-xl' onClick={onConfirm}>Выйти</Link>
                 </div>
             </div>
         </div>
