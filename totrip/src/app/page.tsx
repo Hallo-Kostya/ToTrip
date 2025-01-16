@@ -1,40 +1,44 @@
+'use client';
 import SuggestionsSection from '@/components/ui/main-page/suggestions';
 import RecommendationsSection from '@/components/ui/main-page/Recomendations/recomendations';
 import { SearchContainer } from '@/components/ui/main-page/Search/searchContainer';
+import { fetchRecommendationPlaces } from '@/services/data';
+import { useEffect, useState } from 'react';
+import { BASE_URL } from '@/services/data';
 
-const placeData = [
-  {
-    id: 1758,
-    title: "Lotte Hotel",
-    reviewsCount: "1.2K",
-    placeImg: "/img/index/like-it__place-photo.jpg",
-    rating: 2,
-  },
-  {
-    id: 1758,
-    title: "Lotte Hotel",
-    reviewsCount: "1.2K",
-    placeImg: "/img/index/like-it__place-photo.jpg",
-    rating: 3,
-  },
-  {
-    id: 1758,
-    title: "Lotte Hotel",
-    reviewsCount: "1.2K",
-    placeImg: "/img/index/like-it__place-photo.jpg",
-    rating: 4,
-  },
-  {
-    id: 1758,
-    title: "Lotte Hotel",
-    reviewsCount: "1.2K",
-    placeImg: "/img/index/like-it__place-photo.jpg",
-    rating: 5,
-  },
-  
-];
+interface Place {
+  id: number;
+  title: string;
+  reviewsCount: string;
+  placeImg: string;
+  rating: number;
+}
+
+const RecommendationsContainer = () => {
+  const [placeData, setPlaceData] = useState<Place[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchRecommendationPlaces();
+      const transformedData = data.map(place => ({
+        id: place.id,
+        title: place.name,
+        reviewsCount: place.reviews_count.toString(),
+        placeImg: place.search_image ? `${BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
+        rating: place.avg_rating
+      }));
+      setPlaceData(transformedData);
+    };
+
+    fetchData();
+  }, []);
+
+  return placeData;
+};
 
 export default function Home() {
+  const placeData = RecommendationsContainer();
+  
   return (  
     <main>
         <section className='w-full'>
