@@ -169,7 +169,7 @@ const Popup: React.FC<PopupControlsProps> = ({
                 value={profileData.city}
                 onChange={handleLocationChange}
                 className="p-[12px] pl-[36px] rounded-[12px] border border-[#8F8F8F] settings-input w-full"
-                required
+                
               >
                 <option value="" disabled>Выберите город</option>
                 {popularCities.map(city => (
@@ -198,7 +198,7 @@ const Popup: React.FC<PopupControlsProps> = ({
               className="p-[12px] border rounded-[12px] border-[#8F8F8F] w-full"
               onChange={handleChange}
               maxLength={500}
-              required
+              
             />
           </div>
           <div className="mb-[12px]">

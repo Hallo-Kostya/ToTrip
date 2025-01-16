@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ subscribers, onAddPost }) => {
         <h5 className="text-black font-bold text-2xl mb-4">Обо мне</h5>
         <div className="flex items-center gap-2 mb-2">
           <Image src="/img/profile/Map Point.svg" width={19} height={19} alt="location" />
-          <p className='text-sm'>{city || 'Город не указан'}, {country}</p>
+          <p className='text-sm'>{city || 'Город'}, {country || 'страна не указана(ы)'}</p>
         </div>
         <div className="flex gap-2 mb-2">
           <Image src="/img/profile/Calendar.svg" className="mb-auto" width={19} height={19} alt="date" />

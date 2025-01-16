@@ -22,7 +22,7 @@ const Profile: React.FC = () => {
       Object.entries(formData).forEach(([key, value]) => {
         if (key === 'photo' && value instanceof File) {
           formDataObject.append(key, value);
-        } else if (value !== null && value !== undefined) {
+        } else if (key !== 'photo') {
           formDataObject.append(key, value.toString());
         }
       });

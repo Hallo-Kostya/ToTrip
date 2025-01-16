@@ -17,6 +17,7 @@
     "react-datepicker": "^7.5.0",
     "react-dom": "^19.0.0",
     "react-refresh": "^0.16.0",
+    "reactjs-popup": "^2.0.6",
     "tailwind-scrollbar-hide": "^2.0.0",
     "tailwindcss-filters": "^3.0.0",
     "use-debounce": "^10.0.4",
