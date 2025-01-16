@@ -9,41 +9,10 @@ import Map from '@/components/ui/maps/map';
 import RecommendationsSection from '@/components/ui/main-page/Recomendations/recomendations';
 const Popup = dynamic(() => import('reactjs-popup'), { ssr: false });
 import { useParams } from 'next/navigation';
-import { fetchObjectCard, iObjectCard } from '@/services/data';
+import { fetchObjectCard, iObjectCard, fetchRecommendationPlaces, BASE_URL } from '@/services/data';
 import { useEffect, useState } from 'react';
 import Comment from '@/components/ui/main-page/comments/comment';
-
-const placeData = [
-    {
-        id: 1758,
-        title: "Lotte Hotel",
-        reviewsCount: "1.2K",
-        placeImg: "/img/index/like-it__place-photo.jpg",
-        rating: 2,
-    },
-    {
-        id: 1758,
-        title: "Lotte Hotel",
-        reviewsCount: "1.2K",
-        placeImg: "/img/index/like-it__place-photo.jpg",
-        rating: 3,
-    },
-    {
-        id: 1758,
-        title: "Lotte Hotel",
-        reviewsCount: "1.2K",
-        placeImg: "/img/index/like-it__place-photo.jpg",
-        rating: 4,
-    },
-    {
-        id: 1758,
-        title: "Lotte Hotel",
-        reviewsCount: "1.2K",
-        placeImg: "/img/index/like-it__place-photo.jpg",
-        rating: 5,
-    },
-
-];
+import { Place } from '@/components/ui/main-page/Recomendations/placeCard';
 
 
 export default function Page() {
@@ -52,6 +21,35 @@ export default function Page() {
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentImage, setCurrentImage] = useState('/img/common/noimage.jpg');
+    const [recommendedPlaces, setRecommendedPlaces] = useState<Place[]>([]);
+
+    useEffect(() => {
+        let mounted = true;
+
+        const fetchRecommendations = async () => {
+            try {
+                const data = await fetchRecommendationPlaces();
+                if (!mounted) return;
+                
+                const transformedData = data.map(place => ({
+                    id: place.id,
+                    title: place.name,
+                    reviewsCount: place.reviews_count.toString(),
+                    placeImg: place.search_image ? `${BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
+                    rating: place.avg_rating
+                }));
+                setRecommendedPlaces(transformedData);
+            } catch (error) {
+                console.error('Ошибка при загрузке рекомендаций:', error);
+            }
+        };
+
+        fetchRecommendations();
+
+        return () => {
+            mounted = false;
+        };
+    }, []);
 
     const nextImageHandler = () => {
         if (!object || !object.placeimage_set.length) return;
@@ -281,26 +279,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className='flex flex-row gap-[32px]'>
-                    <div className='max-w-[1120px] flex p-[40px] flex-col bg-white rounded-[24px]'>
-                        <h2 className='text-[48px] font-bold mb-[20px]'>О нас</h2>
-                        <ul className='mb-[64px] flex flex-col gap-[20px] w-[1040px]'>
-                            <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <Stars rating={4.5} width={35} height={35} />
-                                <p className='text-[20px] font-bold'>Расположение</p>
-                            </ul>
-                            <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <Stars rating={4.5} width={35} height={35} />
-                                <p className={styles.attributeName}>Чистота</p>
-                            </ul>
-                            <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <Stars rating={4.5} width={35} height={35} />
-                                <p className={styles.attributeName}>Обслуживание</p>
-                            </ul>
-                            <ul className={`${styles.stars} ${styles.fiveStar}`}>
-                                <Stars rating={4.5} width={35} height={35} />
-                                <p className={styles.attributeName}>Цена/качество</p>
-                            </ul>
-                        </ul>
+                    <div className='max-w-[1120px] flex p-[40px] flex-col bg-white rounded-[24px]'>                        
                         <div>
                             <p className='text-[25px] font-medium'>{object.description}</p>
                         </div>
@@ -308,7 +287,9 @@ export default function Page() {
                     <Map width={541} height={928} borderRadius={24} address={object.address} />
                 </div>
             </div>
-            <div className='mt-[63px] mb-[63px]'><RecommendationsSection places={placeData} /></div>
+            <div className='mt-[63px] mb-[63px]'>
+                <RecommendationsSection places={recommendedPlaces} />
+            </div>
             <div className='flex w-[1697px] p-[40px] flex-col gap-[21px] rounded-[24px] bg-white shadow-sm'>
                 <div className='flex flex-row justify-between content-center align-center'>
                     <h2 className='text-bold'>Отзывы</h2>

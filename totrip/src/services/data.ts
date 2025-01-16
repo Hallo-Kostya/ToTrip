@@ -99,12 +99,12 @@ export const fetchFullSearchPlaceCards = async (query: string, category: string,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
-        query, 
+        query: query, 
         full_search: "True",
-        category,
-        sortBy,
-        sortThenBy,
-        isAsc
+        query_cat: category,
+        order_by: sortBy,
+        then_by: sortThenBy,
+        is_asc: String(isAsc === 'asc')
       }),
     });
 
@@ -151,3 +151,40 @@ export const fetchObjectCard = async (id: number): Promise<iObjectCard | null> =
     return null;
   }
 };
+
+export interface iRecommendationPlace {
+  id: number;
+  name: string;
+  city_name: string;
+  region_name: string;
+  district_name: string;
+  address: string;
+  search_image: string;
+  categories: category[];
+  avg_rating: number;
+  reviews_count: number;
+}
+
+export const fetchRecommendationPlaces = async (): Promise<iRecommendationPlace[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/places/recommendation/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`Ошибка HTTP: ${response.status} - ${response.statusText}`);
+      return [];
+    }
+
+    const data: iRecommendationPlace[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Ошибка при выполнении запроса: ", error);
+    return [];
+  }
+};
+
+
