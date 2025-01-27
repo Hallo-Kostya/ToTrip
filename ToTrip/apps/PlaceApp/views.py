@@ -54,6 +54,9 @@ class FavoritesView(APIView):
             return Response({"error": "Место не найдено."}, status=status.HTTP_404_NOT_FOUND)
         
 class GetAllCategoriesApiView(APIView):
+    """
+    Метод для получения списка всех категорий
+    """
     def get(self, request):
         try:
             categories = Category.objects.all()
@@ -116,6 +119,9 @@ class PlaceRecommendationView(APIView):
 
 
 class AddPlaceApiView(APIView):
+    """
+    Метод для добавления места в бд из кастомной формы с фронтенда, доступен только модераторам
+    """
     permission_classes = [IsAdminUser]
     def post(self, request):
         serializer = PlaceSerializer(data = request.data)

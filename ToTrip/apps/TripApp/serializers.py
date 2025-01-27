@@ -58,13 +58,12 @@ class SubTripSerializer(serializers.ModelSerializer):
         fields = ["id", "date", "trip_id", "subtrip_places", "subtrip_notes"]
 
     def get_subtrip_notes(self,obj):
+        """получаем заметки только от авторизованного автора"""
         try:
             request = self.context.get('request')
             if request and hasattr(request, 'user') and request.user.is_authenticated:
-                print(request.user.id, obj.id)
                 notes = Note.objects.filter(author_id = request.user.id, subtrip_id = obj.id)
                 if notes.exists():
-                    print(notes)
                     return NoteSerializer(notes, many=True).data
         except AttributeError:
             return []

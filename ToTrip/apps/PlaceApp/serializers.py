@@ -82,6 +82,7 @@ class CitySerializer(serializers.ModelSerializer):
         fields = ["id", "name", "region_id","region_name", "district_id", "district_name", "country_id", "country_name","places"]
 
 class CityShortSerializer(serializers.ModelSerializer):
+    """Сериализатор с ограниченным колчичеством полей"""
     class Meta:
         model = City
         fields = ["id", "name"]

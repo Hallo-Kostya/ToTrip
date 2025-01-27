@@ -37,7 +37,7 @@ class RegisterView(APIView):
                 status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):   
-            user = serializer.save()
+            serializer.save()
             return Response({"user": serializer.data},
                 status=status.HTTP_201_CREATED
             )
@@ -54,7 +54,7 @@ class LogoutView(APIView):
                             status=status.HTTP_400_BAD_REQUEST)
         try:
             token = RefreshToken(refresh_token)
-            token.blacklist() # Добавить его в чёрный список
+            token.blacklist() # Добавляем токен в чёрный список
         except Exception as e:
             return Response({'error': 'Неверный Refresh token'},
                             status=status.HTTP_400_BAD_REQUEST)

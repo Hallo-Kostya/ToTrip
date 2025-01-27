@@ -9,6 +9,9 @@ from apps.ReviewApp.models import Review
 
 # Create your views here.
 class AddReviewApiView(APIView):
+    """
+    Метод для добавления отзыва на место. Информацию получает из формы с фронтенда и сохраняет в бд через сериализатор.
+    """
     permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = ReviewSerializer(data=request.data, context={"request": request})
@@ -22,6 +25,9 @@ class AddReviewApiView(APIView):
         return Response({"error": serializer.errors}, status= status.HTTP_406_NOT_ACCEPTABLE)
 
 class ReviewApiView(APIView):
+    """
+    Класс, поддерживающий удаление(delete-запрос), редактирование(patch-запрос), получение (get-запрос) отзывов
+    """
     permission_classes = [IsAuthenticated]
     def delete(self, request, review_id):
         user = request.user

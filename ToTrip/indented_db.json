@@ -1,0 +1,3649 @@
+[
+{
+  "model": "UsersApp.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$VSxIp5jLs1t5wEc08svN8I$btgYeLAMvZe2jFWYdUSCJtZ1HPQxtOTcBlgGUyk0I/0=",
+    "is_superuser": true,
+    "username": "aitur1311@gmail.com",
+    "first_name": "Айтур",
+    "last_name": "Максутов",
+    "email": "aitur1311@gmail.com",
+    "phone_number": null,
+    "created_at": "2025-01-04T20:09:23.885Z",
+    "bio": null,
+    "slogan": null,
+    "photo": "user_photos/default_avatar.png",
+    "last_login": "2025-01-15T20:22:32.888Z",
+    "is_active": true,
+    "is_staff": true,
+    "city": null,
+    "country": null,
+    "groups": [],
+    "user_permissions": [],
+    "followers": []
+  }
+},
+{
+  "model": "UsersApp.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$ojleNkKsuaft86KTHZAMTF$4eQXMPTvmTYm+RqFlsABQDnXxHFTiS9kqqjtFFrVwN0=",
+    "is_superuser": false,
+    "username": "aitur2005",
+    "first_name": "ait",
+    "last_name": "Максутов",
+    "email": "Aitur.Maksutov@urfu.me",
+    "phone_number": null,
+    "created_at": "2025-01-04T20:47:44.597Z",
+    "bio": null,
+    "slogan": null,
+    "photo": "user_photos/default_avatar.png",
+    "last_login": "2025-01-04T20:48:33.314Z",
+    "is_active": true,
+    "is_staff": true,
+    "city": null,
+    "country": null,
+    "groups": [],
+    "user_permissions": [],
+    "followers": []
+  }
+},
+{
+  "model": "ImageApp.districtimage",
+  "pk": 1,
+  "fields": {
+    "district": 1,
+    "image": "district_images/уфо.png",
+    "author": 1
+  }
+},
+{
+  "model": "ImageApp.cityimage",
+  "pk": 2,
+  "fields": {
+    "city": 1,
+    "image": "city_images/екатеринбург.jpg",
+    "author": 1
+  }
+},
+{
+  "model": "ImageApp.cityimage",
+  "pk": 3,
+  "fields": {
+    "city": 2,
+    "image": "city_images/санктпетербург.jpg",
+    "author": 1
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 1,
+  "fields": {
+    "name": "Еда",
+    "code": 1,
+    "icon": "category_icons/еда_cdyminj.svg"
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 2,
+  "fields": {
+    "name": "Исторические места",
+    "code": 2,
+    "icon": "category_icons/исторические_месат_Dculmv2.svg"
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 3,
+  "fields": {
+    "name": "Музеи",
+    "code": 3,
+    "icon": "category_icons/музеи_vXlsDWt.svg"
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 4,
+  "fields": {
+    "name": "На природе",
+    "code": 4,
+    "icon": "category_icons/на_природе_b0OAn4Y.svg"
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 5,
+  "fields": {
+    "name": "Ночная жизнь",
+    "code": 5,
+    "icon": "category_icons/ночная_жизнь_AJpcRNS.svg"
+  }
+},
+{
+  "model": "PlaceApp.category",
+  "pk": 6,
+  "fields": {
+    "name": "Отели",
+    "code": 6,
+    "icon": "category_icons/отели_diFbPeE.svg"
+  }
+},
+{
+  "model": "PlaceApp.country",
+  "pk": 1,
+  "fields": {
+    "name": "Россия",
+    "code": "RU",
+    "flag": "country_photos/flags/россия.png"
+  }
+},
+{
+  "model": "PlaceApp.district",
+  "pk": 1,
+  "fields": {
+    "name": "Уральский федеральный округ",
+    "country": 1
+  }
+},
+{
+  "model": "PlaceApp.district",
+  "pk": 2,
+  "fields": {
+    "name": "Северо-западный федеральный округ",
+    "country": 1
+  }
+},
+{
+  "model": "PlaceApp.region",
+  "pk": 1,
+  "fields": {
+    "name": "Свердловская область",
+    "district": 1
+  }
+},
+{
+  "model": "PlaceApp.region",
+  "pk": 2,
+  "fields": {
+    "name": "Ленинградская область",
+    "district": 2
+  }
+},
+{
+  "model": "PlaceApp.city",
+  "pk": 1,
+  "fields": {
+    "name": "Екатеринбург",
+    "region": 1,
+    "longitude": "60.597295",
+    "latitude": "56.838002"
+  }
+},
+{
+  "model": "PlaceApp.city",
+  "pk": 2,
+  "fields": {
+    "name": "Санкт-Петербург",
+    "region": 2,
+    "longitude": "30.314278",
+    "latitude": "59.938806"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "jti": "a404b1a3a1a74f2abc69e33f52522a1d",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTIwNTM2OCwiaWF0IjoxNzM2MDIxMzY4LCJqdGkiOiJhNDA0YjFhM2ExYTc0ZjJhYmM2OWUzM2Y1MjUyMmExZCIsInVzZXJfaWQiOjF9.YFJLIGRA0Oe5fQ5mtClMkTIbqP2p9Cful5QE03sU5XE",
+    "created_at": "2025-01-04T20:09:28.840Z",
+    "expires_at": "2025-03-05T20:09:28Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "jti": "4d5de340c3794f6fb2b5e65db0f24ff0",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTIwNTY0MiwiaWF0IjoxNzM2MDIxNjQyLCJqdGkiOiI0ZDVkZTM0MGMzNzk0ZjZmYjJiNWU2NWRiMGYyNGZmMCIsInVzZXJfaWQiOjF9.jSllX9a_GSB_-b8-ME2vrqvUn3Oi3X52LSrXXqlCJUE",
+    "created_at": "2025-01-04T20:14:02.469Z",
+    "expires_at": "2025-03-05T20:14:02Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 3,
+  "fields": {
+    "user": 2,
+    "jti": "5947adc18552442f92d20afa00c8bc53",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTIwNzY4OSwiaWF0IjoxNzM2MDIzNjg5LCJqdGkiOiI1OTQ3YWRjMTg1NTI0NDJmOTJkMjBhZmEwMGM4YmM1MyIsInVzZXJfaWQiOjJ9.YOBNWy-jv7CsRHqrhHYrH9mxAjne2UkIC3-4PgTZZF8",
+    "created_at": "2025-01-04T20:48:09.004Z",
+    "expires_at": "2025-03-05T20:48:09Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "jti": "3c2059fe024a488cb06bed59f7546d9a",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTIwNzcxMywiaWF0IjoxNzM2MDIzNzEzLCJqdGkiOiIzYzIwNTlmZTAyNGE0ODhjYjA2YmVkNTlmNzU0NmQ5YSIsInVzZXJfaWQiOjJ9.gLQDYahkjRPKZxBwtBe5pPIe2lhDO3ILbe01qI0qDG4",
+    "created_at": "2025-01-04T20:48:33.026Z",
+    "expires_at": "2025-03-05T20:48:33Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "jti": "a48836c036334efba141113614628aa8",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTg3NTM2MSwiaWF0IjoxNzM2NjkxMzYxLCJqdGkiOiJhNDg4MzZjMDM2MzM0ZWZiYTE0MTExMzYxNDYyOGFhOCIsInVzZXJfaWQiOjF9.532gAiV6DonEBPfSL0fIirApIriOtmHJJtZCkNQGsHM",
+    "created_at": "2025-01-12T14:16:01.693Z",
+    "expires_at": "2025-03-13T14:16:01Z"
+  }
+},
+{
+  "model": "token_blacklist.outstandingtoken",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "jti": "5a042c29d82c42d4ac38d107ca8ebbe9",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MTg3NTQyNiwiaWF0IjoxNzM2NjkxNDI2LCJqdGkiOiI1YTA0MmMyOWQ4MmM0MmQ0YWMzOGQxMDdjYThlYmJlOSIsInVzZXJfaWQiOjF9.kWp8KbbRqQ2tKr7v_X6WJNxMDm610wECNbb8619q6MA",
+    "created_at": "2025-01-12T14:17:06.770Z",
+    "expires_at": "2025-03-13T14:17:06Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-01-04T21:41:17.087Z",
+    "user": 1,
+    "content_type": 39,
+    "object_id": "1",
+    "object_repr": "Россия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-01-04T21:42:23.422Z",
+    "user": 1,
+    "content_type": 40,
+    "object_id": "1",
+    "object_repr": "Свердловская область в стране Россия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-01-04T21:44:02.947Z",
+    "user": 1,
+    "content_type": 40,
+    "object_id": "1",
+    "object_repr": "Уральский федеральный округ в стране Россия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-01-04T21:44:25.722Z",
+    "user": 1,
+    "content_type": 42,
+    "object_id": "1",
+    "object_repr": "Свердловская область в Уральский федеральный округ",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-01-04T21:47:52.056Z",
+    "user": 1,
+    "content_type": 38,
+    "object_id": "1",
+    "object_repr": "Екатеринбург, Свердловская область, Уральский федеральный округ, Россия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-01-04T21:50:35.595Z",
+    "user": 1,
+    "content_type": 40,
+    "object_id": "2",
+    "object_repr": "Центральный федеральный округ в стране Россия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-01-04T21:51:48.517Z",
+    "user": 1,
+    "content_type": 40,
+    "object_id": "2",
+    "object_repr": "Северо-западный федеральный округ в стране Россия",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-01-04T21:52:20.433Z",
+    "user": 1,
+    "content_type": 42,
+    "object_id": "2",
+    "object_repr": "Ленинградская область в Северо-западный федеральный округ",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-01-04T21:53:05.697Z",
+    "user": 1,
+    "content_type": 38,
+    "object_id": "2",
+    "object_repr": "Санкт-Петербург, Ленинградская область, Северо-западный федеральный округ, Россия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-01-04T21:54:14.157Z",
+    "user": 1,
+    "content_type": 26,
+    "object_id": "1",
+    "object_repr": "Photos for City Екатеринбург",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-01-04T21:55:42.291Z",
+    "user": 1,
+    "content_type": 26,
+    "object_id": "1",
+    "object_repr": "Photos for City Екатеринбург",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-01-04T21:55:54.703Z",
+    "user": 1,
+    "content_type": 26,
+    "object_id": "2",
+    "object_repr": "Photos for City Екатеринбург",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-01-04T21:57:52.307Z",
+    "user": 1,
+    "content_type": 26,
+    "object_id": "3",
+    "object_repr": "Photos for City Санкт-Петербург",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-01-04T21:59:46.247Z",
+    "user": 1,
+    "content_type": 28,
+    "object_id": "1",
+    "object_repr": "Photos for District Уральский федеральный округ",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-01-04T22:06:43.259Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "1",
+    "object_repr": "Категория еда",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-01-04T22:07:04.534Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "2",
+    "object_repr": "Категория Исторические места",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-01-04T22:07:13.023Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "1",
+    "object_repr": "Категория Еда",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-01-04T22:07:21.550Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "3",
+    "object_repr": "Категория Музеи",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-01-04T22:07:37.325Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "4",
+    "object_repr": "Категория На природе",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-01-04T22:07:47.720Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "5",
+    "object_repr": "Категория Ночная жизнь",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-01-04T22:07:57.650Z",
+    "user": 1,
+    "content_type": 37,
+    "object_id": "6",
+    "object_repr": "Категория Отели",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-01-04T22:21:02.287Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "1",
+    "object_repr": "Photos for Place Храм-памятник на крови во имя Всех Святых в земле Российской просиявших",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Author\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-01-04T22:21:53.272Z",
+    "user": 1,
+    "content_type": 41,
+    "object_id": "1",
+    "object_repr": "Храм-памятник на крови во имя Всех Святых в земле Российской просиявших",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-01-05T15:31:03.765Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "4",
+    "object_repr": "Photos for Place Сыроварня",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\", \"Author\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-01-05T18:50:01.230Z",
+    "user": 1,
+    "content_type": 41,
+    "object_id": "18",
+    "object_repr": "Вкусно — и точка",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-01-05T18:51:10.868Z",
+    "user": 1,
+    "content_type": 41,
+    "object_id": "19",
+    "object_repr": "Вкусно — и точка",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-01-15T20:28:24.805Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "2",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-01-15T20:28:45.970Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "54",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2025-01-15T20:28:57.346Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "55",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2025-01-15T20:29:01.398Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "55",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2025-01-15T20:29:12.466Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "56",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2025-01-15T20:30:27.411Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "57",
+    "object_repr": "Photos for Place Храм-памятник на крови",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2025-01-15T20:32:48.214Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "58",
+    "object_repr": "Photos for Place Высоцкий",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2025-01-15T20:33:00.358Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "59",
+    "object_repr": "Photos for Place Высоцкий",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2025-01-15T20:33:12.850Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "60",
+    "object_repr": "Photos for Place Высоцкий",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2025-01-15T20:34:20.944Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "61",
+    "object_repr": "Photos for Place Высоцкий",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2025-01-15T20:36:32.440Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "62",
+    "object_repr": "Photos for Place Екатеринбург Арена",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2025-01-15T20:36:46.899Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "63",
+    "object_repr": "Photos for Place Екатеринбург Арена",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2025-01-15T20:36:58.060Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "64",
+    "object_repr": "Photos for Place Екатеринбург Арена",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2025-01-15T20:37:10.129Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "65",
+    "object_repr": "Photos for Place Екатеринбург Арена",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2025-01-15T20:38:58.003Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "66",
+    "object_repr": "Photos for Place Плотинка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2025-01-15T20:39:09.089Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "67",
+    "object_repr": "Photos for Place Плотинка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-01-15T20:39:18.559Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "68",
+    "object_repr": "Photos for Place Плотинка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-01-15T20:39:26.992Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "69",
+    "object_repr": "Photos for Place Плотинка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-01-15T20:41:55.085Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "70",
+    "object_repr": "Photos for Place Ельцин Центр",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2025-01-15T20:42:04.405Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "71",
+    "object_repr": "Photos for Place Ельцин Центр",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2025-01-15T20:42:16.295Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "72",
+    "object_repr": "Photos for Place Ельцин Центр",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2025-01-15T20:42:28.168Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "73",
+    "object_repr": "Photos for Place Ельцин Центр",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2025-01-15T20:44:06.014Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "74",
+    "object_repr": "Photos for Place Simple Coffee",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2025-01-15T20:44:39.036Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "75",
+    "object_repr": "Photos for Place Вкусно — и точка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2025-01-15T20:44:47.837Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "76",
+    "object_repr": "Photos for Place Вкусно — и точка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2025-01-15T20:44:59.491Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "77",
+    "object_repr": "Photos for Place Вкусно — и точка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2025-01-15T20:45:44.363Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "78",
+    "object_repr": "Photos for Place Rostic's",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2025-01-15T20:46:02.407Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "79",
+    "object_repr": "Photos for Place Rostic's",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2025-01-15T20:46:12.360Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "80",
+    "object_repr": "Photos for Place Rostic's",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2025-01-15T20:47:50.196Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "81",
+    "object_repr": "Photos for Place Космос",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2025-01-15T20:49:17.229Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "82",
+    "object_repr": "Photos for Place Сыроварня",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2025-01-15T20:50:26.918Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "83",
+    "object_repr": "Photos for Place Космос Бани",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2025-01-15T20:51:27.809Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "84",
+    "object_repr": "Photos for Place Супра",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2025-01-15T20:52:24.229Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "85",
+    "object_repr": "Photos for Place Сквер Юнеско",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2025-01-15T20:53:16.983Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "86",
+    "object_repr": "Photos for Place Сквер Литературный",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2025-01-15T20:54:11.407Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "87",
+    "object_repr": "Photos for Place Suite",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2025-01-15T20:55:14.545Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "88",
+    "object_repr": "Photos for Place Академический театр драмы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2025-01-15T20:56:37.928Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "89",
+    "object_repr": "Photos for Place Ричмонд",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2025-01-15T20:57:09.559Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "90",
+    "object_repr": "Photos for Place Вера",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2025-01-15T20:57:35.828Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "91",
+    "object_repr": "Photos for Place Loff",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2025-01-15T20:58:10.756Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "92",
+    "object_repr": "Photos for Place Grand Hall",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2025-01-15T20:58:49.812Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "93",
+    "object_repr": "Photos for Place Ваша студия",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2025-01-15T20:59:29.409Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "94",
+    "object_repr": "Photos for Place Веста",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2025-01-15T20:59:54.241Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "95",
+    "object_repr": "Photos for Place Урал",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2025-01-15T21:00:48.925Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "96",
+    "object_repr": "Photos for Place Луна",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2025-01-15T21:01:20.450Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "97",
+    "object_repr": "Photos for Place Тесса",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2025-01-15T21:02:02.383Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "98",
+    "object_repr": "Photos for Place Октябрьская",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2025-01-15T21:02:42.396Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "99",
+    "object_repr": "Photos for Place Лесопарк Каменные Палатки",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2025-01-15T21:03:24.596Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "100",
+    "object_repr": "Photos for Place Харитоновский сад",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2025-01-15T21:04:16.434Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "101",
+    "object_repr": "Photos for Place Шарташский лесопарк",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2025-01-15T21:05:07.057Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "102",
+    "object_repr": "Photos for Place Парк имени Блюхера",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2025-01-15T21:06:01.950Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "103",
+    "object_repr": "Photos for Place Парк имени Павлика Морозова",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2025-01-15T21:06:41.024Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "104",
+    "object_repr": "Photos for Place Парк имени Энгельса",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2025-01-15T21:07:24.117Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "105",
+    "object_repr": "Photos for Place Свобода Концерт Холл",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2025-01-15T21:08:11.332Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "106",
+    "object_repr": "Photos for Place Эрмитаж Урал",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2025-01-15T21:10:44.770Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "107",
+    "object_repr": "Photos for Place Планета",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2025-01-15T21:11:35.512Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "108",
+    "object_repr": "Photos for Place Музей архитектуры и дизайна",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2025-01-15T21:12:20.478Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "109",
+    "object_repr": "Photos for Place Музей наивного искусства",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2025-01-15T21:12:52.997Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "110",
+    "object_repr": "Photos for Place Памятник Татищеву, Геннину",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2025-01-15T21:13:39.136Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "111",
+    "object_repr": "Photos for Place УрФУ",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2025-01-15T21:14:16.818Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "112",
+    "object_repr": "Photos for Place Театр оперы и балета",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2025-01-15T21:15:12.440Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "113",
+    "object_repr": "Photos for Place  Парк им. В.В. Маяковского",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2025-01-15T21:16:17.868Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "114",
+    "object_repr": "Photos for Place Дендрологический парк-выставка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2025-01-15T21:17:05.246Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "115",
+    "object_repr": "Photos for Place Музей изобразительных искусств",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2025-01-15T21:17:50.920Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "116",
+    "object_repr": "Photos for Place Музей имени О.Е. Клера",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2025-01-15T21:19:54.309Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "117",
+    "object_repr": "Photos for Place Музей андеграунда",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2025-01-15T21:20:38.877Z",
+    "user": 1,
+    "content_type": 29,
+    "object_id": "118",
+    "object_repr": "Photos for Place Музей Эрнста Неизвестного",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 1,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 1,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 1,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 1,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add city",
+    "content_type": 2,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change city",
+    "content_type": 2,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete city",
+    "content_type": 2,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view city",
+    "content_type": 2,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add place",
+    "content_type": 3,
+    "codename": "add_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change place",
+    "content_type": 3,
+    "codename": "change_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete place",
+    "content_type": 3,
+    "codename": "delete_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view place",
+    "content_type": 3,
+    "codename": "view_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 4,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 4,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 4,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 4,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 5,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 5,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 5,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 5,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 6,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 6,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 6,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 6,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 7,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 7,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 7,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 7,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 8,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 8,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 8,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 8,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add review",
+    "content_type": 9,
+    "codename": "add_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change review",
+    "content_type": 9,
+    "codename": "change_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete review",
+    "content_type": 9,
+    "codename": "delete_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view review",
+    "content_type": 9,
+    "codename": "view_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add review",
+    "content_type": 10,
+    "codename": "add_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change review",
+    "content_type": 10,
+    "codename": "change_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete review",
+    "content_type": 10,
+    "codename": "delete_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view review",
+    "content_type": 10,
+    "codename": "view_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 11,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 11,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 11,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 11,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add country",
+    "content_type": 12,
+    "codename": "add_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change country",
+    "content_type": 12,
+    "codename": "change_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete country",
+    "content_type": 12,
+    "codename": "delete_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view country",
+    "content_type": 12,
+    "codename": "view_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add city",
+    "content_type": 13,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change city",
+    "content_type": 13,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete city",
+    "content_type": 13,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view city",
+    "content_type": 13,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add place",
+    "content_type": 14,
+    "codename": "add_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change place",
+    "content_type": 14,
+    "codename": "change_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete place",
+    "content_type": 14,
+    "codename": "delete_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view place",
+    "content_type": 14,
+    "codename": "view_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add post",
+    "content_type": 15,
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change post",
+    "content_type": 15,
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete post",
+    "content_type": 15,
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view post",
+    "content_type": 15,
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add post photo",
+    "content_type": 16,
+    "codename": "add_postphoto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change post photo",
+    "content_type": 16,
+    "codename": "change_postphoto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete post photo",
+    "content_type": 16,
+    "codename": "delete_postphoto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view post photo",
+    "content_type": 16,
+    "codename": "view_postphoto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add review",
+    "content_type": 17,
+    "codename": "add_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change review",
+    "content_type": 17,
+    "codename": "change_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete review",
+    "content_type": 17,
+    "codename": "delete_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view review",
+    "content_type": 17,
+    "codename": "view_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add review photos",
+    "content_type": 18,
+    "codename": "add_reviewphotos"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change review photos",
+    "content_type": 18,
+    "codename": "change_reviewphotos"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete review photos",
+    "content_type": 18,
+    "codename": "delete_reviewphotos"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view review photos",
+    "content_type": 18,
+    "codename": "view_reviewphotos"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add trip",
+    "content_type": 19,
+    "codename": "add_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change trip",
+    "content_type": 19,
+    "codename": "change_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete trip",
+    "content_type": 19,
+    "codename": "delete_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view trip",
+    "content_type": 19,
+    "codename": "view_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 20,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 20,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 20,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 20,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add route",
+    "content_type": 21,
+    "codename": "add_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change route",
+    "content_type": 21,
+    "codename": "change_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete route",
+    "content_type": 21,
+    "codename": "delete_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view route",
+    "content_type": 21,
+    "codename": "view_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add route point",
+    "content_type": 22,
+    "codename": "add_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change route point",
+    "content_type": 22,
+    "codename": "change_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete route point",
+    "content_type": 22,
+    "codename": "delete_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view route point",
+    "content_type": 22,
+    "codename": "view_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 89,
+  "fields": {
+    "name": "Can add route",
+    "content_type": 23,
+    "codename": "add_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 90,
+  "fields": {
+    "name": "Can change route",
+    "content_type": 23,
+    "codename": "change_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 91,
+  "fields": {
+    "name": "Can delete route",
+    "content_type": 23,
+    "codename": "delete_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 92,
+  "fields": {
+    "name": "Can view route",
+    "content_type": 23,
+    "codename": "view_route"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 93,
+  "fields": {
+    "name": "Can add route point",
+    "content_type": 24,
+    "codename": "add_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 94,
+  "fields": {
+    "name": "Can change route point",
+    "content_type": 24,
+    "codename": "change_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 95,
+  "fields": {
+    "name": "Can delete route point",
+    "content_type": 24,
+    "codename": "delete_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 96,
+  "fields": {
+    "name": "Can view route point",
+    "content_type": 24,
+    "codename": "view_routepoint"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 97,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 25,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 98,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 25,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 99,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 25,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 100,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 25,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 101,
+  "fields": {
+    "name": "Can add city image",
+    "content_type": 26,
+    "codename": "add_cityimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 102,
+  "fields": {
+    "name": "Can change city image",
+    "content_type": 26,
+    "codename": "change_cityimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 103,
+  "fields": {
+    "name": "Can delete city image",
+    "content_type": 26,
+    "codename": "delete_cityimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 104,
+  "fields": {
+    "name": "Can view city image",
+    "content_type": 26,
+    "codename": "view_cityimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 105,
+  "fields": {
+    "name": "Can add country image",
+    "content_type": 27,
+    "codename": "add_countryimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 106,
+  "fields": {
+    "name": "Can change country image",
+    "content_type": 27,
+    "codename": "change_countryimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 107,
+  "fields": {
+    "name": "Can delete country image",
+    "content_type": 27,
+    "codename": "delete_countryimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 108,
+  "fields": {
+    "name": "Can view country image",
+    "content_type": 27,
+    "codename": "view_countryimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 109,
+  "fields": {
+    "name": "Can add district image",
+    "content_type": 28,
+    "codename": "add_districtimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 110,
+  "fields": {
+    "name": "Can change district image",
+    "content_type": 28,
+    "codename": "change_districtimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 111,
+  "fields": {
+    "name": "Can delete district image",
+    "content_type": 28,
+    "codename": "delete_districtimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 112,
+  "fields": {
+    "name": "Can view district image",
+    "content_type": 28,
+    "codename": "view_districtimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 113,
+  "fields": {
+    "name": "Can add place image",
+    "content_type": 29,
+    "codename": "add_placeimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 114,
+  "fields": {
+    "name": "Can change place image",
+    "content_type": 29,
+    "codename": "change_placeimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 115,
+  "fields": {
+    "name": "Can delete place image",
+    "content_type": 29,
+    "codename": "delete_placeimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 116,
+  "fields": {
+    "name": "Can view place image",
+    "content_type": 29,
+    "codename": "view_placeimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 117,
+  "fields": {
+    "name": "Can add post image",
+    "content_type": 30,
+    "codename": "add_postimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 118,
+  "fields": {
+    "name": "Can change post image",
+    "content_type": 30,
+    "codename": "change_postimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 119,
+  "fields": {
+    "name": "Can delete post image",
+    "content_type": 30,
+    "codename": "delete_postimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 120,
+  "fields": {
+    "name": "Can view post image",
+    "content_type": 30,
+    "codename": "view_postimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 121,
+  "fields": {
+    "name": "Can add region image",
+    "content_type": 31,
+    "codename": "add_regionimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 122,
+  "fields": {
+    "name": "Can change region image",
+    "content_type": 31,
+    "codename": "change_regionimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 123,
+  "fields": {
+    "name": "Can delete region image",
+    "content_type": 31,
+    "codename": "delete_regionimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 124,
+  "fields": {
+    "name": "Can view region image",
+    "content_type": 31,
+    "codename": "view_regionimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 125,
+  "fields": {
+    "name": "Can add review image",
+    "content_type": 32,
+    "codename": "add_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 126,
+  "fields": {
+    "name": "Can change review image",
+    "content_type": 32,
+    "codename": "change_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 127,
+  "fields": {
+    "name": "Can delete review image",
+    "content_type": 32,
+    "codename": "delete_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 128,
+  "fields": {
+    "name": "Can view review image",
+    "content_type": 32,
+    "codename": "view_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 129,
+  "fields": {
+    "name": "Can add trip image",
+    "content_type": 33,
+    "codename": "add_tripimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 130,
+  "fields": {
+    "name": "Can change trip image",
+    "content_type": 33,
+    "codename": "change_tripimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 131,
+  "fields": {
+    "name": "Can delete trip image",
+    "content_type": 33,
+    "codename": "delete_tripimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 132,
+  "fields": {
+    "name": "Can view trip image",
+    "content_type": 33,
+    "codename": "view_tripimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 133,
+  "fields": {
+    "name": "Can add post",
+    "content_type": 34,
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 134,
+  "fields": {
+    "name": "Can change post",
+    "content_type": 34,
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 135,
+  "fields": {
+    "name": "Can delete post",
+    "content_type": 34,
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 136,
+  "fields": {
+    "name": "Can view post",
+    "content_type": 34,
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 137,
+  "fields": {
+    "name": "Can add post category",
+    "content_type": 35,
+    "codename": "add_postcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 138,
+  "fields": {
+    "name": "Can change post category",
+    "content_type": 35,
+    "codename": "change_postcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 139,
+  "fields": {
+    "name": "Can delete post category",
+    "content_type": 35,
+    "codename": "delete_postcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 140,
+  "fields": {
+    "name": "Can view post category",
+    "content_type": 35,
+    "codename": "view_postcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 141,
+  "fields": {
+    "name": "Can add review",
+    "content_type": 36,
+    "codename": "add_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 142,
+  "fields": {
+    "name": "Can change review",
+    "content_type": 36,
+    "codename": "change_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 143,
+  "fields": {
+    "name": "Can delete review",
+    "content_type": 36,
+    "codename": "delete_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 144,
+  "fields": {
+    "name": "Can view review",
+    "content_type": 36,
+    "codename": "view_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 145,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 37,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 146,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 37,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 147,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 37,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 148,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 37,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 149,
+  "fields": {
+    "name": "Can add city",
+    "content_type": 38,
+    "codename": "add_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 150,
+  "fields": {
+    "name": "Can change city",
+    "content_type": 38,
+    "codename": "change_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 151,
+  "fields": {
+    "name": "Can delete city",
+    "content_type": 38,
+    "codename": "delete_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 152,
+  "fields": {
+    "name": "Can view city",
+    "content_type": 38,
+    "codename": "view_city"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 153,
+  "fields": {
+    "name": "Can add country",
+    "content_type": 39,
+    "codename": "add_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 154,
+  "fields": {
+    "name": "Can change country",
+    "content_type": 39,
+    "codename": "change_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 155,
+  "fields": {
+    "name": "Can delete country",
+    "content_type": 39,
+    "codename": "delete_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 156,
+  "fields": {
+    "name": "Can view country",
+    "content_type": 39,
+    "codename": "view_country"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 157,
+  "fields": {
+    "name": "Can add district",
+    "content_type": 40,
+    "codename": "add_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 158,
+  "fields": {
+    "name": "Can change district",
+    "content_type": 40,
+    "codename": "change_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 159,
+  "fields": {
+    "name": "Can delete district",
+    "content_type": 40,
+    "codename": "delete_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 160,
+  "fields": {
+    "name": "Can view district",
+    "content_type": 40,
+    "codename": "view_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 161,
+  "fields": {
+    "name": "Can add place",
+    "content_type": 41,
+    "codename": "add_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 162,
+  "fields": {
+    "name": "Can change place",
+    "content_type": 41,
+    "codename": "change_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 163,
+  "fields": {
+    "name": "Can delete place",
+    "content_type": 41,
+    "codename": "delete_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 164,
+  "fields": {
+    "name": "Can view place",
+    "content_type": 41,
+    "codename": "view_place"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 165,
+  "fields": {
+    "name": "Can add region",
+    "content_type": 42,
+    "codename": "add_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 166,
+  "fields": {
+    "name": "Can change region",
+    "content_type": 42,
+    "codename": "change_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 167,
+  "fields": {
+    "name": "Can delete region",
+    "content_type": 42,
+    "codename": "delete_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 168,
+  "fields": {
+    "name": "Can view region",
+    "content_type": 42,
+    "codename": "view_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 169,
+  "fields": {
+    "name": "Can add favorite place",
+    "content_type": 43,
+    "codename": "add_favoriteplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 170,
+  "fields": {
+    "name": "Can change favorite place",
+    "content_type": 43,
+    "codename": "change_favoriteplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 171,
+  "fields": {
+    "name": "Can delete favorite place",
+    "content_type": 43,
+    "codename": "delete_favoriteplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 172,
+  "fields": {
+    "name": "Can view favorite place",
+    "content_type": 43,
+    "codename": "view_favoriteplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 173,
+  "fields": {
+    "name": "Can add trip",
+    "content_type": 44,
+    "codename": "add_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 174,
+  "fields": {
+    "name": "Can change trip",
+    "content_type": 44,
+    "codename": "change_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 175,
+  "fields": {
+    "name": "Can delete trip",
+    "content_type": 44,
+    "codename": "delete_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 176,
+  "fields": {
+    "name": "Can view trip",
+    "content_type": 44,
+    "codename": "view_trip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 177,
+  "fields": {
+    "name": "Can add sub trip",
+    "content_type": 45,
+    "codename": "add_subtrip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 178,
+  "fields": {
+    "name": "Can change sub trip",
+    "content_type": 45,
+    "codename": "change_subtrip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 179,
+  "fields": {
+    "name": "Can delete sub trip",
+    "content_type": 45,
+    "codename": "delete_subtrip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 180,
+  "fields": {
+    "name": "Can view sub trip",
+    "content_type": 45,
+    "codename": "view_subtrip"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 181,
+  "fields": {
+    "name": "Can add subtrip place",
+    "content_type": 46,
+    "codename": "add_subtripplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 182,
+  "fields": {
+    "name": "Can change subtrip place",
+    "content_type": 46,
+    "codename": "change_subtripplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 183,
+  "fields": {
+    "name": "Can delete subtrip place",
+    "content_type": 46,
+    "codename": "delete_subtripplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 184,
+  "fields": {
+    "name": "Can view subtrip place",
+    "content_type": 46,
+    "codename": "view_subtripplace"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 185,
+  "fields": {
+    "name": "Can add blacklisted token",
+    "content_type": 47,
+    "codename": "add_blacklistedtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 186,
+  "fields": {
+    "name": "Can change blacklisted token",
+    "content_type": 47,
+    "codename": "change_blacklistedtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 187,
+  "fields": {
+    "name": "Can delete blacklisted token",
+    "content_type": 47,
+    "codename": "delete_blacklistedtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 188,
+  "fields": {
+    "name": "Can view blacklisted token",
+    "content_type": 47,
+    "codename": "view_blacklistedtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 189,
+  "fields": {
+    "name": "Can add outstanding token",
+    "content_type": 48,
+    "codename": "add_outstandingtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 190,
+  "fields": {
+    "name": "Can change outstanding token",
+    "content_type": 48,
+    "codename": "change_outstandingtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 191,
+  "fields": {
+    "name": "Can delete outstanding token",
+    "content_type": 48,
+    "codename": "delete_outstandingtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 192,
+  "fields": {
+    "name": "Can view outstanding token",
+    "content_type": 48,
+    "codename": "view_outstandingtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 193,
+  "fields": {
+    "name": "Can add note",
+    "content_type": 49,
+    "codename": "add_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 194,
+  "fields": {
+    "name": "Can change note",
+    "content_type": 49,
+    "codename": "change_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 195,
+  "fields": {
+    "name": "Can delete note",
+    "content_type": 49,
+    "codename": "delete_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 196,
+  "fields": {
+    "name": "Can view note",
+    "content_type": 49,
+    "codename": "view_note"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "users",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "TripPlanner",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "TripPlanner",
+    "model": "place"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "TripPlanner",
+    "model": "review"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "users",
+    "model": "review"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "country"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "place"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "postphoto"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "review"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "reviewphotos"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "trip"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "route"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "Db_api",
+    "model": "routepoint"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 23,
+  "fields": {
+    "app_label": "TripPlanner",
+    "model": "route"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 24,
+  "fields": {
+    "app_label": "TripPlanner",
+    "model": "routepoint"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 25,
+  "fields": {
+    "app_label": "UsersApp",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 26,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "cityimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 27,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "countryimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 28,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "districtimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 29,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "placeimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 30,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "postimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 31,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "regionimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 32,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "reviewimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 33,
+  "fields": {
+    "app_label": "ImageApp",
+    "model": "tripimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 34,
+  "fields": {
+    "app_label": "PostApp",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 35,
+  "fields": {
+    "app_label": "PostApp",
+    "model": "postcategory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 36,
+  "fields": {
+    "app_label": "ReviewApp",
+    "model": "review"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 37,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 38,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 39,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "country"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 40,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "district"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 41,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "place"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 42,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "region"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 43,
+  "fields": {
+    "app_label": "PlaceApp",
+    "model": "favoriteplace"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 44,
+  "fields": {
+    "app_label": "TripApp",
+    "model": "trip"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 45,
+  "fields": {
+    "app_label": "TripApp",
+    "model": "subtrip"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 46,
+  "fields": {
+    "app_label": "TripApp",
+    "model": "subtripplace"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 47,
+  "fields": {
+    "app_label": "token_blacklist",
+    "model": "blacklistedtoken"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 48,
+  "fields": {
+    "app_label": "token_blacklist",
+    "model": "outstandingtoken"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 49,
+  "fields": {
+    "app_label": "TripApp",
+    "model": "note"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7r67q8c3fcjw4b3vnkbs8jwtdept8lhh",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAUBe_iGlmxEy-hpOcM0V-eSQAlUpYKcXeIlALaNzPvZTra1r7bFszdoOZsnDn9bkzywLgDvdN4m6xM4zoPbHfFHnSx10nxvBzu30FPS_-t21KBONetrzklgULrkhsIgufM0gQXEAVIhcVpzN6TFopVzDF6wLw_FqM5Mg:1tUB9B:-rACFtPeL1eNyTNFub5dvjT1Op3pT5OFXJxumJAUkrs",
+    "expire_date": "2025-01-18T20:53:25.433Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "91jk3uj5zp6gd2cfx6tingf7d9t2ssyq",
+  "fields": {
+    "session_data": ".eJylkElzozAQhf8L5wkFYgtzCza2oSzJCzbLxSUkHCRWg1PYpOa_D6RymJzn0Jfu1_36fZ8SoTTre-m3lD39PF1TjrnvnUZPRdzrvfpg0IVnekUbnRe-LU8iJQX3Mi1tJYuc0hMNj0MkkgiNHh94EuXD1HugET5wcNLw8mRsF34bR3uOhavB0TVQsH-ioOi9qlXIcTouChVVqIqBX8B1rMbBgUPBOApjAwdJBQP3mQROgZfnYvZgESppabfJ9BiMFNm6PVYNtqrgxT1sTsdLnhNmu5bqH7VNF75GIuDbHju6471Lv6Quu3ZZn_9PYFqdq6lGspgWqrM-L8CAjlC8KXAZq_g4cBKulH9AKFB8gbixdTEb8li4jzkcmoDE4UlBohhx6D5j4CpwLKtYQAMvmUCzR30ek8i_knCGuLLlLR4eSnPf725mEuxvbR2FwwvfVcu33TULN74lQKsdBtK5_ZT4Qj7u-eWjz7oLZ1Nu9WcvJbTI6nnABKnfG5k29b3jqTxL5O9pL8OGZaXzrf1xICdfOKmla5rGiEkJ1TSimcBiKTUBZUDNbACuIE0Z0S31VTMU3VD1jOhXy2SAGGlKAZP-_AVr3tnY:1tD6Q7:ka_oCZytzapvYs0tnJJkz36-xZsrY-ttKG7380mmLYA",
+    "expire_date": "2024-12-02T18:24:19.635Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "htwihx7dev2nlp9emqsm1o2ohrc6j9ha",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAUBe_iGlmxEy-hpOcM0V-eSQAlUpYKcXeIlALaNzPvZTra1r7bFszdoOZsnDn9bkzywLgDvdN4m6xM4zoPbHfFHnSx10nxvBzu30FPS_-t21KBONetrzklgULrkhsIgufM0gQXEAVIhcVpzN6TFopVzDF6wLw_FqM5Mg:1tY9uK:igvmXSU-Pm85ZimJI9mBzXy2TlWSAGV7nkJJtSzLfqg",
+    "expire_date": "2025-01-29T20:22:32.895Z"
+  }
+}
+]
