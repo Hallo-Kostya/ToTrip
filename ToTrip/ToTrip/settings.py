@@ -32,14 +32,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'ToTrip.apps.UsersApp',
-    'ToTrip.apps.ImageApp',
-    'ToTrip.apps.PostApp',
-    'ToTrip.apps.ReviewApp',
-    'ToTrip.apps.PlaceApp',
-    'ToTrip.apps.SearchApp',
-    'ToTrip.apps.TripApp',
-    'ToTrip.apps.AdminApp',
+    'apps.UsersApp',
+    'apps.ImageApp',
+    'apps.PostApp',
+    'apps.ReviewApp',
+    'apps.PlaceApp',
+    'apps.SearchApp',
+    'apps.TripApp',
+    'apps.AdminApp',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -90,7 +90,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Next.js
 ]
 
-ROOT_URLCONF = 'ToTrip.ToTrip.urls'
+ROOT_URLCONF = 'ToTrip.urls'
 
 TEMPLATES = [
     {
