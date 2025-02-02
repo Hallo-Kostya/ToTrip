@@ -22,10 +22,13 @@
 }
 
 .suggestion-elem.bg-3 {
-	background: url('/img/index/sugg__photo-2.jpg') no-repeat center center/cover;
-	height: 354px;
-	border-radius: 36px;
+  background: 
+    linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 100%), 
+    url('/img/index/winter.jpg') no-repeat center center/cover;
+  height: 354px;
+  border-radius: 36px;
 }
+
 
 .bg-1.big {
 	grid-column: 1;
