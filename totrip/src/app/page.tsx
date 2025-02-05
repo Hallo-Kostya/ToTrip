@@ -4,7 +4,7 @@ import RecommendationsSection from '@/components/ui/main-page/Recomendations/rec
 import { SearchContainer } from '@/components/ui/main-page/Search/searchContainer';
 import { fetchRecommendationPlaces } from '@/services/data';
 import { useEffect, useState } from 'react';
-import { BASE_URL } from '@/services/data';
+import { API_BASE_URL } from '@/services/data';
 
 interface Place {
   id: number;
@@ -24,7 +24,7 @@ const RecommendationsContainer = () => {
         id: place.id,
         title: place.name,
         reviewsCount: place.reviews_count.toString(),
-        placeImg: place.search_image ? `${BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
+        placeImg: place.search_image ? `${API_BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
         rating: place.avg_rating
       }));
       setPlaceData(transformedData);

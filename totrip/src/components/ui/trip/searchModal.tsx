@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://totrip.onrender.com';
 
 const SearchPlacesModal = ({ selectedTag, onSelect }) => {
   const [query, setQuery] = useState('');

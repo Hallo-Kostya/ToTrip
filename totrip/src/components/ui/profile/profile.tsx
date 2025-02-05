@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
         }
       });
 
-      fetch('http://127.0.0.1:8000/api/users/profile/edit/', {
+      fetch('https://totrip.onrender.com/api/users/profile/edit/', {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${accessToken}`,

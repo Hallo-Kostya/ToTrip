@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import TripCard from '@/components/ui/trips/tripCard';
 import TripHeadlines from '@/components/ui/trip/tripHeadlines';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://totrip.onrender.com';
 
 const TripPage = () => {
     const { tripId } = useParams();

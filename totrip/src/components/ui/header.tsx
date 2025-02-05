@@ -8,7 +8,7 @@ import { useUser } from '@/app/userContext';
 import RegistrationPopup from './common_modules/registration';
 import ConfirmLogoutPopup from './common_modules/confirmLogoutPopup';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://totrip.onrender.com';
 
 const Header: React.FC = () => {
   const { first_name, last_name, photo, setUserContext } = useUser();

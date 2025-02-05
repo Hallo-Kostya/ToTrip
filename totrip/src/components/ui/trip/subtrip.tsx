@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Modal from './modal';
 import SearchPlacesModal from './searchModal';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://totrip.onrender.com';
 
 
 const Subtrip = ({ tripId, subtrip, onDeleteSubtrip }) => {

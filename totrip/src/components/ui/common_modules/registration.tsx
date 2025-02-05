@@ -49,7 +49,7 @@ const RegistrationPopup: React.FC<RegistrationPopupProps> = ({ onClose }) => {
     if (validateForm()) {
       try {
         const endpoint = isLoginMode ? 'login' : 'register';
-        const response = await fetch(`http://127.0.0.1:8000/api/users/${endpoint}/`, {
+        const response = await fetch(`https://totrip.onrender.com/api/users/${endpoint}/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),

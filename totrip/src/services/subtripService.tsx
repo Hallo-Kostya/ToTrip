@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://totrip.onrender.com';
 
 export const createSubtrip = (
     trip_id: number,
