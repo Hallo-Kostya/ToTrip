@@ -1,71 +1,153 @@
-// change this component to client component
-
-
 'use client'
 
+import React, { useState, useEffect } from 'react';
+import TripCard from '@/components/ui/trips/tripCard';
+import Image from 'next/image';
+import TripForm from '@/components/ui/trips/newTripForm';
+import { TripData } from '@/components/ui/types';
+import Link from 'next/link';
+import { useUser } from '../userContext';
 
-// import the data
+const BASE_URL = 'https://totrip.onrender.com';
 
-// import the searchBar
+const TripsPage = () => {
+    const { user_id } = useUser();
+    const [futureTrips, setFutureTrips] = useState<TripData[]>([]);
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
-// import the profile UI
+    useEffect(() => {
+        const fetchTrips = async () => {
+            try {
+                
+    
+                const response = await fetch(`${BASE_URL}/api/trips/list/${user_id}/`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access')}`,
+                    },
+                });
+    
+                if (!response.ok) {
+                    console.error(`Ошибка запроса: ${response.status} ${response.statusText}`);
+                    return;
+                }
+    
+                if (response.status === 204) {
+                    setFutureTrips([]); // Пустой список, если контента нет
+                    return;
+                }
+    
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    setFutureTrips(data.trips || []); // Обработка случая, если `trips` пусто
+                } else {
+                    console.warn('Ответ сервера не содержит JSON.');
+                    setFutureTrips([]);
+                }
+            } catch (error) {
+                console.error('Ошибка сети:', error);
+            }
+        };
+    
+        fetchTrips();
+    }, [user_id]);
 
-import { useState, useEffect } from "react"
-import { ProfileCard } from "@/components/ui/main-page/searchPlaceCard"
-import { SearchInput } from "@/components/ui/main-page/searchInput"
-import { data, iProfile } from "@/services/data"
-import {useSearchParams} from 'next/navigation'
-
-
-const Home = () => {
-
-  const [profileData, setProfileData] = useState<iProfile[]>([])
-
-  const searchParams = useSearchParams()
-  const searchQuery = searchParams && searchParams.get("q"); // we use `q` to set the query to the browser, it could be anything
-
-  useEffect(() => {
-
-    const handleSearch = () => {
-      const findUser = data.filter((user) => {
-        if (searchQuery) {
-          return (
-            user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.toLowerCase())
-          );
-        } else {
-          return true;
-        }
-      });
-      setProfileData(findUser);
+    const handleOpenPopup = () => {
+        setPopupOpen(true);
     };
-    handleSearch();
-  }, [searchQuery]);
 
-  const totalUser = profileData.length;
-  return (
-  <section className="min-h-screen px-[2rem] md:px-[6rem] mt-[100px]">
-    <p className="mb-10">Showing {totalUser} {totalUser > 1 ? "Users" : "User"}</p>
+    const handleClosePopup = () => {
+        setPopupOpen(false);
+    };
 
-    <SearchInput defaultValue={""} />
+    const handleSubmit = (trip: TripData) => {
+        setFutureTrips([...futureTrips, trip]);
+        handleClosePopup();
+    };
 
-    <div className="mt-8">
-      {totalUser === 0 ? <p>No result returned</p> : (
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-5">
-          {profileData.map(({ username, role, name, photo, email }: iProfile) => {
-            return (
-              <div key={username}>
-                <ProfileCard name={name} role={role} photo={photo} email={email} username={username} />
-              </div>
-            )
-          })}
+    return (
+        <TripsContent
+            futureTrips={futureTrips}
+            isPopupOpen={isPopupOpen}
+            handleOpenPopup={handleOpenPopup}
+            handleClosePopup={handleClosePopup}
+            handleSubmit={handleSubmit}
+        />
+    );
+};
+
+const TripsContent = ({ futureTrips, isPopupOpen, handleOpenPopup, handleClosePopup, handleSubmit }) => {
+    const [isPastOpen, setPastOpen] = useState(true);
+    const [isFutureOpen, setFutureOpen] = useState(true);
+    const [isCurrentOpen, setCurrentOpen] = useState(true);
+
+    const { user_id } = useUser();
+
+    const handleTogglePast = () => setPastOpen(!isPastOpen);
+    const handleToggleFuture = () => setFutureOpen(!isFutureOpen);
+    const handleToggleCurrent = () => setCurrentOpen(!isCurrentOpen);
+
+    const renderTripsContainer = (title, isOpen, toggleFunc, children) => (
+        <div className="mt-[109px] flex flex-col mx-auto max-w-[1696px]">
+            <div className="flex justify-between items-center">
+                <h2 className="text-[48px] font-bold">{title}</h2>
+                <button onClick={toggleFunc} className={`transform transition-transform duration-300 ${isOpen ? '' : 'rotate-180'}`}>
+                    <Image src="/img/common/unwrap__button.svg" alt="toggle content" width={60} height={60} />
+                </button>
+            </div>
+            <div className={`trips-container ${isOpen ? '' : 'hidden'}`}>
+                {children}
+            </div>
         </div>
-      )}
-    </div>
-  </section>
-  )
-}
+    );
 
-export default Home
+    return (
+        <div className='my-trips max-w-full mb-[100px]'>
+            <div className="my-trips__header flex justify-between items-center max-w-[1696px] mx-auto mt-[101px]">
+                <h1 className="text-[56px] font-bold">Мои поездки</h1>
+                <button type="button" className="rounded-[24px] bg-btn p-[20px]" onClick={handleOpenPopup}>
+                    <span className="text-[24px] font-bold">Запланировать новую поездку</span>
+                </button>
+            </div>
+            {renderTripsContainer("Прошедшие", isPastOpen, handleTogglePast, (
+                /* Здесь отображать прошедшие поездки, если есть */
+                <div></div>
+            ))}
+            {renderTripsContainer("Предстоящие", isFutureOpen, handleToggleFuture, (
+                futureTrips.map((trip) => (
+                    <div className="flex flex-col max-w-[1696px] mx-auto" key={trip.id}>
+                        <Link href={`/trip/${trip.id}`}>
+                            <TripCard key={trip.id} {...trip} />
+                        </Link>
+                    </div>
+                ))
+            ))}
+            {renderTripsContainer("Текущие", isCurrentOpen, handleToggleCurrent, (
+                /* Здесь отображать текущие поездки, если есть */
+                <div></div>
+            ))}
+
+            <TripForm
+                isOpen={isPopupOpen}
+                onClose={handleClosePopup}
+                onSubmit={handleSubmit}
+                initialData={{
+                    tripImage: '',
+                    title: '',
+                    description: '',
+                    startDate: new Date(),
+                    endDate: new Date(),
+                    trippers: [user_id],
+                    cities: '',
+                    tripPlace: '',
+                }}
+                days={0}
+            />
+        </div>
+    );
+};
+
+export default TripsPage;
+
