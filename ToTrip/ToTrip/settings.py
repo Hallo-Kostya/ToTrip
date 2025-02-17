@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
 ]
+SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False
+}
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static"),
