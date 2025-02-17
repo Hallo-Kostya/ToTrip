@@ -19,15 +19,16 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from .yasg import urlpatterns as documentation_urls
 
 urlpatterns = [
-    path('api/admin/', admin.site.urls),
-    path('api/users/', include('apps.UsersApp.urls')),
-    path('api/search/', include('apps.SearchApp.urls')),
-    path('api/reviews/', include('apps.ReviewApp.urls')),
-    path('api/posts/', include('apps.PostApp.urls')),
-    path('api/trips/', include('apps.TripApp.urls')),
-    # path('api/images/', include('apps.ImageApp.urls')),
-    path('api/places/', include('apps.PlaceApp.urls'))
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/v1/admin/', admin.site.urls),
+    path('api/v1/users/', include('apps.UsersApp.urls')),
+    path('api/v1/search/', include('apps.SearchApp.urls')),
+    path('api/v1/reviews/', include('apps.ReviewApp.urls')),
+    path('api/v1/posts/', include('apps.PostApp.urls')),
+    path('api/v1/trips/', include('apps.TripApp.urls')),
+    path('api/v1/images/', include('apps.ImageApp.urls')),
+    path('api/v1/places/', include('apps.PlaceApp.urls'))
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + documentation_urls
  

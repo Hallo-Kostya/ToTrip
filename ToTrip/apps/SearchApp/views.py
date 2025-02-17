@@ -1,12 +1,23 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from apps.PlaceApp.models import Place, City, District, Country, Region, Category 
-from .serializers import  SearchCitySerializer, SearchCountrySerializer, SearchDistrictSerializer, SearchPlaceSerializer, SearchRegionSerializer
-from django.db.models import Q
-from django.db.models.functions import Lower
+from apps.PlaceApp.models import Place
+from .serializers import   SearchPlaceSerializer
 from rest_framework.pagination import PageNumberPagination      
+from rest_framework import generics, filters 
 
+class CustomSearchPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+class SearchApiView(generics.ListAPIView):
+    queryset = Place.objects.all().prefetch_related("categories")
+    serializer_class = SearchPlaceSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['^name', '^categories__name', '^city__name']
+    ordering_fields = ['avg_rating', 'reviews_count']
+    ordering = ['-avg_rating', '-reviews_count']
+    pagination_class = CustomSearchPagination
+
+<<<<<<< HEAD
 #разделить перегруженный метод на несколько 
 class SearchPlacesAPIView(APIView):
     """метод для получения городов, мест, округов, стран, регионов из бд.
@@ -152,3 +163,6 @@ class SearchPlacesAPIView(APIView):
                     places = places.order_by(order_by)
         return places
 # Create your views here.
+=======
+
+>>>>>>> Backend-Alex

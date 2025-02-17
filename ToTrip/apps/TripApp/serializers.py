@@ -3,7 +3,7 @@ from .models import Trip, SubTrip, SubtripPlace, Note
 from apps.UsersApp.serializers import FollowSerializer
 from apps.PlaceApp.serializers import CityShortSerializer, PlaceSerializer, CategorySerializer
 from apps.PlaceApp.models import City, Place, Category
-from apps.ImageApp.serializers import TripImageSerializer
+from apps.ImageApp.serializers import BaseImageSerializer
 from apps.UsersApp.models import User
 from datetime import date
     
@@ -103,7 +103,7 @@ class CreateTripSerializer(serializers.ModelSerializer):
 
 class TripSerializer(serializers.ModelSerializer):
     trippers = FollowSerializer(many = True)
-    tripimage_set = TripImageSerializer(many=True, read_only=True)
+    tripimage_set = BaseImageSerializer(many=True, read_only=True)
     subtrips = SubTripSerializer(many = True)
     actuality = serializers.SerializerMethodField()
     class Meta: 

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
 ]
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -131,9 +132,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+<<<<<<< HEAD
 database_url = os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
 #dj_database_url.parse("postgresql://totripbd_user:nlVZYiaXOOnG4m0Qh5AvDszIKdA1gj1I@dpg-cubu8qaj1k6c73b2t0q0-a.frankfurt-postgres.render.com/totripbd")
+=======
+
+>>>>>>> Backend-Alex
 LOGIN_URL = 'login/'
 
 LOGIN_REDIRECT_URL = ''
@@ -187,9 +192,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=60),
     'AUTH_HEADER_TYPES': ('Bearer',),
     'TOKEN_BLACKLIST_ENABLED': True
-
 }
