@@ -10,6 +10,7 @@ from apps.PlaceApp.models import FavoritePlace
 from .renderers import UserJSONRenderer
 from rest_framework.exceptions import NotFound
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate
 
 
 def get_tokens_for_user(user):
@@ -33,7 +34,7 @@ class RegisterView(APIView):
     renderer_classes = [UserJSONRenderer]
     def post(self, request):
         if request.user.is_authenticated:
-            return Response({"error":"Вы уже авторизованы"},
+            return Response({"error": "Вы уже авторизованы"},
                 status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):   
@@ -71,6 +72,7 @@ class LoginView(APIView):
         if serializer.is_valid():
             user = serializer.validated_data
             token = get_tokens_for_user(user)
+            user = authenticate(email=email, password=password)
             return Response(token, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

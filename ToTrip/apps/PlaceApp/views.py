@@ -3,13 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Place, FavoritePlace, Category
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import redirect, render
 from apps.SearchApp.serializers import SearchPlaceSerializer
 from .models import Place
-from apps.ImageApp.models import PlaceImage
+from apps.ImageApp.models import BaseImage
 from .forms import PlaceForm
 from random import sample
+from apps.UsersApp.permissions import IsModerator
 
 class FavoritesView(APIView):
     """
@@ -95,7 +96,7 @@ def create_place(request):
             place = form.save()
             uploaded_images = request.FILES.getlist('images')
             for image in uploaded_images:
-                PlaceImage.objects.create(place=place, image=image)
+                BaseImage.objects.create(model_name = "Place", model_id = place.id, image=image)
             return redirect('place_detail', place.id)  
     else:
         form = PlaceForm()
@@ -116,7 +117,7 @@ class PlaceRecommendationView(APIView):
 
 
 class AddPlaceApiView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsModerator]
     def post(self, request):
         serializer = PlaceSerializer(data = request.data)
         if serializer.is_valid():

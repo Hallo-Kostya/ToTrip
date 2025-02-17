@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import  Place, City, District, Country, Region, Category, FavoritePlace
 from apps.UsersApp.models import User
 from apps.ReviewApp.models import Review
-from apps.ImageApp.serializers import PlaceImageSerializer
+from apps.ImageApp.serializers import BaseImageSerializer
+from apps.ImageApp.models import BaseImage
 from apps.ReviewApp.serializers import ReviewSerializer
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -14,7 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PlaceSerializer(serializers.ModelSerializer):
     """класс для преобразования места в json формат и наоборот"""
     is_favorite = serializers.SerializerMethodField()
-    placeimage_set = PlaceImageSerializer(many=True, read_only=True)
+    placeimage_set = serializers.SerializerMethodField()
     reviews = ReviewSerializer(many=True, read_only = True)
     review_ids = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all(), many=True, write_only=True)  
     city_name = serializers.CharField(source="city.name", read_only=True)
@@ -52,6 +53,13 @@ class PlaceSerializer(serializers.ModelSerializer):
             "reviews_count",
             "review_ids"
         ]
+
+    def get_placeimage_set(self, obj):
+        queryset = BaseImage.objects.filter(model_name = "Place", model_id = obj.id)
+        serializer = BaseImageSerializer(queryset, many = True)
+        return serializer.data
+
+        
     def get_is_favorite(self,obj):
         try:
             user = self.context.get('request').user
