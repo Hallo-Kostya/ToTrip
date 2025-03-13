@@ -1,0 +1,89 @@
+
+
+/* ПРОБЛЕМЫ С ОТЦЕНТРОВКОЙ MAIN */
+.mainContent {
+	width: 100%;
+	background-color: #E4E4E4;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	padding: 0 112px;
+}
+
+
+.placeDescription {
+	max-width: 1120px;
+	border-radius: 24px;
+	background: #fff;
+	margin-top: 61px;
+}
+
+.placeDescription__wrapper {
+	padding: 40px;
+}
+
+.rating {
+	margin-top: 16px;
+}
+
+.stars {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.attributeName {
+	margin-left: 4px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.descriptionP {
+	margin-top: 64px;
+}
+
+.descriptionP p {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.descriptionP p:not(:last-child) {
+	margin-bottom: 26px;
+}
+
+.writeComment {
+	border: none;
+	padding: 18px 32px;
+	border-radius: 16px;
+	margin-left: auto;
+	background: #000;
+	box-shadow: 0px 4px 12.6px 0px rgba(0, 0, 0, 0.14);
+}
+
+.comBtnText {
+	color: #fff;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.commentsWrapper {
+	max-width: 1120px;
+	background: #fff;
+	border-radius: 24px;
+	margin-top: 46px;
+}
+
+.commentsWrapperInner {
+	padding: 40px;
+}
+
+.commentsHeader {
+	display: flex;
+}
+
+.comments {
+	margin-top: 21px;
+}
+
