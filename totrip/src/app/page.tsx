@@ -1,25 +1,54 @@
-
-"use client"
-import styles from '@/components/css/home.module.css';
+'use client';
 import SuggestionsSection from '@/components/ui/main-page/suggestions';
-import RecommendationsSection from '@/components/ui/main-page/recomendations';
-import { SearchInput } from '@/components/ui/main-page/searchInput';
+import RecommendationsSection from '@/components/ui/main-page/Recomendations/recomendations';
+import { SearchContainer } from '@/components/ui/main-page/Search/searchContainer';
+import { fetchRecommendationPlaces } from '@/services/data';
+import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '@/services/data';
+
+interface Place {
+  id: number;
+  title: string;
+  reviewsCount: string;
+  placeImg: string;
+  rating: number;
+}
+
+const RecommendationsContainer = () => {
+  const [placeData, setPlaceData] = useState<Place[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchRecommendationPlaces();
+      const transformedData = data.map(place => ({
+        id: place.id,
+        title: place.name,
+        reviewsCount: place.reviews_count.toString(),
+        placeImg: place.search_image ? `${API_BASE_URL}${place.search_image}` : '/img/common/noimage.jpg',
+        rating: place.avg_rating
+      }));
+      setPlaceData(transformedData);
+    };
+
+    fetchData();
+  }, []);
+
+  return placeData;
+};
 
 export default function Home() {
+  const placeData = RecommendationsContainer();
+  
   return (  
     <main>
-      <div className={styles["main-content"]}>
-        <section className={styles["lead"]}>
-          <div className={styles["lead-wrapper"]}>
-            <div className={styles["lead-content"]}>
-              <h1>Начните путешествовать вместе с ToTrip!</h1>
-            </div>
-            <SearchInput defaultValue={""} />
+        <section className='w-full'>
+          <div className='py-[304px] mt-[-100px] max-h-[860px] bg-[url("/img/index/main-photo.jpg")] bg-no-repeat bg-center bg-cover'>
+              <h1 className='w-[744px] mx-auto text-[56px] font-bold mb-[64px] text-white text-center'>Начните путешествовать вместе с ToTrip!</h1>
+            <SearchContainer />
           </div>
         </section>
         <SuggestionsSection />
-        <RecommendationsSection />
-      </div>
+        <div className='mb-[100px]'><RecommendationsSection places={placeData}/></div>
     </main>
   );
 }
