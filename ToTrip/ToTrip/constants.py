@@ -1,7 +1,0 @@
-FOURSQUARE_API_KEY = 'fsq34Zy+vMIVStXkOn52f0vpDs+Om19xxkMKaXfrqRJF0mg='
-DATABASE_NAME = 'ToTrip_BD'
-DATABASE_USERNAME = 'postgres'
-DATABASE_PASSWORD = '2396ToTripUlitki'
-DATABASE_HOST = 'localhost'
-DATABASE_PORT = '5432'
-SECRET_KEY_DJANGO = 'django-insecure-u1@3z4)b&ev8wbdf2-_)l_)#fl(ca70(y+hy=!2_$!$5$09(#4'
