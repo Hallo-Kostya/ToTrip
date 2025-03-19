@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import dj_database_url
 from datetime import timedelta
 from pathlib import Path
 from . import constants
@@ -22,12 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = os.environ.get("SECRET_KEY")
+=======
+SECRET_KEY =  os.environ.get("SECRET_KEY")
+>>>>>>> Backend-Alex
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+=======
+ALLOWED_HOSTS =  os.environ.get("ALLOWED_HOSTS").split(" ")
+>>>>>>> Backend-Alex
 
 
 # Application definition
@@ -53,10 +62,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
 ]
+SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False
+}
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static"),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -133,10 +146,15 @@ DATABASES = {
     }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 database_url = os.environ.get("DATABASE_URL")
 DATABASES["default"] = dj_database_url.parse(database_url)
 #dj_database_url.parse("postgresql://totripbd_user:nlVZYiaXOOnG4m0Qh5AvDszIKdA1gj1I@dpg-cubu8qaj1k6c73b2t0q0-a.frankfurt-postgres.render.com/totripbd")
 =======
+=======
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
+>>>>>>> Backend-Alex
 
 >>>>>>> Backend-Alex
 LOGIN_URL = 'login/'
