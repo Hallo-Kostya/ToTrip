@@ -13,7 +13,13 @@ import os
 import dj_database_url
 from datetime import timedelta
 from pathlib import Path
-from . import constants
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -111,21 +117,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToTrip.wsgi.application'
 
-FOURSQUARE_API_KEY = constants.FOURSQUARE_API_KEY
+FOURSQUARE_API_KEY = os.environ.get("FOURSQUARE_API_KEY")
 FOURSQUARE_API_BASE_URL = 'https://api.foursquare.com/v3/places/search'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': constants.DATABASE_NAME,
-        'USER': constants.DATABASE_USERNAME,
-        'PASSWORD': constants.DATABASE_PASSWORD,
-        'HOST': constants.DATABASE_HOST,
-        'PORT': constants.DATABASE_PORT,
-    },
-
     'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
