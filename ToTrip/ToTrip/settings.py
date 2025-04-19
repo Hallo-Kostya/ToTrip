@@ -13,30 +13,25 @@ import os
 import dj_database_url
 from datetime import timedelta
 from pathlib import Path
-from . import constants
 import dj_database_url
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
+# SECURITY WARNING: keep the secret key u
 SECRET_KEY = os.environ.get("SECRET_KEY")
-=======
-SECRET_KEY =  os.environ.get("SECRET_KEY")
->>>>>>> Backend-Alex
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-=======
-ALLOWED_HOSTS =  os.environ.get("ALLOWED_HOSTS").split(" ")
->>>>>>> Backend-Alex
 
 
 # Application definition
@@ -125,7 +120,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToTrip.wsgi.application'
 
-FOURSQUARE_API_KEY = constants.FOURSQUARE_API_KEY
+FOURSQUARE_API_KEY = os.environ.get("FOURSQUARE_API_KEY")
 FOURSQUARE_API_BASE_URL = 'https://api.foursquare.com/v3/places/search'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -133,11 +128,11 @@ FOURSQUARE_API_BASE_URL = 'https://api.foursquare.com/v3/places/search'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': constants.DATABASE_NAME,
-        'USER': constants.DATABASE_USERNAME,
-        'PASSWORD': constants.DATABASE_PASSWORD,
-        'HOST': constants.DATABASE_HOST,
-        'PORT': constants.DATABASE_PORT,
+        'NAME': os.environ.get("DATABASE_NAME"),
+        'USER': os.environ.get("DATABASE_USERNAME"),
+        'PASSWORD':os.environ.get("DATABASE_PASSWORD"),
+        'HOST': os.environ.get("DATABASE_HOST"),
+        'PORT': os.environ.get("DATABASE_PORT")
     },
 
     'sqlite3': {
@@ -145,18 +140,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
-#dj_database_url.parse("postgresql://totripbd_user:nlVZYiaXOOnG4m0Qh5AvDszIKdA1gj1I@dpg-cubu8qaj1k6c73b2t0q0-a.frankfurt-postgres.render.com/totripbd")
-=======
-=======
-database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
->>>>>>> Backend-Alex
 
->>>>>>> Backend-Alex
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
+
+
 LOGIN_URL = 'login/'
 
 LOGIN_REDIRECT_URL = ''

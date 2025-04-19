@@ -27,14 +27,7 @@ class AddReviewApiView(APIView):
         return Response({"error": serializer.errors}, status= status.HTTP_406_NOT_ACCEPTABLE)
 
 class ReviewApiView(APIView):
-<<<<<<< HEAD
-    """
-    Класс, поддерживающий удаление(delete-запрос), редактирование(patch-запрос), получение (get-запрос) отзывов
-    """
-    permission_classes = [IsAuthenticated]
-=======
     permission_classes = [OwnerOrModeratorOrReadonly]
->>>>>>> Backend-Alex
     def delete(self, request, review_id):
         review = get_object_or_404(Review, pk =review_id)
         review.delete()

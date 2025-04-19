@@ -120,14 +120,7 @@ class PlaceRecommendationView(APIView):
 
 
 class AddPlaceApiView(APIView):
-<<<<<<< HEAD
-    """
-    Метод для добавления места в бд из кастомной формы с фронтенда, доступен только модераторам
-    """
-    permission_classes = [IsAdminUser]
-=======
     permission_classes = [IsModerator]
->>>>>>> Backend-Alex
     def post(self, request):
         serializer = PlaceSerializer(data = request.data)
         if serializer.is_valid():

@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-.venv/
-=======
 .venv/
 .env
->>>>>>> Backend-Alex
+.idea/
+.mypy_cache/
